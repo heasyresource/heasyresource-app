@@ -34,7 +34,7 @@
     height: 200px;
 }
 .form_container{
-    max-width: 43rem;
+    max-width: 35rem;
     padding-top: rem(80px);
     height: 100%;
     display: flex;

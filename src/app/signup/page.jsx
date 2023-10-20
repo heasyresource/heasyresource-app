@@ -2,14 +2,14 @@
 import React from "react";
 import classes from "./signup.module.css";
 import {
-  Anchor,
   Box,
   Button,
-  Checkbox,
   Container,
   Flex,
+  Grid,
   Image,
-  Paper,
+  Loader,
+  
   PasswordInput,
   Popover,
   Progress,
@@ -19,10 +19,10 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-// import { FormIntro } from "@/compoonents";
-import Link from "next/link";
+
 import useCustomAuthHook from "@/hooks";
 import { IconCheck, IconX } from "@tabler/icons-react";
+import { useMediaQuery } from "@mantine/hooks";
 
 const requirements = [
     { re: /[0-9]/, label: 'Includes number' },
@@ -32,6 +32,7 @@ const requirements = [
   ];
   
 const signup = () => {
+  const isMobile = useMediaQuery(`(max-width: 768px)`)
   const {
     companyInfoForm,
     handleCompanyInfoSubmit,
@@ -40,10 +41,12 @@ const signup = () => {
     handleCompanyRepSubmit,
     popoverOpened,
     setPopoverOpened,
+    loadingCompanyInfo,
+    loadingCompanyRep
   } = useCustomAuthHook();
 
   const getStrength = (string) => {
-    let multiplier = string.length > 5 ? 0 : 1;
+    let multiplier = string.length > 7 ? 0 : 1;
   
     requirements.forEach((requirement) => {
       if (!requirement.re.test(string)) {
@@ -88,16 +91,16 @@ const signup = () => {
         <Container className={classes.form_container}>
           <Flex justify={"space-between"} align={"flex-start"}>
             <Box>
-              <Title order={2} tt="capitalize" c="#3377FF">
-                sign up as a company
+              <Title order={2}  c="#3377FF" fw={"bold"}>
+                Sign Up as a Company
               </Title>
-              <Text mt="5px" tt="capitalize" c={"#000"} fs="18px" fw="bold">
+              <Text mt="5px" tt="capitalize" c={"#565656"} fs="18px" fw="bold">
                 {` company ${step === 1 ? "information" : "representative"}`}
               </Text>
             </Box>
             <Box className={classes.step}>
-              <Text tt="capitalize" fw={"500"} fs="16px">
-                {`  step ${step} of 2`}
+              <Text  fw={"500"} c="#000000" fs="16px">
+                {`  Step ${step} of 2`}
               </Text>
             </Box>
           </Flex>
@@ -109,51 +112,63 @@ const signup = () => {
             >
               <Stack gap="1.5rem">
                 <TextInput
-                  size="lg"
-                  placeholder="Company Name"
+                  size="md"
+                placeholder="Pepsi"
                   type="text"
                   {...companyInfoForm.getInputProps("name")}
-                  required
+                  withAsterisk
+                  disabled={loadingCompanyInfo}
+                  label="Company Name"
+                  
                 />
                 <TextInput
-                  size="lg"
-                  placeholder="Company Email"
+                  size="md"
+                  placeholder="pepsi@example.com"
                   type="email"
-                  required
+                  withAsterisk
                   {...companyInfoForm.getInputProps("email")}
+                  disabled={loadingCompanyInfo}
+                  label="Company Email"
                 />
                 <TextInput
-                  size="lg"
-                  placeholder="Company Website"
+                  size="md"
+                  
                   type="url"
-                  required
+                withAsterisk
                   {...companyInfoForm.getInputProps("website")}
+                  disabled={loadingCompanyInfo}
+                  label="Company Website"
                 />
                 <Select
-                  size="lg"
-                  placeholder="Field/Industry"
-                  data={["Infomation Technology"]}
+                  size="md"
+                  withAsterisk
+                  data={["Information Technology", "Data Analysis", "Cyber Security", "Graphics Designer"]}
                   searchable
-                  required
+                 
                   {...companyInfoForm.getInputProps("field")}
+                  disabled={loadingCompanyInfo}
+                  label="Field/Industry"
                 />
                 <TextInput
-                  size="lg"
-                  placeholder="Phone Number"
+                  size="md"
+                  placeholder="+23470000000"
                   type="tel"
-                  required
+                  withAsterisk
                   {...companyInfoForm.getInputProps("phoneNumber")}
+                  disabled={loadingCompanyInfo}
+                  label="Phone Number"
                 />
                 <Button
-                  size="lg"
+                  size="md"
                   variant="filled"
                   tt="capitalize"
                   fs="1rem"
                   fw="bold"
                   c={"white"}
                   type="submit"
+                  bg="#3377FF"
                 >
-                  next
+                  {loadingCompanyInfo ? <Loader color="white" variant="dots"/> : "next"}
                 </Button>
               </Stack>
             </form>
@@ -164,40 +179,61 @@ const signup = () => {
               )}
             >
               <Stack gap="1.5rem">
+                <Grid>
+                  <Grid.Col span={isMobile ? 12 : 6}>
+
                 <TextInput
-                  size="lg"
-                  placeholder="First Name"
+                style={{flex: 1}}
+                  size="md"
+                  label="First Name"
+                  placeholder="John "
                   type="text"
                   {...companyRepForm.getInputProps("firstName")}
-                  required
+                  withAsterisk
+                  disabled={loadingCompanyRep}
                 />
+                  </Grid.Col>
+
+                  <Grid.Col span={isMobile ? 12 : 6}>
+
                 <TextInput
-                  size="lg"
-                  placeholder="Last Name"
+                 style={{flex: 1}}
+                  size="md"
+                  label="Last Name"
+                  placeholder="Smith"
                   type="text"
-                  required
+                  withAsterisk
+                  disabled={loadingCompanyRep}
                   {...companyRepForm.getInputProps("lastName")}
                 />
+                  </Grid.Col>
+                </Grid>
                 <TextInput
-                  size="lg"
-                  placeholder="Work Email Address"
+                  size="md"
+                  placeholder="smith@gmail.com"
                   type="email"
-                  required
+                  withAsterisk
+                  label="Email Address"
                   {...companyRepForm.getInputProps("email")}
+                  disabled={loadingCompanyRep}
                 />
                 <TextInput
-                  size="lg"
-                  placeholder="Phone Number"
+                  size="md"
+                  label="Phone Number"
                   type="tel"
-                  required
+                  placeholder="+23470000000"
+                  withAsterisk
                   {...companyRepForm.getInputProps("phoneNumber")}
+                  disabled={loadingCompanyRep}
                 />
                 <TextInput
-                  size="lg"
-                  placeholder="Position in Company"
+                  size="md"
+                  label="Position in Company"
                   type="text"
-                  required
+                 
+                  withAsterisk
                   {...companyRepForm.getInputProps("position")}
+                  disabled={loadingCompanyRep}
                 />
 
                 <Popover
@@ -212,10 +248,11 @@ const signup = () => {
                       onBlurCapture={() => setPopoverOpened(false)}
                     >
                       <PasswordInput
-                        size="lg"
+                        size="md"
                         required
-                        placeholder="Password"
+                        label="Password"
                         {...companyRepForm.getInputProps("password")}
+                        disabled={loadingCompanyRep}
                       />
                     </div>
                   </Popover.Target>
@@ -223,32 +260,39 @@ const signup = () => {
                     <Progress
                       color={color}
                       value={strength}
-                      size={5}
+                      size={7}
                       style={{ marginBottom: 10 }}
                     />
                     <PasswordRequirement
-                      label="Includes at least 6 characters"
-                      meets={companyRepForm.values.password.length > 5}
+                      label="Includes at least 8 characters"
+                      meets={companyRepForm.values.password.length > 7}
                     />
                     {checks}
                   </Popover.Dropdown>
                 </Popover>
                 <PasswordInput
-                  size="lg"
+                  size="md"
                   required
-                  placeholder="Confirm Password"
+                  label="Confirm Password"
                   {...companyRepForm.getInputProps("comfirmPassword")}
+                  disabled={loadingCompanyRep}
                 />
                 <Button
-                  size="lg"
+                  size="md"
                   variant="filled"
                   tt="capitalize"
                   fs="1rem"
                   fw="bold"
                   c={"white"}
                   type="submit"
+                  bg="#3377FF"
+                  className={classes.signup_btn}
                 >
-                 sign up
+                  {
+                    loadingCompanyRep ? <Loader color="white" type="dots" /> : "sign up"
+                  }
+                  
+         
                 </Button>
               </Stack>
             </form>
