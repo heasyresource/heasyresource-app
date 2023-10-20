@@ -8,7 +8,7 @@ const useCustomAuthHook = () => {
   const [loadingCompanyInfo, setLoadingCompanyInfo] = useState(false)
   const [loadingCompanyRep, setLoadingCompanyRep] = useState(false)
     const [popoverOpened, setPopoverOpened] = useState(false);
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const signInForm = useForm({
     initialValues: {
       email: "",
