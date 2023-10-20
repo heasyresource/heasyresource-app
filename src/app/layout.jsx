@@ -1,6 +1,6 @@
 import '@mantine/core/styles.css';
 import React from 'react';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Provider } from "react-redux";
 import { theme } from '@/theme';
 import store from "@/store";
@@ -14,6 +14,8 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <head>
+                <ColorSchemeScript />
+
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <meta charSet="utf-8" />
                 <meta content="IE=Edge" httpEquiv="x-ua-compatible" />
@@ -27,13 +29,13 @@ export default function RootLayout({ children }) {
             </head>
             <body suppressHydrationWarning={true}>
                 {/* <Provider store={store}> */}
-                    <MantineProvider
-                        withGlobalStyles
-                        withNormalizeCSS
-                        theme={theme}
-                    >
-                        {children}
-                    </MantineProvider>
+                <MantineProvider
+                    withGlobalStyles
+                    withNormalizeCSS
+                    theme={theme}
+                >
+                    {children}
+                </MantineProvider>
                 {/* </Provider> */}
             </body>
         </html>
