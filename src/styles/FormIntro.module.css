@@ -1,0 +1,17 @@
+.type{
+    color: #3377FF;
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.desc{
+    color: #8692A6;
+    font-size: 18px;
+    text-transform: capitalize;
+
+}
