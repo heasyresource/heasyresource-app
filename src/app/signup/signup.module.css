@@ -1,68 +1,67 @@
-.wrapper{
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    overflow: hidden;
-    @media (max-width: 500px) {
-        height: 100%;
-        overflow: auto;
-    }
-}
-.wrapper_img{
-    background-image: url("/assets/images/authBgImg.png");
-    flex: 1;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    @media (max-width: 500px) {
-        display: none;
-    }
-}
-
-.wrapper_imgOverlay{
-    position: absolute;
-    inset: 0;
-    background-color: #3377ff;
-    opacity: 42%;
-}
-.logo_wrapper{
-    position: absolute;
-    width: 200px;
-}
-.form_wrapper{
-    flex: 1;
-   
-        overflow: scroll;
-    
-    
-}
-.form_container{
-
-    max-width: 35rem;
-    width: 100%;
-    padding-top: rem(40px);
-    padding-bottom: rem(40px);
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+  @media (max-width: 500px) {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-
- 
+    overflow: auto;
+  }
 }
-.step{
-    @media (max-width: 786px) {
-        display: none;
-    }
+.wrapper_img {
+  background-image: url("/assets/images/authBgImg.png");
+  flex: 1;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  @media (max-width: 500px) {
+    display: none;
+  }
 }
-.signup_btn{
-    @media (max-width: 1440px) {
-        margin-bottom: 1.5rem;
-    }
-    @media (max-width: 786px) {
-        margin-bottom: 3rem;
-    }
+.wrapper_imgOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: #3377ff;
+  opacity: 42%;
+}
+.logo_wrapper {
+  position: absolute;
+  width: 200px;
+}
+.form_wrapper {
+  flex: 1;
+  overflow: scroll;
+}
+.form_container {
+  max-width: 35rem;
+  width: 100%;
+  padding-top: rem(40px);
+  padding-bottom: rem(40px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.step {
+  @media (max-width: 786px) {
+    display: none;
+  }
+}
+.signup_btn {
+  @media (max-width: 1440px) {
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 786px) {
+    margin-top: 3rem;
+  }
+}
+.label {
+  font-size: small;
+}
+.error {
+  font-size: 12px;
 }

@@ -7,7 +7,7 @@ const useCustomAuthHook = () => {
   const [loadingSignIn, setLoadingSignIn] = useState(false)
   const [loadingCompanyInfo, setLoadingCompanyInfo] = useState(false)
   const [loadingCompanyRep, setLoadingCompanyRep] = useState(false)
-    const [popoverOpened, setPopoverOpened] = useState(false);
+  const [popoverOpened, setPopoverOpened] = useState(false);
   const [step, setStep] = useState(1);
   const signInForm = useForm({
     initialValues: {
@@ -31,11 +31,11 @@ const useCustomAuthHook = () => {
       phoneNumber: "",
     },
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
-      name: (val) => val.length < 1 ? "Enter valid name" : null,
-      website: (val) => (/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/.test(val) ? null : "Enter a  valid url"),
+      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Enter a valid email"),
+      name: (val) => val.length < 1 ? "Enter a valid name" : null,
+      website: (val) => (/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/.test(val) ? null : "Enter a valid url"),
       phoneNumber: (val) => val.length === 10 ? null : "Enter a valid phone number",
-      field: (val) => !val.length ? "Select a field" : null
+      field: (val) => !val.length ? "Select a field/industry" : null
     },
   });
   const companyRepForm = useForm({
@@ -50,14 +50,14 @@ const useCustomAuthHook = () => {
     },
     validate: {
       firstName: (value) =>
-        /^[A-Za-z]+$/.test(value) ? null : "No special characters or number",
+        /^[A-Za-z]+$/.test(value) ? null : "First Name is required.",
       lastName: (value) =>
-        /^[A-Za-z]+$/.test(value) ? null : "No special characters or number",
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+        /^[A-Za-z]+$/.test(value) ? null : "Last Name is required.",
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Enter a valid email"),
       confirmPassword: (value, values) =>
         value !== values.password ? "Password did not match" : null,
-        phoneNumber: (val) => val.length === 10 ? null : "Enter a valid phone number",
-        position: (val) => !val.length ? "Enter a valid position" : null,
+      phoneNumber: (val) => val.length === 10 ? null : "Enter a valid phone number",
+      position: (val) => !val.length ? "Enter a valid position" : null,
     },
   });
   const handleSignInSubmit = async (data) => {
