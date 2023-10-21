@@ -59,7 +59,7 @@ const signin = () => {
                 type="submit"
                 bg="#3377ff"
               >
-                {loadingSignIn ? <Loader color="white" variant="dots"/> : "sign in"}
+                {loadingSignIn ? <Loader color="white" type="dots" size="md" />: "sign in"}
               </Button>
               <Flex justify="center" align="center">
                 <Link

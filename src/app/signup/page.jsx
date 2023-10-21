@@ -173,7 +173,7 @@ const signup = () => {
                   bg="#3377FF"
                   className={classes.signup_btn}
                 >
-                  {loadingCompanyInfo ? <Loader color="white" variant="dots" /> : "next"}
+                  {loadingCompanyInfo ? <Loader color="white" type="dots" size="md" /> : "next"}
                 </Button>
               </Stack>
             </form>
@@ -301,7 +301,7 @@ const signup = () => {
                   className={classes.signup_btn}
                 >
                   {
-                    loadingCompanyRep ? <Loader color="white" type="dots" /> : "sign up"
+                    loadingCompanyRep ? <Loader color="white" type="dots" size="md" /> : "sign up"
                   }
 
 
