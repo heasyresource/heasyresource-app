@@ -16,10 +16,16 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import useCustomAuthHook from "@/hooks";
+import Head from "next/head";
 
 const signin = () => {
   const { signInForm, handleSignInSubmit, loadingSignIn } = useCustomAuthHook();
   return (
+
+    <>
+    <Head>
+<title>Sign In | HeasyResource</title>
+    </Head>
     <Box className={classes.wrapper}>
       <Box className={classes.wrapper_img}>
         <Box className={classes.wrapper_imgOverlay} />
@@ -85,6 +91,7 @@ const signin = () => {
         </Container>
       </Box>
     </Box>
+    </>
   );
 };
 

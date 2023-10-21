@@ -1,29 +1,25 @@
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import React, { useState } from "react";
 
-const useResetPassword = () => {
+const useVerification = () => {
   const [loading, setLoading] = useState(false);
-  const [opened, { open, close }] = useDisclosure(false);
-  const [popoverOpened, setPopoverOpened] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const form = useForm({
     initialValues: {
-      password: "",
-      confirmPassword: "",
+      code: "",
     },
     validate: {
-      confirmPassword: (value, values) =>
-        value !== values.password ? "Password did not match" : null,
+      code: (val) => (val.length < 6 ? "Enter code" : null),
     },
   });
   const handleRouteChange = () => {
-    modals.closeAll()
-    window.location.replace('/signin')
-  }
-  const openModal = () =>
+    modals.closeAll();
+    window.location.replace("/signin");
+  };
+  const openModal = () => 
     modals.open({
       radius: "md",
       centered: true,
@@ -41,47 +37,40 @@ const useResetPassword = () => {
           </Box>
           <Box ta={"center"}>
             <Title order={isMobile ? 4 : 3} c="#000000">
-              Password Reset Successful
+              Verification Successful
             </Title>
             <Text c="#1E1E1E" size="13px" mt="5px">
-              Your Password has been Successfully Updated!
+              Your aacount has been verified successfully
             </Text>
           </Box>
           <Button
-          fullWidth
+            fullWidth
             onClick={() => handleRouteChange()}
             tt="capitalize"
             bg="#3377FF"
             size="md"
-            
           >
             continue
           </Button>
         </Stack>
       ),
     });
-
-  const handleFormSubmit = async (data) => {
+  
+  const handleSubmit = async (data) => {
     setLoading(true);
     try {
-      console.log(data, "signin");
+      console.log(data);
       openModal();
-      setLoading(true);
+      setLoading(false);
     } catch (err) {
       setLoading(false);
-      console.log(err);
     }
   };
   return {
-    loading,
     form,
-    handleFormSubmit,
-    opened,
-    open,
-    close,
-    popoverOpened,
-    setPopoverOpened,
+    loading,
+    handleSubmit,
   };
 };
 
-export default useResetPassword;
+export default useVerification;

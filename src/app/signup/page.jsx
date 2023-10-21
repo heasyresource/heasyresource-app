@@ -23,6 +23,7 @@ import useCustomAuthHook from "@/hooks";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
 import { getStrength, requirements } from "@/utils/publicFunctions";
+import Head from "next/head";
 
 
 
@@ -65,6 +66,10 @@ const signup = () => {
   const strength = getStrength(companyRepForm.values.password);
   const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
   return (
+    <>
+   <Head>
+    <title>Sign Up | HeasyResource</title>
+    </Head> 
     <Box className={classes.wrapper}>
       <Box className={classes.wrapper_img}>
         <Box className={classes.wrapper_imgOverlay} />
@@ -297,6 +302,7 @@ const signup = () => {
         </Container>
       </Box>
     </Box>
+    </>
   );
 };
 

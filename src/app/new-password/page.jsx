@@ -1,20 +1,12 @@
 "use client";
 import Logo from "@/components/Image";
 import {
-  Paper,
   Title,
   Text,
-  TextInput,
   Button,
   Container,
-  Group,
-  Anchor,
   Center,
   Box,
-  rem,
-  Modal,
-  Image,
-  Flex,
   PasswordInput,
   Stack,
   Popover,
@@ -25,12 +17,13 @@ import classes from "./newPassword.module.css";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { getStrength, requirements } from "@/utils/publicFunctions";
 import useResetPassword from "@/hooks/useResetPassword";
-import ResetStatus from "@/components/ResetStatus";
 import { useMediaQuery } from "@mantine/hooks";
+import Head from "next/head";
 
 export default function NewPassword() {
   const isMobile = useMediaQuery("(max-width: 500px)");
-  const { form, handleFormSubmit, setPopoverOpened, popoverOpened, loading } = useResetPassword();
+  const { form, handleFormSubmit, setPopoverOpened, popoverOpened, loading } =
+    useResetPassword();
   const PasswordRequirement = ({ meets, label }) => {
     return (
       <Text
@@ -40,7 +33,9 @@ export default function NewPassword() {
         size="sm"
       >
         {meets ? <IconCheck size={14} /> : <IconX size={14} />}{" "}
-        <span className="ml-[15px]" ml={10}>{label}</span>
+        <span className="ml-[15px]" ml={10}>
+          {label}
+        </span>
       </Text>
     );
   };
@@ -56,7 +51,9 @@ export default function NewPassword() {
 
   return (
     <>
-     
+    <Head>
+        <title>New Password | HeasyResource</title>
+    </Head>
       <Container
         size={500}
         style={{
@@ -74,60 +71,62 @@ export default function NewPassword() {
             New Password
           </Title>
           <Text c="dimmed" fz="md" ta="left" mt={"20px"}>
-            Set the new password for your account so you can login <br style={{display: isMobile ? "none" : 'block'}}/> and
-            access all features
+            Set the new password for your account so you can login{" "}
+            <br style={{ display: isMobile ? "none" : "block" }} /> and access
+            all features
           </Text>
           <form
             className="mt-[2rem]"
             onSubmit={form.onSubmit((values) => handleFormSubmit(values))}
           >
             <Stack gap="1rem">
-            <Popover
-                  opened={popoverOpened}
-                  position="bottom"
-                  width="target"
-                  transition="pop"
-                >
-                  <Popover.Target>
-                    <div
-                      onFocusCapture={() => setPopoverOpened(true)}
-                      onBlurCapture={() => setPopoverOpened(false)}
-                    >
-                      <PasswordInput
-                        size="md"
-                        required
-                        label="Enter New Password"
-                        {...form.getInputProps("password")}
-                        disabled={loading}
-                        classNames={{ label: classes.label, error: classes.error }}
-                      />
-                    </div>
-                  </Popover.Target>
-                  <Popover.Dropdown>
-                    <Progress
-                      color={color}
-                      value={strength}
-                      size={7}
-                      style={{ marginBottom: 10 }}
+              <Popover
+                opened={popoverOpened}
+                position="bottom"
+                width="target"
+                transition="pop"
+              >
+                <Popover.Target>
+                  <div
+                    onFocusCapture={() => setPopoverOpened(true)}
+                    onBlurCapture={() => setPopoverOpened(false)}
+                  >
+                    <PasswordInput
+                      size="md"
+                      required
+                      label="Enter New Password"
+                      {...form.getInputProps("password")}
+                      disabled={loading}
+                      classNames={{
+                        label: classes.label,
+                        error: classes.error,
+                      }}
                     />
-                    <PasswordRequirement
-                      label="Includes at least 8 characters"
-                      meets={form.values.password.length > 7}
-                    />
-                    {checks}
-                  </Popover.Dropdown>
-                </Popover>
+                  </div>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Progress
+                    color={color}
+                    value={strength}
+                    size={7}
+                    style={{ marginBottom: 10 }}
+                  />
+                  <PasswordRequirement
+                    label="Includes at least 8 characters"
+                    meets={form.values.password.length > 7}
+                  />
+                  {checks}
+                </Popover.Dropdown>
+              </Popover>
               <PasswordInput
                 classNames={{ label: classes.label, error: classes.error }}
                 label="Confirm Password"
                 size="md"
-               
                 required
                 disabled={loading}
                 {...form.getInputProps("confirmPassword")}
               />
               <Button
-                
                 size="md"
                 variant="filled"
                 tt="capitalize"
@@ -135,16 +134,18 @@ export default function NewPassword() {
                 c={"white"}
                 type="submit"
                 bg="#3377FF"
-               
-                
               >
-                {loading ? <Loader type="dots" color="white"/> : "Update Password"}
+                {loading ? (
+                  <Loader type="dots" color="white" />
+                ) : (
+                  "Update Password"
+                )}
               </Button>
             </Stack>
           </form>
         </Box>
-        <ResetStatus />
       </Container>
     </>
+  
   );
 }
