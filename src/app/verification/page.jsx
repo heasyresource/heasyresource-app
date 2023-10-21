@@ -1,3 +1,4 @@
+'use client'
 import Logo from '@/components/Image';
 import {
     Paper,
@@ -11,10 +12,12 @@ import {
     Center,
     Box,
     rem,
+    PinInput,
 } from '@mantine/core';
-import { IconArrowLeft } from '@tabler/icons-react';
+
 
 export default function ForgotPassword() {
+
     return (
         <Container size={590} style={{
             height: '100vh',
@@ -30,26 +33,33 @@ export default function ForgotPassword() {
                     ta="left"
                     order={2}
                     mt={100}>
-                    Forgot your password?
+                    Verification
                 </Title>
                 <Text c="dimmed" fz="md" ta="left" mt={29}>
-                    Submit your email address for the verification process; <br /> we will send a four-digit code to your inbox
+                    An OTP code has been sent to your email address <br /> <span style={{ fontWeight: 'bold' }}>youremail@email.com</span> for verification."
                 </Text>
 
-                <Paper radius="md" mt={15}>
-                    <TextInput
-                    fz="md"
-                     label="Your email" 
-                     size="lg" placeholder="me@mantine.dev" required />
-                    <Group justify="space-between" mt={20}>
+                <Paper radius="md" mt={40}>
+                    {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <PinInput length={6} />
+                    </div> */}
+                    <PinInput
+                        style={{ display: 'flex', justifyContent: 'space-between' }}
+                        size='xl'
+                        placeholder=''
+                        length={6}
+                    />
+
+
+                    <Group justify="space-between" mt={30}>
                         <Button fullWidth size="lg">
                             <Text>Continue</Text>
                         </Button>
                     </Group>
                     <Text ta="left" mt="xl">
-                        Remember your password?{' '}
+                        Haven’t received it yet?{' '}
                         <Anchor href="#">
-                            Login
+                            Resend
                         </Anchor>
                     </Text>
                 </Paper>
