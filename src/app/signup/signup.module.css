@@ -51,14 +51,6 @@
     display: none;
   }
 }
-.signup_btn {
-  @media (max-width: 1440px) {
-    margin-top: 1.5rem;
-  }
-  @media (max-width: 786px) {
-    margin-top: 3rem;
-  }
-}
 .label {
   font-size: small;
 }

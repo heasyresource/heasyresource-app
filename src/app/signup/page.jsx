@@ -9,7 +9,6 @@ import {
   Grid,
   Image,
   Loader,
-
   PasswordInput,
   Popover,
   Progress,
@@ -171,7 +170,7 @@ const signup = () => {
                   c={"white"}
                   type="submit"
                   bg="#3377FF"
-                  className={classes.signup_btn}
+                  mt={"1.5rem"}
                 >
                   {loadingCompanyInfo ? <Loader color="white" type="dots" size="md" /> : "next"}
                 </Button>
@@ -298,7 +297,7 @@ const signup = () => {
                   c={"white"}
                   type="submit"
                   bg="#3377FF"
-                  className={classes.signup_btn}
+                  mt={"1.5rem"}
                 >
                   {
                     loadingCompanyRep ? <Loader color="white" type="dots" size="md" /> : "sign up"

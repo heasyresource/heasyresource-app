@@ -15,10 +15,10 @@ const useCustomAuthHook = () => {
       password: "",
     },
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
+      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Enter a valid email address"),
       password: (val) =>
-        val.length <= 8
-          ? "Password should include at least 8 characters"
+        val.length <= 1
+          ? "Password is required"
           : null,
     },
   });
@@ -53,12 +53,10 @@ const useCustomAuthHook = () => {
       confirmPassword: "",
     },
     validate: {
-      firstName: (value) =>
-        /^[A-Za-z]+$/.test(value) ? null : "First Name is required.",
-      lastName: (value) =>
-        /^[A-Za-z]+$/.test(value) ? null : "Last Name is required.",
+      firstName: (value) => value.length < 1 ? "First Name is required" : /^[A-Za-z]+$/.test(value) ? null : "First Name must contain only alphabets.",
+      lastName: (value) => value.length < 1 ? "Last Name is required" : /^[A-Za-z]+$/.test(value) ? null : "Last Name must contain only alphabets.",
       email: (value) =>
-        /^\S+@\S+$/.test(value) ? null : "Enter a valid email",
+        /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
       confirmPassword: (value, values) =>
         value !== values.password ? "Password did not match" : null,
       phoneNumber: (val) =>
