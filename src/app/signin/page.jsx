@@ -67,7 +67,7 @@ const signin = () => {
               </Button>
               <Flex justify="center" align="center">
                 <Link
-                  href="/"
+                  href="/forgot-password"
                   style={{
                     color: "#3377FF",
                     fontSize: "16px",

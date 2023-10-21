@@ -22,13 +22,9 @@ import {
 import useCustomAuthHook from "@/hooks";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
+import { getStrength, requirements } from "@/utils/publicFunctions";
 
-const requirements = [
-  { re: /[0-9]/, label: 'Includes number' },
-  { re: /[a-z]/, label: 'Includes lowercase letter' },
-  { re: /[A-Z]/, label: 'Includes uppercase letter' },
-  { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: 'Includes special symbol' },
-];
+
 
 const signup = () => {
   const isMobile = useMediaQuery(`(max-width: 768px)`)
@@ -44,17 +40,7 @@ const signup = () => {
     loadingCompanyRep
   } = useCustomAuthHook();
 
-  const getStrength = (string) => {
-    let multiplier = string.length > 7 ? 0 : 1;
 
-    requirements.forEach((requirement) => {
-      if (!requirement.re.test(string)) {
-        multiplier += 1;
-      }
-    });
-
-    return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
-  };
   const PasswordRequirement = ({ meets, label }) => {
     return (
       <Text

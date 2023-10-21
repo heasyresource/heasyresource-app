@@ -44,3 +44,6 @@ html, body {
  {
   --_input-bd: #3377FF!important;
 }
+.mantine-Modal-header{
+  display: none !important;
+}
