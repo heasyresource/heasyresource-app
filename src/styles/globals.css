@@ -33,6 +33,14 @@ html, body {
 	padding: 0;
   font-family: 'Satoshi', sans-serif;
 }
- .mantine-TextInput-input:focus-within{
-  --_input-bd: #3377FF !important;
+.mantine-TextInput-input:focus-within, 
+ .mantine-TextInput-input:focus, 
+ .mantine-Select-input:focus-within, 
+ .mantine-Select-input:focus,
+ .mantine-PasswordInput-input:focus-within, 
+ .mantine-PasswordInput-input:focus,
+ .mantine-PinInput-input:focus,
+ .mantine-PinInput-input:focus 
+ {
+  --_input-bd: #3377FF!important;
 }

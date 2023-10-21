@@ -1,5 +1,5 @@
 'use client'
-import Logo from '@/components/Image';
+import Logo from '../../../src/components/Image';
 import {
     Paper,
     Title,
@@ -36,7 +36,7 @@ export default function ForgotPassword() {
                     Verification
                 </Title>
                 <Text c="dimmed" fz="md" ta="left" mt={29}>
-                    An OTP code has been sent to your email address <br /> <span style={{ fontWeight: 'bold' }}>youremail@email.com</span> for verification."
+                    An OTP code has been sent to your email address <br /> <span style={{ fontWeight: 'bold' }}>youremail@email.com</span> for verification.
                 </Text>
 
                 <Paper radius="md" mt={40}>
@@ -53,10 +53,10 @@ export default function ForgotPassword() {
 
                     <Group justify="space-between" mt={30}>
                         <Button fullWidth size="lg">
-                            <Text>Continue</Text>
+                            Continue
                         </Button>
                     </Group>
-                    <Text ta="left" mt="xl">
+                    <Text size='sm' ta="left" mt="xl">
                         Haven’t received it yet?{' '}
                         <Anchor href="#">
                             Resend

@@ -1,5 +1,5 @@
 'use client'
-import Logo from '@/components/Image';
+// import Logo from '@/components/Image';
 import verified from '../../../public/verified.svg'
 import {
     Paper,
@@ -16,10 +16,11 @@ import {
     Modal,
     Image,
     Flex,
+    PasswordInput,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import NextImage from 'next/image'
-import { IconArrowLeft } from '@tabler/icons-react';
+import classes from './newPassword.module.css'
 
 export default function NewPassword() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -77,16 +78,30 @@ export default function NewPassword() {
                 </Text>
 
                 <Paper radius="md" mt={15}>
-                    <TextInput
+                    <PasswordInput
                         fz="md"
+                        classNames={{ label: classes.label, error: classes.error }}
                         label="Enter New Password"
-                        size="lg" my={20} placeholder="me@mantine.dev" required />
-                    <TextInput
+                        size="md" my={20} placeholder="Your password" required />
+                    <PasswordInput
                         fz="md"
+                        classNames={{ label: classes.label, error: classes.error }}
                         label="Confirm Password"
-                        size="lg" placeholder="me@mantine.dev" required />
+                        size="md" placeholder="Your password" required />
                     <Group justify="space-between" mt={20}>
-                        <Button onClick={open} fullWidth size="lg">
+                    <Button
+                            fullWidth
+                            size="md"
+                            variant="filled"
+                            tt="capitalize"
+                            fs="1rem"
+                            fw="bold"
+                            c={"white"}
+                            type="submit"
+                            bg="#3377FF"
+                            mt={"1rem"}
+                            onClick={open}
+                        >
                             <Text>Update Password</Text>
                         </Button>
                     </Group>

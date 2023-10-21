@@ -12,7 +12,7 @@ import {
     Box,
     rem,
 } from '@mantine/core';
-import { IconArrowLeft } from '@tabler/icons-react';
+import classes from './forgotPassword.module.css'
 
 export default function ForgotPassword() {
     return (
@@ -30,7 +30,7 @@ export default function ForgotPassword() {
                     ta="left"
                     order={2}
                     mt={100}>
-                    Forgot your password?
+                    Forgot password?
                 </Title>
                 <Text c="dimmed" fz="md" ta="left" mt={29}>
                     Submit your email address for the verification process; <br /> we will send a four-digit code to your inbox
@@ -38,15 +38,28 @@ export default function ForgotPassword() {
 
                 <Paper radius="md" mt={15}>
                     <TextInput
-                    fz="md"
-                     label="Your email" 
-                     size="lg" placeholder="me@mantine.dev" required />
+                        fz="md"
+                        label="Email address"
+                        type="email"
+                        classNames={{ label: classes.label, error: classes.error }}
+                        size="md" placeholder="johndoe@email.com" required />
                     <Group justify="space-between" mt={20}>
-                        <Button fullWidth size="lg">
+                        <Button
+                            fullWidth
+                            size="md"
+                            variant="filled"
+                            tt="capitalize"
+                            fs="1rem"
+                            fw="bold"
+                            c={"white"}
+                            type="submit"
+                            bg="#3377FF"
+                            mt={"1rem"}
+                        >
                             <Text>Continue</Text>
                         </Button>
                     </Group>
-                    <Text ta="left" mt="xl">
+                    <Text fw={700} size='sm' ta="left" mt="xl">
                         Remember your password?{' '}
                         <Anchor href="#">
                             Login
