@@ -9,7 +9,7 @@ import {
   Grid,
   Image,
   Loader,
-  
+
   PasswordInput,
   Popover,
   Progress,
@@ -25,12 +25,12 @@ import { IconCheck, IconX } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
 
 const requirements = [
-    { re: /[0-9]/, label: 'Includes number' },
-    { re: /[a-z]/, label: 'Includes lowercase letter' },
-    { re: /[A-Z]/, label: 'Includes uppercase letter' },
-    { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: 'Includes special symbol' },
-  ];
-  
+  { re: /[0-9]/, label: 'Includes number' },
+  { re: /[a-z]/, label: 'Includes lowercase letter' },
+  { re: /[A-Z]/, label: 'Includes uppercase letter' },
+  { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: 'Includes special symbol' },
+];
+
 const signup = () => {
   const isMobile = useMediaQuery(`(max-width: 768px)`)
   const {
@@ -47,28 +47,28 @@ const signup = () => {
 
   const getStrength = (string) => {
     let multiplier = string.length > 7 ? 0 : 1;
-  
+
     requirements.forEach((requirement) => {
       if (!requirement.re.test(string)) {
         multiplier += 1;
       }
     });
-  
+
     return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
   };
   const PasswordRequirement = ({ meets, label }) => {
     return (
-        <Text
-          c={meets ? 'teal' : 'red'}
-         
-          style={{display: 'flex', alignItems: 'center'}}
-          mt={7}
-          size="sm"
-        >
-          {meets ? <IconCheck size={14} /> : <IconX size={14} />}{' '}
-          <Box ml={10}>{label}</Box>
-        </Text>
-      );
+      <Text
+        c={meets ? 'teal' : 'red'}
+
+        style={{ display: 'flex', alignItems: 'center' }}
+        mt={7}
+        size="sm"
+      >
+        {meets ? <IconCheck size={14} /> : <IconX size={14} />}{' '}
+        <Box ml={10}>{label}</Box>
+      </Text>
+    );
   };
   const checks = requirements.map((requirement, index) => (
     <PasswordRequirement
@@ -91,7 +91,7 @@ const signup = () => {
         <Container className={classes.form_container}>
           <Flex justify={"space-between"} align={"flex-start"}>
             <Box>
-              <Title order={2}  c="#3377FF" fw={"bold"}>
+              <Title order={2} c="#3377FF" fw={"bold"}>
                 Sign Up as a Company
               </Title>
               <Text mt="5px" tt="capitalize" c={"#565656"} fs="18px" fw="bold">
@@ -99,7 +99,7 @@ const signup = () => {
               </Text>
             </Box>
             <Box className={classes.step}>
-              <Text  fw={"500"} c="#000000" fs="16px">
+              <Text fw={"500"} c="#000000" fs="16px">
                 {`  Step ${step} of 2`}
               </Text>
             </Box>
@@ -110,16 +110,16 @@ const signup = () => {
                 handleCompanyInfoSubmit(values)
               )}
             >
-              <Stack gap="1.5rem">
+              <Stack gap="1rem">
                 <TextInput
                   size="md"
-                placeholder="Pepsi"
+                  placeholder="Pepsi"
                   type="text"
                   {...companyInfoForm.getInputProps("name")}
                   withAsterisk
                   disabled={loadingCompanyInfo}
                   label="Company Name"
-                  
+                  classNames={{ label: classes.label }}
                 />
                 <TextInput
                   size="md"
@@ -129,25 +129,28 @@ const signup = () => {
                   {...companyInfoForm.getInputProps("email")}
                   disabled={loadingCompanyInfo}
                   label="Company Email"
+                  classNames={{ label: classes.label }}
                 />
                 <TextInput
                   size="md"
-                  
+                  placeholder="https://pepsi.com"
                   type="url"
-                withAsterisk
+                  withAsterisk
                   {...companyInfoForm.getInputProps("website")}
                   disabled={loadingCompanyInfo}
                   label="Company Website"
+                  classNames={{ label: classes.label }}
                 />
                 <Select
                   size="md"
                   withAsterisk
                   data={["Information Technology", "Data Analysis", "Cyber Security", "Graphics Designer"]}
                   searchable
-                 
+                  placeholder="Information Technology"
                   {...companyInfoForm.getInputProps("field")}
                   disabled={loadingCompanyInfo}
                   label="Field/Industry"
+                  classNames={{ label: classes.label }}
                 />
                 <TextInput
                   size="md"
@@ -157,6 +160,7 @@ const signup = () => {
                   {...companyInfoForm.getInputProps("phoneNumber")}
                   disabled={loadingCompanyInfo}
                   label="Phone Number"
+                  classNames={{ label: classes.label }}
                 />
                 <Button
                   size="md"
@@ -167,8 +171,9 @@ const signup = () => {
                   c={"white"}
                   type="submit"
                   bg="#3377FF"
+                  className={classes.signup_btn}
                 >
-                  {loadingCompanyInfo ? <Loader color="white" variant="dots"/> : "next"}
+                  {loadingCompanyInfo ? <Loader color="white" variant="dots" /> : "next"}
                 </Button>
               </Stack>
             </form>
@@ -178,34 +183,36 @@ const signup = () => {
                 handleCompanyRepSubmit(values)
               )}
             >
-              <Stack gap="1.5rem">
+              <Stack gap="1rem">
                 <Grid>
                   <Grid.Col span={isMobile ? 12 : 6}>
 
-                <TextInput
-                style={{flex: 1}}
-                  size="md"
-                  label="First Name"
-                  placeholder="John "
-                  type="text"
-                  {...companyRepForm.getInputProps("firstName")}
-                  withAsterisk
-                  disabled={loadingCompanyRep}
-                />
+                    <TextInput
+                      style={{ flex: 1 }}
+                      size="md"
+                      label="First Name"
+                      placeholder="John"
+                      type="text"
+                      {...companyRepForm.getInputProps("firstName")}
+                      withAsterisk
+                      disabled={loadingCompanyRep}
+                      classNames={{ label: classes.label }}
+                    />
                   </Grid.Col>
 
                   <Grid.Col span={isMobile ? 12 : 6}>
 
-                <TextInput
-                 style={{flex: 1}}
-                  size="md"
-                  label="Last Name"
-                  placeholder="Smith"
-                  type="text"
-                  withAsterisk
-                  disabled={loadingCompanyRep}
-                  {...companyRepForm.getInputProps("lastName")}
-                />
+                    <TextInput
+                      style={{ flex: 1 }}
+                      size="md"
+                      label="Last Name"
+                      placeholder="Smith"
+                      type="text"
+                      withAsterisk
+                      disabled={loadingCompanyRep}
+                      {...companyRepForm.getInputProps("lastName")}
+                      classNames={{ label: classes.label }}
+                    />
                   </Grid.Col>
                 </Grid>
                 <TextInput
@@ -216,8 +223,9 @@ const signup = () => {
                   label="Email Address"
                   {...companyRepForm.getInputProps("email")}
                   disabled={loadingCompanyRep}
+                  classNames={{ label: classes.label }}
                 />
-                <TextInput
+                {/* <TextInput
                   size="md"
                   label="Phone Number"
                   type="tel"
@@ -225,15 +233,17 @@ const signup = () => {
                   withAsterisk
                   {...companyRepForm.getInputProps("phoneNumber")}
                   disabled={loadingCompanyRep}
-                />
+                  classNames={{label: classes.label}}
+                /> */}
                 <TextInput
                   size="md"
                   label="Position in Company"
                   type="text"
-                 
+                  placeholder="CEO"
                   withAsterisk
                   {...companyRepForm.getInputProps("position")}
                   disabled={loadingCompanyRep}
+                  classNames={{ label: classes.label }}
                 />
 
                 <Popover
@@ -253,6 +263,7 @@ const signup = () => {
                         label="Password"
                         {...companyRepForm.getInputProps("password")}
                         disabled={loadingCompanyRep}
+                        classNames={{ label: classes.label }}
                       />
                     </div>
                   </Popover.Target>
@@ -276,6 +287,7 @@ const signup = () => {
                   label="Confirm Password"
                   {...companyRepForm.getInputProps("comfirmPassword")}
                   disabled={loadingCompanyRep}
+                  classNames={{ label: classes.label }}
                 />
                 <Button
                   size="md"
@@ -291,8 +303,8 @@ const signup = () => {
                   {
                     loadingCompanyRep ? <Loader color="white" type="dots" /> : "sign up"
                   }
-                  
-         
+
+
                 </Button>
               </Stack>
             </form>
