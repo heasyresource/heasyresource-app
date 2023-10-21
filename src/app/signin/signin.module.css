@@ -30,17 +30,15 @@
 }
 .form_wrapper {
   flex: 1;
-  height: 200px;
 }
 .form_container {
   max-width: 35rem;
   padding-top: rem(80px);
   height: 100%;
   display: flex;
-  margin-top: 7rem;
-  margin-bottom: 3rem;
   flex-direction: column;
   gap: 32px;
+  justify-content: center;
 
   @media (max-width: 500px) {
     margin-top: 5rem;
