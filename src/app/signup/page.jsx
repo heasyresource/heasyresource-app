@@ -119,7 +119,7 @@ const signup = () => {
                   withAsterisk
                   disabled={loadingCompanyInfo}
                   label="Company Name"
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 <TextInput
                   size="md"
@@ -129,7 +129,7 @@ const signup = () => {
                   {...companyInfoForm.getInputProps("email")}
                   disabled={loadingCompanyInfo}
                   label="Company Email"
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 <TextInput
                   size="md"
@@ -139,7 +139,7 @@ const signup = () => {
                   {...companyInfoForm.getInputProps("website")}
                   disabled={loadingCompanyInfo}
                   label="Company Website"
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 <Select
                   size="md"
@@ -150,7 +150,7 @@ const signup = () => {
                   {...companyInfoForm.getInputProps("field")}
                   disabled={loadingCompanyInfo}
                   label="Field/Industry"
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 <TextInput
                   size="md"
@@ -160,7 +160,7 @@ const signup = () => {
                   {...companyInfoForm.getInputProps("phoneNumber")}
                   disabled={loadingCompanyInfo}
                   label="Phone Number"
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 <Button
                   size="md"
@@ -196,7 +196,7 @@ const signup = () => {
                       {...companyRepForm.getInputProps("firstName")}
                       withAsterisk
                       disabled={loadingCompanyRep}
-                      classNames={{ label: classes.label }}
+                      classNames={{ label: classes.label, error: classes.error }}
                     />
                   </Grid.Col>
 
@@ -211,7 +211,7 @@ const signup = () => {
                       withAsterisk
                       disabled={loadingCompanyRep}
                       {...companyRepForm.getInputProps("lastName")}
-                      classNames={{ label: classes.label }}
+                      classNames={{ label: classes.label, error: classes.error }}
                     />
                   </Grid.Col>
                 </Grid>
@@ -223,7 +223,7 @@ const signup = () => {
                   label="Email Address"
                   {...companyRepForm.getInputProps("email")}
                   disabled={loadingCompanyRep}
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 {/* <TextInput
                   size="md"
@@ -243,7 +243,7 @@ const signup = () => {
                   withAsterisk
                   {...companyRepForm.getInputProps("position")}
                   disabled={loadingCompanyRep}
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
 
                 <Popover
@@ -263,7 +263,7 @@ const signup = () => {
                         label="Password"
                         {...companyRepForm.getInputProps("password")}
                         disabled={loadingCompanyRep}
-                        classNames={{ label: classes.label }}
+                        classNames={{ label: classes.label, error: classes.error }}
                       />
                     </div>
                   </Popover.Target>
@@ -287,7 +287,7 @@ const signup = () => {
                   label="Confirm Password"
                   {...companyRepForm.getInputProps("comfirmPassword")}
                   disabled={loadingCompanyRep}
-                  classNames={{ label: classes.label }}
+                  classNames={{ label: classes.label, error: classes.error }}
                 />
                 <Button
                   size="md"
