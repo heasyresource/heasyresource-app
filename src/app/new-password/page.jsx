@@ -1,5 +1,5 @@
 'use client'
-// import Logo from '@/components/Image';
+import Logo from '@/components/Image';
 import verified from '../../../public/verified.svg'
 import {
     Paper,
@@ -56,7 +56,7 @@ export default function NewPassword() {
                             component={NextImage}
                             src={verified} />
                     </Box>
-                    <Title order={4}>Password Reset Successful</Title>
+                    <Title order={3}>Password Reset Successful</Title>
                     <Text c="dimmed" size="xs">"Your Password has been Successfully Updated!"</Text>
                     <Button mt={25} onClick={open} fullWidth size="lg">
                         <Text size='sm'>Continue</Text>

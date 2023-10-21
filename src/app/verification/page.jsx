@@ -16,7 +16,7 @@ import {
 } from '@mantine/core';
 
 
-export default function ForgotPassword() {
+export default function Verification() {
 
     return (
         <Container size={590} style={{
@@ -36,7 +36,7 @@ export default function ForgotPassword() {
                     Verification
                 </Title>
                 <Text c="dimmed" fz="md" ta="left" mt={29}>
-                    An OTP code has been sent to your email address <br /> <span style={{ fontWeight: 'bold' }}>youremail@email.com</span> for verification.
+                    An OTP code has been sent to your email address <br /> <span style={{ fontWeight: 'bold' }}>your@email.com</span> for verification.
                 </Text>
 
                 <Paper radius="md" mt={40}>
@@ -52,13 +52,25 @@ export default function ForgotPassword() {
 
 
                     <Group justify="space-between" mt={30}>
-                        <Button fullWidth size="lg">
+                    <Button
+                            fullWidth
+                            size="md"
+                            variant="filled"
+                            tt="capitalize"
+                            fs="1rem"
+                            fw="bold"
+                            c={"white"}
+                            type="submit"
+                            bg="#3377FF"
+                            mt={"1rem"}
+                            onClick={open}
+                        >
                             Continue
                         </Button>
                     </Group>
-                    <Text size='sm' ta="left" mt="xl">
+                    <Text fw={700} size='sm' ta="left" mt="xl">
                         Haven’t received it yet?{' '}
-                        <Anchor href="#">
+                        <Anchor fw={700} href="#">
                             Resend
                         </Anchor>
                     </Text>

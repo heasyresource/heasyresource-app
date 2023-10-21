@@ -33,7 +33,7 @@ export default function ForgotPassword() {
                     Forgot password?
                 </Title>
                 <Text c="dimmed" fz="md" ta="left" mt={29}>
-                    Submit your email address for the verification process; <br /> we will send a four-digit code to your inbox
+                    Submit your email address for the verification process; <br /> we will send a six-digit code to your inbox
                 </Text>
 
                 <Paper radius="md" mt={15}>
@@ -61,7 +61,7 @@ export default function ForgotPassword() {
                     </Group>
                     <Text fw={700} size='sm' ta="left" mt="xl">
                         Remember your password?{' '}
-                        <Anchor href="#">
+                        <Anchor fw={700} href="#">
                             Login
                         </Anchor>
                     </Text>
