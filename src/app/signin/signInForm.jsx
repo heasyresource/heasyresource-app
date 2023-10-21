@@ -10,10 +10,12 @@ import {
     TextInput,
 } from "@mantine/core";
 import Link from "next/link";
-import useCustomAuthHook from "@/hooks";
+import { useSignin } from "@/hooks";
+import { Notifications, notifications } from "@mantine/notifications";
+import notify from '@/styles/notification..module.css'
 
 const SignInForm = () => {
-    const { signInForm, handleSignInSubmit, loadingSignIn } = useCustomAuthHook();
+    const { signInForm, handleSignInSubmit, loadingSignIn } = useSignin();
     return (
         <form onSubmit={signInForm.onSubmit((values) => { handleSignInSubmit(values) })}>
             <Stack gap="1rem">
