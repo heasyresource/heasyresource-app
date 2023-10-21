@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
                     withGlobalStyles
                     withNormalizeCSS
                     theme={theme}
+                    
                 >
                     {children}
                 </MantineProvider>

@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,7 +17,22 @@
   }
 } */
 
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  /* Add more font formats for cross-browser compatibility if needed */
+  font-weight: normal;
+  font-style: normal;
+}
+::-webkit-scrollbar {
+  width: 0; 
+}
 html, body {
 	margin: 0;
 	padding: 0;
+  font-family: 'Satoshi', sans-serif;
+}
+ .mantine-TextInput-input:focus-within{
+  --_input-bd: #3377FF !important;
 }
