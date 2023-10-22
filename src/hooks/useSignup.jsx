@@ -37,9 +37,8 @@ const useSignup = () => {
       lastName: "",
       email: "",
       position: "",
-      phoneNumber: "",
       password: "",
-      confirmPassword: "",
+      comfirmPassword: "",
     },
     validate: {
       firstName: (value) => 
@@ -58,9 +57,7 @@ const useSignup = () => {
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
       confirmPassword: (value, values) =>
         value !== values.password ? "Password did not match" : null,
-      phoneNumber: (val) =>
-        val.length === 10 ? null : "Enter a valid phone number",
-      position: (val) => (!val.length ? "Enter a valid position" : null),
+      position: (val) => (val.length < 1 ? "Enter a valid position" : null),
     },
   });
   const handleCompanyInfoSubmit = async (data) => {

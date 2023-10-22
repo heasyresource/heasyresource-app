@@ -1,8 +1,7 @@
 import Logo from "@/components/Image";
-import { Title, Container, Center, Box } from "@mantine/core";
+import { Title, Container, Center, Box, Text } from "@mantine/core";
 import ForgotPasswordForm from "./forgotPasswordForm";
-import ForgotPasswordOpt from "./forgotPasswordOpt";
-import ForgotPasswordDesc from "./forgotPasswordDesc";
+import Link from "next/link";
 
 export const metadata = {
   title: "Forgot Password",
@@ -25,11 +24,27 @@ export default function ForgotPassword() {
         <Title ta="left" c="#000000" order={2} mt={"50px"}>
           Forgot password?
         </Title>
-        <ForgotPasswordDesc></ForgotPasswordDesc>
+        <Text c="#595959" fz="md" ta="left" mt={29}>
+          Submit your email address for the verification process <br /> we will
+          send a six-digit code to your inbox
+        </Text>
 
         <ForgotPasswordForm></ForgotPasswordForm>
 
-        <ForgotPasswordOpt></ForgotPasswordOpt>
+        <Text fw={700} c={"#494949"} size="sm" ta="left" mt="xl">
+          Remember your password?{" "}
+          <Link
+            href="/signin"
+            style={{
+              color: "#3377FF",
+              textTransform: "capitalize",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
+            sign in
+          </Link>
+        </Text>
       </Box>
     </Container>
   );

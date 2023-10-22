@@ -3,6 +3,7 @@ import { useSignup } from "@/hooks";
 import {
   Box,
   Button,
+  Flex,
   Grid,
   Loader,
   PasswordInput,
@@ -12,12 +13,12 @@ import {
   Stack,
   Text,
   TextInput,
+  Title,
 } from "@mantine/core";
 import classes from "./signup.module.css";
 import React from "react";
 import { getStrength, requirements } from "@/utils/publicFunctions";
 import { IconCheck, IconX } from "@tabler/icons-react";
-import SignUpDesc from "./signupDesc";
 
 const PasswordRequirement = ({ meets, label }) => {
   return (
@@ -28,7 +29,13 @@ const PasswordRequirement = ({ meets, label }) => {
       size="sm"
     >
       {meets ? <IconCheck size={14} /> : <IconX size={14} />}{" "}
-      <Box ml={10}>{label}</Box>
+      <span
+        style={{
+          marginLeft: 10,
+        }}
+      >
+        {label}
+      </span>
     </Text>
   );
 };
@@ -56,7 +63,21 @@ const SignUpForm = () => {
   const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
   return (
     <>
-      <SignUpDesc step={step}></SignUpDesc>
+      <Flex justify={"space-between"} align={"flex-start"}>
+        <Box>
+          <Title order={2} c="#3377FF" fw={"bold"}>
+            Sign Up as a Company
+          </Title>
+          <Text mt="5px" tt="capitalize" c={"#565656"} fs="18px" fw="bold">
+            {` company ${step === 1 ? "information" : "representative"}`}
+          </Text>
+        </Box>
+        <Box className={classes.step}>
+          <Text fw={"500"} c="#000000" fs="16px">
+            {`  Step ${step} of 2`}
+          </Text>
+        </Box>
+      </Flex>
       {step === 1 ? (
         <form
           onSubmit={companyInfoForm.onSubmit((values) => {

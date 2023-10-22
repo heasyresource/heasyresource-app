@@ -4,9 +4,9 @@ import {
   Container,
   Center,
   Box,
+  Text,
 } from "@mantine/core";
 import NewPasswordForm from "./newPasswordForm";
-import NewPasswordDesc from "./newPasswordDesc";
 
 export const metadata = {
   title: 'New Password',
@@ -30,7 +30,11 @@ export default function NewPassword() {
         <Title ta="left" order={2} mt={"50px"} c="#000000">
           New Password
         </Title>
-        <NewPasswordDesc></NewPasswordDesc>
+        <Text c="dimmed" fz="md" ta="left" mt={"20px"}>
+            Set the new password for your account so you can login{" "}
+            <br style={{ display: isMobile ? "none" : "block" }} /> and access
+            all features
+        </Text>
         <NewPasswordForm></NewPasswordForm>
       </Box>
     </Container>
