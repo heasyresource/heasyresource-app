@@ -11,8 +11,6 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import { useSignin } from "@/hooks";
-import { Notifications, notifications } from "@mantine/notifications";
-import notify from '@/styles/notification..module.css'
 
 const SignInForm = () => {
     const { signInForm, handleSignInSubmit, loadingSignIn } = useSignin();
@@ -33,7 +31,7 @@ const SignInForm = () => {
                     classNames={{ label: classes.label, error: classes.error }}
                 />
                 <Button
-                    size="lg"
+                    size="md"
                     variant="filled"
                     tt="capitalize"
                     fs="1rem"

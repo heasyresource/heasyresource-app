@@ -1,9 +1,9 @@
 import "@mantine/core/styles.css";
+import '@mantine/notifications/styles.css';
+import '@/styles/globals.css'
 import React from "react";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { Provider } from "react-redux";
 import { theme } from "@/theme";
-import store from "@/store";
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
 
@@ -33,28 +33,16 @@ export default function RootLayout({ children }) {
         <meta property="og:ste_name" content="Heasyresource" />
       </head>
       <body suppressHydrationWarning={true}>
-        {/* <Provider store={store}> */}
         <MantineProvider
           withGlobalStyles
           withNormalizeCSS
           theme={theme}
         >
-          <Notifications
-            style={{
-              position: "fixed",
-              top: "0",
-              right: "0",
-              marginTop: "10px",
-              marginRight: "10px",
-              zIndex: 2000,
-            }}
-          />
+          <Notifications position="top-right" zIndex={1000} />
           <ModalsProvider>
-
             {children}
           </ModalsProvider>
         </MantineProvider>
-        {/* </Provider> */}
       </body>
     </html>
   );

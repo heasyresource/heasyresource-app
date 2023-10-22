@@ -21,7 +21,6 @@ import {
 
 import { useSignup } from "@/hooks";
 import { IconCheck, IconX } from "@tabler/icons-react";
-import { useMediaQuery } from "@mantine/hooks";
 import { getStrength, requirements } from "@/utils/publicFunctions";
 import Head from "next/head";
 

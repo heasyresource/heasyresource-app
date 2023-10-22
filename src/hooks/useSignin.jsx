@@ -2,7 +2,6 @@
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
-import classes from '@/styles/notification..module.css'
 
 const useSignin = () => {
   const [loadingSignIn, setLoadingSignIn] = useState(false);
@@ -24,7 +23,6 @@ const useSignin = () => {
       notifications.show({
         title: 'Success',
         message: 'Signin successful',
-        classNames: classes,
       })
     } catch (err) {
       setLoadingSignIn(false);
@@ -33,8 +31,6 @@ const useSignin = () => {
         color: "red",
         title: 'Error',
         message: 'Signin unsuccessful',
-        classNames: classes,
-
       })
     }
   };
