@@ -1,4 +1,5 @@
 "use client";
+import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import React, { useState } from "react";
@@ -21,17 +22,22 @@ const useSignin = () => {
     try {
       console.log(data, "signin");
       notifications.show({
-        title: 'Success',
-        message: 'Signin successful',
-      })
+        color: "white",
+        title: "Success",
+        message: "Signin successful",
+        styles: successStyles,
+        autoClose: 2000
+      });
     } catch (err) {
       setLoadingSignIn(false);
       console.log(err);
       notifications.show({
         color: "red",
-        title: 'Error',
-        message: 'Signin unsuccessful',
-      })
+        title: "Error",
+        message: "Signin unsuccessful",
+        styles: errorStyles,
+        autoClose: 2000
+      });
     }
   };
   return {
