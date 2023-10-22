@@ -2,7 +2,6 @@ import Logo from "../../../src/components/Image";
 import { Title, Container, Center, Box, Text } from "@mantine/core";
 import VerificationDesc from "./verificationDesc";
 import VerificationForm from "./verificationForm";
-import VerificationOpt from "./verificationOpt";
 
 export const metadata = {
   title: "Verification",

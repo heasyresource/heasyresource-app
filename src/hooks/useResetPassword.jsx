@@ -82,6 +82,7 @@ const useResetPassword = () => {
     close,
     popoverOpened,
     setPopoverOpened,
+    isMobile
   };
 };
 
