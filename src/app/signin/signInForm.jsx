@@ -10,10 +10,10 @@ import {
     TextInput,
 } from "@mantine/core";
 import Link from "next/link";
-import useCustomAuthHook from "@/hooks";
+import { useSignin } from "@/hooks";
 
 const SignInForm = () => {
-    const { signInForm, handleSignInSubmit, loadingSignIn } = useCustomAuthHook();
+    const { signInForm, handleSignInSubmit, loadingSignIn } = useSignin();
     return (
         <form onSubmit={signInForm.onSubmit((values) => { handleSignInSubmit(values) })}>
             <Stack gap="1rem">
@@ -31,7 +31,7 @@ const SignInForm = () => {
                     classNames={{ label: classes.label, error: classes.error }}
                 />
                 <Button
-                    size="lg"
+                    size="md"
                     variant="filled"
                     tt="capitalize"
                     fs="1rem"
