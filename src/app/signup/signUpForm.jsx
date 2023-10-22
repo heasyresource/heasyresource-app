@@ -150,6 +150,7 @@ const SignUpForm = () => {
               c={"white"}
               type="submit"
               bg="#3377FF"
+              mt="1rem"
               disabled={loadingCompanyInfo}
             >
               {loadingCompanyInfo ? (
