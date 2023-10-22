@@ -141,9 +141,9 @@ const SignUpForm = () => {
         </form>
       ) : (
         <form
-          onSubmit={companyRepForm.onSubmit((values) =>
-            handleCompanyRepSubmit(values)
-          )}
+          onSubmit={companyRepForm.onSubmit((values) => {
+            handleCompanyRepSubmit(values);
+          })}
         >
           <Stack gap="1rem">
             <Grid>

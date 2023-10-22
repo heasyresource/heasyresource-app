@@ -104,7 +104,6 @@ const useSignup = () => {
         autoClose: 2000
       });
 
-      console.log(step);
     } catch (err) {
       setLoadingCompanyRep(false);
       console.log(err);
@@ -117,7 +116,6 @@ const useSignup = () => {
       });
     }
   };
-  console.log(step, "outside");
   return {
     companyInfoForm,
     companyRepForm,
