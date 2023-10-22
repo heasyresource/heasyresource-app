@@ -1,24 +1,19 @@
-"use client"
 import React from "react";
+import SignInForm from "./signInForm";
 import classes from "./signin.module.css";
 import {
   Box,
-  Button,
   Container,
-  Flex,
   Image,
-  Loader,
-  PasswordInput,
   Stack,
   Text,
-  TextInput,
   Title,
 } from "@mantine/core";
-import Link from "next/link";
-import useCustomAuthHook from "@/hooks";
+export const metadata = {
+  title: 'Sign In',
+};
 
-const signin = () => {
-  const { signInForm, handleSignInSubmit, loadingSignIn } = useCustomAuthHook();
+const SignIn = () => {
   return (
     <Box className={classes.wrapper}>
       <Box className={classes.wrapper_img}>
@@ -37,55 +32,11 @@ const signin = () => {
               Sign In to Initiate Your HR Solutions
             </Text>
           </Stack>
-          <form onSubmit={signInForm.onSubmit((values) => { handleSignInSubmit(values) })}>
-            <Stack gap="1rem">
-              <TextInput
-                size="md"
-                label="Email Address"
-                placeholder="john@example.com"
-                type="email"
-                {...signInForm.getInputProps('email')}
-                disabled={loadingSignIn}
-                classNames={{ label: classes.label, error: classes.error }}
-              />
-
-              <PasswordInput label="Password" size="md" disabled={loadingSignIn} placeholder="Password" {...signInForm.getInputProps('password')}
-                classNames={{ label: classes.label, error: classes.error }}
-              />
-              <Button
-                size="lg"
-                variant="filled"
-                tt="capitalize"
-                fs="1rem"
-                fw="bold"
-                c={"white"}
-                type="submit"
-                bg="#3377ff"
-                mt={"1.5rem"}
-              >
-                {loadingSignIn ? <Loader color="white" type="dots" size="md" /> : "sign in"}
-              </Button>
-              <Flex justify="center" align="center">
-                <Link
-                  href="/"
-                  style={{
-                    color: "#3377FF",
-                    fontSize: "16px",
-                    textTransform: "capitalize",
-                    textDecoration: "none",
-                    fontWeight: "bold",
-                    marginTop: "1rem"
-                  }}
-                >
-                  forgot password?
-                </Link>
-              </Flex>
-            </Stack>
-          </form>
+          <SignInForm></SignInForm>
         </Container>
       </Box>
     </Box>
   );
 };
 
-export default signin;
+export default SignIn;
