@@ -27,7 +27,7 @@ import Head from "next/head";
 
 
 
-const signup = () => {
+const SignUp = () => {
   const isMobile = useMediaQuery(`(max-width: 768px)`)
   const {
     companyInfoForm,
@@ -306,4 +306,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default SignUp;
