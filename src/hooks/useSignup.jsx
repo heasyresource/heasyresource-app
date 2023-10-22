@@ -1,3 +1,5 @@
+"use client"
+import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -35,12 +37,11 @@ const useSignup = () => {
       lastName: "",
       email: "",
       position: "",
-      phoneNumber: "",
       password: "",
-      confirmPassword: "",
+      comfirmPassword: "",
     },
     validate: {
-      firstName: (value) =>
+      firstName: (value) => 
         value.length < 1
           ? "First Name is required"
           : /^[A-Za-z]+$/.test(value)
@@ -56,52 +57,59 @@ const useSignup = () => {
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
       confirmPassword: (value, values) =>
         value !== values.password ? "Password did not match" : null,
-      phoneNumber: (val) =>
-        val.length === 10 ? null : "Enter a valid phone number",
-      position: (val) => (!val.length ? "Enter a valid position" : null),
+      position: (val) => (val.length < 1 ? "Enter a valid position" : null),
     },
   });
   const handleCompanyInfoSubmit = async (data) => {
     setLoadingCompanyInfo(true);
     try {
       notifications.show({
+        color: "white",
         title: "Success",
         message: "Step one successful",
-        classNames: classes,
+        styles: successStyles,
+        autoClose: 2000
       });
+      setStep(() => step +1)
+     
       console.log(data, "company info");
+        console.log(step, "inside");
 
-      setStep(2);
-
-      console.log(step);
     } catch (err) {
       setLoadingCompanyInfo(false);
       console.log(err);
       notifications.show({
+        color: "red",
         title: "Error",
         message: "Step one unsuccessful",
-        classNames: classes,
+        styles: errorStyles,
+        autoClose: 2000
       });
     }
   };
+
   const handleCompanyRepSubmit = async (data) => {
     setLoadingCompanyRep(true);
     try {
+
       console.log(data, "company info");
       notifications.show({
+        color: "white",
         title: "Success",
         message: "Registration successful",
-        classNames: classes,
+        styles: successStyles,
+        autoClose: 2000
       });
-      setStep(2);
-      console.log(step);
+
     } catch (err) {
       setLoadingCompanyRep(false);
       console.log(err);
       notifications.show({
+        color: "red",
         title: "Error",
         message: "Registration unsuccessful",
-        classNames: classes,
+        styles: errorStyles,
+        autoClose: 2000
       });
     }
   };

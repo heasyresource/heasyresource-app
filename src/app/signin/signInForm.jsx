@@ -40,6 +40,7 @@ const SignInForm = () => {
                     type="submit"
                     bg="#3377ff"
                     mt={"1.5rem"}
+                    disabled={loadingSignIn}
                 >
                     {loadingSignIn ? <Loader color="white" type="dots" size="md" /> : "sign in"}
                 </Button>

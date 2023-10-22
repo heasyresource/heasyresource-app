@@ -1,16 +1,9 @@
 import React from "react";
 import SignInForm from "./signInForm";
 import classes from "./signin.module.css";
-import {
-  Box,
-  Container,
-  Image,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Box, Container, Image, Stack, Text, Title } from "@mantine/core";
 export const metadata = {
-  title: 'Sign In',
+  title: "Sign In",
 };
 
 const SignIn = () => {
@@ -19,7 +12,7 @@ const SignIn = () => {
       <Box className={classes.wrapper_img}>
         <Box className={classes.wrapper_imgOverlay} />
         <Box className={classes.logo_wrapper}>
-          <Image src="/assets/images/HRlogo.png" alt="" />
+          <Image src="/assets/images/HRlogo.png" alt="hr-logo" />
         </Box>
       </Box>
       <Box className={classes.form_wrapper}>

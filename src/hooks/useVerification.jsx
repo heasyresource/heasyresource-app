@@ -1,3 +1,4 @@
+"use client"
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
@@ -70,6 +71,7 @@ const useVerification = () => {
     form,
     loading,
     handleSubmit,
+    isMobile
   };
 };
 
