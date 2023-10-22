@@ -9,7 +9,7 @@ export default function HomePage() {
 
                 <Link href="/signin">Sign In</Link> |  
                 <Link href="/signup">Sign Up</Link> | 
-                <Link href="/new-password">New Password</Link> | 
+                <Link href="/new-password">New Password</Link> 
             </Box>
         </>
     );

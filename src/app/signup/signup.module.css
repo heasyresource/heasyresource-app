@@ -34,13 +34,10 @@
 }
 .form_wrapper {
   flex: 1;
-  overflow: scroll;
 }
 .form_container {
   max-width: 35rem;
   width: 100%;
-  padding-top: rem(40px);
-  padding-bottom: rem(40px);
   height: 100%;
   display: flex;
   flex-direction: column;
