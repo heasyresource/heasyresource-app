@@ -7,8 +7,9 @@ export default function HomePage() {
             <Box w={600} mx="auto" ta="center" c="#fff" size={"xs"} bg="blue.7" py="xl">
                 <Text tt="capitalize">welcome to Heasyresource</Text>
 
-                <Link href="/signin">Sign In</Link> | 
-                <Link href="/signup">Sign Up</Link>
+                <Link href="/signin">Sign In</Link> |  
+                <Link href="/signup">Sign Up</Link> | 
+                <Link href="/new-password">New Password</Link> 
             </Box>
         </>
     );
