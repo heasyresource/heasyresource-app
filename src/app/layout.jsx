@@ -4,9 +4,13 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Provider } from "react-redux";
 import { theme } from '@/theme';
 import store from "@/store";
+import { ModalsProvider } from '@mantine/modals';
 
 export const metadata = {
-    title: 'HeasyResource',
+    title: {
+        template: '%s | HeasyResource',
+        default: 'HeasyResource',
+    },
     description: 'Hr Manangement System',
 };
 
@@ -33,9 +37,11 @@ export default function RootLayout({ children }) {
                     withGlobalStyles
                     withNormalizeCSS
                     theme={theme}
-                    
                 >
-                    {children}
+                    <ModalsProvider>
+
+                        {children}
+                    </ModalsProvider>
                 </MantineProvider>
                 {/* </Provider> */}
             </body>
