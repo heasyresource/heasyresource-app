@@ -108,6 +108,7 @@ export default function NewPasswordForm() {
           c={"white"}
           type="submit"
           bg="#3377FF"
+          mt="1rem"
           disabled={loading}
         >
           {loading ? <Loader type="dots" color="white" /> : "Update Password"}
