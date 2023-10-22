@@ -29,7 +29,7 @@ const PasswordRequirement = ({ meets, label }) => {
   );
 };
 export default function NewPasswordForm() {
-  const { form, handleFormSubmit, setPopoverOpened, popoverOpened, loading } =
+  const { form, handleFormSubmit, setPopoverOpened, popoverOpened, loading, isMobile} =
     useResetPassword();
 
   const checks = requirements.map((requirement, index) => (
@@ -43,6 +43,12 @@ export default function NewPasswordForm() {
   const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
 
   return (
+    <>
+     <Text c="dimmed" fz="md" ta="left" mt={"20px"}>
+            Set the new password for your account so you can login{" "}
+            <br style={{ display: isMobile ? "none" : "block" }} /> and access
+            all features
+        </Text>
     <form
       className="mt-[2rem]"
       onSubmit={form.onSubmit((values) => handleFormSubmit(values))}
@@ -108,5 +114,6 @@ export default function NewPasswordForm() {
         </Button>
       </Stack>
     </form>
+    </>
   );
 }
