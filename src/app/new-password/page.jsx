@@ -4,7 +4,6 @@ import {
   Container,
   Center,
   Box,
-  Text,
 } from "@mantine/core";
 import NewPasswordForm from "./newPasswordForm";
 
