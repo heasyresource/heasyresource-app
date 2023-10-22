@@ -1,8 +1,10 @@
-import { useRouter } from "next/router";
+"use client"
+import { useRouter, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function SecureUser({ children }) {
   const router = useRouter();
+  const lastPathname = usePathname()
 
   const [isDataPresent, setIsDataPresent] = useState(true);
 
@@ -16,7 +18,6 @@ export default function SecureUser({ children }) {
         if (!checkStore) {
           setIsDataPresent(false);
 
-          const lastPathname = router.pathname;
           localStorage.getItem("user") && localStorage.removeItem("user");
           localStorage.getItem("accessUserToken") &&
             localStorage.removeItem("accessUserToken");

@@ -6,7 +6,6 @@ import {
   Box,
 } from "@mantine/core";
 import NewPasswordForm from "./newPasswordForm";
-import NewPasswordDesc from "./newPasswordDesc";
 
 export const metadata = {
   title: 'New Password',
@@ -30,7 +29,7 @@ export default function NewPassword() {
         <Title ta="left" order={2} mt={"50px"} c="#000000">
           New Password
         </Title>
-        <NewPasswordDesc></NewPasswordDesc>
+       
         <NewPasswordForm></NewPasswordForm>
       </Box>
     </Container>
