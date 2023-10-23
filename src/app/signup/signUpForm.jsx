@@ -51,6 +51,7 @@ const SignUpForm = () => {
     setPopoverOpened,
     popoverOpened,
     isMobile,
+    fields,
   } = useSignup();
   const checks = requirements.map((requirement, index) => (
     <PasswordRequirement
@@ -89,7 +90,7 @@ const SignUpForm = () => {
               size="md"
               placeholder="Pepsi"
               type="text"
-              {...companyInfoForm.getInputProps("name")}
+              {...companyInfoForm.getInputProps("companyName")}
               withAsterisk
               disabled={loadingCompanyInfo}
               label="Company Name"
@@ -100,7 +101,7 @@ const SignUpForm = () => {
               placeholder="pepsi@example.com"
               type="email"
               withAsterisk
-              {...companyInfoForm.getInputProps("email")}
+              {...companyInfoForm.getInputProps("companyEmail")}
               disabled={loadingCompanyInfo}
               label="Company Email"
               classNames={{ label: classes.label, error: classes.error }}
@@ -110,7 +111,7 @@ const SignUpForm = () => {
               placeholder="https://pepsi.com"
               type="url"
               withAsterisk
-              {...companyInfoForm.getInputProps("website")}
+              {...companyInfoForm.getInputProps("companyWebsite")}
               disabled={loadingCompanyInfo}
               label="Company Website"
               classNames={{ label: classes.label, error: classes.error }}
@@ -118,12 +119,7 @@ const SignUpForm = () => {
             <Select
               size="md"
               withAsterisk
-              data={[
-                "Information Technology",
-                "Data Analysis",
-                "Cyber Security",
-                "Graphics Designer",
-              ]}
+              data={fields}
               searchable
               placeholder="Information Technology"
               {...companyInfoForm.getInputProps("field")}
@@ -164,7 +160,7 @@ const SignUpForm = () => {
       ) : (
         <form
           onSubmit={companyRepForm.onSubmit((values) => {
-            handleCompanyRepSubmit(values);
+            handleCompanyRepSubmit(values);   
           })}
         >
           <Stack gap="1rem">
