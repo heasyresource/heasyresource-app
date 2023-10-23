@@ -2,7 +2,7 @@
 import React from 'react';
 import NextImage from 'next/image';
 import profileIcon from '../../public/profileicon.svg'
-import { Card, Center, Flex, Image, Text } from '@mantine/core';
+import { Card, Center, Group, Image, Text } from '@mantine/core';
 
 // Define your custom Card component
 function MiniCard({ width, height, borderColor, title, value }) {
@@ -18,7 +18,7 @@ function MiniCard({ width, height, borderColor, title, value }) {
       <Text style={{ color: '#7EA6F4' }} fz="sm" fw={700}>
         {title}
       </Text>
-      <Flex
+      <Group
         mt={8}
         align="center"
         justify="space-between"
@@ -31,8 +31,8 @@ function MiniCard({ width, height, borderColor, title, value }) {
           h={15}
           w="auto"
           fit="contain"
-          src={profileIcon} alt="hr-logo" />
-      </Flex>
+          src={profileIcon} alt="profile-icon" />
+      </Group>
     </Card>
   );
 }
