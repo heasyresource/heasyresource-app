@@ -1,6 +1,6 @@
 'use client'
 import { forwardRef } from 'react';
-import { IconChevronDown, IconExternalLink, IconMan, IconSignLeft } from '@tabler/icons-react';
+import { IconChevronDown, IconExternalLink, IconMan } from '@tabler/icons-react';
 import { Group, Avatar, Text, Menu, UnstyledButton, rem } from '@mantine/core';
 import {
     IconSettings,
@@ -74,3 +74,5 @@ export default function Profile() {
         </Menu>
     );
 }
+
+UserButton.displayName = "UserButton";
