@@ -122,7 +122,7 @@ const SignUpForm = () => {
               data={fields}
               searchable
               placeholder="Information Technology"
-              {...companyInfoForm.getInputProps("field")}
+              {...companyInfoForm.getInputProps("industryId")}
               disabled={loadingCompanyInfo}
               label="Field/Industry"
               classNames={{ label: classes.label, error: classes.error }}
@@ -132,7 +132,7 @@ const SignUpForm = () => {
               placeholder="+23470000000"
               type="tel"
               withAsterisk
-              {...companyInfoForm.getInputProps("phoneNumber")}
+              {...companyInfoForm.getInputProps("companyPhoneNumber")}
               disabled={loadingCompanyInfo}
               label="Phone Number"
               classNames={{ label: classes.label, error: classes.error }}
@@ -160,39 +160,34 @@ const SignUpForm = () => {
       ) : (
         <form
           onSubmit={companyRepForm.onSubmit((values) => {
-            handleCompanyRepSubmit(values);   
+            handleCompanyRepSubmit(values);
           })}
         >
           <Stack gap="1rem">
-            <Grid>
-              <Grid.Col span={isMobile ? 12 : 6}>
-                <TextInput
-                  style={{ flex: 1 }}
-                  size="md"
-                  label="First Name"
-                  placeholder="John"
-                  type="text"
-                  {...companyRepForm.getInputProps("firstName")}
-                  withAsterisk
-                  disabled={loadingCompanyRep}
-                  classNames={{ label: classes.label, error: classes.error }}
-                />
-              </Grid.Col>
+            <TextInput
+              style={{ flex: 1 }}
+              size="md"
+              label="First Name"
+              placeholder="John"
+              type="text"
+              {...companyRepForm.getInputProps("firstName")}
+              withAsterisk
+              disabled={loadingCompanyRep}
+              classNames={{ label: classes.label, error: classes.error }}
+            />
 
-              <Grid.Col span={isMobile ? 12 : 6}>
-                <TextInput
-                  style={{ flex: 1 }}
-                  size="md"
-                  label="Last Name"
-                  placeholder="Smith"
-                  type="text"
-                  withAsterisk
-                  disabled={loadingCompanyRep}
-                  {...companyRepForm.getInputProps("lastName")}
-                  classNames={{ label: classes.label, error: classes.error }}
-                />
-              </Grid.Col>
-            </Grid>
+            <TextInput
+              style={{ flex: 1 }}
+              size="md"
+              label="Last Name"
+              placeholder="Smith"
+              type="text"
+              withAsterisk
+              disabled={loadingCompanyRep}
+              {...companyRepForm.getInputProps("lastName")}
+              classNames={{ label: classes.label, error: classes.error }}
+            />
+
             <TextInput
               size="md"
               placeholder="smith@gmail.com"
@@ -249,14 +244,14 @@ const SignUpForm = () => {
                 {checks}
               </Popover.Dropdown>
             </Popover>
-            <PasswordInput
+            {/* <PasswordInput
               size="md"
               required
               label="Confirm Password"
               {...companyRepForm.getInputProps("comfirmPassword")}
               disabled={loadingCompanyRep}
               classNames={{ label: classes.label, error: classes.error }}
-            />
+            /> */}
             <Button
               size="md"
               variant="filled"

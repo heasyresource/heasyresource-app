@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: `${process.env.NEXT_BASE_URL}`,
+  baseURL: `https://heasyresource.onrender.com/api/v1`,
 });
 
 api.interceptors.request.use(

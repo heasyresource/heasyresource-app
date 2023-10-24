@@ -5,10 +5,12 @@ import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const useSignup = () => {
+  const router = useRouter();
   const isMobile = useMediaQuery(`(max-width: 768px)`);
   const [loadingCompanyInfo, setLoadingCompanyInfo] = useState(false);
   const [loadingCompanyRep, setLoadingCompanyRep] = useState(false);
@@ -21,8 +23,8 @@ const useSignup = () => {
       companyName: "",
       companyEmail: "",
       companyWebsite: "",
-      field: "",
-      phoneNumber: "",
+      industryId: "",
+      companyPhoneNumber: "",
     },
     validate: {
       companyEmail: (val) =>
@@ -32,9 +34,9 @@ const useSignup = () => {
         /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/.test(val)
           ? null
           : "Enter a valid url",
-      phoneNumber: (val) =>
+      companyPhoneNumber: (val) =>
         val.length >= 10 ? null : "Enter a valid phone number",
-      field: (val) => (!val.length ? "Select a field/industry" : null),
+      industryId: (val) => (!val.length ? "Select a field/industry" : null),
     },
   });
 
@@ -46,7 +48,6 @@ const useSignup = () => {
       email: "",
       position: "",
       password: "",
-      comfirmPassword: "",
     },
     validate: {
       firstName: (value) =>
@@ -63,8 +64,6 @@ const useSignup = () => {
           : "Last Name must contain only alphabets.",
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
-      confirmPassword: (value, values) =>
-        value !== values.password ? "Password did not match" : null,
       position: (val) => (val.length < 1 ? "Enter a valid position" : null),
     },
   });
@@ -73,7 +72,10 @@ const useSignup = () => {
   const handleCompanyInfoSubmit = async (data) => {
     setLoadingCompanyInfo(true);
     try {
-      sessionStorage.setItem("stepOne", obfuscateToken(true, data));
+      sessionStorage.setItem(
+        "stepOne",
+        obfuscateToken(true, JSON.stringify(data))
+      );
       notifications.show({
         color: "white",
         title: "Success",
@@ -115,14 +117,16 @@ const useSignup = () => {
     const stepOneData =
       sessionStorage.getItem("stepOne") &&
       obfuscateToken(false, sessionStorage.getItem("stepOne") ?? "");
+    const parsedData = JSON.parse(stepOneData);
     setLoadingCompanyRep(true);
     try {
       const values = {
         ...data,
-        ...stepOneData,
+        ...parsedData,
       };
-      const res = await apiClient.post("/regster", values);
-      if (res.statusCode === 200) {
+      const res = await apiClient.post("/register", values);
+      if (res.statusCode === 200 || res.statusCode === 201) {
+        sessionStorage.removeItem("stepOne");
         notifications.show({
           color: "white",
           title: "Registration successful",
@@ -131,6 +135,7 @@ const useSignup = () => {
           autoClose: 2000,
         });
         handleResend(data);
+        router.push("/verification");
       }
     } catch (err) {
       setLoadingCompanyRep(false);
@@ -138,7 +143,7 @@ const useSignup = () => {
       notifications.show({
         color: "red",
         title: "Registration unsuccessful",
-        message: err.message,
+        message: err.errors[0].message,
         styles: errorStyles,
         autoClose: 2000,
       });
