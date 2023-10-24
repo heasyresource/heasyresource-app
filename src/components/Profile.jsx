@@ -21,11 +21,14 @@ const UserButton = forwardRef(
             {...others}
         >
             <Group>
-                <Avatar
-                    size="lg"
-                    variant="outline"
-                    color="blue"
-                    src={image} radius="xl" />
+                <div style={{ border: '2px #3377FF solid', borderRadius: '50%', padding: '3px', zIndex: '1' }}
+                >
+                    <Avatar
+                        variant="outline"
+                        size="lg"
+                        color="blue"
+                        src={image} radius="xl" />
+                </div>
 
                 <div>
                     <Text style={{ color: '#2A004C' }} size="sm" fw={500}>
@@ -41,10 +44,10 @@ const UserButton = forwardRef(
                 </div>
 
                 {icon ||
-                        <IconChevronDown
-                            size="1.3rem"
-                            color='#3377FF'
-                        />}
+                    <IconChevronDown
+                        size="1.3rem"
+                        color='#3377FF'
+                    />}
             </Group>
         </UnstyledButton>
     )
