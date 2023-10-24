@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
   Loader,
   PasswordInput,
   Popover,
@@ -50,7 +49,6 @@ const SignUpForm = () => {
     handleCompanyRepSubmit,
     setPopoverOpened,
     popoverOpened,
-    isMobile,
     fields,
   } = useSignup();
   const checks = requirements.map((requirement, index) => (
@@ -130,12 +128,13 @@ const SignUpForm = () => {
             <TextInput
               size="md"
               placeholder="+23470000000"
-              type="tel"
+              type="number"
               withAsterisk
               {...companyInfoForm.getInputProps("companyPhoneNumber")}
               disabled={loadingCompanyInfo}
               label="Phone Number"
               classNames={{ label: classes.label, error: classes.error }}
+            
             />
             <Button
               size="md"
