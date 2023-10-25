@@ -95,11 +95,7 @@ const SignUpForm = () => {
                 label="Company Name"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-              {companyInfoForm.errors.companyName && (
-                <span className="red.500">
-                  {companyInfoForm.errors.companyName}
-                </span>
-              )}
+    
             </Box>
             <Box>
               <TextInput
@@ -112,11 +108,7 @@ const SignUpForm = () => {
                 label="Company Email"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-              {companyInfoForm.errors.companyEmail && (
-                <span className="red.500">
-                  {companyInfoForm.errors.companyEmail}
-                </span>
-              )}
+     
             </Box>
             <Box>
               <TextInput
@@ -129,11 +121,7 @@ const SignUpForm = () => {
                 label="Company Website"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-              {companyInfoForm.errors.companyWebsite && (
-                <span className="red.500">
-                  {companyInfoForm.errors.companyWebsite}
-                </span>
-              )}
+         
             </Box>
             <Box>
               <Select
@@ -147,11 +135,7 @@ const SignUpForm = () => {
                 label="Field/Industry"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-              {companyInfoForm.errors.industryId && (
-                <span className="red.500">
-                  {companyInfoForm.errors.industryId}
-                </span>
-              )}
+      
             </Box>
             <Box>
               <TextInput
@@ -165,11 +149,7 @@ const SignUpForm = () => {
                 classNames={{ label: classes.label, error: classes.error }}
               />
 
-              {companyInfoForm.errors.companyPhoneNumber && (
-                <span className="red.500">
-                  {companyInfoForm.errors.companyPhoneNumber}
-                </span>
-              )}
+       
             </Box>
             <Button
               size="md"

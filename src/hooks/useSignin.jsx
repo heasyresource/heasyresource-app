@@ -58,7 +58,7 @@ const useSignin = () => {
           title: "Success",
           message: "Signin successful",
           styles: successStyles,
-          autoClose: 2000,
+          autoClose: 15000,
         });
         setLoadingSignIn(false);
         router.push("/");
@@ -71,7 +71,7 @@ const useSignin = () => {
         title: "Unsuccessful",
         message: err.message,
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 15000,
       });
       if (
         err.message ===

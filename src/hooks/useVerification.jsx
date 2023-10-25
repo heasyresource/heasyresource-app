@@ -7,9 +7,11 @@ import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useVerification = () => {
+  const router = useRouter()
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const [email, setEmail] = useState("");
@@ -23,7 +25,7 @@ const useVerification = () => {
   });
   const handleRouteChange = () => {
     modals.closeAll();
-    window.location.replace("/signin");
+    router.push("/signin");
   };
   const openModal = () =>
     modals.open({

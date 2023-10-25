@@ -6,7 +6,7 @@ export const requirements = [
 ];
 
 export const getStrength = (string) => {
-  let multiplier = string.length === 8 ? 0 : 1;
+  let multiplier = string.length >= 8 ? 0 : 1;
 
   requirements.forEach((requirement) => {
     if (!requirement.re.test(string)) {

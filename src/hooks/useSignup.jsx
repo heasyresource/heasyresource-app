@@ -35,7 +35,14 @@ const useSignup = () => {
           ? null
           : "Enter a valid url",
       companyPhoneNumber: (val) =>
-        val.length >= 10 ? null : "Enter a valid phone number",
+        val.startsWith("234") && val.length === 13
+          ? null
+          : val.length > 13
+          ? "Phone number should not exceed 13 characters"
+          : !val.startsWith("+234")
+          ? "Phone number must include the country code +234"
+          : null,
+
       industryId: (val) => (!val.length ? "Select a field/industry" : null),
     },
   });
@@ -65,32 +72,23 @@ const useSignup = () => {
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
       position: (val) => (val.length < 1 ? "Enter a valid position" : null),
-      password: (val) => (val.length === 8 ? null : "Password should be 8 characters")
+      password: (val) =>
+        val.length >= 8 ? null : "Password should be 8 characters",
     },
   });
 
   //Step 1: Function
   const handleCompanyInfoSubmit = async (data) => {
     setLoadingCompanyInfo(true);
-    const values = {
-      ...data,
-      companyPhoneNumber: `+234${data.companyPhoneNumber}`,
-    };
+    data.companyPhoneNumber = "+" + data.companyPhoneNumber
     try {
-      const res = await apiClient.post("validate/company-info", values);
+      const res = await apiClient.post("validate/company-info", data);
 
       if (res.statusCode === 201 || res.statusCode === 200) {
         sessionStorage.setItem(
           "stepOne",
-          obfuscateToken(true, JSON.stringify(values))
+          obfuscateToken(true, JSON.stringify(data))
         );
-        notifications.show({
-          color: "white",
-          title: "Success",
-          message: "Step one successful",
-          styles: successStyles,
-          autoClose: 2000,
-        });
         setStep(() => step + 1);
       }
     } catch (err) {
@@ -102,14 +100,6 @@ const useSignup = () => {
         });
       }
       setLoadingCompanyInfo(false);
-      console.log(err);
-      notifications.show({
-        color: "red",
-        title: "Error",
-        message: "Step one unsuccessful",
-        styles: errorStyles,
-        autoClose: 2000,
-      });
     }
   };
   //Resend Verification
@@ -120,6 +110,13 @@ const useSignup = () => {
       };
       const res = await apiClient.post("/account/resend-code", value);
       if (res.statusCode === 200) {
+        notifications.show({
+          color: "white",
+          title: "Registration successful",
+          message: "Check your mail for verification",
+          styles: successStyles,
+          autoClose: 15000,
+        });
         sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
         router.push("/verification");
       }
@@ -143,17 +140,18 @@ const useSignup = () => {
       const res = await apiClient.post("/register", values);
       if (res.statusCode === 200 || res.statusCode === 201) {
         sessionStorage.removeItem("stepOne");
-        notifications.show({
-          color: "white",
-          title: "Registration successful",
-          message: "Check your mail for verification",
-          styles: successStyles,
-          autoClose: 2000,
-        });
+
         handleResend(data);
         router.push("/verification");
       }
     } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          console.log(field, message, "message");
+          companyInfoForm.setFieldError(field, message);
+        });
+      }
       setLoadingCompanyRep(false);
       console.log(err);
       notifications.show({
@@ -161,7 +159,7 @@ const useSignup = () => {
         title: "Registration unsuccessful",
         message: err.errors[0].message,
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 15000,
       });
     }
   };

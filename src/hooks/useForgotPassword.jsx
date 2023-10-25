@@ -29,7 +29,7 @@ const useForgotPassword = () => {
         title: "Success",
         message: "Password reset successfully",
         styles: successStyles,
-        autoClose: 2000,
+        autoClose: 15000,
       });
       setLoading(false);
       sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
@@ -41,7 +41,7 @@ const useForgotPassword = () => {
         title: "Error",
         message: err.message,
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 15000,
       });
       setLoading(false);
     }
