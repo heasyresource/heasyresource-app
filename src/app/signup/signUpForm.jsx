@@ -84,58 +84,93 @@ const SignUpForm = () => {
           })}
         >
           <Stack gap="1rem">
-            <TextInput
-              size="md"
-              placeholder="Pepsi"
-              type="text"
-              {...companyInfoForm.getInputProps("companyName")}
-              withAsterisk
-              disabled={loadingCompanyInfo}
-              label="Company Name"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <TextInput
-              size="md"
-              placeholder="pepsi@example.com"
-              type="email"
-              withAsterisk
-              {...companyInfoForm.getInputProps("companyEmail")}
-              disabled={loadingCompanyInfo}
-              label="Company Email"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <TextInput
-              size="md"
-              placeholder="https://pepsi.com"
-              type="url"
-              withAsterisk
-              {...companyInfoForm.getInputProps("companyWebsite")}
-              disabled={loadingCompanyInfo}
-              label="Company Website"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <Select
-              size="md"
-              withAsterisk
-              data={fields}
-              searchable
-              placeholder="Information Technology"
-              {...companyInfoForm.getInputProps("industryId")}
-              disabled={loadingCompanyInfo}
-              label="Field/Industry"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <TextInput
-              size="md"
-              placeholder="+23470000000"
-              type="number"
-              withAsterisk
-              {...companyInfoForm.getInputProps("companyPhoneNumber")}
-              disabled={loadingCompanyInfo}
-              label="Phone Number"
-              classNames={{ label: classes.label, error: classes.error }}
-            
-            />
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="Pepsi"
+                type="text"
+                {...companyInfoForm.getInputProps("companyName")}
+                withAsterisk
+                disabled={loadingCompanyInfo}
+                label="Company Name"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+              {companyInfoForm.errors.companyName && (
+                <span className="red.500">
+                  {companyInfoForm.errors.companyName}
+                </span>
+              )}
+            </Box>
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="pepsi@example.com"
+                type="email"
+                withAsterisk
+                {...companyInfoForm.getInputProps("companyEmail")}
+                disabled={loadingCompanyInfo}
+                label="Company Email"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+              {companyInfoForm.errors.companyEmail && (
+                <span className="red.500">
+                  {companyInfoForm.errors.companyEmail}
+                </span>
+              )}
+            </Box>
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="https://pepsi.com"
+                type="url"
+                withAsterisk
+                {...companyInfoForm.getInputProps("companyWebsite")}
+                disabled={loadingCompanyInfo}
+                label="Company Website"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+              {companyInfoForm.errors.companyWebsite && (
+                <span className="red.500">
+                  {companyInfoForm.errors.companyWebsite}
+                </span>
+              )}
+            </Box>
+            <Box>
+              <Select
+                size="md"
+                withAsterisk
+                data={fields}
+                searchable
+                placeholder="Information Technology"
+                {...companyInfoForm.getInputProps("industryId")}
+                disabled={loadingCompanyInfo}
+                label="Field/Industry"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+              {companyInfoForm.errors.industryId && (
+                <span className="red.500">
+                  {companyInfoForm.errors.industryId}
+                </span>
+              )}
+            </Box>
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="+23470000000"
+                type="number"
+                withAsterisk
+                {...companyInfoForm.getInputProps("companyPhoneNumber")}
+                disabled={loadingCompanyInfo}
+                label="Phone Number"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+
+              {companyInfoForm.errors.companyPhoneNumber && (
+                <span className="red.500">
+                  {companyInfoForm.errors.companyPhoneNumber}
+                </span>
+              )}
+            </Box>
             <Button
               size="md"
               variant="filled"
@@ -243,14 +278,6 @@ const SignUpForm = () => {
                 {checks}
               </Popover.Dropdown>
             </Popover>
-            {/* <PasswordInput
-              size="md"
-              required
-              label="Confirm Password"
-              {...companyRepForm.getInputProps("comfirmPassword")}
-              disabled={loadingCompanyRep}
-              classNames={{ label: classes.label, error: classes.error }}
-            /> */}
             <Button
               size="md"
               variant="filled"

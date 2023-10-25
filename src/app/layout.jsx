@@ -6,6 +6,7 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { theme } from "@/theme";
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
   title: {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
         >
           <Notifications position="top-right" zIndex={1000} />
           <ModalsProvider>
+          <NextTopLoader />
             {children}
           </ModalsProvider>
         </MantineProvider>

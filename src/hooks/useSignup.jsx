@@ -65,26 +65,42 @@ const useSignup = () => {
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
       position: (val) => (val.length < 1 ? "Enter a valid position" : null),
+      password: (val) => (val.length === 8 ? null : "Password should be 8 characters")
     },
   });
 
   //Step 1: Function
   const handleCompanyInfoSubmit = async (data) => {
     setLoadingCompanyInfo(true);
+    const values = {
+      ...data,
+      companyPhoneNumber: `+234${data.companyPhoneNumber}`,
+    };
     try {
-      sessionStorage.setItem(
-        "stepOne",
-        obfuscateToken(true, JSON.stringify(data))
-      );
-      notifications.show({
-        color: "white",
-        title: "Success",
-        message: "Step one successful",
-        styles: successStyles,
-        autoClose: 2000,
-      });
-      setStep(() => step + 1);
+      const res = await apiClient.post("validate/company-info", values);
+
+      if (res.statusCode === 201 || res.statusCode === 200) {
+        sessionStorage.setItem(
+          "stepOne",
+          obfuscateToken(true, JSON.stringify(values))
+        );
+        notifications.show({
+          color: "white",
+          title: "Success",
+          message: "Step one successful",
+          styles: successStyles,
+          autoClose: 2000,
+        });
+        setStep(() => step + 1);
+      }
     } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          console.log(field, message, "message");
+          companyInfoForm.setFieldError(field, message);
+        });
+      }
       setLoadingCompanyInfo(false);
       console.log(err);
       notifications.show({
