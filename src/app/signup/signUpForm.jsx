@@ -59,7 +59,7 @@ const SignUpForm = () => {
     />
   ));
   const strength = getStrength(companyRepForm.values.password);
-  const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
+  const color = strength === 100 ? "teal" : (strength > 50 ? "yellow" : "red");
   return (
     <>
       <Flex justify={"space-between"} align={"flex-start"}>
@@ -140,8 +140,11 @@ const SignUpForm = () => {
             <Box>
               <TextInput
                 size="md"
-                placeholder="+23470000000"
-                type="number"
+                placeholder="07012345678" 
+                leftSection={'+234'}
+                leftSectionWidth={50}
+                type="tel"
+                maxLength={'11'}
                 withAsterisk
                 {...companyInfoForm.getInputProps("companyPhoneNumber")}
                 disabled={loadingCompanyInfo}

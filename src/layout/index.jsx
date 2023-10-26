@@ -27,7 +27,7 @@ export default function SecureUser({ children }) {
 
       return () => clearInterval(checkData);
     }
-  }, [isDataPresent, router]);
+  }, [isDataPresent, router, lastPathname]);
 
   return isDataPresent ? children : <></>;
 }

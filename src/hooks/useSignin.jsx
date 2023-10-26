@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { useForm } from "@mantine/form";
@@ -61,7 +61,7 @@ const useSignin = () => {
           autoClose: 15000,
         });
         setLoadingSignIn(false);
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (err) {
       setLoadingSignIn(false);
@@ -81,12 +81,6 @@ const useSignin = () => {
       }
     }
   };
-  useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      router.push("/");
-    }
-  
-  }, []);
 
   return {
     signInForm,

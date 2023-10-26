@@ -71,7 +71,7 @@ const useVerification = () => {
         ...data,
         email: email,
       };
-      const res = await apiClient.post("/account/verify", values);
+      await apiClient.post("/account/verify", values);
       openModal();
       setLoading(false);
     } catch (err) {
@@ -93,7 +93,7 @@ const useVerification = () => {
       const value = {
         email: email,
       };
-      const res = await apiClient.post("/account/resend-code", value);
+      await apiClient.post("/account/resend-code", value);
       notifications.show({
         color: "white",
         title: "Success",
@@ -126,8 +126,7 @@ const useVerification = () => {
     handleSubmit,
     isMobile,
     email,
-    handleResend,
-    email,
+    handleResend
   };
 };
 
