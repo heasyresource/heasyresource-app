@@ -1,61 +1,20 @@
-'use client'
-import { Group, Code, AppShell, Container, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-// import { AppShell, Burger } from '@mantine/core';
-import Jitto from '../../../public/jitto.svg'
-import NavBar from './NavBar';
-import Main from './Main';
-import Profile from '@/components/Profile';
-import Image from 'next/image';
-import NextImage from 'next/image'
-import { IconBell, IconMessage, IconNotification } from '@tabler/icons-react';
-import { IconMessageDots } from '@tabler/icons-react';
+import React from 'react'
+import { Grid } from './components/mantine'
+import { GridCol, Space, Text } from '@mantine/core'
 
-
-
-
-export default function Dashboard() {
-    const [opened, { toggle }] = useDisclosure();
-
+const page = () => {
     return (
-        <AppShell
-            layout='alt'
-            padding="lg"
-            header={{ height: 60 }}
-            navbar={{ width: '245', breakpoint: 'sm', collapsed: { mobile: !opened } }}
-        >
-            <AppShell.Header
-                style={{ backgroundColor: '#F8F9FA', padding: '20px' }}
-                withBorder={false}
-            >
-                <Group
-                    justify='flex-end'
-                    gap="28"
-                    px={113}
-                >
-                    <Group>
-                        <Image
-                            src={Jitto}
-                            component={NextImage}
-                            alt='Company Logo'
-                        />
-                        <Text fw={500} c='#616161'>
-                            Jitto Consultancy Ltd.
-                        </Text>
-                    </Group>
-                    <div style={{ backgroundColor: 'rgba(126, 166, 244, 0.22)', borderRadius: '50%', padding: '11px', zIndex: '1' }}>
-                        <IconBell />
-                    </div>
-                    <div style={{ backgroundColor: 'rgba(126, 166, 244, 0.22)', borderRadius: '50%', padding: '11px', zIndex: '1' }}>
-                        <IconMessageDots />
-                    </div>
-                    <Profile />
-                </Group>
-            </AppShell.Header>
-
-            <NavBar />
-            <Main />
-
-        </AppShell>
-    );
+        <div>
+            <Grid>
+                <GridCol bg="#" span={8} style={{ minHeight: '80px' }}>
+                    <Text c='#9C9C9C' fz='20px'>Hi Modupe,</Text>
+                    <Space h="2px" />
+                    <Text fz='32px' fw={700}>Welcome to your Dashboard</Text>
+                </GridCol>
+                <GridCol span={4} style={{ minHeight: '20px' }}>2</GridCol>
+            </Grid>
+        </div>
+    )
 }
+
+export default page

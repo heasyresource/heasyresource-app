@@ -17,8 +17,8 @@
 }
 
 .footer {
-    margin-bottom: 64px;
-  }
+  margin-bottom: 64px;
+}
 
 .version {
   background-color: var(--mantine-color-blue-7);
@@ -51,12 +51,14 @@
     &:hover {
       background-color: #3377FF;
       color: #ffff;
+
       .linkIcon {
         color: #ffff;
       }
     }
   }
 }
+
 
 .linkIcon {
   color: #7EA6F4;
