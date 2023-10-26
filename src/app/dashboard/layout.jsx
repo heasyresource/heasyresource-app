@@ -50,7 +50,7 @@ const DashBoardLayout = ({ children }) => {
             </AppShell.Header>
 
             <NavBar />
-            <Main children={children} />
+            <Main>{children}</Main>
         </AppShell>
     );
 }
