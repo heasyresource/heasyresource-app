@@ -1,6 +1,6 @@
 'use client'
 import { forwardRef } from 'react';
-import { IconChevronDown, IconExternalLink, IconMan } from '@tabler/icons-react';
+import { IconChevronDown, IconExternalLink, IconHelpOctagon, IconLockOpen, IconMan, IconUser } from '@tabler/icons-react';
 import { Group, Avatar, Text, Menu, UnstyledButton, rem } from '@mantine/core';
 import {
     IconSettings,
@@ -13,10 +13,9 @@ const UserButton = forwardRef(
         <UnstyledButton
             ref={ref}
             style={{
-                padding: 'var(--mantine-spacing-md)',
+                // paddingTop: 'var(--mantine-spacing-md)',
                 color: 'var(--mantine-color-text)',
                 borderRadius: 'var(--mantine-radius-sm)',
-                backgroundColor: 'var(--mantine-color-white)'
             }}
             {...others}
         >
@@ -25,7 +24,7 @@ const UserButton = forwardRef(
                 >
                     <Avatar
                         variant="outline"
-                        size="lg"
+                        size="md"
                         color="blue"
                         src={image} radius="xl" />
                 </div>
@@ -63,15 +62,18 @@ export default function Profile() {
                     position="HR Admin"
                 />
             </Menu.Target>
-            <Menu.Dropdown w={150}>
-                <Menu.Item leftSection={<IconMan style={{ width: rem(14), height: rem(14) }} />}>
+            <Menu.Dropdown>
+                <Menu.Item fz="xs" leftSection={<IconUser style={{ width: rem(14), height: rem(14), color: 'rgba(126, 166, 244, 1)' }} />}>
                     Profile
                 </Menu.Item>
-                <Menu.Item leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
-                    Settings
+                <Menu.Item fz="xs" leftSection={<IconHelpOctagon style={{ width: rem(14), height: rem(14), color: 'rgba(126, 166, 244, 1)' }} />}>
+                    Support
                 </Menu.Item>
-                <Menu.Item leftSection={<IconExternalLink style={{ width: rem(14), height: rem(14) }} />}>
-                    Sign Out
+                <Menu.Item fz="xs" leftSection={<IconLockOpen style={{ width: rem(14), height: rem(14), color: 'rgba(126, 166, 244, 1)' }} />}>
+                    Change Password
+                </Menu.Item>
+                <Menu.Item c="#FF3D00" fz="xs" leftSection={<IconExternalLink style={{ width: rem(14), height: rem(14) }} />}>
+                    Logout
                 </Menu.Item>
             </Menu.Dropdown>
         </Menu>
