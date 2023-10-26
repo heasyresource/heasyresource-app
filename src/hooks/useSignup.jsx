@@ -112,6 +112,7 @@ const useSignup = () => {
       const res = await apiClient.post("/register", values);
       if (res.statusCode === 200 || res.statusCode === 201) {
         sessionStorage.removeItem("stepOne");
+        sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email))
         router.push("/verification");
       }
     } catch (err) {
