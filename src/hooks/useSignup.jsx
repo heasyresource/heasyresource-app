@@ -1,36 +1,45 @@
-"use client"
+"use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { obfuscateToken } from "@/utils/encryptToken";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
+import { normalizePhoneNumber } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const useSignup = () => {
+  const router = useRouter();
   const isMobile = useMediaQuery(`(max-width: 768px)`);
   const [loadingCompanyInfo, setLoadingCompanyInfo] = useState(false);
   const [loadingCompanyRep, setLoadingCompanyRep] = useState(false);
   const [popoverOpened, setPopoverOpened] = useState(false);
   const [step, setStep] = useState(1);
+
+  // Step 1: Form
   const companyInfoForm = useForm({
     initialValues: {
-      name: "",
-      email: "",
-      website: "",
-      field: "",
-      phoneNumber: "",
+      companyName: "",
+      companyEmail: "",
+      companyWebsite: "",
+      industryId: "",
+      companyPhoneNumber: "",
     },
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Enter a valid email"),
-      name: (val) => (val.length < 1 ? "Enter a valid name" : null),
-      website: (val) =>
-        /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/.test(val)
+      companyEmail: (val) =>
+        /^\S+@\S+$/.test(val) ? null : "Enter a valid email",
+      companyName: (val) => (val.length < 1 ? "Enter a valid name" : null),
+      companyWebsite: (val) =>
+        /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(val)
           ? null
           : "Enter a valid url",
-      phoneNumber: (val) =>
-        val.length >= 10 ? null : "Enter a valid phone number",
-      field: (val) => (!val.length ? "Select a field/industry" : null),
+      companyPhoneNumber: (val) => (val.length < 10 ? "Enter a valid phone number" : null),
+      industryId: (val) => (!val.length ? "Select a field/industry" : null),
     },
   });
+
+  // Step 2: Form
   const companyRepForm = useForm({
     initialValues: {
       firstName: "",
@@ -38,81 +47,122 @@ const useSignup = () => {
       email: "",
       position: "",
       password: "",
-      comfirmPassword: "",
     },
     validate: {
-      firstName: (value) => 
+      firstName: (value) =>
         value.length < 1
           ? "First Name is required"
           : /^[A-Za-z]+$/.test(value)
-          ? null
-          : "First Name must contain only alphabets.",
+            ? null
+            : "First Name must contain only alphabets.",
       lastName: (value) =>
         value.length < 1
           ? "Last Name is required"
           : /^[A-Za-z]+$/.test(value)
-          ? null
-          : "Last Name must contain only alphabets.",
+            ? null
+            : "Last Name must contain only alphabets.",
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
-      confirmPassword: (value, values) =>
-        value !== values.password ? "Password did not match" : null,
       position: (val) => (val.length < 1 ? "Enter a valid position" : null),
+      password: (val) =>
+        val.length >= 8 ? null : "Password should be 8 characters",
     },
   });
+
+  //Step 1: Function
   const handleCompanyInfoSubmit = async (data) => {
     setLoadingCompanyInfo(true);
+    const normalizedPhoneNumber = normalizePhoneNumber(data.companyPhoneNumber)
     try {
-      notifications.show({
-        color: "white",
-        title: "Success",
-        message: "Step one successful",
-        styles: successStyles,
-        autoClose: 2000
-      });
-      setStep(() => step +1)
-     
-      console.log(data, "company info");
-        console.log(step, "inside");
+      const res = await apiClient.post("validate/company-info", { ...data, companyPhoneNumber: normalizedPhoneNumber });
 
+      if (res.statusCode === 201 || res.statusCode === 200) {
+        sessionStorage.setItem(
+          "stepOne",
+          obfuscateToken(true, JSON.stringify(data))
+        );
+        setStep(() => step + 1);
+      }
     } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          console.log(field, message, "message");
+          companyInfoForm.setFieldError(field, message);
+        });
+      }
       setLoadingCompanyInfo(false);
-      console.log(err);
-      notifications.show({
-        color: "red",
-        title: "Error",
-        message: "Step one unsuccessful",
-        styles: errorStyles,
-        autoClose: 2000
-      });
     }
   };
 
+  //Step 2: Function
   const handleCompanyRepSubmit = async (data) => {
+    const stepOneData =
+      sessionStorage.getItem("stepOne") &&
+      obfuscateToken(false, sessionStorage.getItem("stepOne") ?? "");
+    const parsedData = JSON.parse(stepOneData);
+    const normalizedPhoneNumber = normalizePhoneNumber(parsedData.companyPhoneNumber)
     setLoadingCompanyRep(true);
     try {
-
-      console.log(data, "company info");
-      notifications.show({
-        color: "white",
-        title: "Success",
-        message: "Registration successful",
-        styles: successStyles,
-        autoClose: 2000
-      });
-
+      const values = {
+        ...data,
+        ...parsedData,
+        companyPhoneNumber: normalizedPhoneNumber
+      };
+      const res = await apiClient.post("/register", values);
+      if (res.statusCode === 200 || res.statusCode === 201) {
+        sessionStorage.removeItem("stepOne");
+        router.push("/verification");
+      }
     } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          console.log(field, message, "message");
+          companyInfoForm.setFieldError(field, message);
+        });
+      }
       setLoadingCompanyRep(false);
       console.log(err);
       notifications.show({
         color: "red",
-        title: "Error",
-        message: "Registration unsuccessful",
+        title: "Registration unsuccessful",
+        message: err.errors[0].message,
         styles: errorStyles,
-        autoClose: 2000
+        autoClose: 15000,
       });
     }
   };
+  useEffect(() => {
+    const stepOneData =
+      sessionStorage.getItem("stepOne");
+    if (stepOneData) {
+      setStep(2);
+    }
+  }, []);
+
+  const fields = [
+    {
+      value: '87616d36-f780-4886-9086-9320f7f89ad4',
+      label: "Information Technology",
+    },
+    {
+      value: '17616d36-f780-4886-9086-9320f7f89ad4',
+      label: "Graphic Designer",
+    },
+    {
+      value: '87616d36-f780-4886-9086-9320f7f89ad3',
+      label: "Cyber Security",
+    },
+    {
+      value: '87616d36-f782-4886-9086-9320f7f89ad4',
+      label: "Software Engineer",
+    },
+    {
+      value: '87614d36-f780-4886-9086-9320f7f89ad4',
+      label: "Data Analysis",
+    },
+  ];
   return {
     companyInfoForm,
     companyRepForm,
@@ -122,6 +172,7 @@ const useSignup = () => {
     loadingCompanyInfo,
     loadingCompanyRep,
     setPopoverOpened,
+    fields,
     isMobile,
     step,
   };

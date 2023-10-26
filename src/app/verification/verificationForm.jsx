@@ -4,7 +4,7 @@ import { Button, Loader, PinInput, Stack, Text } from "@mantine/core";
 import React from "react";
 
 const VerificationForm = () => {
-  const { form, loading, handleSubmit } = useVerification();
+  const { form, loading, handleSubmit, handleResend } = useVerification();
   return (
     <>
       <form
@@ -19,7 +19,7 @@ const VerificationForm = () => {
             size="xl"
             placeholder="0"
             length={6}
-            {...form.getInputProps("code")}
+            {...form.getInputProps("verificationCode")}
             disabled={loading}
           />
           <Button
@@ -39,7 +39,7 @@ const VerificationForm = () => {
       </form>
       <Text fw={700} size="sm" ta="left" mt="xl" c="#494949">
         Haven’t received it yet?{" "}
-        <span style={{ color: "#3377FF", cursor: "pointer" }}>Resend</span>
+        <button style={{ color: "#3377FF", cursor: "pointer" }} onClick={handleResend} disabled={loading}>Resend</button>
       </Text>
     </>
   );
