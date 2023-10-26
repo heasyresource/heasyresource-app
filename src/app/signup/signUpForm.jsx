@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
   Loader,
   PasswordInput,
   Popover,
@@ -50,7 +49,7 @@ const SignUpForm = () => {
     handleCompanyRepSubmit,
     setPopoverOpened,
     popoverOpened,
-    isMobile,
+    fields,
   } = useSignup();
   const checks = requirements.map((requirement, index) => (
     <PasswordRequirement
@@ -60,7 +59,7 @@ const SignUpForm = () => {
     />
   ));
   const strength = getStrength(companyRepForm.values.password);
-  const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
+  const color = strength === 100 ? "teal" : (strength > 50 ? "yellow" : "red");
   return (
     <>
       <Flex justify={"space-between"} align={"flex-start"}>
@@ -85,62 +84,76 @@ const SignUpForm = () => {
           })}
         >
           <Stack gap="1rem">
-            <TextInput
-              size="md"
-              placeholder="Pepsi"
-              type="text"
-              {...companyInfoForm.getInputProps("name")}
-              withAsterisk
-              disabled={loadingCompanyInfo}
-              label="Company Name"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <TextInput
-              size="md"
-              placeholder="pepsi@example.com"
-              type="email"
-              withAsterisk
-              {...companyInfoForm.getInputProps("email")}
-              disabled={loadingCompanyInfo}
-              label="Company Email"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <TextInput
-              size="md"
-              placeholder="https://pepsi.com"
-              type="url"
-              withAsterisk
-              {...companyInfoForm.getInputProps("website")}
-              disabled={loadingCompanyInfo}
-              label="Company Website"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <Select
-              size="md"
-              withAsterisk
-              data={[
-                "Information Technology",
-                "Data Analysis",
-                "Cyber Security",
-                "Graphics Designer",
-              ]}
-              searchable
-              placeholder="Information Technology"
-              {...companyInfoForm.getInputProps("field")}
-              disabled={loadingCompanyInfo}
-              label="Field/Industry"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-            <TextInput
-              size="md"
-              placeholder="+23470000000"
-              type="tel"
-              withAsterisk
-              {...companyInfoForm.getInputProps("phoneNumber")}
-              disabled={loadingCompanyInfo}
-              label="Phone Number"
-              classNames={{ label: classes.label, error: classes.error }}
-            />
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="Pepsi"
+                type="text"
+                {...companyInfoForm.getInputProps("companyName")}
+                withAsterisk
+                disabled={loadingCompanyInfo}
+                label="Company Name"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+    
+            </Box>
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="pepsi@example.com"
+                type="email"
+                withAsterisk
+                {...companyInfoForm.getInputProps("companyEmail")}
+                disabled={loadingCompanyInfo}
+                label="Company Email"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+     
+            </Box>
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="https://pepsi.com"
+                type="url"
+                withAsterisk
+                {...companyInfoForm.getInputProps("companyWebsite")}
+                disabled={loadingCompanyInfo}
+                label="Company Website"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+         
+            </Box>
+            <Box>
+              <Select
+                size="md"
+                withAsterisk
+                data={fields}
+                searchable
+                placeholder="Information Technology"
+                {...companyInfoForm.getInputProps("industryId")}
+                disabled={loadingCompanyInfo}
+                label="Field/Industry"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+      
+            </Box>
+            <Box>
+              <TextInput
+                size="md"
+                placeholder="07012345678" 
+                leftSection={'+234'}
+                leftSectionWidth={50}
+                type="tel"
+                maxLength={'11'}
+                withAsterisk
+                {...companyInfoForm.getInputProps("companyPhoneNumber")}
+                disabled={loadingCompanyInfo}
+                label="Phone Number"
+                classNames={{ label: classes.label, error: classes.error }}
+              />
+
+       
+            </Box>
             <Button
               size="md"
               variant="filled"
@@ -168,35 +181,30 @@ const SignUpForm = () => {
           })}
         >
           <Stack gap="1rem">
-            <Grid>
-              <Grid.Col span={isMobile ? 12 : 6}>
-                <TextInput
-                  style={{ flex: 1 }}
-                  size="md"
-                  label="First Name"
-                  placeholder="John"
-                  type="text"
-                  {...companyRepForm.getInputProps("firstName")}
-                  withAsterisk
-                  disabled={loadingCompanyRep}
-                  classNames={{ label: classes.label, error: classes.error }}
-                />
-              </Grid.Col>
+            <TextInput
+              style={{ flex: 1 }}
+              size="md"
+              label="First Name"
+              placeholder="John"
+              type="text"
+              {...companyRepForm.getInputProps("firstName")}
+              withAsterisk
+              disabled={loadingCompanyRep}
+              classNames={{ label: classes.label, error: classes.error }}
+            />
 
-              <Grid.Col span={isMobile ? 12 : 6}>
-                <TextInput
-                  style={{ flex: 1 }}
-                  size="md"
-                  label="Last Name"
-                  placeholder="Smith"
-                  type="text"
-                  withAsterisk
-                  disabled={loadingCompanyRep}
-                  {...companyRepForm.getInputProps("lastName")}
-                  classNames={{ label: classes.label, error: classes.error }}
-                />
-              </Grid.Col>
-            </Grid>
+            <TextInput
+              style={{ flex: 1 }}
+              size="md"
+              label="Last Name"
+              placeholder="Smith"
+              type="text"
+              withAsterisk
+              disabled={loadingCompanyRep}
+              {...companyRepForm.getInputProps("lastName")}
+              classNames={{ label: classes.label, error: classes.error }}
+            />
+
             <TextInput
               size="md"
               placeholder="smith@gmail.com"
@@ -253,14 +261,6 @@ const SignUpForm = () => {
                 {checks}
               </Popover.Dropdown>
             </Popover>
-            <PasswordInput
-              size="md"
-              required
-              label="Confirm Password"
-              {...companyRepForm.getInputProps("comfirmPassword")}
-              disabled={loadingCompanyRep}
-              classNames={{ label: classes.label, error: classes.error }}
-            />
             <Button
               size="md"
               variant="filled"
