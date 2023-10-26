@@ -8,7 +8,7 @@ const VerificationDesc = () => {
 
 
   return (
-    <Text c="#595959" fz="md" ta="left" mt={29}>
+    <Text c="#595959" fz="md" ta="left" mt={29} mb={20}>
       An OTP code has been sent to your email address{" "}
       <br style={{ display: isMobile ? "none" : "block" }} />{" "}
       <span style={{ fontWeight: "bold" }}>{email}</span> for verification.
