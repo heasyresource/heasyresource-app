@@ -1,5 +1,5 @@
 'use client'
-import { Group, AppShell, Container, Text } from '@mantine/core';
+import { Group, AppShell, Container, Text, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 // import { AppShell, Burger } from '@mantine/core';
 import Jitto from '../../../public/jitto.svg'
@@ -39,12 +39,36 @@ const DashBoardLayout = ({ children }) => {
                             Jitto Consultancy Ltd.
                         </Text>
                     </Group>
-                    <div style={{ backgroundColor: 'rgba(126, 166, 244, 0.22)', borderRadius: '50%', padding: '11px', zIndex: '1' }}>
-                        <IconBell />
-                    </div>
-                    <div style={{ backgroundColor: 'rgba(126, 166, 244, 0.22)', borderRadius: '50%', padding: '11px', zIndex: '1' }}>
-                        <IconMessageDots />
-                    </div>
+                    <ActionIcon
+                        color="rgba(126, 166, 244, 0.22)"
+                        variant='filled'
+                        style={{
+                            width: '48px',
+                            height: '48px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: '50%',
+                            zIndex: '1'
+                        }}
+                    >
+                        <IconBell color='black' />
+                    </ActionIcon>
+                    <ActionIcon
+                        color="rgba(126, 166, 244, 0.22)"
+                        variant='filled'
+                        style={{
+                            width: '48px',
+                            height: '48px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: '50%',
+                            zIndex: '1'
+                        }}
+                    >
+                        <IconMessageDots  color='black'/>
+                    </ActionIcon>
                     <Profile />
                 </Group>
             </AppShell.Header>
