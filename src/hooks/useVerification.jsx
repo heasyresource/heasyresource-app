@@ -15,6 +15,7 @@ const useVerification = () => {
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const [email, setEmail] = useState("");
+  
   const form = useForm({
     initialValues: {
       verificationCode: "",
@@ -72,8 +73,10 @@ const useVerification = () => {
         email: email,
       };
       await apiClient.post("/account/verify", values);
-      openModal();
       setLoading(false);
+      openModal();
+
+      handleSignInSubmit()
     } catch (err) {
       setLoading(false);
 
