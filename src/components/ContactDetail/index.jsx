@@ -62,6 +62,7 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Zip Code"
                 style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -72,6 +73,7 @@ const ContactDetail = () => {
                 placeholder="Nigeria"
                 style={{ textAlign: "start", width: "100%" }}
                 data={[]}
+                classNames={{ label: classes.label, error: classes.error }}
               />
             </Grid.Col>
           </Grid>
@@ -115,26 +117,6 @@ const ContactDetail = () => {
                 label="Work"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Zip Code"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-              <Select
-                size="md"
-                withAsterisk
-                label="Country"
-                placeholder="Nigeria"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                data={[]}
               />
             </Grid.Col>
           </Grid>
