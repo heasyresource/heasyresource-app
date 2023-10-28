@@ -6,6 +6,10 @@ import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { theme } from "@/theme";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
+import NextTopLoader from "nextjs-toploader";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Provider from "./context/client-provider";
 
 export const metadata = {
   title: {
@@ -15,7 +19,9 @@ export const metadata = {
   description: "Hr Manangement System",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <head>
@@ -35,7 +41,10 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning={true}>
         <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
           <Notifications position="top-right" zIndex={1000} />
-          <ModalsProvider>{children}</ModalsProvider>
+          <ModalsProvider>
+            <NextTopLoader />
+            <Provider session={session}>{children}</Provider>
+          </ModalsProvider>
         </MantineProvider>
       </body>
     </html>

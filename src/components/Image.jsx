@@ -4,12 +4,12 @@ import { Image } from '@mantine/core'
 import logo from '../../public/HRlogo.svg'
 
 
-const Logo = () => {
+const Logo = ({h}) => {
     return (
         <Image
             component={NextImage}
             src={logo}
-            h={50}
+            h={h}
             w="auto"
             fit="contain"
             alt="HeasyResource Logo"

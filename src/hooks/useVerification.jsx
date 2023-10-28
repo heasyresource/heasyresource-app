@@ -1,26 +1,34 @@
-"use client"
+"use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { obfuscateToken } from "@/utils/encryptToken";
+import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
-import React, { useState } from "react";
+import { notifications } from "@mantine/notifications";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const useVerification = () => {
+  const router = useRouter()
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
+  const [email, setEmail] = useState("");
+  
   const form = useForm({
     initialValues: {
-      code: "",
+      verificationCode: "",
     },
     validate: {
-      code: (val) => (val.length < 6 ? "Enter code" : null),
+      verificationCode: (val) => (val.length < 6 ? "Enter code" : null),
     },
   });
   const handleRouteChange = () => {
     modals.closeAll();
-    window.location.replace("/signin");
+    router.push("/signin");
   };
-  const openModal = () => 
+  const openModal = () =>
     modals.open({
       radius: "md",
       centered: true,
@@ -56,22 +64,70 @@ const useVerification = () => {
         </Stack>
       ),
     });
-  
+
   const handleSubmit = async (data) => {
     setLoading(true);
     try {
-      console.log(data);
+      const values = {
+        ...data,
+        email: email,
+      };
+      await apiClient.post("/account/verify", values);
+      setLoading(false);
       openModal();
+    } catch (err) {
+      setLoading(false);
+
+      notifications.show({
+        color: "red",
+        title: "Unsuccessful",
+        message: err.message,
+        styles: errorStyles,
+        autoClose: 2000,
+      });
+    }
+  };
+
+  const handleResend = async () => {
+    setLoading(true);
+    try {
+      const value = {
+        email: email,
+      };
+      await apiClient.post("/account/resend-code", value);
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Check your mail for code",
+        styles: successStyles,
+        autoClose: 2000,
+      });
       setLoading(false);
     } catch (err) {
       setLoading(false);
+      notifications.show({
+        color: "red",
+        title: "Error",
+        message: err.message,
+        styles: errorStyles,
+        autoClose: 2000,
+      });
     }
   };
+  useEffect(() => {
+    const address =
+      sessionStorage.getItem("mailAdress") &&
+      obfuscateToken(false, sessionStorage.getItem("mailAdress") ?? "");
+    setEmail(address);
+  }, []);
+
   return {
     form,
     loading,
     handleSubmit,
-    isMobile
+    isMobile,
+    email,
+    handleResend
   };
 };
 
