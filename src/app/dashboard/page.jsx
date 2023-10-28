@@ -1,6 +1,5 @@
 import React from 'react'
-import { Grid } from './components/mantine'
-import { Container, GridCol, Group, ScrollArea, SimpleGrid, Space, Text } from '@mantine/core'
+import { Container, Grid, GridCol, Group, ScrollArea, SimpleGrid, Space, Text } from '@mantine/core'
 import MiniCard from '@/components/MiniCard'
 import Messages from '@/components/Messages'
 import Notifications from '@/components/Notifications'
