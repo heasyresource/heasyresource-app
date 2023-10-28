@@ -34,6 +34,10 @@
 }
 .form_wrapper {
   flex: 1;
+  background-image: url("/assets/images/HRbg.png");
+  background-position: "center";
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .form_container {
   max-width: 35rem;

@@ -1,0 +1,28 @@
+.companyLogo {
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+.profileContainer {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.appWrapper {
+  display: flex;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+.appContainer {
+  flex: 4;
+  height: 100vh;
+  overflow: auto;
+  @media (max-width: 768px) {
+    height: 100%;
+  }
+}
+.appContent {
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
+}

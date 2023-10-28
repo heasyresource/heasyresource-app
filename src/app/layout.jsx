@@ -1,18 +1,18 @@
-import '@mantine/notifications/styles.css';
-import '@/styles/globals.css'
+import "@mantine/notifications/styles.css";
+import "@/styles/globals.css";
 import "@mantine/core/styles.css";
 import React from "react";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { theme } from "@/theme";
-import { ModalsProvider } from '@mantine/modals';
+import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 
 export const metadata = {
   title: {
-    template: '%s | HeasyResource',
-    default: 'HeasyResource',
+    template: "%s | HeasyResource",
+    default: "HeasyResource",
   },
-  description: 'Hr Manangement System',
+  description: "Hr Manangement System",
 };
 
 export default function RootLayout({ children }) {
@@ -33,15 +33,9 @@ export default function RootLayout({ children }) {
         <meta property="og:ste_name" content="Heasyresource" />
       </head>
       <body suppressHydrationWarning={true}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={theme}
-        >
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
           <Notifications position="top-right" zIndex={1000} />
-          <ModalsProvider>
-            {children}
-          </ModalsProvider>
+          <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>
       </body>
     </html>

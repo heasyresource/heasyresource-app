@@ -1,0 +1,28 @@
+.label {
+  font-size: small;
+}
+.error {
+  font-size: 12px;
+}
+.inputWrap {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem !important;
+  }
+}
+.formStack {
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+.btnWrap {
+  @media (max-width: 768px) {
+    margin-top: 2rem !important;
+  }
+}
+.btn {
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+}

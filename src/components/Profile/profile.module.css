@@ -1,0 +1,6 @@
+.profileText,
+.profileIcon {
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
