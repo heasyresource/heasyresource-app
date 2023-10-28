@@ -75,8 +75,6 @@ const useVerification = () => {
       await apiClient.post("/account/verify", values);
       setLoading(false);
       openModal();
-
-      handleSignInSubmit()
     } catch (err) {
       setLoading(false);
 
