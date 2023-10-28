@@ -3,15 +3,18 @@ import { Container, Grid, GridCol, Group, ScrollArea, SimpleGrid, Space, Text } 
 import MiniCard from '@/components/MiniCard'
 import Messages from '@/components/Messages'
 import Notifications from '@/components/Notifications'
+import { getServerSession } from "next-auth";
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
-const page = () => {
+const Dashboard = async() => {
+    const session = await getServerSession(authOptions);
     return (
         <div style={{ height: '50%', borderRadius: '15px' }}>
             <Grid justify="space-around" align="stretch">
                 <GridCol bg="#" span={8.5} style={{ minHeight: '80px' }}>
                     <Container>
                         <div style={{ paddingLeft: '35px' }}>
-                            <Text c='#9C9C9C' fz='20px'>Hi Modupe,</Text>
+                            <Text c='#9C9C9C' fz='20px'>Hi {session && session.user.firstName},</Text>
                             <Space h="2px" />
                             <Text fz='32px' fw={700}>Welcome to your Dashboard</Text>
                         </div>
@@ -40,4 +43,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Dashboard
