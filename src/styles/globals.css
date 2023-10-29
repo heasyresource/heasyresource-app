@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import url("https://fonts.cdnfonts.com/css/satoshi");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,33 +17,46 @@
   }
 } */
 
-
 @font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Regular.woff2") format("woff2");
   /* Add more font formats for cross-browser compatibility if needed */
   font-weight: normal;
   font-style: normal;
 }
 ::-webkit-scrollbar {
-  width: 0; 
+  width: 0;
 }
-html, body {
-	margin: 0;
-	padding: 0;
-  font-family: 'Satoshi', sans-serif;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Satoshi", sans-serif;
 }
-.mantine-TextInput-input:focus-within, 
- .mantine-TextInput-input:focus, 
- .mantine-Select-input:focus-within, 
- .mantine-Select-input:focus,
- .mantine-PasswordInput-input:focus-within, 
- .mantine-PasswordInput-input:focus,
- .mantine-PinInput-input:focus,
- .mantine-PinInput-input:focus 
- {
-  --_input-bd: #3377FF!important;
+.mantine-TextInput-input:focus-within,
+.mantine-TextInput-input:focus,
+.mantine-Select-input:focus-within,
+.mantine-Select-input:focus,
+.mantine-PasswordInput-input:focus-within,
+.mantine-PasswordInput-input:focus,
+.mantine-PinInput-input:focus,
+.mantine-PinInput-input:focus {
+  --_input-bd: #3377ff !important;
 }
-.mantine-Modal-header{
+.mantine-Modal-header {
   display: none !important;
+}
+
+.add-image {
+  @media (max-width: 500px) {
+    width: 150px;
+    height: 150px;
+  }
+}
+.add-icon {
+  right: 20px;
+  bottom: 0;
+  @media (max-width: 768px) {
+    right: 10px;
+  }
 }

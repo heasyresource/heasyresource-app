@@ -18,11 +18,11 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import React from "react";
-import InputField from "../components/InputField";
-import { TableSelection } from "../components/TableSelection";
-import classes from "./employee.module.css";
+import SlugCheck from "./slugCheck";
+import { EmployeeLayout } from "@/components";
+import classes from "../employee.module.css";
 
-const Employee = () => {
+const page = () => {
   return (
     <>
       <Card
@@ -35,16 +35,17 @@ const Employee = () => {
         }}
       >
         <CardSection
-          pt="25px"
-          pb="55px"
-          style={{ borderBottom: "1px solid #DDDDDD" }}
           className={classes.cardSection}
+          pt="25px"
+          pb={{ lg: "55px", md: "25px" }}
+          px={"25px"}
+          style={{ borderBottom: "1px solid #DDDDDD" }}
         >
-          <Group justify="space-between" mx="40px">
-            <Text fz="24px" fw="700">
+          <Group justify="space-between">
+            <Text style={{ fontSize: "20px" }} fw="700">
               Employee Management
             </Text>
-            <Group>
+            <Group className={classes.flexWrap}>
               <Button w="125px" variant="filled" color="#E7F7FF">
                 <Text c="#424242" fz="13px" fw={700}>
                   Employee List
@@ -124,22 +125,12 @@ const Employee = () => {
             </Group>
           </Group>
         </CardSection>
-        <InputField />
-        <Group justify="flex-end" mt={"3rem"}>
-          <Button
-            style={{ fontSize: "16px", textTransform: "capitalize" }}
-            size="md"
-            variant="filled"
-            color="#3377FF"
-            px={"40px"}
-          >
-            search
-          </Button>
-        </Group>
+        <EmployeeLayout>
+          <SlugCheck />
+        </EmployeeLayout>
       </Card>
-      <TableSelection />
     </>
   );
 };
 
-export default Employee;
+export default page;
