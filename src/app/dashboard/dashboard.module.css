@@ -66,3 +66,43 @@
   width: rem(20px);
   height: rem(20px);
 }
+
+.label {
+  font-size: small;
+  padding-bottom: 14px;
+  color: #4D4D4D;
+}
+
+.error {
+  font-size: 12px;
+}
+
+.placeholder {
+  font-size: 8px;
+}
+
+.appShellHeader {
+  /* position: sticky; */
+  top: 0;
+  background-color: var(--mantine-color-body);
+  transition: box-shadow 150ms ease;
+  box-shadow: 15px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: rem(1px) solid
+      light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-3));
+  }
+}
+
+.scrolled {
+  box-shadow: 15px;
+}
+
+.rowSelected {
+  background-color: var(--mantine-color-blue-light);
+}
