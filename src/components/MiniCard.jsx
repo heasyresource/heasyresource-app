@@ -20,6 +20,7 @@ function MiniCard({ height }) {
       py="20"
       padding="xl"
       bg="var(--mantine-color-body)"
+      key={item.title}
     >
       <Text style={{ color: '#7EA6F4' }} fz="sm" fw={700}>
         {item.title}

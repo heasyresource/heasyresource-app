@@ -12,6 +12,7 @@ const Messages = () => {
         <Flex
             direction='column'
             mb='5px'
+            key={item}
         >
             <HoverCard width={280} shadow="md">
                 <HoverCardTarget >
