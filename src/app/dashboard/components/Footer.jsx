@@ -8,9 +8,7 @@ import NavbarFooter from '@/components/NavbarFooter';
 const Footer = () => {
   return (
     <div className={classes.footer}>
-      <NavbarFooter
-        width='198px'
-      />
+      
     </div>
   )
 }

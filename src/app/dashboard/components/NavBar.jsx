@@ -17,8 +17,7 @@ const NavBar = () => {
                             h={35}
                         />
                     </Group>
-                    <Box style={{paddingRight: '25px', borderTop: '2px solid #EFEFEF'
-}}>
+                    <Box style={{paddingRight: '25px', borderTop: '2px solid #EFEFEF'}}>
                         <Links />
                     </Box>
                 </div>

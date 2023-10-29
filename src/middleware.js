@@ -1,7 +1,7 @@
 const unProtectedRoutes = ["/signin", "/signup", "/forgot-password", "/new-password", "/verfication"];
-const matcher = ["/dashboard/:path*", ...unProtectedRoutes];
+
 export const config = {
-  matcher,
+  matcher: ["/dashboard/:path*", "/signin", "/signup", "/forgot-password", "/new-password", "/verfication"],
 };
 
 import { getToken } from "next-auth/jwt";
