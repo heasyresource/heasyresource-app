@@ -1,5 +1,5 @@
 "use client";
-import { Group, AppShell, Container, Text, ActionIcon } from "@mantine/core";
+import { Group, AppShell, Text, ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
 import classes from "../dashboard/dashboard.module.css";
@@ -9,8 +9,7 @@ import Main from "./components/Main";
 import Profile from "@/components/Profile";
 import Image from "next/image";
 import NextImage from "next/image";
-import { IconBell } from "@tabler/icons-react";
-import { IconMessageDots } from "@tabler/icons-react";
+import { IconBell, IconMessageDots } from "@tabler/icons-react";
 import { useState } from "react";
 import { Header } from "@/components";
 const DashBoardLayout = ({ children }) => {
