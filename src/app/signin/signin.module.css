@@ -4,7 +4,7 @@
   height: 100%;
 }
 .wrapper_img {
-  background-image: url("/assets/images/authBgImg.png");
+  background-image: url("/assets/images/signBg.png");
   flex: 1;
   background-repeat: no-repeat;
   background-position: center center;
@@ -35,6 +35,12 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 5%);
+  z-index: 1;
+}
 .form_container {
   max-width: 35rem;
   height: 100%;
@@ -42,6 +48,8 @@
   flex-direction: column;
   gap: 32px;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .label {

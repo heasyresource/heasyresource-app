@@ -1,17 +1,9 @@
 .header {
-  position: fixed;
+  height: inherit;
   width: 100%;
   background-color: #fff;
-  height: rem(60px);
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
-  border-bottom: rem(1px) solid
-    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-  display: none;
-  z-index: 1000;
-  @media (max-width: 768px) {
-    display: block;
-  }
 }
 
 .link {

@@ -18,11 +18,13 @@
 }
 .btnWrap {
   @media (max-width: 768px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
     margin-top: 2rem !important;
   }
 }
 .btn {
-  @media (max-width: 500px) {
-    width: 100%;
+  @media (max-width: 768px) {
+    width: 100% !important;
   }
 }

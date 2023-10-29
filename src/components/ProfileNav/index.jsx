@@ -7,12 +7,12 @@ import { Badge, Box, Divider, Stack, Text } from "@mantine/core";
 import { AddImage } from "..";
 
 const data = [
-  { link: "/employee/personal-detail", label: "personal Details" },
-  { link: "/employee/contact-detail", label: "contact Details" },
-  { link: "/employee/emergency-contact", label: "emergency contact" },
-  { link: "/employee/employement-info", label: "employement info" },
-  { link: "/employee/qualifications", label: "qualifications" },
-  { link: "/employee/compensation", label: "compensation" },
+  { link: "/dashboard/employee/personal-detail", label: "personal Details" },
+  { link: "/dashboard/employee/contact-detail", label: "contact Details" },
+  { link: "/dashboard/employee/emergency-contact", label: "emergency contact" },
+  { link: "/dashboard/employee/employement-info", label: "employement info" },
+  { link: "/dashboard/employee/qualifications", label: "qualifications" },
+  { link: "/dashboard/employee/compensation", label: "compensation" },
 ];
 const ProfileNav = () => {
   const pathname = usePathname();

@@ -20,6 +20,7 @@ const SignUp = () => {
         <Container className={classes.form_container}>
           <SignUpForm></SignUpForm>
         </Container>
+        <Box className={classes.overlay} />
       </Box>
     </Box>
   );

@@ -4,26 +4,35 @@ import classes from "./header.module.css";
 import { Burger, Drawer, Flex, Group, Image, Stack } from "@mantine/core";
 import {
   IconUsers,
-  IconBriefcase,
-  IconShieldChevron,
-  IconCalendarEvent,
-  IconWallet,
   IconHome,
   IconSettings,
+  IconBriefcase2,
+  IconCalendarBolt,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import Profile from "../Profile";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IconGraph } from "@tabler/icons-react";
+import { IconUserDollar } from "@tabler/icons-react";
 
 const data = [
-  { link: "/", label: "Dashboard", icon: IconHome },
-  { link: "/employee", label: "Employee", icon: IconUsers, subLink: true },
-  { link: "/hiring", label: "Hiring", icon: IconBriefcase },
-  { link: "/performance", label: "Performance", icon: IconShieldChevron },
-  { link: "absence", label: "Absence", icon: IconCalendarEvent },
-  { link: "/compensation", label: "Compensation", icon: IconWallet },
-  { link: "/settings", label: "Settings", icon: IconSettings },
+  { link: "/dashboard", label: "Dashboard", icon: IconHome },
+  {
+    link: "/dashboard/employee",
+    label: "Employee",
+    icon: IconUsers,
+    subLink: true,
+  },
+  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
+  { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
+  { link: "/dashboard/absence", label: "Absence", icon: IconCalendarBolt },
+  {
+    link: "/dashboard/compensation",
+    label: "Compensation",
+    icon: IconUserDollar,
+  },
+  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
 ];
 const Header = () => {
   const pathname = usePathname();
@@ -39,6 +48,7 @@ const Header = () => {
       }
       href={item.link}
       key={item.label}
+      onClick={closeDrawer}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />
       <span>{item.label}</span>
