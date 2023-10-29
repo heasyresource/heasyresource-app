@@ -1,0 +1,45 @@
+.header {
+  height: inherit;
+  width: 100%;
+  background-color: #fff;
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 18px;
+  color: #626262;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-sm);
+  font-weight: 500;
+
+  @mixin hover {
+    background-color: #3377ff17;
+    color: #626262;
+
+    .linkIcon {
+      color: #626262;
+    }
+  }
+
+  &[data-active] {
+    &,
+    &:hover {
+      color: #3377ff;
+
+      .linkIcon {
+        color: #3377ff;
+      }
+    }
+  }
+}
+
+.linkIcon {
+  color: #626262;
+  margin-right: var(--mantine-spacing-sm);
+  width: rem(18px);
+  height: rem(18px);
+}
