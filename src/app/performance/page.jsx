@@ -1,10 +1,8 @@
-import Layout from "@/components/Layout";
-import { Text } from "@mantine/core";
+import { Layout } from "@/components";
+import React from "react";
 
-export default function Performance() {
-  return (
-    <Layout>
-      <Text>Performance</Text>
-    </Layout>
-  );
-}
+const Performance = () => {
+  return <Layout>Performance</Layout>;
+};
+
+export default Performance;

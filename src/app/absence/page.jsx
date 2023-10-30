@@ -1,11 +1,8 @@
-import { Text } from "@mantine/core";
+import { Layout } from "@/components";
+import React from "react";
 
-import Layout from "@/components/Layout";
+const absence = () => {
+  return <Layout>absence</Layout>;
+};
 
-export default function Absence() {
-  return (
-    <Layout>
-      <Text> Absence</Text>
-    </Layout>
-  );
-}
+export default absence;

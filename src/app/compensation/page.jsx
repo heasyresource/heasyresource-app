@@ -1,10 +1,8 @@
-import Layout from "@/components/Layout";
-import { Text } from "@mantine/core";
+import { Layout } from "@/components";
+import React from "react";
 
-export default function Compensation() {
-  return (
-    <Layout>
-      <Text>Compensation</Text>
-    </Layout>
-  );
-}
+const Compensation = () => {
+  return <Layout>Compensation</Layout>;
+};
+
+export default Compensation;

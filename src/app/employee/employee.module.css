@@ -1,0 +1,40 @@
+.cardSection {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.flexWrap {
+  @media (max-width: 768px) {
+    display: none;
+    flex-wrap: nowrap;
+  }
+}
+.cardType:hover {
+  box-shadow: 1px 1px 9px 0px;
+}
+.employeeIndividual {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+  }
+}
+.fileInput {
+  margin-top: 2rem;
+  width: 40%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.btnWrap {
+  margin-top: 4rem !important;
+  @media (max-width: 768px) {
+    margin-top: 2rem !important;
+  }
+}
+.btn {
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+}

@@ -2,129 +2,101 @@
 import {
   Button,
   Grid,
+  GridCol,
   Group,
-  Radio,
   Select,
   Stack,
   TextInput,
 } from "@mantine/core";
 import React from "react";
-import classes from "./personalDetail.module.css";
-import { usePersonalDetail } from "@/hooks";
+import classes from "./employeeLayout.module.css";
+import { useIndividual } from "@/hooks";
 
-const PersonalDetail = () => {
-  const { form, loading, handleSubmit } = usePersonalDetail();
+const EmployeeIndividual = () => {
+  const { form, handleSubmit } = useIndividual();
   return (
-    <form
-      onSubmit={form.onSubmit((values) => handleSubmit(values))}
-      style={{ height: "100%" }}
-    >
-      <Stack
-        gap={"3rem"}
-        className={classes.formStack}
-        style={{ height: "100%" }}
-      >
-        <Grid style={{ marginTop: "20px" }} gutter="xl">
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+      <Stack className={classes.individualWrap}>
+        <Grid gutter={"lg"}>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="First Name"
               withAsterisk
+              size="md"
+              placeholder="John"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("firstName")}
-              disabled={loading}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="Middle Name"
               withAsterisk
+              size="md"
+              placeholder="Smith"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("middleName")}
-              disabled={loading}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="Last Name"
               withAsterisk
+              size="md"
+              placeholder="Corner"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("lastName")}
-              disabled={loading}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="Employee ID"
-              type="number"
               withAsterisk
+              size="md"
+              type="number"
+              placeholder="John"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("employeeId")}
-              disabled={loading}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
-              size="md"
-              label="Nationality"
+              data={["Front-End Developer"]}
+              label="Job Title"
               withAsterisk
+              size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              data={["Nigeria"]}
-              {...form.getInputProps("nationality")}
-              disabled={loading}
+              {...form.getInputProps("jobTitle")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
-              data={["Single", "Married"]}
-              size="md"
-              label="Marital Status"
+              data={[]}
+              label="Department"
               withAsterisk
+              size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("maritalStatus")}
-              disabled={loading}
+              {...form.getInputProps("department")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              type="date"
-              size="md"
+              label="Work Email"
+              type="email"
               withAsterisk
+              size="md"
               style={{ textAlign: "start", width: "100%" }}
-              label="Date of Birth"
-              placeholder="DD/MM/YYYY"
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("dob")}
-              disabled={loading}
+              {...form.getInputProps("workEmail")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <Radio.Group
-              size="md"
-              withAsterisk
-              label="Gender"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("gender")}
-              disabled={loading}
-            >
-              <Group mt="xs">
-                <Radio value="male" label="Male" labelPosition="left" />
-                <Radio value="femaale" label="Female" labelPosition="left" />
-              </Group>
-            </Radio.Group>
-          </Grid.Col>
+          </GridCol>
         </Grid>
-
         <Group
           justify="flex-end"
           className={classes.btnWrap}
@@ -140,8 +112,6 @@ const PersonalDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
-            onClick={() => form.reset}
-            disabled={loading}
           >
             cancel
           </Button>
@@ -154,9 +124,8 @@ const PersonalDetail = () => {
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
             type="submit"
-            disabled={loading}
           >
-            add
+            save
           </Button>
         </Group>
       </Stack>
@@ -164,4 +133,4 @@ const PersonalDetail = () => {
   );
 };
 
-export default PersonalDetail;
+export default EmployeeIndividual;

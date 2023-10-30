@@ -8,30 +8,31 @@ import {
   IconSettings,
   IconBriefcase2,
   IconCalendarBolt,
+  IconGraph,
+  IconUserDollar,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import Profile from "../Profile";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconGraph, IconUserDollar } from "@tabler/icons-react";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
   {
-    link: "/dashboard/employee",
+    link: "/employee",
     label: "Employee",
     icon: IconUsers,
     subLink: true,
   },
-  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
-  { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
-  { link: "/dashboard/absence", label: "Absence", icon: IconCalendarBolt },
+  { link: "/hiring", label: "Hiring", icon: IconBriefcase2 },
+  { link: "/performance", label: "Performance", icon: IconGraph },
+  { link: "/absence", label: "Absence", icon: IconCalendarBolt },
   {
-    link: "/dashboard/compensation",
+    link: "/compensation",
     label: "Compensation",
     icon: IconUserDollar,
   },
-  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
+  { link: "/settings", label: "Settings", icon: IconSettings },
 ];
 const Header = () => {
   const pathname = usePathname();

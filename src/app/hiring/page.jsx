@@ -1,10 +1,9 @@
-import Layout from "@/components/Layout";
-import { Text } from "@mantine/core";
+import { Layout } from "@/components";
+import { Flex, Loader } from "@mantine/core";
+import React from "react";
 
-export default function Hiring() {
-  return (
-    <Layout>
-      <Text>Hiring</Text>
-    </Layout>
-  );
-}
+const page = () => {
+  return <Layout>hiring</Layout>;
+};
+
+export default page;

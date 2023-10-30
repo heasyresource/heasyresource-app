@@ -1,7 +1,7 @@
 "use client";
 import { AppShell, Box, Group } from "@mantine/core";
 import React from "react";
-import classes from "../dashboard.module.css";
+import classes from "./layout.module.css";
 import Footer from "./Footer";
 import Links from "./Links";
 import Logo from "@/components/Image";

@@ -3,8 +3,8 @@ import { forwardRef } from "react";
 import {
   IconChevronDown,
   IconExternalLink,
-  IconMan,
-  IconSettings,
+  IconSettingsQuestion,
+  IconUser,
 } from "@tabler/icons-react";
 import {
   Group,
@@ -72,20 +72,29 @@ export default function Profile() {
       </Menu.Target>
       <Menu.Dropdown w={150}>
         <Menu.Item
-          leftSection={<IconMan style={{ width: rem(14), height: rem(14) }} />}
+          leftSection={
+            <IconUser
+              style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
+            />
+          }
         >
           Profile
         </Menu.Item>
         <Menu.Item
           leftSection={
-            <IconSettings style={{ width: rem(14), height: rem(14) }} />
+            <IconSettingsQuestion
+              style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
+            />
           }
         >
           Settings
         </Menu.Item>
         <Menu.Item
+          c={"#FF0000"}
           leftSection={
-            <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
+            <IconExternalLink
+              style={{ width: rem(14), height: rem(14), color: "#FF0000" }}
+            />
           }
         >
           Sign Out

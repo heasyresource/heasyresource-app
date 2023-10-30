@@ -10,10 +10,15 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "./contactDetail.module.css";
+import { useContactDetail } from "@/hooks";
 
 const ContactDetail = () => {
+  const { form, handleSubmit, loading } = useContactDetail();
   return (
-    <Box style={{ height: "100%" }}>
+    <form
+      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      style={{ height: "100%" }}
+    >
       <Stack style={{ gap: "3rem" }}>
         <Box>
           <Text
@@ -30,6 +35,9 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="Full Name"
+                placeholder="John Smith"
+                disabled={loading}
+                {...form.getInputProps("fullName")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -43,6 +51,8 @@ const ContactDetail = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 data={[]}
+                disabled={loading}
+                {...form.getInputProps("lga")}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -54,6 +64,8 @@ const ContactDetail = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 data={[]}
+                disabled={loading}
+                {...form.getInputProps("state")}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -61,6 +73,9 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="Zip Code"
+                placeholder="2023920"
+                disabled={loading}
+                {...form.getInputProps("code")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -71,8 +86,10 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Country"
                 placeholder="Nigeria"
+                disabled={loading}
+                {...form.getInputProps("country")}
                 style={{ textAlign: "start", width: "100%" }}
-                data={[]}
+                data={["Nigeria"]}
                 classNames={{ label: classes.label, error: classes.error }}
               />
             </Grid.Col>
@@ -95,6 +112,8 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="Home"
+                disabled={loading}
+                {...form.getInputProps("homeTel")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -105,6 +124,8 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="Mobile"
+                disabled={loading}
+                {...form.getInputProps("mobileTel")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -115,6 +136,8 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="Work"
+                disabled={loading}
+                {...form.getInputProps("workTel")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -139,6 +162,9 @@ const ContactDetail = () => {
                 label="Work Email"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                disabled={loading}
+                placeholder="example@company.com"
+                {...form.getInputProps("workEmail")}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -147,8 +173,11 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="Personal Email"
+                placeholder="example@gmail.com"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                disabled={loading}
+                {...form.getInputProps("personalEmail")}
               />
             </Grid.Col>
           </Grid>
@@ -179,12 +208,13 @@ const ContactDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            type="submit"
           >
             add
           </Button>
         </Group>
       </Stack>
-    </Box>
+    </form>
   );
 };
 

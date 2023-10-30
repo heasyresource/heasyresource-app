@@ -1,10 +1,8 @@
-import Layout from "@/components/Layout";
-import { Text } from "@mantine/core";
+import { Layout } from "@/components";
+import React from "react";
 
-export default function Settings() {
-  return (
-    <Layout>
-      <Text>Setting</Text>
-    </Layout>
-  );
-}
+const Settings = () => {
+  return <Layout>Settings</Layout>;
+};
+
+export default Settings;

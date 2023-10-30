@@ -3,3 +3,26 @@
     flex-direction: column;
   }
 }
+.individualWrap {
+  gap: 4rem;
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+}
+.label {
+  font-size: small;
+}
+.error {
+  font-size: 12px;
+}
+.btnWrap {
+  @media (max-width: 768px) {
+    margin-top: 2rem !important;
+  }
+}
+.btn {
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+}

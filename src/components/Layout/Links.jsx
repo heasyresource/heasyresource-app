@@ -9,27 +9,27 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import React from "react";
-import classes from "../dashboard.module.css";
+import classes from "./layout.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
   {
-    link: "/dashboard/employee",
+    link: "/employee",
     label: "Employee",
     icon: IconUsers,
     subLink: true,
   },
-  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
-  { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
-  { link: "/dashboard/absence", label: "Absence", icon: IconCalendarBolt },
+  { link: "/hiring", label: "Hiring", icon: IconBriefcase2 },
+  { link: "/performance", label: "Performance", icon: IconGraph },
+  { link: "/absence", label: "Absence", icon: IconCalendarBolt },
   {
-    link: "/dashboard/compensation",
+    link: "/compensation",
     label: "Compensation",
     icon: IconUserDollar,
   },
-  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
+  { link: "/settings", label: "Settings", icon: IconSettings },
 ];
 
 const Links = () => {

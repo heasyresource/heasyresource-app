@@ -1,5 +1,5 @@
-.addEmployee {
+.card {
   @media (max-width: 500px) {
-    display: none;
+    width: 100% !important;
   }
 }
