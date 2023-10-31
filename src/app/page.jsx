@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <Box
-      w={400}
+      w={450}
       mx="auto"
       ta="center"
       c="#fff"
