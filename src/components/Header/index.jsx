@@ -19,20 +19,20 @@ import { usePathname } from "next/navigation";
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
   {
-    link: "/employee",
+    link: "/dashboard/employee",
     label: "Employee",
     icon: IconUsers,
     subLink: true,
   },
-  { link: "/hiring", label: "Hiring", icon: IconBriefcase2 },
-  { link: "/performance", label: "Performance", icon: IconGraph },
-  { link: "/absence", label: "Absence", icon: IconCalendarBolt },
+  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
+  { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
+  { link: "/dashboard/absence", label: "Absence", icon: IconCalendarBolt },
   {
-    link: "/compensation",
+    link: "/dashboard/compensation",
     label: "Compensation",
     icon: IconUserDollar,
   },
-  { link: "/settings", label: "Settings", icon: IconSettings },
+  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
 ];
 const Header = () => {
   const pathname = usePathname();

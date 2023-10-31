@@ -23,7 +23,7 @@ const EmployeeNav = ({ tabTitle }) => {
         <Button
           w="125px"
           component="a"
-          href="/employee"
+          href="/dashboard/employee"
           style={{ color: "#424242", fontSize: "13px", fontWeight: 700 }}
           variant="filled"
           color="#E7F7FF"
@@ -32,7 +32,7 @@ const EmployeeNav = ({ tabTitle }) => {
         </Button>
         <Button
           component="a"
-          href="/employee/add-employee"
+          href="/dashboard/employee/add-employee"
           w="125px"
           variant="filled"
           color="#EBEBEB"
@@ -60,7 +60,11 @@ const EmployeeNav = ({ tabTitle }) => {
           <MenuDropdown>
             <MenuItem fz="xs">Optional Fields</MenuItem>
             <MenuDivider />
-            <MenuItem fz="xs" component="a" href="/employee/add-employee/bulk">
+            <MenuItem
+              fz="xs"
+              component="a"
+              href="/dashboard/employee/add-employee/bulk"
+            >
               Data Import
             </MenuItem>
           </MenuDropdown>

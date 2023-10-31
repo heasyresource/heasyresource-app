@@ -2,15 +2,15 @@
 import { Group, AppShell, Text, ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
-import classes from "./layout.module.css";
+import classes from "./dashboard.module.css";
 import Image from "next/image";
 import NextImage from "next/image";
 import { IconBell, IconMessageDots } from "@tabler/icons-react";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { Header } from "@/components";
-import Profile from "../Profile";
-import NavBar from "../../app/dashboard/components/NavBar";
-import Main from "../../app/dashboard/components/Main";
+import NavBar from "./components/NavBar";
+import Main from "./components/Main";
+import Profile from "@/components/Profile";
 const Layout = ({ children }) => {
   const [opened, { toggle }] = useDisclosure();
   const [scrolled, setScrolled] = useState(false);
