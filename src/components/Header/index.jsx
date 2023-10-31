@@ -8,12 +8,13 @@ import {
   IconSettings,
   IconBriefcase2,
   IconCalendarBolt,
+  IconGraph,
+  IconUserDollar,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import Profile from "../Profile";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconGraph, IconUserDollar } from "@tabler/icons-react";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },

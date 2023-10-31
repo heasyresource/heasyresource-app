@@ -2,17 +2,16 @@
 import { Group, AppShell, Text, ActionIcon } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
-import classes from "../dashboard/dashboard.module.css";
-import Jitto from "../../../public/jitto.svg";
-import NavBar from "./components/NavBar";
-import Main from "./components/Main";
-import Profile from "@/components/Profile";
+import classes from "./dashboard.module.css";
 import Image from "next/image";
 import NextImage from "next/image";
 import { IconBell, IconMessageDots } from "@tabler/icons-react";
 import { useState } from "react";
 import { Header } from "@/components";
-const DashBoardLayout = ({ children }) => {
+import NavBar from "./components/NavBar";
+import Main from "./components/Main";
+import Profile from "@/components/Profile";
+const Layout = ({ children }) => {
   const [opened, { toggle }] = useDisclosure();
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,7 +33,13 @@ const DashBoardLayout = ({ children }) => {
       >
         <Group justify="flex-end" gap="28" style={{ flexWrap: "nowrap" }}>
           <Group>
-            <Image src={Jitto} component={NextImage} alt="Company Logo" />
+            <Image
+              src={"/jitto.svg"}
+              width={28}
+              height={28}
+              component={NextImage}
+              alt="Company Logo"
+            />
             <Text fw={500} c="#616161">
               Jitto Consultancy Ltd.
             </Text>
@@ -77,9 +82,10 @@ const DashBoardLayout = ({ children }) => {
       </AppShell.Header>
 
       <NavBar />
+
       <Main>{children}</Main>
     </AppShell>
   );
 };
 
-export default DashBoardLayout;
+export default Layout;
