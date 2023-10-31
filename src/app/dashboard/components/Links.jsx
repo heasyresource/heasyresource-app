@@ -23,7 +23,7 @@ const data = [
   },
   { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
   { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
-  { link: "/dashboard/absence", label: "Absence", icon: IconCalendarBolt },
+  { link: "/absence", label: "Absence", icon: IconCalendarBolt },
   {
     link: "/dashboard/compensation",
     label: "Compensation",

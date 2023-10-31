@@ -27,7 +27,6 @@ const SignIn = () => {
           </Stack>
           <SignInForm></SignInForm>
         </Container>
-        <Box className={classes.overlay} />
       </Box>
     </Box>
   );

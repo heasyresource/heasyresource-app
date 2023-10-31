@@ -1,9 +1,9 @@
 import React from "react";
 import {
+  Box,
   Container,
   Grid,
   GridCol,
-  Group,
   ScrollArea,
   SimpleGrid,
   Space,
@@ -18,17 +18,17 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   return (
-    <div style={{ height: "50%", borderRadius: "15px" }}>
+    <Box style={{ height: "50%", borderRadius: "15px" }}>
       <Grid justify="space-around" align="stretch">
         <GridCol
           bg="#"
           span={{ lg: 8.5, md: 12, sm: 12 }}
           style={{ minHeight: "80px" }}
         >
-          <Container>
+          <Container p="0px">
             <div>
               <Text c="#9C9C9C" fz="20px">
-                Hi {session && session.user.firstName},
+                Hi {session && session?.user?.firstName},
               </Text>
               <Space h="2px" />
               <Text fz="32px" fw={700}>
@@ -36,9 +36,9 @@ const Dashboard = async () => {
               </Text>
             </div>
             <Container mt="39">
-              <Group justify="space-between">
+              <Grid gutter={"lg"}>
                 <MiniCard />
-              </Group>
+              </Grid>
             </Container>
           </Container>
         </GridCol>
@@ -56,7 +56,7 @@ const Dashboard = async () => {
           </SimpleGrid>
         </GridCol>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

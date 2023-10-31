@@ -1,18 +1,24 @@
+"use client";
 import {
-  Box,
   Button,
   Grid,
   Group,
   Radio,
+  Select,
   Stack,
   TextInput,
 } from "@mantine/core";
 import React from "react";
-import classes from "./personalDetail.module.css";
+import classes from "./employeeLayout.module.css";
+import { usePersonalDetail } from "@/hooks";
 
 const PersonalDetail = () => {
+  const { form, loading, handleSubmit } = usePersonalDetail();
   return (
-    <Box style={{ height: "100%" }}>
+    <form
+      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      style={{ height: "100%" }}
+    >
       <Stack
         gap={"3rem"}
         className={classes.formStack}
@@ -26,6 +32,8 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("firstName")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -35,6 +43,8 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("middleName")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -44,33 +54,44 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("lastName")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
               size="md"
               label="Employee ID"
+              type="number"
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("employeeId")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
+            <Select
               size="md"
               label="Nationality"
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              data={["Nigeria"]}
+              {...form.getInputProps("nationality")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
+            <Select
+              data={["Single", "Married"]}
               size="md"
               label="Marital Status"
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("maritalStatus")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -82,6 +103,8 @@ const PersonalDetail = () => {
               label="Date of Birth"
               placeholder="DD/MM/YYYY"
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("dob")}
+              disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -91,6 +114,9 @@ const PersonalDetail = () => {
               label="Gender"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("gender")}
+              disabled={loading}
+              color="#3377FF"
             >
               <Group mt="xs">
                 <Radio value="male" label="Male" labelPosition="left" />
@@ -115,6 +141,8 @@ const PersonalDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            onClick={() => form.reset}
+            disabled={loading}
           >
             cancel
           </Button>
@@ -126,12 +154,17 @@ const PersonalDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            type="submit"
+            disabled={loading}
+            style={{
+              backgroundColor: "#3377FF",
+            }}
           >
             add
           </Button>
         </Group>
       </Stack>
-    </Box>
+    </form>
   );
 };
 

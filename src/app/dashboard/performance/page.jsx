@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Performance = () => {
-  return (
-    <div>Performance</div>
-  )
-}
+  return <div>Performance</div>;
+};
 
 export default Performance;
