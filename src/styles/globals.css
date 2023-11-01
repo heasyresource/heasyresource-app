@@ -43,8 +43,94 @@ body {
 .mantine-PinInput-input:focus {
   --_input-bd: #3377ff !important;
 }
+.mantine-DatePicker-calendarHeader {
+  display: flex;
+  width: 100%;
+  height: 2.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.mantine-DatePicker-calendarHeaderControl {
+  width: 2.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+  top: 10px;
+}
+.mantine-DatePicker-calendarHeaderControl svg[data-direction="previous"] {
+  rotate: 90deg;
+}
+.mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
+  right: 20px;
+}
+.mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
+  right: 0;
+}
+.mantine-DatePicker-calendarHeaderControl svg[data-direction="next"] {
+  right: 0;
+  rotate: 270deg;
+}
+.mantine-DatePicker-calendarHeaderControl svg,
+.mantine-DatePicker-weekday {
+  color: #3377ff;
+}
+.mantine-DatePicker-day,
+.mantine-DatePicker-month,
+.mantine-DatePicker-weekday {
+  font-size: 14px !important;
+}
+.mantine-DatePicker-calendarHeaderLevel {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mantine-DatePicker-levelsGroup {
+  max-width: 20rem;
+}
+.mantine-DatePicker-month,
+.mantine-DatePicker-monthsList,
+.mantine-DatePicker-yearsList {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.mantine-DatePicker-day,
+.mantine-DatePicker-monthsListControl,
+.mantine-DatePicker-yearsListControl {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 31px;
+}
+.mantine-DatePicker-day[data-outside="true"] {
+  color: #909296;
+}
+.mantine-DatePicker-day[data-selected="true"] {
+  background-color: #3377ff !important;
+  color: #fff !important;
+}
+.mantine-DatePicker-day[data-first-in-range="true"] {
+  border-radius: 10px 0px 0px 10px !important;
+}
+.mantine-DatePicker-day[data-last-in-range="true"] {
+  border-radius: 0px 10px 10px 0px !important;
+}
+.mantine-DatePicker-day[data-in-range="true"] {
+  background-color: #3377ff24;
+}
+.mantine-DatePicker-day[data-weekend="true"] {
+  color: #fa5252;
+}
+
 .mantine-Modal-header {
   display: none !important;
+}
+.mantine-Carousel-container {
+  display: flex;
 }
 
 .add-image {

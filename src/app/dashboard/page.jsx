@@ -4,6 +4,7 @@ import {
   Container,
   Grid,
   GridCol,
+  Paper,
   ScrollArea,
   SimpleGrid,
   Space,
@@ -14,6 +15,7 @@ import Messages from "@/components/Messages";
 import Notifications from "@/components/Notifications";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { DatePicker } from "@mantine/dates";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -31,13 +33,25 @@ const Dashboard = async () => {
                 Hi {session && session?.user?.firstName},
               </Text>
               <Space h="2px" />
-              <Text fz="32px" fw={700}>
+              <Text fz={{ lg: "32px", md: "30px", sm: "25px" }} fw={700}>
                 Welcome to your Dashboard
               </Text>
             </div>
             <Container mt="39">
               <Grid gutter={"lg"}>
                 <MiniCard />
+              </Grid>
+            </Container>
+            <Container>
+              <Grid mt="30px">
+                <GridCol span={{ lg: 8, md: 12, sm: 12 }}>
+                  <Paper p="20px"></Paper>
+                </GridCol>
+                <GridCol span={{ lg: 4, md: 12, sm: 12 }}>
+                  <Paper radius={"md"} p={"20px"}>
+                    <DatePicker type="range" />
+                  </Paper>
+                </GridCol>
               </Grid>
             </Container>
           </Container>

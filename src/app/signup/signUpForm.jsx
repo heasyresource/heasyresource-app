@@ -18,6 +18,7 @@ import classes from "./signup.module.css";
 import React from "react";
 import { getStrength, requirements } from "@/utils/publicFunctions";
 import { IconCheck, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 
 const PasswordRequirement = ({ meets, label }) => {
   return (
@@ -59,7 +60,7 @@ const SignUpForm = () => {
     />
   ));
   const strength = getStrength(companyRepForm.values.password);
-  const color = strength === 100 ? "teal" : (strength > 50 ? "yellow" : "red");
+  const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
   return (
     <>
       <Flex justify={"space-between"} align={"flex-start"}>
@@ -95,7 +96,6 @@ const SignUpForm = () => {
                 label="Company Name"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-    
             </Box>
             <Box>
               <TextInput
@@ -108,7 +108,6 @@ const SignUpForm = () => {
                 label="Company Email"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-     
             </Box>
             <Box>
               <TextInput
@@ -121,7 +120,6 @@ const SignUpForm = () => {
                 label="Company Website"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-         
             </Box>
             <Box>
               <Select
@@ -129,30 +127,28 @@ const SignUpForm = () => {
                 withAsterisk
                 data={fields}
                 searchable
+                nothingFoundMessage="Nothing found..."
                 placeholder="Information Technology"
                 {...companyInfoForm.getInputProps("industryId")}
                 disabled={loadingCompanyInfo}
                 label="Field/Industry"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-      
             </Box>
             <Box>
               <TextInput
                 size="md"
-                placeholder="07012345678" 
-                leftSection={'+234'}
+                placeholder="07012345678"
+                leftSection={"+234"}
                 leftSectionWidth={50}
                 type="tel"
-                maxLength={'11'}
+                maxLength={"11"}
                 withAsterisk
                 {...companyInfoForm.getInputProps("companyPhoneNumber")}
                 disabled={loadingCompanyInfo}
                 label="Phone Number"
                 classNames={{ label: classes.label, error: classes.error }}
               />
-
-       
             </Box>
             <Button
               size="md"
@@ -172,6 +168,20 @@ const SignUpForm = () => {
                 "next"
               )}
             </Button>
+            <Flex justify="center" align="center">
+              <Text fw={700} c={"#494949"} size="sm" tt="capitalize">
+                Already have an account?{" "}
+                <Link
+                  href="/signin"
+                  style={{
+                    color: "#3377FF",
+                    textDecoration: "none",
+                  }}
+                >
+                  Sign In
+                </Link>
+              </Text>
+            </Flex>
           </Stack>
         </form>
       ) : (

@@ -2,6 +2,7 @@
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { obfuscateToken } from "@/utils/encryptToken";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
+import { getSubdomain } from "@/utils/publicFunctions";
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
@@ -11,11 +12,12 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useVerification = () => {
-  const router = useRouter()
+  const subdomain = getSubdomain();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const [email, setEmail] = useState("");
-  
+
   const form = useForm({
     initialValues: {
       verificationCode: "",
@@ -67,15 +69,38 @@ const useVerification = () => {
 
   const handleSubmit = async (data) => {
     setLoading(true);
+    const type =
+      sessionStorage.getItem("verificationType") &&
+      obfuscateToken(false, sessionStorage.getItem("verificationType") ?? "");
     try {
-      const values = {
-        ...data,
-        email: email,
-      };
-      await apiClient.post("/account/verify", values);
-      setLoading(false);
-      openModal();
+      if (type === "registration") {
+        await apiClient.post("/account/verify", { ...data, email: email });
+        setLoading(false);
+        openModal();
+      }
+      if (type === "forgotPassword") {
+        const res = await apiClient.post(
+          "/password/verify-code",
+          {
+            email: email,
+            resetPasswordCode: data.verificationCode,
+          },
+          {
+            headers: { "x-subdomain-name": subdomain },
+          }
+        );
+        const values = {
+          email: email,
+          resetPasswordCode: data.verificationCode,
+        };
+        obfuscateToken(
+          true,
+          sessionStorage.setItem("resetPasswordCode", JSON.stringify(values))
+        );
+        router.push("/new-password");
+      }
     } catch (err) {
+      form.reset();
       setLoading(false);
 
       notifications.show({
@@ -90,11 +115,21 @@ const useVerification = () => {
 
   const handleResend = async () => {
     setLoading(true);
+    const type =
+      sessionStorage.getItem("verificationType") &&
+      obfuscateToken(false, sessionStorage.getItem("verificationType") ?? "");
     try {
       const value = {
         email: email,
       };
-      await apiClient.post("/account/resend-code", value);
+      if (type === "registration") {
+        await apiClient.post("/account/resend-code", value);
+      }
+      if (type === "forgotPassword") {
+        await apiClient.post("/password/forgot", value, {
+          headers: { "x-subdomain-name": subdomain },
+        });
+      }
       notifications.show({
         color: "white",
         title: "Success",
@@ -127,7 +162,7 @@ const useVerification = () => {
     handleSubmit,
     isMobile,
     email,
-    handleResend
+    handleResend,
   };
 };
 

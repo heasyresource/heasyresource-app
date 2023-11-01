@@ -9,6 +9,7 @@ import {
   Avatar,
   rem,
   Space,
+  Box,
 } from "@mantine/core";
 import classes from "../dashboard.module.css";
 import { employeeList } from "@/utils/publicFunctions";
@@ -29,9 +30,8 @@ export function TableSelection() {
   const rows = employeeList.map((item) => {
     const selected = selection.includes(item.id);
     return (
-      <>
+      <Box key={item.id}>
         <Table.Tr
-          key={item.id}
           className={cx({ [classes.rowSelected]: selected })}
           bg="#ffff"
           py="32px"
@@ -62,7 +62,7 @@ export function TableSelection() {
           </Table.Td>
         </Table.Tr>
         <Space h="20px" />
-      </>
+      </Box>
     );
   });
 

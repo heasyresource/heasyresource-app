@@ -14,8 +14,14 @@ import {
   UnstyledButton,
   rem,
   Box,
+  Modal,
+  Stack,
+  Flex,
+  Button,
 } from "@mantine/core";
 import classes from "./profile.module.css";
+import { useSignOut } from "@/hooks";
+import { useDisclosure } from "@mantine/hooks";
 
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
@@ -61,46 +67,96 @@ const UserButton = forwardRef(
 );
 
 export default function Profile() {
+  const { handleSignOut } = useSignOut();
+  const [opened, { open, close }] = useDisclosure(false);
   return (
-    <Menu position="bottom-end" offset={10}>
-      <Menu.Target>
-        <UserButton
-          image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-          name="Modupe Ojo"
-          position="HR Admin"
-        />
-      </Menu.Target>
-      <Menu.Dropdown w={150}>
-        <Menu.Item
-          leftSection={
-            <IconUser
-              style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
-            />
-          }
-        >
-          Profile
-        </Menu.Item>
-        <Menu.Item
-          leftSection={
-            <IconSettingsQuestion
-              style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
-            />
-          }
-        >
-          Settings
-        </Menu.Item>
-        <Menu.Item
-          c={"#FF0000"}
-          leftSection={
-            <IconExternalLink
-              style={{ width: rem(14), height: rem(14), color: "#FF0000" }}
-            />
-          }
-        >
-          Sign Out
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+    <>
+      <Menu position="bottom-end" offset={10}>
+        <Menu.Target>
+          <UserButton
+            image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+            name="Modupe Ojo"
+            position="HR Admin"
+          />
+        </Menu.Target>
+        <Menu.Dropdown w={150}>
+          <Menu.Item
+            leftSection={
+              <IconUser
+                style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
+              />
+            }
+          >
+            Profile
+          </Menu.Item>
+          <Menu.Item
+            leftSection={
+              <IconSettingsQuestion
+                style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
+              />
+            }
+          >
+            Settings
+          </Menu.Item>
+          <Menu.Item
+            onClick={open}
+            c={"#FF0000"}
+            leftSection={
+              <IconExternalLink
+                style={{ width: rem(14), height: rem(14), color: "#FF0000" }}
+              />
+            }
+          >
+            Sign Out
+          </Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+      <Modal
+        size={"xs"}
+        opened={opened}
+        onClose={close}
+        centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+      >
+        <Stack py={"3rem"}>
+          <Text
+            tt={"capitalize"}
+            ta={"center"}
+            fw={600}
+            style={{ fontSize: "20px" }}
+            c="#000000"
+          >
+            are you sure, <br /> you want to sign out ?
+          </Text>
+          <Group mt="1rem" justify="space-around" align="center">
+            <Button
+              variant="outline"
+              radius="lg"
+              size="sm"
+              color="#3377FF"
+              style={{ borderColor: "#3377FF" }}
+              tt="capitalize"
+              onClick={close}
+            >
+              cancel
+            </Button>
+            <Button
+              variant="contained"
+              radius="lg"
+              size="sm"
+              style={{ backgroundColor: "#FF0000" }}
+              tt="capitalize"
+              onClick={handleSignOut}
+            >
+              sign out
+            </Button>
+          </Group>
+        </Stack>
+      </Modal>
+    </>
   );
 }
 

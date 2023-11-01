@@ -23,6 +23,14 @@ export const normalizePhoneNumber = (phoneNumber) => {
   }
   return "+234" + phoneNumber;
 };
+export const getSubdomain = () => {
+  const hostname = window.location.hostname;
+  const parts = hostname.split(".");
+  if (parts.length > 1) {
+    return parts[0];
+  }
+  return null;
+};
 export const employeeList = [
   {
     id: "1",
