@@ -149,7 +149,7 @@ export default function Profile() {
               size="sm"
               style={{ backgroundColor: "#FF0000" }}
               tt="capitalize"
-              onClick={handleSignOut}
+              onClick={() => handleSignOut()}
             >
               sign out
             </Button>

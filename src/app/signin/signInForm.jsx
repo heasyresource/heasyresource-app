@@ -75,7 +75,7 @@ const SignInForm = () => {
         </Button>
         <Flex justify="center" align="center" mt={".5rem"}>
           <Text fw={700} c={"#494949"} size="sm">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               href="/signup"
               style={{
