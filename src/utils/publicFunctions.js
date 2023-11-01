@@ -23,13 +23,19 @@ export const normalizePhoneNumber = (phoneNumber) => {
   }
   return "+234" + phoneNumber;
 };
-export const getSubdomain = () => {
-  const hostname = window.location.hostname;
-  const parts = hostname.split(".");
-  if (parts.length > 1) {
-    return parts[0];
+export const getSubdomain = (host) => {
+  let subdomain = null;
+  if (!host && typeof window !== 'undefined') {
+    // On client side, get the host from window
+    host = window.location.host;
   }
-  return null;
+  if (host && host.includes('.')) {
+    const candidate = host.split('.')[0];
+    if (candidate && !candidate.includes('localhost')) {
+      subdomain = candidate;
+    }
+  }
+  return subdomain;
 };
 export const employeeList = [
   {
