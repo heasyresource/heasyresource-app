@@ -1,7 +1,8 @@
 import React from "react";
 import classes from "./signup.module.css";
-import { Box, Container, Image } from "@mantine/core";
+import { Box, Container, Flex, Image, Text } from "@mantine/core";
 import SignUpForm from "./signUpForm";
+import Link from "next/link";
 
 export const metadata = {
   title: "Sign Up",
@@ -20,7 +21,6 @@ const SignUp = () => {
         <Container className={classes.form_container}>
           <SignUpForm></SignUpForm>
         </Container>
-        <Box className={classes.overlay} />
       </Box>
     </Box>
   );

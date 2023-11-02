@@ -4,6 +4,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Radio,
   Select,
   Stack,
   TextInput,
@@ -96,6 +97,22 @@ const EmployeeIndividual = () => {
               {...form.getInputProps("workEmail")}
             />
           </GridCol>
+          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+            <Radio.Group
+              size="md"
+              withAsterisk
+              label="Gender"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("gender")}
+              color="#3377FF"
+            >
+              <Group mt="xs">
+                <Radio value="male" label="Male" labelPosition="left" />
+                <Radio value="femaale" label="Female" labelPosition="left" />
+              </Group>
+            </Radio.Group>
+          </Grid.Col>
         </Grid>
         <Group
           justify="flex-end"

@@ -1,13 +1,30 @@
 "use client";
 import React from "react";
-import { Card, GridCol, Group, Image, Text } from "@mantine/core";
+import { Card, GridCol, Group, Text } from "@mantine/core";
 import classes from "./miniCard.module.css";
+import { IconBriefcase, IconUsers, IconWallet } from "@tabler/icons-react";
 
 const data = [
-  { title: "Total Employees", value: "6789" },
-  { title: "New Employees", value: "6789" },
-  { title: "Job Vacancy", value: "6789" },
-  { title: "Payroll Created", value: "6789" },
+  {
+    title: "Total Employees",
+    value: "6789",
+    icon: <IconUsers style={{ color: "#7EA6F4" }} />,
+  },
+  {
+    title: "New Employees",
+    value: "6789",
+    icon: <IconUsers style={{ color: "#7EA6F4" }} />,
+  },
+  {
+    title: "Job Vacancy",
+    value: "6789",
+    icon: <IconBriefcase style={{ color: "#7EA6F4" }} />,
+  },
+  {
+    title: "Payroll Created",
+    value: "6789",
+    icon: <IconWallet style={{ color: "#7EA6F4" }} />,
+  },
 ];
 
 // Define your custom Card component
@@ -21,7 +38,6 @@ function MiniCard({ height }) {
         py="20"
         padding="xl"
         bg="var(--mantine-color-body)"
-        key={item.title}
       >
         <Text style={{ color: "#7EA6F4" }} fz="sm" fw={700}>
           {item.title}
@@ -30,13 +46,7 @@ function MiniCard({ height }) {
           <Text style={{ fontSize: "24px" }} fw={700}>
             {item.value}
           </Text>
-          <Image
-            h={15}
-            w="auto"
-            fit="contain"
-            src={"/profileicon.svg"}
-            alt="profile-icon"
-          />
+          {item.icon}
         </Group>
       </Card>
     </GridCol>
