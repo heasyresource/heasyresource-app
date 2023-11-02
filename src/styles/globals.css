@@ -134,6 +134,27 @@ body {
     padding-left: 15px !important;
   }
 }
+.mantine-datatable-table {
+  background: none;
+  border-collapse: separate !important;
+  border-spacing: 0 15px;
+}
+.mantine-Table-tr {
+  background-color: #fff !important;
+  height: 60px !important;
+}
+.mantine-datatable-header th {
+  border-bottom: none;
+}
+.mantine-datatable-table td {
+  font-size: 15px !important;
+}
+.mantine-datatable-pagination-pages-control[data-active="true"] {
+  background-color: #3377ff !important;
+}
+.mantine-datatable-scroll-area-thumb {
+  background-color: #3377ff !important;
+}
 .add-image {
   @media (max-width: 500px) {
     width: 150px;

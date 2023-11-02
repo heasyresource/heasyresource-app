@@ -17,6 +17,8 @@ export default function ForgotPassword() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          position: "relative",
+          zIndex: 10,
         }}
       >
         <Box>
