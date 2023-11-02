@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
         className={cx(classes.appShellHeader, { [classes.scrolled]: scrolled })}
         withBorder={false}
       >
-        <Group justify="flex-end" gap="28" style={{ flexWrap: "nowrap" }}>
+        <Group justify="flex-end" gap="20" style={{ flexWrap: "nowrap" }}>
           <Group>
             <Image
               src={"/jitto.svg"}
@@ -47,30 +47,16 @@ const Layout = ({ children }) => {
           <ActionIcon
             color="rgba(126, 166, 244, 0.22)"
             variant="filled"
-            style={{
-              width: "48px",
-              height: "48px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: "50%",
-              zIndex: "1",
-            }}
+            size={"lg"}
+            radius={"lg"}
           >
             <IconBell color="black" />
           </ActionIcon>
           <ActionIcon
             color="rgba(126, 166, 244, 0.22)"
             variant="filled"
-            style={{
-              width: "48px",
-              height: "48px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: "50%",
-              zIndex: "1",
-            }}
+            size={"lg"}
+            radius={"lg"}
           >
             <IconMessageDots color="black" />
           </ActionIcon>

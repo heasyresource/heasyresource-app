@@ -213,7 +213,7 @@ const ContactDetail = () => {
               backgroundColor: "#3377FF",
             }}
           >
-            add
+            save
           </Button>
         </Group>
       </Stack>

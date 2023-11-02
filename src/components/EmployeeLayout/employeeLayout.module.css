@@ -10,6 +10,19 @@
     gap: 2rem;
   }
 }
+.btnLink {
+  background-color: #ebebeb;
+  color: #424242;
+  font-size: 13px;
+  font-weight: 600;
+
+  &[data-active] {
+    &,
+    &:hover {
+      background-color: #e7f7ff;
+    }
+  }
+}
 .inputWrap {
   @media (max-width: 768px) {
     flex-direction: column;

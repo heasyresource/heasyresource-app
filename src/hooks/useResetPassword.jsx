@@ -1,11 +1,19 @@
-"use client"
+"use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { obfuscateToken } from "@/utils/encryptToken";
+import { errorStyles } from "@/utils/notificationTheme";
+import { getSubdomain } from "@/utils/publicFunctions";
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const useResetPassword = () => {
+  const router = useRouter();
+  const subdomain = getSubdomain();
   const [loading, setLoading] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [popoverOpened, setPopoverOpened] = useState(false);
@@ -17,13 +25,17 @@ const useResetPassword = () => {
     },
     validate: {
       confirmPassword: (value, values) =>
-        value !== values.password ? "Password did not match" : null,
+        !value.length
+          ? "Confirm Password is required"
+          : value !== values.password
+          ? "Password did not match"
+          : null,
     },
   });
   const handleRouteChange = () => {
-    modals.closeAll()
-    window.location.replace('/signin')
-  }
+    modals.closeAll();
+    router.push("/signin");
+  };
   const openModal = () =>
     modals.open({
       radius: "md",
@@ -49,12 +61,11 @@ const useResetPassword = () => {
             </Text>
           </Box>
           <Button
-          fullWidth
+            fullWidth
             onClick={() => handleRouteChange()}
             tt="capitalize"
             bg="#3377FF"
             size="md"
-            
           >
             continue
           </Button>
@@ -62,15 +73,74 @@ const useResetPassword = () => {
       ),
     });
 
+  const handleResend = async (data) => {
+    try {
+      const value = {
+        email: data.email,
+      };
+      const res = await apiClient.post("/password/forgot", value, {
+        headers: { "x-subdomain-name": subdomain },
+      });
+      if (res.statusCode === 200) {
+        sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
+        router.push("/verification");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleFormSubmit = async (data) => {
     setLoading(true);
+    const resetStore =
+      sessionStorage.getItem("resetPasswordCode") &&
+      obfuscateToken(false, sessionStorage.getItem("resetPasswordCode") ?? "");
+    const parsedData = JSON.parse(resetStore);
+    const modifiedValues = {
+      newPassword: data.password,
+      ...parsedData,
+    };
+
     try {
-      console.log(data, "signin");
+      await apiClient.put("/password/reset", modifiedValues, {
+        headers: { "x-subdomain-name": subdomain },
+      });
       openModal();
       setLoading(true);
     } catch (err) {
       setLoading(false);
-      console.log(err);
+      if (err.message === "Reset password code expired.") {
+        notifications.show({
+          color: "red",
+          title: "Failed",
+          message: "Check for a new code!",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+        sessionStorage.setItem(
+          "verificationType",
+          obfuscateToken(true, "forgotPassword")
+        );
+        router.push("/verification");
+        handleResend(modifiedValues);
+      } else if (err.message === "Invalid reset password code.") {
+        notifications.show({
+          color: "red",
+          title: "Failed",
+          message: "Check for a new code!",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+        router.push("/verification");
+        handleResend(modifiedValues);
+      } else {
+        notifications.show({
+          color: "red",
+          title: "Failed",
+          message: err.message,
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
     }
   };
   return {
@@ -82,7 +152,7 @@ const useResetPassword = () => {
     close,
     popoverOpened,
     setPopoverOpened,
-    isMobile
+    isMobile,
   };
 };
 
