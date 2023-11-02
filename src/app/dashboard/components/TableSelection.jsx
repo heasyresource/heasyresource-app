@@ -51,6 +51,7 @@ export function TableSelection() {
           accessor: "moreDetails",
           render: ({ moreDetails }) => (
             <Badge
+              radius="xs"
               variant="light"
               color="#3377FF"
               size="lg"
@@ -62,7 +63,7 @@ export function TableSelection() {
               }}
               onClick={() => router.push("/dashboard/employee/personal-detail")}
             >
-              {moreDetails}
+              more details
             </Badge>
           ),
         },
