@@ -139,11 +139,11 @@ export default function Profile() {
             />
           </ActionIcon>
           <Text fw={600} style={{ fontSize: "25px", color: "#000000" }}>
-            Confirm sign out
+            Confirm Sign Out
           </Text>
 
           <Text style={{ fontSize: "16px", color: "#1E1E1E" }}>
-            Are you sure you want to sign out ?
+            Are you sure you want to sign out?
           </Text>
           <Group mt="1rem" justify="flex-end" align="center">
             <Button

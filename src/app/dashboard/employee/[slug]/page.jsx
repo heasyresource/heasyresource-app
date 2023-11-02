@@ -24,7 +24,7 @@ const page = () => {
           px={"25px"}
           style={{ borderBottom: "1px solid #DDDDDD" }}
         >
-          <EmployeeNav tabTitle={"edit employee details"} />
+          <EmployeeNav tabTitle={"employee details"} />
         </CardSection>
         <EmployeeLayout>
           <SlugCheck />

@@ -160,7 +160,7 @@ const PersonalDetail = () => {
               backgroundColor: "#3377FF",
             }}
           >
-            add
+            save
           </Button>
         </Group>
       </Stack>
