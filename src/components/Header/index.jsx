@@ -76,7 +76,7 @@ const Header = () => {
             size={"lg"}
             variant="filled"
             color="#fff"
-            opened={drawerOpened}
+            opened={drawerOpened.toString()}
             radius={"md"}
             onClick={toggleDrawer}
           >

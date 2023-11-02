@@ -122,10 +122,18 @@ body {
 .mantine-Modal-header {
   display: none !important;
 }
-.mantine-Carousel-container {
-  display: flex;
+.mantine-FileInput-wrapper[data-with-right-section="true"]
+  div[data-position="left"] {
+  @media (max-width: 500px) {
+    display: none;
+  }
 }
-
+.mantine-FileInput-wrapper[data-with-right-section="true"],
+.mantine-FileInput-input {
+  @media (max-width: 500px) {
+    padding-left: 15px !important;
+  }
+}
 .add-image {
   @media (max-width: 500px) {
     width: 150px;

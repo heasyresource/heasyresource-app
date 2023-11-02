@@ -30,11 +30,12 @@ export function TableSelection() {
   const rows = employeeList.map((item) => {
     const selected = selection.includes(item.id);
     return (
-      <Box key={item.id}>
+      <>
         <Table.Tr
           className={cx({ [classes.rowSelected]: selected })}
           bg="#ffff"
           py="32px"
+          key={item.id}
         >
           <Table.Td>
             <Checkbox
@@ -61,8 +62,8 @@ export function TableSelection() {
             {item.moreDetails}
           </Table.Td>
         </Table.Tr>
-        <Space h="20px" />
-      </Box>
+        <Space h={"20px"} />
+      </>
     );
   });
 

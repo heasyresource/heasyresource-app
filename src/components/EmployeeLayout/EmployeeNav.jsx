@@ -1,3 +1,4 @@
+"use client";
 import {
   Button,
   Group,
@@ -12,8 +13,10 @@ import {
 import { IconChevronDown } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
 import React from "react";
+import classes from "./employeeLayout.module.css";
 
 const EmployeeNav = ({ tabTitle }) => {
+  const pathname = usePathname();
   return (
     <Group justify="space-between" mx="40px">
       <Text fz="24px" fw="700" tt={"capitalize"}>
@@ -24,9 +27,9 @@ const EmployeeNav = ({ tabTitle }) => {
           w="125px"
           component="a"
           href="/dashboard/employee"
-          style={{ color: "#424242", fontSize: "13px", fontWeight: 700 }}
+          data-active={"/dashboard/employee" === pathname || undefined}
+          className={classes.btnLink}
           variant="filled"
-          color="#E7F7FF"
         >
           Employee List
         </Button>
@@ -35,8 +38,13 @@ const EmployeeNav = ({ tabTitle }) => {
           href="/dashboard/employee/add-employee"
           w="125px"
           variant="filled"
-          color="#EBEBEB"
-          style={{ color: "#424242", fontSize: "13px", fontWeight: 700 }}
+          className={classes.btnLink}
+          data-active={
+            "/dashboard/employee/add-employee" === pathname ||
+            "/dashboard/employee/add-employee/individual" === pathname ||
+            "/dashboard/employee/add-employee/bulk" === pathname ||
+            undefined
+          }
         >
           Add Employee
         </Button>

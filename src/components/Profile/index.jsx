@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import {
   IconChevronDown,
   IconExternalLink,
+  IconLogout,
   IconSettingsQuestion,
   IconUser,
 } from "@tabler/icons-react";
@@ -16,17 +17,19 @@ import {
   Box,
   Modal,
   Stack,
-  Flex,
   Button,
+  Divider,
+  ActionIcon,
 } from "@mantine/core";
 import classes from "./profile.module.css";
 import { useSignOut } from "@/hooks";
 import { useDisclosure } from "@mantine/hooks";
+import { useSession } from "next-auth/react";
 
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
     <UnstyledButton ref={ref} {...others}>
-      <Group>
+      <Group gap={"10px"}>
         <div
           style={{
             border: "2px #3377FF solid",
@@ -37,7 +40,7 @@ const UserButton = forwardRef(
         >
           <Avatar
             variant="outline"
-            size="md"
+            size="sm"
             color="blue"
             src={image}
             radius="xl"
@@ -67,6 +70,7 @@ const UserButton = forwardRef(
 );
 
 export default function Profile() {
+  const { data: session } = useSession();
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -74,9 +78,11 @@ export default function Profile() {
       <Menu position="bottom-end" offset={10}>
         <Menu.Target>
           <UserButton
-            image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-            name="Modupe Ojo"
-            position="HR Admin"
+            image={null}
+            name={
+              session && `${session.user.firstName} ${session.user.lastName}`
+            }
+            position={session && `${session.user.role.name}`}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>
@@ -112,7 +118,6 @@ export default function Profile() {
         </Menu.Dropdown>
       </Menu>
       <Modal
-        size={"xs"}
         opened={opened}
         onClose={close}
         centered
@@ -121,23 +126,31 @@ export default function Profile() {
           blur: 3,
         }}
       >
-        <Stack py={"3rem"}>
-          <Text
-            tt={"capitalize"}
-            ta={"center"}
-            fw={600}
-            style={{ fontSize: "20px" }}
-            c="#000000"
-          >
-            are you sure, <br /> you want to sign out ?
+        <Stack py={"3rem"} justify="center" align="center">
+          <ActionIcon variant="transparent" size="xl">
+            <IconLogout
+              style={{
+                color: "#FF0000",
+                fontSize: "20px",
+                width: "100%",
+                height: "100%",
+              }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+          <Text fw={600} style={{ fontSize: "25px", color: "#000000" }}>
+            Confirm sign out
           </Text>
-          <Group mt="1rem" justify="space-around" align="center">
+
+          <Text style={{ fontSize: "16px", color: "#1E1E1E" }}>
+            Are you sure you want to sign out ?
+          </Text>
+          <Group mt="1rem" justify="flex-end" align="center">
             <Button
               variant="outline"
-              radius="lg"
-              size="sm"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
+              size="md"
+              color="#A3A3A3"
+              style={{ borderColor: "#A3A3A3" }}
               tt="capitalize"
               onClick={close}
             >
@@ -145,8 +158,7 @@ export default function Profile() {
             </Button>
             <Button
               variant="contained"
-              radius="lg"
-              size="sm"
+              size="md"
               style={{ backgroundColor: "#FF0000" }}
               tt="capitalize"
               onClick={() => handleSignOut()}

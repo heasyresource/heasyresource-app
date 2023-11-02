@@ -12,6 +12,7 @@ const useIndividual = () => {
       jobTitle: "",
       department: "",
       workEmail: "",
+      gender: "",
     },
     validate: {
       firstName: (value) =>
@@ -37,6 +38,7 @@ const useIndividual = () => {
       department: (value) => (!value.length ? "Department is required" : null),
       workEmail: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email",
+      gender: (value) => (!value.length ? "Gender is required" : null),
     },
   });
   const handleSubmit = async (data) => {
