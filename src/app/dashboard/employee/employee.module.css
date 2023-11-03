@@ -14,13 +14,6 @@
     margin-bottom: 0px;
   }
 }
-.fileInput {
-  margin-top: 2rem;
-  width: 40%;
-  @media (max-width: 1110px) {
-    width: 100%;
-  }
-}
 
 .btnWrap {
   margin-top: 4rem !important;

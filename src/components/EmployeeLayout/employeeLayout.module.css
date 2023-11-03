@@ -23,6 +23,15 @@
     }
   }
 }
+.activeConfig {
+  color: #424242;
+  &[data-active] {
+    &,
+    &:hover {
+      color: #3377ff;
+    }
+  }
+}
 .inputWrap {
   @media (max-width: 768px) {
     flex-direction: column;

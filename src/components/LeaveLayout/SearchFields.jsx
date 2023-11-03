@@ -5,7 +5,7 @@ import classes from "./leaveLayout.module.css";
 import { IconCalendarBolt } from "@tabler/icons-react";
 const SearchFields = () => {
   return (
-    <form style={{ marginTop: "2rem" }}>
+    <form style={{ marginTop: "1rem" }}>
       <Grid justify="space-between" className={classes.formWrap}>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
           <TextInput

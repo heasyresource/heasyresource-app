@@ -25,8 +25,11 @@ export default function HolidayTypeTable() {
       records={records}
       columns={[
         {
-          accessor: "",
-          width: "5%",
+          accessor: "index",
+          title: "S/N",
+          textAlign: "center",
+          width: 70,
+          render: (record) => records.indexOf(record) + 1,
         },
         {
           accessor: "name",
