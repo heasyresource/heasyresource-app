@@ -1,16 +1,5 @@
 "use client";
-import {
-  Button,
-  Group,
-  Menu,
-  MenuDivider,
-  MenuDropdown,
-  MenuItem,
-  MenuTarget,
-  Space,
-  Text,
-} from "@mantine/core";
-import { IconChevronDown } from "@tabler/icons-react";
+import { Button, Group, Text } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import React from "react";
 import classes from "./employeeLayout.module.css";

@@ -17,7 +17,6 @@ import { useDisclosure } from "@mantine/hooks";
 
 const AddDepartment = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  //   const { form, handleSubmit } = useAddLeaveType();
   return (
     <>
       <Flex
@@ -35,7 +34,7 @@ const AddDepartment = () => {
             whiteSpace: "nowrap",
           }}
         >
-          Department Type
+          Department
         </Text>
         <Button
           onClick={open}
@@ -59,7 +58,7 @@ const AddDepartment = () => {
             tt={"capitalize"}
             style={{ fontSize: "22px", fontWeight: 700, marginTop: "1rem" }}
           >
-            add department type
+            add department
           </Text>
           <form>
             <Stack gap={"2rem"} mt={"1rem"}>
