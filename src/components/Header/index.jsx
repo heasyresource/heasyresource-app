@@ -39,7 +39,12 @@ const data = [
   },
   { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
   { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
-  { link: "/dashboard/absence", label: "Absence", icon: IconCalendarBolt },
+  {
+    link: "/dashboard/leave",
+    label: "Leave",
+    icon: IconCalendarBolt,
+    subLink: true,
+  },
   {
     link: "/dashboard/compensation",
     label: "Compensation",
@@ -56,7 +61,7 @@ const Header = () => {
       className={classes.link}
       data-active={
         item.link === pathname ||
-        (pathname.includes("/employee") && item.subLink) ||
+        (pathname.includes(item.link) && item.subLink) ||
         undefined
       }
       href={item.link}
