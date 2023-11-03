@@ -2,7 +2,6 @@ import { Card, CardSection } from "@mantine/core";
 import React from "react";
 import InputField from "../components/InputField";
 import { TableSelection } from "../components/TableSelection";
-import classes from "./employee.module.css";
 import { EmployeeNav } from "@/components";
 
 const Employee = () => {

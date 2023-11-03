@@ -67,8 +67,8 @@ const AddLeaveType = () => {
             add holiday type
           </Text>
           <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-            <Stack gap={"2rem"} mt={"1rem"}>
-              <Grid gutter={"xl"}>
+            <Stack gap={"1.5rem"} mt={"1rem"}>
+              <Grid gutter={"md"}>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
                   <TextInput
                     label="Holiday Type Name"
@@ -173,7 +173,7 @@ const AddLeaveType = () => {
                     backgroundColor: "#3377FF",
                   }}
                 >
-                  assign
+                  add
                 </Button>
               </Group>
             </Stack>

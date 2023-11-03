@@ -26,6 +26,13 @@ export function TableSelection() {
       records={records}
       columns={[
         {
+          accessor: "index",
+          title: "S/N",
+          textAlign: "center",
+
+          render: (record) => records.indexOf(record) + 1,
+        },
+        {
           accessor: "avatar",
           title: "",
           textAlign: "center",

@@ -34,6 +34,13 @@ const LeaveTable = () => {
       records={records}
       columns={[
         {
+          accessor: "index",
+          title: "S/N",
+          textAlign: "center",
+
+          render: (record) => records.indexOf(record) + 1,
+        },
+        {
           accessor: "date",
           textAlign: "center",
           textTransform: "capitalize",

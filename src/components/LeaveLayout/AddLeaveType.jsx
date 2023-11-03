@@ -145,7 +145,7 @@ const AddLeaveType = () => {
                     backgroundColor: "#3377FF",
                   }}
                 >
-                  assign
+                  add
                 </Button>
               </Group>
             </Stack>
