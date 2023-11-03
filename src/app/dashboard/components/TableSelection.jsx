@@ -1,7 +1,7 @@
 "use client";
 
 import { employeeList } from "@/utils/publicFunctions";
-import { Avatar, Badge } from "@mantine/core";
+import { Avatar, Badge, Flex } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -29,8 +29,12 @@ export function TableSelection() {
           accessor: "avatar",
           title: "",
           textAlign: "center",
-          width: "50px",
-          render: ({ avatar }) => <Avatar size={26} src={avatar} radius={26} />,
+          width: "80px",
+          render: ({ avatar }) => (
+            <Flex justify="center" align="center">
+              <Avatar size={26} src={avatar} radius={26} />
+            </Flex>
+          ),
         },
         {
           accessor: "firstName",

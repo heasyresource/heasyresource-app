@@ -36,14 +36,16 @@ body {
 .mantine-PinInput-input:focus {
   --_input-bd: #3377ff !important;
 }
-.mantine-DatePicker-calendarHeader {
+.mantine-DatePicker-calendarHeader,
+.mantine-DateInput-calendarHeader {
   display: flex;
   width: 100%;
   height: 2.25rem;
   margin-bottom: 1rem;
   position: relative;
 }
-.mantine-DatePicker-calendarHeaderControl {
+.mantine-DatePicker-calendarHeaderControl,
+.mantine-DateInput-calendarHeaderControl {
   width: 2.25rem;
   display: flex;
   justify-content: center;
@@ -52,21 +54,27 @@ body {
 
   top: 10px;
 }
-.mantine-DatePicker-calendarHeaderControl svg[data-direction="previous"] {
+.mantine-DatePicker-calendarHeaderControl svg[data-direction="previous"],
+.mantine-DateInput-calendarHeaderControl svg[data-direction="previous"] {
   rotate: 90deg;
 }
-.mantine-DatePicker-calendarHeaderControl[data-direction="previous"] {
+.mantine-DatePicker-calendarHeaderControl[data-direction="previous"],
+.mantine-DateInput-calendarHeaderControl[data-direction="previous"] {
   right: 20px;
 }
-.mantine-DatePicker-calendarHeaderControl[data-direction="next"] {
+.mantine-DatePicker-calendarHeaderControl[data-direction="next"],
+.mantine-DateInput-calendarHeaderControl[data-direction="next"] {
   right: 0;
 }
-.mantine-DatePicker-calendarHeaderControl svg[data-direction="next"] {
+.mantine-DatePicker-calendarHeaderControl svg[data-direction="next"],
+.mantine-DateInput-calendarHeaderControl svg[data-direction="next"] {
   right: 0;
   rotate: 270deg;
 }
 .mantine-DatePicker-calendarHeaderControl svg,
-.mantine-DatePicker-weekday {
+.mantine-DateInput-calendarHeaderControl svg,
+.mantine-DatePicker-weekday,
+.mantine-DateInput-weekday {
   color: #3377ff;
 }
 .mantine-DatePicker-day,
@@ -74,35 +82,45 @@ body {
 .mantine-DatePicker-weekday {
   font-size: 14px !important;
 }
-.mantine-DatePicker-calendarHeaderLevel {
+.mantine-DatePicker-calendarHeaderLevel,
+.mantine-DateInput-calendarHeaderLevel {
   flex: 1 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.mantine-DatePicker-levelsGroup {
+.mantine-DatePicker-levelsGroup,
+.mantine-DateInput-levelsGroup {
   max-width: 20rem;
 }
 .mantine-DatePicker-month,
 .mantine-DatePicker-monthsList,
-.mantine-DatePicker-yearsList {
+.mantine-DatePicker-yearsList,
+.mantine-DateInput-month,
+.mantine-DateInput-monthsList,
+.mantine-DateInput-yearsList {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 }
 .mantine-DatePicker-day,
 .mantine-DatePicker-monthsListControl,
-.mantine-DatePicker-yearsListControl {
+.mantine-DatePicker-yearsListControl,
+.mantine-DateInput-day,
+.mantine-DateInput-monthsListControl,
+.mantine-DateInput-yearsListControl {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   height: 31px;
 }
-.mantine-DatePicker-day[data-outside="true"] {
+.mantine-DatePicker-day[data-outside="true"],
+.mantine-DateInput-day[data-outside="true"] {
   color: #909296;
 }
-.mantine-DatePicker-day[data-selected="true"] {
+.mantine-DatePicker-day[data-selected="true"],
+.mantine-DateInput-day[data-selected="true"] {
   background-color: #3377ff !important;
   color: #fff !important;
 }
@@ -115,7 +133,8 @@ body {
 .mantine-DatePicker-day[data-in-range="true"] {
   background-color: #3377ff24;
 }
-.mantine-DatePicker-day[data-weekend="true"] {
+.mantine-DatePicker-day[data-weekend="true"],
+.mantine-DateInput-day[data-weekend="true"] {
   color: #fa5252;
 }
 
@@ -154,6 +173,36 @@ body {
 }
 .mantine-datatable-scroll-area-thumb {
   background-color: #3377ff !important;
+}
+.mantine-datatable-header
+  .mantine-Table-tr:first-child
+  .mantine-Table-th:first-child {
+  border-top-left-radius: 50px;
+
+  border-bottom-left-radius: 50px;
+}
+.mantine-datatable-header
+  .mantine-Table-tr:last-child
+  .mantine-Table-th:last-child {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.mantine-Table-tr .mantine-Table-td:first-child {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.mantine-Table-tr .mantine-Table-td:last-child {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.mantine-Textarea-wrapper {
+  height: 250px;
+}
+body .mantine-Textarea-wrapper textarea {
+  height: 100% !important;
+}
+.mantine-Textarea-input {
+  height: 100% !important;
 }
 .add-image {
   @media (max-width: 500px) {
