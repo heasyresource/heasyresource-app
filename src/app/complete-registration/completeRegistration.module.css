@@ -4,6 +4,15 @@
     color: #4D4D4D;
 }
 
+
+.fileLabel {
+    font-size: 13px;
+    color: #4D4D4D;
+    background-color: rgb(236, 242, 255);
+    padding: 10px;
+    border-radius: 10px;
+  }
+
 .placeholder {
     font-size: 11px;
 }
@@ -70,5 +79,6 @@
 
     .stepIcon {
         transform: scale(0.8);
+
     }
 }

@@ -89,7 +89,7 @@ export default function DepartmentTable() {
                         </Button>
                     </Paper>
                 </Modal>
-                <Button onClick={open} size='sm' variant="filled">
+                <Button color='rgba(51, 119, 255, 1)' onClick={open} size='sm' variant="filled">
                     Add Department
                 </Button>
             </Group>

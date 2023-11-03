@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import { Stepper, Button, Group, StepperStep, StepperCompleted, Paper, Box, Grid, GridCol, TextInput, NativeSelect, FileInput, Text, SimpleGrid, Space, RadioGroup, Radio, Flex, MultiSelect, Textarea } from '@mantine/core';
 import styles from './completeRegistration.module.css'
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown, IconPhoto } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import DepartmentTable from './DepartmentTable';
+
 
 export default function CompleteRegistration() {
 
@@ -23,14 +24,48 @@ export default function CompleteRegistration() {
             employee_ID: '',
         },
 
-        validate: {
-            companyName: (value) => (value.trim() !== '' ? null : 'Company name is required'),
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+        validate: (value) => {
+            if (active === 0) {
+                return {
+                    companyName: value.companyName.trim() !== '' ? null : 'Company name is required',
+                    email: /^\S+@\S+$/.test(value.email) ? null : 'Invalid email',
+                    phone: /^\+\d{1,3} \d{10}$/.test(value.phone) ? null : 'Invalid phone number',
+                    companySize: ["1-10", "11-50", "51-200", "201-500", "501-1000", "1001-5000", "5001+"].includes(value.companySize) ? null : 'Invalid company size',
+                    industry_field: ["Consultancy", "Healthcare", "Information Technology", "Education", "Agriculture", "Renewable Energy"].includes(value.industry_field) ? null : 'Invalid industry/field',
+                    country: value.country === "Nigeria" ? null : 'Invalid country', // You can add more countries to the array if needed
+                    website: /^(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value.website) ? null : 'Invalid website',
+                    emailDomain: /^@[a-zA-Z0-9][a-zA-Z0-9\.-]+[a-zA-Z0-9]\.[a-zA-Z]{2,}(,@[a-zA-Z0-9][a-zA-Z0-9\.-]+[a-zA-Z0-9]\.[a-zA-Z]{2,})*$/.test(value.domain) ? null : 'Enter valid email domains in the format @domain.com, separated by commas',
+                    subDomain: value.subDomain.match(/^@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/) ? null : 'Invalid subdomain',
+                    companyLogo: value.companyLogo ? null : 'Company logo is required',
+                    employee_id_options: selectedOptions.length >= 4 ? null : 'Select all options for Employee ID',
+                }
+            }
         }
     })
 
+
+
     const [selectedOptions, setSelectedOptions] = useState([]); // To store selected options
     const [isRadioChecked, setIsRadioChecked] = useState(false);
+    const [validationError, setValidationError] = useState(null);
+    const allOptions = ['Company Initials', 'Department Code', 'Year of Employment', 'Random Numbers'];
+
+
+    const validateMultiSelect = (selectedOptions, allOptions) => {
+        if (selectedOptions.length === 0) {
+            return 'Please generate the employee ID'; // No option selected
+        } else if (selectedOptions.length === allOptions.length) {
+            return null; // Validation passed, all options are selected
+        } else {
+            return 'Please select all options'; // Not all options are selected
+        }
+    };
+
+    const handleMultiSelectChange = (selectedOptions) => {
+        setSelectedOptions(selectedOptions);
+        const error = validateMultiSelect(selectedOptions, allOptions);
+        setValidationError(error);
+    };
 
     // Define the mapping of options to their codes
     const optionCodeMap = {
@@ -40,37 +75,37 @@ export default function CompleteRegistration() {
         'Random Numbers': '5695',
     };
 
-    const handleOptionSelect = (selected) => {
-        setSelectedOptions([...selected]);
-    };
 
 
-    const [active, setActive] = useState(1);
+
+    const [active, setActive] = useState(0);
     const nextStep = () => {
-        // Validate the form fields
-        const { values, errors } = form.validate();
+        const error = validateMultiSelect(selectedOptions, allOptions);
+        setActive((current) => {
+            if (form.validate().hasErrors || error) {
+                setValidationError(error);
+                return current;
+            
+             }
+            return current < 3 ? current + 1 : current;
+        })
+    }
 
-        if (Object.keys(errors).length === 0) {
-            // If there are no validation errors, proceed to the next step
-            setActive((current) => (current < 3 ? current + 1 : current));
-        } else {
-            // If there are validation errors, display them
-            form.forceValidate(); // This will display the validation errors
-        }
-    };
+
     const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-
     return (
-        <div style={{height: '100vh', backgroundColor: '#F8F9FA'}}>
+        <div style={{ height: '100vh', backgroundColor: '#F8F9FA' }}>
             <Stepper
                 active={active}
-                style={{     padding: '15px' }}
+                style={{ padding: '15px' }}
                 onStepClick={setActive}
+                bg='#F8F9FA'
                 classNames={{
                     stepBody: styles.stepBody,
                     stepIcon: styles.stepIcon,
-                    steps: styles.steps
+                    steps: styles.steps,
+                    stepWrapper: styles.stepWrapper
                 }}
             >
                 <StepperStep label="First step" description="Company Information">
@@ -87,6 +122,7 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Company Name"
                                             placeholder="Jitta Consultancy Ltd"
+                                            {...form.getInputProps('companyName')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -101,8 +137,8 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Email"
                                             placeholder="jittoconsultancyltd@hr.com"
+                                            {...form.getInputProps('email')}
                                             style={{ width: "100%" }}
-                                            {...form.getInputProps('companyName')}
                                             classNames={{
                                                 label: styles.label,
                                                 error: styles.error,
@@ -116,6 +152,7 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Phone"
                                             placeholder="+234 000 000 0000"
+                                            {...form.getInputProps('phone')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -131,6 +168,7 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Company Size"
                                             data={["1-10", "11-50", "51-200", "201-500", "501-1000", "1001-5000", "5001+"]}
+                                            {...form.getInputProps('companySize')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -146,6 +184,7 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Industry/Field"
                                             data={["Consultancy", "Healthcare", "Information Technology", "Education", "Agriculture", "Renewable Energy"]}
+                                            {...form.getInputProps('industry_field')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -161,6 +200,7 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Country"
                                             data={["Nigeria"]}
+                                            {...form.getInputProps('country')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -175,6 +215,7 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Website"
                                             placeholder="www.jittoocnsultancy.com"
+                                            {...form.getInputProps('website')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -187,8 +228,9 @@ export default function CompleteRegistration() {
                                         <TextInput
                                             required
                                             size="md"
-                                            label="Domain"
-                                            placeholder="www.jittoocnsultancy.com"
+                                            label="Email Domain"
+                                            placeholder="@heasyresource.com"  
+                                            {...form.getInputProps('emailDomain')}
                                             style={{ width: "100%" }}
                                             classNames={{
                                                 label: styles.label,
@@ -203,22 +245,30 @@ export default function CompleteRegistration() {
                                             size="md"
                                             label="Sub Domain"
                                             placeholder="@heasyresource.com"
+                                            {...form.getInputProps('subDomain')}
                                             style={{ width: "100%" }}
-                                            classNames={{
+                                            classNames={{ 
                                                 label: styles.label,
                                                 error: styles.error,
                                                 placeholder: styles.placeholder,
                                             }}
                                         />
                                     </GridCol>
-                                    <GridCol span={{ base: 12, xs: 4 }}>
+                                    <GridCol span={{ base: 12, xs: 'fit-content' }}>
                                         <FileInput
                                             size='md'
-                                            // variant='filled'
-                                            label="Company Logo"
-                                            placeholder="Input placeholder"
+                                            variant='unstyled'
+                                            {...form.getInputProps('companyLogo')}
+                                            label={<Group align='center'>
+                                                <Text>
+                                                    Upload Company Logo
+                                                </Text>
+                                                <IconPhoto />
+                                            </Group>}
+                                            inputWrapperOrder={['label', 'error', 'input']}
+                                            withErrorStyles={false}
                                             classNames={{
-                                                label: styles.label,
+                                                label: styles.fileLabel,
                                                 error: styles.error,
                                                 placeholder: styles.placeholder,
                                             }}
@@ -265,19 +315,32 @@ export default function CompleteRegistration() {
                                 {isRadioChecked && (
                                     <>
                                         <Space h={32} />
-                                        <div>
-                                            {selectedOptions.map((option) => (
-                                                <span>
-                                                    {optionCodeMap[option]}
-                                                </span>
-                                            ))}
-                                        </div>
+                                        <TextInput
+                                            required
+                                            size="md"
+                                            variant='unstyled'
+                                            label="Employee ID"
+                                            value={selectedOptions.map((option) => optionCodeMap[option]).join('')}
+                                            onChange={() => {
+                                                form.setValues({
+                                                    employee_ID: selectedOptions.map((option) => optionCodeMap[option]).join(''),
+                                                })
+                                            }}
+                                            style={{ width: "100%" }}
+                                            classNames={{
+                                                label: styles.label,
+                                                error: styles.error,
+                                                placeholder: styles.placeholder,
+                                            }}
+                                        />
+                                        {validationError && <div style={{ color: 'red' }}>{validationError}</div>}
+
                                         <MultiSelect
                                             maxDropdownHeight={150}
                                             w='30%'
                                             placeholder="Pick value"
-                                            data={['Company Initials', 'Department Code', 'Year of Employment', 'Random Numbers']}
-                                            onChange={(selected) => { handleOptionSelect(selected) }}
+                                            data={allOptions}
+                                            onChange={handleMultiSelectChange}
                                             clearable
                                             classNames={{
                                                 pill: styles.pill
@@ -287,7 +350,7 @@ export default function CompleteRegistration() {
                                 )}
                                 <Group justify="flex-end" py='xl' mt={{ base: '16px', xs: '64px' }} fz='16px'>
                                     <Button size='md' className={styles.control} variant="default" onClick={prevStep}>Back</Button>
-                                    <Button size='md' className={styles.control} onClick={nextStep}>Continue</Button>
+                                    <Button size='md' color='rgba(51, 119, 255, 1)' className={styles.control} onClick={nextStep}>Continue</Button>
                                 </Group>
                             </Box>
                         </div>
@@ -309,7 +372,7 @@ export default function CompleteRegistration() {
                                 <DepartmentTable />
                                 <Group justify="flex-end" py='xl' mt={{ base: '16px', xs: '64px' }} fz='16px'>
                                     <Button size='md' className={styles.control} variant="default" onClick={prevStep}>Back</Button>
-                                    <Button size='md' className={styles.control} onClick={nextStep}>Continue</Button>
+                                    <Button size='md' color='rgba(51, 119, 255, 1)' className={styles.control} onClick={nextStep}>Continue</Button>
                                 </Group>
                             </Box>
                         </div>
