@@ -11,7 +11,6 @@ import {
   MenuTarget,
   MenuDropdown,
   MenuItem,
-  MenuDivider,
 } from "@mantine/core";
 import { IconCheck, IconX, IconDotsVertical } from "@tabler/icons-react";
 

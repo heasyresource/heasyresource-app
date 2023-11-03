@@ -10,13 +10,13 @@ const page = () => {
           backgroundColor: "#ffff",
           borderRadius: "15px",
           borderBottom: "1px solid #DDDDDD",
-          minHeight: "250px",
+          minHeight: "200px",
           margin: "0px",
         }}
       >
         <CardSection
-          pt="25px"
-          pb="55px"
+          pt="18px"
+          pb="27px"
           style={{ borderBottom: "1px solid #DDDDDD" }}
         >
           <EmployeeNav tabTitle={"employee management"} />
