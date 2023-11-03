@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardSection } from "@mantine/core";
-import classes from "./leave.module.css";
 import { LeaveNav, SearchFields, LeaveTable } from "@/components";
 const absence = () => {
   return (
@@ -18,7 +17,6 @@ const absence = () => {
           pt="25px"
           pb="55px"
           style={{ borderBottom: "1px solid #DDDDDD" }}
-          className={classes.cardSection}
         >
           <LeaveNav tabTitle="Leave" />
         </CardSection>

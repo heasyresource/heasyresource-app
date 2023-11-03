@@ -204,6 +204,10 @@ body .mantine-Textarea-wrapper textarea {
 .mantine-Textarea-input {
   height: 100% !important;
 }
+.mantine-InputPlaceholder-placeholder {
+  font-size: 14px;
+  white-space: nowrap;
+}
 .add-image {
   @media (max-width: 500px) {
     width: 150px;

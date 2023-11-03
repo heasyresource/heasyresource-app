@@ -30,7 +30,6 @@ const page = () => {
         pt="25px"
         pb="55px"
         style={{ borderBottom: "1px solid #DDDDDD" }}
-        className={classes.cardSection}
       >
         <EmployeeNav tabTitle={"data import"} />
       </CardSection>
@@ -42,29 +41,29 @@ const page = () => {
           padding: "25px",
         }}
       >
-        <Text tt="capitalize" style={{ fontSize: "18px", fontWeight: 600 }}>
-          important guidelines for data import:
+        <Text style={{ fontSize: "18px", fontWeight: 600 }}>
+          Important guidelines for data import:
         </Text>
         <List type="ordered" mt="lg" withPadding>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             Column order must remain unchanged.
           </ListItem>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             First Name and Last Name are mandatory.
           </ListItem>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             Dates must follow the YYYY-MM-DD format.
           </ListItem>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             If specifying gender, choose Male or Female.
           </ListItem>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             Each import file should contain a maximum of 100 records
           </ListItem>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             You may need to use multiple import files.
           </ListItem>
-          <ListItem tt={"capitalize"}>
+          <ListItem style={{ fontSize: "15px" }}>
             Refer to the provided sample CSV file for guidance{" "}
             <a
               href="#"

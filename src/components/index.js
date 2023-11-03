@@ -13,3 +13,5 @@ export { default as AddLeaveType } from "./LeaveLayout/AddLeaveType";
 export { default as LeaveTypeTable } from "./LeaveLayout/LeaveTypeTable";
 export { default as HolidayTypeTable } from "./LeaveLayout/HolidayTypeTable";
 export { default as AddHolidayType } from "./LeaveLayout/AddHolidayType";
+export { default as AddDepartment } from "./EmployeeLayout/AddDepartment";
+export { default as DepartmentsTable } from "./EmployeeLayout/DepartmentsTable";

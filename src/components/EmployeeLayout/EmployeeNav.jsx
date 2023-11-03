@@ -22,7 +22,7 @@ const EmployeeNav = ({ tabTitle }) => {
       <Text fz="24px" fw="700" tt={"capitalize"}>
         {tabTitle}
       </Text>
-      <Group style={{ flexWrap: "nowrap" }}>
+      <Group>
         <Button
           w="125px"
           component="a"
@@ -48,35 +48,18 @@ const EmployeeNav = ({ tabTitle }) => {
         >
           Add Employee
         </Button>
-        <Menu>
-          <MenuTarget>
-            <Button
-              w="150px"
-              variant="filled"
-              color="#EBEBEB"
-              style={{
-                color: "#424242",
-                fontSize: "13px",
-                fontWeight: 700,
-              }}
-            >
-              Configuration
-              <Space w="5px" />
-              <IconChevronDown size="1.3rem" color="#3377FF" />
-            </Button>
-          </MenuTarget>
-          <MenuDropdown>
-            <MenuItem fz="xs">Optional Fields</MenuItem>
-            <MenuDivider />
-            <MenuItem
-              fz="xs"
-              component="a"
-              href="/dashboard/employee/add-employee/bulk"
-            >
-              Data Import
-            </MenuItem>
-          </MenuDropdown>
-        </Menu>
+        <Button
+          component="a"
+          href="/dashboard/employee/department"
+          w="125px"
+          variant="filled"
+          className={classes.btnLink}
+          data-active={
+            "/dashboard/employee/department" === pathname || undefined
+          }
+        >
+          Department
+        </Button>
       </Group>
     </Group>
   );

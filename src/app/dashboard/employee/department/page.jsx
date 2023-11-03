@@ -1,5 +1,6 @@
-import { AddHolidayType, HolidayTypeTable, LeaveNav } from "@/components";
+import { AddDepartment, DepartmentsTable, EmployeeNav } from "@/components";
 import { Card, CardSection } from "@mantine/core";
+import React from "react";
 
 const page = () => {
   return (
@@ -18,11 +19,11 @@ const page = () => {
           pb="55px"
           style={{ borderBottom: "1px solid #DDDDDD" }}
         >
-          <LeaveNav tabTitle="Leave" />
+          <EmployeeNav tabTitle={"employee management"} />
         </CardSection>
-        <AddHolidayType />
+        <AddDepartment />
       </Card>
-      <HolidayTypeTable />
+      <DepartmentsTable />
     </>
   );
 };
