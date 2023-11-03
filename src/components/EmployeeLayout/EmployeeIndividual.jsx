@@ -1,89 +1,102 @@
+"use client";
 import {
-  Box,
   Button,
   Grid,
+  GridCol,
   Group,
   Radio,
+  Select,
   Stack,
   TextInput,
 } from "@mantine/core";
 import React from "react";
-import classes from "./personalDetail.module.css";
+import classes from "./employeeLayout.module.css";
+import { useIndividual } from "@/hooks";
 
-const PersonalDetail = () => {
+const EmployeeIndividual = () => {
+  const { form, handleSubmit } = useIndividual();
   return (
-    <Box style={{ height: "100%" }}>
-      <Stack
-        gap={"3rem"}
-        className={classes.formStack}
-        style={{ height: "100%" }}
-      >
-        <Grid style={{ marginTop: "20px" }} gutter="xl">
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+      <Stack className={classes.individualWrap}>
+        <Grid gutter={"lg"}>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="First Name"
               withAsterisk
+              size="md"
+              placeholder="John"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("firstName")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="Middle Name"
               withAsterisk
+              size="md"
+              placeholder="Smith"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("middleName")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="Last Name"
               withAsterisk
+              size="md"
+              placeholder="Corner"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("lastName")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              size="md"
               label="Employee ID"
               withAsterisk
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
               size="md"
-              label="Nationality"
-              withAsterisk
+              type="number"
+              placeholder="John"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("employeeId")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <Select
+              data={["Front-End Developer"]}
+              label="Job Title"
+              withAsterisk
               size="md"
-              label="Marital Status"
-              withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("jobTitle")}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              type="date"
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <Select
+              data={[]}
+              label="Department"
+              withAsterisk
               size="md"
-              withAsterisk
               style={{ textAlign: "start", width: "100%" }}
-              label="Date of Birth"
-              placeholder="DD/MM/YYYY"
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("department")}
             />
-          </Grid.Col>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <TextInput
+              label="Work Email"
+              type="email"
+              withAsterisk
+              size="md"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("workEmail")}
+            />
+          </GridCol>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
             <Radio.Group
               size="md"
@@ -91,6 +104,8 @@ const PersonalDetail = () => {
               label="Gender"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
+              {...form.getInputProps("gender")}
+              color="#3377FF"
             >
               <Group mt="xs">
                 <Radio value="male" label="Male" labelPosition="left" />
@@ -99,7 +114,6 @@ const PersonalDetail = () => {
             </Radio.Group>
           </Grid.Col>
         </Grid>
-
         <Group
           justify="flex-end"
           className={classes.btnWrap}
@@ -126,13 +140,17 @@ const PersonalDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            type="submit"
+            style={{
+              backgroundColor: "#3377FF",
+            }}
           >
-            add
+            save
           </Button>
         </Group>
       </Stack>
-    </Box>
+    </form>
   );
 };
 
-export default PersonalDetail;
+export default EmployeeIndividual;

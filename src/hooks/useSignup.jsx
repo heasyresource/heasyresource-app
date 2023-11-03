@@ -15,6 +15,7 @@ const useSignup = () => {
   const [loadingCompanyInfo, setLoadingCompanyInfo] = useState(false);
   const [loadingCompanyRep, setLoadingCompanyRep] = useState(false);
   const [popoverOpened, setPopoverOpened] = useState(false);
+  const [fields, setFields] = useState(null);
   const [step, setStep] = useState(1);
 
   // Step 1: Form
@@ -34,7 +35,8 @@ const useSignup = () => {
         /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(val)
           ? null
           : "Enter a valid url",
-      companyPhoneNumber: (val) => (val.length < 10 ? "Enter a valid phone number" : null),
+      companyPhoneNumber: (val) =>
+        val.length < 10 ? "Enter a valid phone number" : null,
       industryId: (val) => (!val.length ? "Select a field/industry" : null),
     },
   });
@@ -53,14 +55,14 @@ const useSignup = () => {
         value.length < 1
           ? "First Name is required"
           : /^[A-Za-z]+$/.test(value)
-            ? null
-            : "First Name must contain only alphabets.",
+          ? null
+          : "First Name must contain only alphabets.",
       lastName: (value) =>
         value.length < 1
           ? "Last Name is required"
           : /^[A-Za-z]+$/.test(value)
-            ? null
-            : "Last Name must contain only alphabets.",
+          ? null
+          : "Last Name must contain only alphabets.",
       email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
       position: (val) => (val.length < 1 ? "Enter a valid position" : null),
@@ -72,9 +74,12 @@ const useSignup = () => {
   //Step 1: Function
   const handleCompanyInfoSubmit = async (data) => {
     setLoadingCompanyInfo(true);
-    const normalizedPhoneNumber = normalizePhoneNumber(data.companyPhoneNumber)
+    const normalizedPhoneNumber = normalizePhoneNumber(data.companyPhoneNumber);
     try {
-      const res = await apiClient.post("validate/company-info", { ...data, companyPhoneNumber: normalizedPhoneNumber });
+      const res = await apiClient.post("validate/company-info", {
+        ...data,
+        companyPhoneNumber: normalizedPhoneNumber,
+      });
 
       if (res.statusCode === 201 || res.statusCode === 200) {
         sessionStorage.setItem(
@@ -101,18 +106,24 @@ const useSignup = () => {
       sessionStorage.getItem("stepOne") &&
       obfuscateToken(false, sessionStorage.getItem("stepOne") ?? "");
     const parsedData = JSON.parse(stepOneData);
-    const normalizedPhoneNumber = normalizePhoneNumber(parsedData.companyPhoneNumber)
+    const normalizedPhoneNumber = normalizePhoneNumber(
+      parsedData.companyPhoneNumber
+    );
     setLoadingCompanyRep(true);
     try {
       const values = {
         ...data,
         ...parsedData,
-        companyPhoneNumber: normalizedPhoneNumber
+        companyPhoneNumber: normalizedPhoneNumber,
       };
       const res = await apiClient.post("/register", values);
       if (res.statusCode === 200 || res.statusCode === 201) {
         sessionStorage.removeItem("stepOne");
-        sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email))
+        sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
+        sessionStorage.setItem(
+          "verificationType",
+          obfuscateToken(true, "registration")
+        );
         router.push("/verification");
       }
     } catch (err) {
@@ -135,35 +146,47 @@ const useSignup = () => {
     }
   };
   useEffect(() => {
-    const stepOneData =
-      sessionStorage.getItem("stepOne");
+    const stepOneData = sessionStorage.getItem("stepOne");
     if (stepOneData) {
       setStep(2);
     }
+    const getMetadata = async () => {
+      try {
+        const res = await apiClient.get("/metadata");
+        const modifiedOptions = res.results.industries.map((option) => ({
+          value: option.id,
+          label: option.name,
+        }));
+        setFields(modifiedOptions);
+      } catch (err) {
+        console.log(err, "Error getting the metadata");
+      }
+    };
+    getMetadata();
   }, []);
 
-  const fields = [
-    {
-      value: '87616d36-f780-4886-9086-9320f7f89ad4',
-      label: "Information Technology",
-    },
-    {
-      value: '17616d36-f780-4886-9086-9320f7f89ad4',
-      label: "Graphic Designer",
-    },
-    {
-      value: '87616d36-f780-4886-9086-9320f7f89ad3',
-      label: "Cyber Security",
-    },
-    {
-      value: '87616d36-f782-4886-9086-9320f7f89ad4',
-      label: "Software Engineer",
-    },
-    {
-      value: '87614d36-f780-4886-9086-9320f7f89ad4',
-      label: "Data Analysis",
-    },
-  ];
+  // const fields = [
+  //   {
+  //     value: '87616d36-f780-4886-9086-9320f7f89ad4',
+  //     label: "Information Technology",
+  //   },
+  //   {
+  //     value: '17616d36-f780-4886-9086-9320f7f89ad4',
+  //     label: "Graphic Designer",
+  //   },
+  //   {
+  //     value: '87616d36-f780-4886-9086-9320f7f89ad3',
+  //     label: "Cyber Security",
+  //   },
+  //   {
+  //     value: '87616d36-f782-4886-9086-9320f7f89ad4',
+  //     label: "Software Engineer",
+  //   },
+  //   {
+  //     value: '87614d36-f780-4886-9086-9320f7f89ad4',
+  //     label: "Data Analysis",
+  //   },
+  // ];
   return {
     companyInfoForm,
     companyRepForm,

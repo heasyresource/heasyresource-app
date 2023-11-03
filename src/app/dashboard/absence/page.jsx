@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const absence = () => {
-  return (
-    <div>absence</div>
-  )
-}
+  return <div>absence</div>;
+};
 
 export default absence; 

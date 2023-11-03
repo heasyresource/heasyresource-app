@@ -16,7 +16,6 @@ const data = [
 ];
 const ProfileNav = () => {
   const pathname = usePathname();
-  console.log(pathname);
   const links = data.map((item) => (
     <Link
       className={classes.link}

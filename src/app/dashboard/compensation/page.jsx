@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Compensation = () => {
-  return (
-    <div>Compensation</div>
-  )
-}
+  return <div>Compensation</div>;
+};
 
-export default Compensation
+export default Compensation;

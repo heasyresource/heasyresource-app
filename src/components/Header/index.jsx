@@ -1,19 +1,33 @@
 "use client";
 import React from "react";
 import classes from "./header.module.css";
-import { Burger, Drawer, Flex, Group, Image, Stack } from "@mantine/core";
+import {
+  ActionIcon,
+  Burger,
+  Divider,
+  Drawer,
+  Flex,
+  Group,
+  Image,
+  Indicator,
+  Stack,
+  Text,
+} from "@mantine/core";
 import {
   IconUsers,
   IconHome,
   IconSettings,
   IconBriefcase2,
   IconCalendarBolt,
+  IconGraph,
+  IconUserDollar,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import Profile from "../Profile";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconGraph, IconUserDollar } from "@tabler/icons-react";
+import { IconAlignLeft } from "@tabler/icons-react";
+import { IconBell } from "@tabler/icons-react";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
@@ -58,19 +72,31 @@ const Header = () => {
     <>
       <header className={classes.header}>
         <Flex justify="space-between" align="center" h={"100%"}>
-          <Burger
-            opened={drawerOpened}
+          <ActionIcon
+            size={"lg"}
+            variant="filled"
+            color="#fff"
+            opened={drawerOpened.toString()}
+            radius={"md"}
             onClick={toggleDrawer}
-            aria-label="Toggle navigation"
-          />
+          >
+            <IconAlignLeft style={{ color: "#3377FF" }} />
+          </ActionIcon>
+          <Group justify="flex-end">
+            <ActionIcon variant="transparent" size={"lg"}>
+              <Indicator
+                offset={5}
+                position="top-end"
+                inline
+                processing
+                size={6}
+              >
+                <IconBell color="#3F3F3F" />
+              </Indicator>
+            </ActionIcon>
 
-          <Image
-            src="/assets/images/companyLogo.png"
-            alt="company"
-            className={classes.companyLogo}
-          />
-
-          <Profile />
+            <Profile />
+          </Group>
         </Flex>
       </header>
       <Drawer
@@ -79,11 +105,21 @@ const Header = () => {
         size="70%"
         padding="md"
         zIndex={1000000}
+        withCloseButton={false}
       >
-        <Group justify="flex-start">
+        <Stack justify="flex-start" my="lg">
           <Image src="/assets/svgs/HRlogo.svg" style={{ width: "120px" }} />
-        </Group>
-        <Stack mt={"2rem"}>{links}</Stack>
+          <Group>
+            <Image src={"/jitto.svg"} alt="Company Logo" />
+            <Text fw={500} c="#616161" style={{ fontSize: "13px" }}>
+              Jitto Consultancy Ltd.
+            </Text>
+          </Group>
+        </Stack>
+        <Divider mt="4rem" />
+        <Stack mt={"1rem"} pr={"20px"}>
+          {links}
+        </Stack>
       </Drawer>
     </>
   );

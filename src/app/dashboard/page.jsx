@@ -1,9 +1,10 @@
 import React from "react";
 import {
+  Box,
   Container,
   Grid,
   GridCol,
-  Group,
+  Paper,
   ScrollArea,
   SimpleGrid,
   Space,
@@ -14,31 +15,44 @@ import Messages from "@/components/Messages";
 import Notifications from "@/components/Notifications";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { DatePicker } from "@mantine/dates";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   return (
-    <div style={{ height: "50%", borderRadius: "15px" }}>
+    <Box style={{ height: "50%", borderRadius: "15px" }}>
       <Grid justify="space-around" align="stretch">
         <GridCol
           bg="#"
           span={{ lg: 8.5, md: 12, sm: 12 }}
           style={{ minHeight: "80px" }}
         >
-          <Container>
+          <Container p="0px">
             <div>
               <Text c="#9C9C9C" fz="20px">
-                Hi {session && session.user.firstName},
+                Hi {session && session?.user?.firstName},
               </Text>
               <Space h="2px" />
-              <Text fz="32px" fw={700}>
+              <Text fz={{ lg: "32px", md: "30px", sm: "25px" }} fw={700}>
                 Welcome to your Dashboard
               </Text>
             </div>
             <Container mt="39">
-              <Group justify="space-between">
+              <Grid gutter={"lg"}>
                 <MiniCard />
-              </Group>
+              </Grid>
+            </Container>
+            <Container>
+              <Grid mt="30px">
+                <GridCol span={{ lg: 8, md: 12, sm: 12 }}>
+                  <Paper p="20px"></Paper>
+                </GridCol>
+                <GridCol span={{ lg: 4, md: 12, sm: 12 }}>
+                  <Paper radius={"md"} p={"20px"}>
+                    <DatePicker type="range" />
+                  </Paper>
+                </GridCol>
+              </Grid>
             </Container>
           </Container>
         </GridCol>
@@ -56,7 +70,7 @@ const Dashboard = async () => {
           </SimpleGrid>
         </GridCol>
       </Grid>
-    </div>
+    </Box>
   );
 };
 
