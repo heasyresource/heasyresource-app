@@ -22,7 +22,7 @@ const EmployeeNav = ({ tabTitle }) => {
       <Text fz="24px" fw="700" tt={"capitalize"}>
         {tabTitle}
       </Text>
-      <Group>
+      <Group style={{ flexWrap: "nowrap" }}>
         <Button
           w="125px"
           component="a"
