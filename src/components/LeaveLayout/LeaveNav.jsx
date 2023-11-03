@@ -22,7 +22,7 @@ const LeaveNav = ({ tabTitle }) => {
       <Text fz="24px" fw="700" tt={"capitalize"}>
         {tabTitle}
       </Text>
-      <Group style={{ flexWrap: "nowrap" }}>
+      <Group>
         <Button
           w="125px"
           component="a"
@@ -78,7 +78,7 @@ const LeaveNav = ({ tabTitle }) => {
               }
               href="/dashboard/leave/leave-type"
             >
-              Leave Type
+              Leave Types
             </MenuItem>
             <MenuDivider />
             <MenuItem
@@ -90,7 +90,7 @@ const LeaveNav = ({ tabTitle }) => {
               }
               href="/dashboard/leave/holidays"
             >
-              Holidays
+              Holiday Types
             </MenuItem>
           </MenuDropdown>
         </Menu>

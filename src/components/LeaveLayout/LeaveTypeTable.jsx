@@ -40,14 +40,14 @@ export default function LeaveTypeTable() {
           render: () => (
             <Flex justify="center" align="center">
               <ActionIcon variant="transparent">
-                <IconTrash
+                <IconEdit
                   style={{ width: "70%", height: "70%" }}
                   stroke={1.5}
                 />
               </ActionIcon>
               <ActionIcon variant="transparent">
-                <IconEdit
-                  style={{ width: "70%", height: "70%" }}
+                <IconTrash
+                  style={{ width: "70%", height: "70%", color: "#FF7A00" }}
                   stroke={1.5}
                 />
               </ActionIcon>

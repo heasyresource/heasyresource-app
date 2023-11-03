@@ -1,22 +1,19 @@
 "use client";
-
-import { holidayTypes } from "@/utils/publicFunctions";
+import { departmentType } from "@/utils/publicFunctions";
 import { ActionIcon, Flex } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
-import { useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 const PAGE_SIZE = 10;
-export default function HolidayTypeTable() {
+const DepartmentsTable = () => {
   const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(holidayTypes.slice(0, PAGE_SIZE));
+  const [records, setRecords] = useState(departmentType.slice(0, PAGE_SIZE));
 
   useEffect(() => {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE;
-    setRecords(holidayTypes.slice(from, to));
+    setRecords(departmentType.slice(from, to));
   }, [page]);
-
   return (
     <DataTable
       style={{ background: "none", marginTop: "3rem" }}
@@ -30,15 +27,12 @@ export default function HolidayTypeTable() {
         },
         {
           accessor: "name",
+          title: "Department Name",
           noWrap: true,
         },
         {
-          accessor: "date",
-          noWrap: true,
-        },
-        {
-          accessor: "day",
-          title: "Full Day/Half Day",
+          accessor: "deptCode",
+          title: "Department Code",
           noWrap: true,
         },
         {
@@ -64,10 +58,12 @@ export default function HolidayTypeTable() {
           ),
         },
       ]}
-      totalRecords={holidayTypes.length}
+      totalRecords={departmentType.length}
       recordsPerPage={PAGE_SIZE}
       page={page}
       onPageChange={(p) => setPage(p)}
     />
   );
-}
+};
+
+export default DepartmentsTable;

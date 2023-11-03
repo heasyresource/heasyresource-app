@@ -7,22 +7,17 @@ import {
   GridCol,
   Group,
   Modal,
-  Select,
   Stack,
   Text,
   TextInput,
-  Textarea,
 } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
-import classes from "./leaveLayout.module.css";
+import classes from "./employeeLayout.module.css";
 import React from "react";
 import { useDisclosure } from "@mantine/hooks";
-import { DateInput } from "@mantine/dates";
-import { useAddHolidayType } from "@/hooks";
 
-const AddLeaveType = () => {
+const AddDepartment = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const { form, handleSubmit } = useAddHolidayType();
+  //   const { form, handleSubmit } = useAddLeaveType();
   return (
     <>
       <Flex
@@ -40,7 +35,7 @@ const AddLeaveType = () => {
             whiteSpace: "nowrap",
           }}
         >
-          Holiday Types
+          Department Type
         </Text>
         <Button
           onClick={open}
@@ -56,7 +51,7 @@ const AddLeaveType = () => {
         opened={opened}
         onClose={close}
         title="Add Leave Type"
-        size="xl"
+        size="lg"
         centered
       >
         <Box>
@@ -64,14 +59,14 @@ const AddLeaveType = () => {
             tt={"capitalize"}
             style={{ fontSize: "22px", fontWeight: 700, marginTop: "1rem" }}
           >
-            add holiday type
+            add department type
           </Text>
-          <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+          <form>
             <Stack gap={"2rem"} mt={"1rem"}>
               <Grid gutter={"xl"}>
-                <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
+                <GridCol span={12}>
                   <TextInput
-                    label="Holiday Type Name"
+                    label="Department Name"
                     withAsterisk
                     size="md"
                     classNames={{
@@ -79,26 +74,11 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("name")}
                   />
                 </GridCol>
-                <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-                  <DateInput
-                    size="md"
-                    label="Date"
-                    withAsterisk
-                    style={{ width: "100%" }}
-                    classNames={{
-                      label: classes.label,
-                      error: classes.error,
-                      placeholder: classes.placeholder,
-                    }}
-                    {...form.getInputProps("date")}
-                  />
-                </GridCol>
-                <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-                  <Select
-                    label="Avalability"
+                <GridCol span={12}>
+                  <TextInput
+                    label="Department Code"
                     withAsterisk
                     size="md"
                     classNames={{
@@ -106,41 +86,10 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("avalability")}
-                  />
-                </GridCol>
-                <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-                  <Select
-                    label="Full Day/Half Day"
-                    withAsterisk
-                    size="md"
-                    classNames={{
-                      label: classes.label,
-                      error: classes.error,
-                      placeholder: classes.placeholder,
-                    }}
-                    {...form.getInputProps("day")}
-                  />
-                </GridCol>
-                <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-                  <Select
-                    label="Paid or Unpaid"
-                    withAsterisk
-                    size="md"
-                    classNames={{
-                      label: classes.label,
-                      error: classes.error,
-                      placeholder: classes.placeholder,
-                    }}
-                    {...form.getInputProps("paid")}
                   />
                 </GridCol>
               </Grid>
-              <Textarea
-                style={{ height: "100% !important " }}
-                label="Notes/Comments"
-                {...form.getInputProps("notes")}
-              />
+
               <Group
                 justify="flex-end"
                 className={classes.btnWrap}
@@ -173,7 +122,7 @@ const AddLeaveType = () => {
                     backgroundColor: "#3377FF",
                   }}
                 >
-                  assign
+                  add
                 </Button>
               </Group>
             </Stack>
@@ -184,4 +133,4 @@ const AddLeaveType = () => {
   );
 };
 
-export default AddLeaveType;
+export default AddDepartment;

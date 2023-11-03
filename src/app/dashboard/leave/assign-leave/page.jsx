@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "../leave.module.css";
 import { Card, CardSection } from "@mantine/core";
 import { AssignLeaveForm, LeaveNav } from "@/components";
 
@@ -18,7 +17,6 @@ const page = () => {
         pt="25px"
         pb="55px"
         style={{ borderBottom: "1px solid #DDDDDD" }}
-        className={classes.cardSection}
       >
         <LeaveNav tabTitle="Leave" />
       </CardSection>

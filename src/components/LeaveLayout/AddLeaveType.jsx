@@ -45,10 +45,9 @@ const AddLeaveType = () => {
           onClick={open}
           variant="filled"
           tt={"capitalize"}
-          rightSection={<IconPlus />}
-          className={classes.btnLink}
+          style={{ backgroundColor: "#e7f7ff", color: "#000000" }}
         >
-          add
+          add +
         </Button>
       </Flex>
       <Modal

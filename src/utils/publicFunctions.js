@@ -175,3 +175,31 @@ export const holidayTypes = [
     day: "Full Day",
   },
 ];
+
+export const departmentType = [
+  {
+    id: "1",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "2",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "3",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "4",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "5",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+];

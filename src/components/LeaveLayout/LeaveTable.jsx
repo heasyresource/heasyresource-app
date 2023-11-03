@@ -94,7 +94,7 @@ const LeaveTable = () => {
                     />
                   </ActionIcon>
                 </MenuTarget>
-                <MenuDropdown p="15px">
+                <MenuDropdown>
                   <MenuItem
                     fz="xs"
                     onClick={() =>
@@ -103,8 +103,8 @@ const LeaveTable = () => {
                   >
                     Employee Details
                   </MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Leave Details</MenuItem>
+
+                  <MenuItem fz="xs">Leave Details</MenuItem>
                 </MenuDropdown>
               </Menu>
             </Flex>
