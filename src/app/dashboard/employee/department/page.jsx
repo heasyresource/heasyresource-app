@@ -1,10 +1,8 @@
+import { AddDepartment, DepartmentsTable, EmployeeNav } from "@/components";
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
-import InputField from "../components/InputField";
-import { TableSelection } from "../components/TableSelection";
-import { EmployeeNav } from "@/components";
 
-const Employee = () => {
+const page = () => {
   return (
     <>
       <Card
@@ -12,22 +10,22 @@ const Employee = () => {
           backgroundColor: "#ffff",
           borderRadius: "15px",
           borderBottom: "1px solid #DDDDDD",
-          minHeight: "390px",
+          minHeight: "200px",
           margin: "0px",
         }}
       >
         <CardSection
-          pt="25px"
-          pb="55px"
+          pt="18px"
+          pb="27px"
           style={{ borderBottom: "1px solid #DDDDDD" }}
         >
           <EmployeeNav tabTitle={"employee management"} />
         </CardSection>
-        <InputField />
+        <AddDepartment />
       </Card>
-      <TableSelection />
+      <DepartmentsTable />
     </>
   );
 };
 
-export default Employee;
+export default page;

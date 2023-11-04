@@ -49,7 +49,7 @@ const Dashboard = async () => {
                 </GridCol>
                 <GridCol span={{ lg: 4, md: 12, sm: 12 }}>
                   <Paper radius={"md"} p={"20px"}>
-                    <DatePicker type="range" />
+                    <DatePicker type="multiple" />
                   </Paper>
                 </GridCol>
               </Grid>

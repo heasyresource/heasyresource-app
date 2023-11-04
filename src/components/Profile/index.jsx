@@ -29,7 +29,7 @@ import { useSession } from "next-auth/react";
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
     <UnstyledButton ref={ref} {...others}>
-      <Group gap={"10px"}>
+      <Group gap={"10px"} style={{ flexWrap: "nowrap" }}>
         <div
           style={{
             border: "2px #3377FF solid",

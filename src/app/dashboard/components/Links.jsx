@@ -23,7 +23,12 @@ const data = [
   },
   { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
   { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
-  { link: "/absence", label: "Absence", icon: IconCalendarBolt },
+  {
+    link: "/dashboard/leave",
+    label: "Leave",
+    icon: IconCalendarBolt,
+    subLink: true,
+  },
   {
     link: "/dashboard/compensation",
     label: "Compensation",
@@ -39,7 +44,7 @@ const Links = () => {
       className={classes.link}
       data-active={
         currentPath === item.link ||
-        (currentPath.includes("/employee") && item.subLink) ||
+        (currentPath.includes(item.link) && item.subLink) ||
         undefined
       }
       href={item.link}

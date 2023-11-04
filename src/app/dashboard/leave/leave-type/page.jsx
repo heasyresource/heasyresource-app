@@ -1,10 +1,8 @@
+import { AddLeaveType, LeaveNav, LeaveTypeTable } from "@/components";
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
-import InputField from "../components/InputField";
-import { TableSelection } from "../components/TableSelection";
-import { EmployeeNav } from "@/components";
 
-const Employee = () => {
+const page = () => {
   return (
     <>
       <Card
@@ -12,7 +10,7 @@ const Employee = () => {
           backgroundColor: "#ffff",
           borderRadius: "15px",
           borderBottom: "1px solid #DDDDDD",
-          minHeight: "390px",
+          minHeight: "250px",
           margin: "0px",
         }}
       >
@@ -21,13 +19,13 @@ const Employee = () => {
           pb="55px"
           style={{ borderBottom: "1px solid #DDDDDD" }}
         >
-          <EmployeeNav tabTitle={"employee management"} />
+          <LeaveNav tabTitle="Leave" />
         </CardSection>
-        <InputField />
+        <AddLeaveType />
       </Card>
-      <TableSelection />
+      <LeaveTypeTable />
     </>
   );
 };
 
-export default Employee;
+export default page;

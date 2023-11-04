@@ -1,68 +1,60 @@
-"use client";
-import { Button, Grid, GridCol, Group, Select, TextInput } from "@mantine/core";
-import classes from "../dashboard.module.css";
 import React from "react";
-import { useSearch } from "@/hooks";
-
-const InputField = () => {
-  const { loading, form, handleSubmit } = useSearch();
+import { Button, Grid, GridCol, Group, Select, TextInput } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
+import classes from "./leaveLayout.module.css";
+import { IconCalendarBolt } from "@tabler/icons-react";
+const SearchFields = () => {
   return (
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+    <form style={{ marginTop: "1rem" }}>
       <Grid justify="space-between" className={classes.formWrap}>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }} mt={0}>
+        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
           <TextInput
             size="md"
             label="Employee Name"
-            placeholder="Name"
+            placeholder="John smith"
             style={{ width: "100%" }}
-            {...form.getInputProps("employeeName")}
             classNames={{
               label: classes.label,
               error: classes.error,
               placeholder: classes.placeholder,
             }}
-            disabled={loading}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <TextInput
+          <DateInput
             size="md"
-            label="Employee ID"
-            placeholder="ID"
+            label="From Date"
+            placeholder="DD/MM/YYY"
             style={{ width: "100%" }}
-            {...form.getInputProps("employeeId")}
             classNames={{
               label: classes.label,
               error: classes.error,
               placeholder: classes.placeholder,
             }}
-            disabled={loading}
+            rightSectionWidth={70}
+            rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
+          />
+        </GridCol>
+        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
+          <DateInput
+            size="md"
+            label="To Date"
+            placeholder="DD/MM/YYY"
+            style={{ width: "100%" }}
+            classNames={{
+              label: classes.label,
+              error: classes.error,
+              placeholder: classes.placeholder,
+            }}
+            rightSectionWidth={70}
+            rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
           <Select
             size="md"
-            label="Employee Status"
-            placeholder="Working"
+            label="Leave Type"
             style={{ width: "100%" }}
-            {...form.getInputProps("employeeStatus")}
-            data={[]}
-            classNames={{
-              label: classes.label,
-              error: classes.error,
-              placeholder: classes.placeholder,
-            }}
-            disabled={loading}
-          />
-        </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <Select
-            size="md"
-            label="Employee Department"
-            placeholder="Software Development"
-            style={{ width: "100%" }}
-            disabled={loading}
-            {...form.getInputProps("employeeDepartment")}
             data={[]}
             classNames={{
               label: classes.label,
@@ -80,7 +72,6 @@ const InputField = () => {
           color="#3377FF"
           px={"40px"}
           type="submit"
-          disabled={loading}
         >
           search
         </Button>
@@ -88,5 +79,4 @@ const InputField = () => {
     </form>
   );
 };
-
-export default InputField;
+export default SearchFields;
