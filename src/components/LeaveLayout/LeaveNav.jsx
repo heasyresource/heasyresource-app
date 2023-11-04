@@ -3,18 +3,19 @@ import {
   Button,
   Group,
   Menu,
+  MenuDivider,
   MenuDropdown,
   MenuItem,
   MenuTarget,
   Space,
   Text,
 } from "@mantine/core";
-import { usePathname } from "next/navigation";
-import React from "react";
-import classes from "./employeeLayout.module.css";
 import { IconChevronDown } from "@tabler/icons-react";
+import { usePathname } from "next/navigation";
+import classes from "./leaveLayout.module.css";
+import React from "react";
 
-const EmployeeNav = ({ tabTitle }) => {
+const LeaveNav = ({ tabTitle }) => {
   const pathname = usePathname();
   return (
     <Group justify="space-between" mx="40px">
@@ -25,27 +26,24 @@ const EmployeeNav = ({ tabTitle }) => {
         <Button
           w="125px"
           component="a"
-          href="/dashboard/employee"
-          data-active={"/dashboard/employee" === pathname || undefined}
+          href="/dashboard/leave"
+          data-active={"/dashboard/leave" === pathname || undefined}
           className={classes.btnLink}
           variant="filled"
         >
-          Employee List
+          Leave List
         </Button>
         <Button
           component="a"
-          href="/dashboard/employee/add-employee"
+          href="/dashboard/leave/assign-leave"
           w="125px"
           variant="filled"
           className={classes.btnLink}
           data-active={
-            "/dashboard/employee/add-employee" === pathname ||
-            "/dashboard/employee/add-employee/individual" === pathname ||
-            "/dashboard/employee/add-employee/bulk" === pathname ||
-            undefined
+            "/dashboard/leave/assign-leave" === pathname || undefined
           }
         >
-          Add Employee
+          Assign Leave
         </Button>
         <Menu>
           <MenuTarget>
@@ -60,7 +58,9 @@ const EmployeeNav = ({ tabTitle }) => {
               }}
               className={classes.btnLink}
               data-active={
-                "/dashboard/employee/department" === pathname || undefined
+                "/dashboard/leave/leave-type" === pathname ||
+                "/dashboard/leave/holidays" === pathname ||
+                undefined
               }
             >
               Configuration
@@ -74,11 +74,23 @@ const EmployeeNav = ({ tabTitle }) => {
               component="a"
               className={classes.activeConfig}
               data-active={
-                "/dashboard/employee/department" === pathname || undefined
+                "/dashboard/leave/leave-type" === pathname || undefined
               }
-              href="/dashboard/employee/department"
+              href="/dashboard/leave/leave-type"
             >
-              Department
+              Leave Types
+            </MenuItem>
+            <MenuDivider />
+            <MenuItem
+              fz="xs"
+              component="a"
+              className={classes.activeConfig}
+              data-active={
+                "/dashboard/leave/holidays" === pathname || undefined
+              }
+              href="/dashboard/leave/holidays"
+            >
+              Holiday Types
             </MenuItem>
           </MenuDropdown>
         </Menu>
@@ -87,4 +99,4 @@ const EmployeeNav = ({ tabTitle }) => {
   );
 };
 
-export default EmployeeNav;
+export default LeaveNav;

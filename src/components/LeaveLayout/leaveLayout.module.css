@@ -44,6 +44,18 @@
     gap: 1rem;
   }
 }
+.formWrap {
+  margin-top: 2rem;
+  @media (max-width: 768px) {
+    margin: 0px;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.placeholder {
+  font-size: 8px;
+}
+
 .label {
   font-size: small;
 }

@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
         withBorder={false}
       >
         <Group justify="flex-end" gap="20" style={{ flexWrap: "nowrap" }}>
-          <Group>
+          <Group style={{ flexWrap: "nowrap" }}>
             <Image
               src={"/jitto.svg"}
               width={28}
@@ -40,7 +40,7 @@ const Layout = ({ children }) => {
               component={NextImage}
               alt="Company Logo"
             />
-            <Text fw={500} c="#616161">
+            <Text fw={500} c="#616161" style={{ whiteSpace: "nowrap" }}>
               Jitto Consultancy Ltd.
             </Text>
           </Group>

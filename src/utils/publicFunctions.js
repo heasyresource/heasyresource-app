@@ -25,13 +25,13 @@ export const normalizePhoneNumber = (phoneNumber) => {
 };
 export const getSubdomain = (host) => {
   let subdomain = null;
-  if (!host && typeof window !== 'undefined') {
+  if (!host && typeof window !== "undefined") {
     // On client side, get the host from window
     host = window.location.host;
   }
-  if (host && host.includes('.')) {
-    const candidate = host.split('.')[0];
-    if (candidate && !candidate.includes('localhost')) {
+  if (host && host.includes(".")) {
+    const candidate = host.split(".")[0];
+    if (candidate && !candidate.includes("localhost")) {
       subdomain = candidate;
     }
   }
@@ -92,5 +92,114 @@ export const employeeList = [
     department: "Management",
     role: "Manager",
     moreDetails: "Link to More Details",
+  },
+];
+export const leaveList = [
+  {
+    id: "1",
+    date: "2023-12-05",
+    employeeName: "John Smith",
+    leaveType: "Vacation",
+    numberOfDays: "22 days",
+    status: "Pending",
+  },
+  {
+    id: "2",
+    date: "2023-12-05",
+    employeeName: "Abijuwon Selim",
+    leaveType: "Vacation",
+    numberOfDays: "22 days",
+    status: "Pending",
+  },
+  {
+    id: "3",
+    date: "2023-12-05",
+    employeeName: "Rasaq Osinwin",
+    leaveType: "Vacation",
+    numberOfDays: "22 days",
+    status: "Pending",
+  },
+];
+export const leaveType = [
+  {
+    id: "1",
+    name: "Annual Leave",
+  },
+  {
+    id: "2",
+    name: "Annual Leave",
+  },
+  {
+    id: "3",
+    name: "Annual Leave",
+  },
+  {
+    id: "4",
+    name: "Annual Leave",
+  },
+  {
+    id: "5",
+    name: "Annual Leave",
+  },
+];
+
+export const holidayTypes = [
+  {
+    id: "1",
+    name: "National Holidays",
+    date: "Dec 25th, 2023",
+    day: "Full Day",
+  },
+  {
+    id: "2",
+    name: "National Holidays",
+    date: "Dec 25th, 2023",
+    day: "Full Day",
+  },
+  {
+    id: "3",
+    name: "National Holidays",
+    date: "Dec 25th, 2023",
+    day: "Full Day",
+  },
+  {
+    id: "4",
+    name: "National Holidays",
+    date: "Dec 25th, 2023",
+    day: "Full Day",
+  },
+  {
+    id: "5",
+    name: "National Holidays",
+    date: "Dec 25th, 2023",
+    day: "Full Day",
+  },
+];
+
+export const departmentType = [
+  {
+    id: "1",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "2",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "3",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "4",
+    name: "Engineering",
+    deptCode: "Eng",
+  },
+  {
+    id: "5",
+    name: "Engineering",
+    deptCode: "Eng",
   },
 ];

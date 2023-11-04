@@ -1,10 +1,7 @@
-import { Card, CardSection } from "@mantine/core";
 import React from "react";
-import InputField from "../components/InputField";
-import { TableSelection } from "../components/TableSelection";
-import { EmployeeNav } from "@/components";
-
-const Employee = () => {
+import { Card, CardSection } from "@mantine/core";
+import { LeaveNav, SearchFields, LeaveTable } from "@/components";
+const absence = () => {
   return (
     <>
       <Card
@@ -21,13 +18,13 @@ const Employee = () => {
           pb="55px"
           style={{ borderBottom: "1px solid #DDDDDD" }}
         >
-          <EmployeeNav tabTitle={"employee management"} />
+          <LeaveNav tabTitle="Leave" />
         </CardSection>
-        <InputField />
+        <SearchFields />
       </Card>
-      <TableSelection />
+      <LeaveTable />
     </>
   );
 };
 
-export default Employee;
+export default absence;

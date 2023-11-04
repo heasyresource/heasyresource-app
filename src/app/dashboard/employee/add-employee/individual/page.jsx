@@ -27,7 +27,6 @@ const page = () => {
         pt="25px"
         pb="55px"
         style={{ borderBottom: "1px solid #DDDDDD" }}
-        className={classes.cardSection}
       >
         <EmployeeNav tabTitle={"add Employee"} />
       </CardSection>

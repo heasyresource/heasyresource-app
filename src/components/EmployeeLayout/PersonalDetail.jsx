@@ -8,12 +8,14 @@ import {
   Stack,
   TextInput,
 } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import React from "react";
 import classes from "./employeeLayout.module.css";
 import { usePersonalDetail } from "@/hooks";
 
 const PersonalDetail = () => {
   const { form, loading, handleSubmit } = usePersonalDetail();
+
   return (
     <form
       onSubmit={form.onSubmit((values) => handleSubmit(values))}
@@ -95,9 +97,9 @@ const PersonalDetail = () => {
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              type="date"
+            <DateInput
               size="md"
+              clearable
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               label="Date of Birth"

@@ -9,3 +9,7 @@ export { default as useEmergencyContact } from "./useEmergencyContact";
 export { default as useEmployementInfo } from "./useEmployementInfo";
 export { default as useQualification } from "./useQualification";
 export { default as useEmployeeCompensation } from "./useEmployeeCompensation";
+export { default as useAddHolidayType } from "./useAddHolidayType";
+export { default as useAddLeaveType } from "./useAddLeaveType";
+export { default as useAssignLeave } from "./useAssignLeave";
+export { default as useSearchLeave } from "./useSearchLeave";
