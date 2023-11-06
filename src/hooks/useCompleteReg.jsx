@@ -232,7 +232,6 @@ const useCompleteReg = () => {
       }
     };
     getMetadata();
-    openModal();
   }, []);
   return {
     form,
