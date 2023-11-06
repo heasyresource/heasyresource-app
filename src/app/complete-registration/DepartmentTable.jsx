@@ -145,7 +145,6 @@ export default function DepartmentTable({
                 color="#3377FF"
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
-                px="50px"
                 w={{ lg: "auto", md: "auto", sm: "auto" }}
                 onClick={close}
               >
@@ -155,7 +154,6 @@ export default function DepartmentTable({
                 variant="contained"
                 color="#3377FF"
                 tt="capitalize"
-                px="50px"
                 onClick={() => handleAddRow()}
                 style={{
                   backgroundColor: "#3377FF",
