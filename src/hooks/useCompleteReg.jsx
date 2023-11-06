@@ -17,7 +17,7 @@ const useCompleteReg = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isRadioChecked, setIsRadioChecked] = useState(false);
   const [validationError, setValidationError] = useState(null);
-  const allOptions = ["Company Initials", "Department Code", "Random Numbers"];
+  const allOptions = ["Department Code", "Random Numbers", "Company Initials"];
   const allSelectedString = selectedOptions.join("");
   const [departmentTable, setDepartmentTable] = useState([]);
   const [isDptTableEmpty, setIsDptTableEmpty] = useState(false);
@@ -55,15 +55,10 @@ const useCompleteReg = () => {
   const optionCodeMap = {
     "Company Initials": "VT",
     "Department Code": "001",
-    "Random Numbers": "5695",
+    "Random Numbers": "569509",
   };
   const handleMultiSelectChange = (selected) => {
-    // Sort the selected values based on the valueOrder array
-    const sortedSelected = allOptions
-      .map((label) => selected.find((value) => value === label))
-      .filter((value) => value !== undefined)
-      .map((value) => optionCodeMap[value]);
-    setSelectedOptions(sortedSelected);
+    setSelectedOptions(selected);
     const error = validateMultiSelect(selected, allOptions);
     setValidationError(error);
   };

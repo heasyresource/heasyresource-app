@@ -42,12 +42,14 @@ const CompleteForm = () => {
     IDError,
     uploading,
     isSubmitted,
+    allOptions,
+    selectedOptions,
   } = useCompleteReg();
   return (
     <>
       {isSubmitted && (
         <Alert variant="light" color="yellow" icon={<IconInfoCircle />}>
-          We&apos;re currently reviewing your account to ensure it meets our
+          We&apos;re currently reviewing your company to ensure it meets our
           standards and policies
         </Alert>
       )}
@@ -121,7 +123,7 @@ const CompleteForm = () => {
                 <TextInput
                   size="md"
                   label="Email Domain"
-                  placeholder="@heasyresource.com"
+                  placeholder="@company1.com,@company2.com"
                   {...form.getInputProps("emailDomain")}
                   style={{ width: "100%" }}
                   classNames={{
@@ -131,6 +133,11 @@ const CompleteForm = () => {
                   }}
                   disabled={uploading || isSubmitted}
                 />
+                {form.values.emailDomain.length !== 0 && (
+                  <Text size="14px" mt="10px" c="565656">
+                    {`Note: you will be able to add employee with this email domain ${form.values.emailDomain}`}
+                  </Text>
+                )}
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <TextInput
@@ -138,7 +145,6 @@ const CompleteForm = () => {
                   type="text"
                   withAsterisk
                   label="Sub Domain"
-                  placeholder="@heasyresource.com"
                   style={{ width: "100%" }}
                   classNames={{
                     label: styles.label,
@@ -148,6 +154,11 @@ const CompleteForm = () => {
                   {...form.getInputProps("subdomain")}
                   disabled={uploading || isSubmitted}
                 />
+                {form.values.subdomain.length !== 0 && (
+                  <Text size="14px" mt="10px" c="565656">
+                    {`Your domain will look like: ${form.values.subdomain}.heasyresource.com`}
+                  </Text>
+                )}
               </GridCol>
 
               <GridCol span={12} style={{ marginTop: "20px" }}>
@@ -191,13 +202,22 @@ const CompleteForm = () => {
                 </Stack>
                 {isRadioChecked && (
                   <>
-                    <Text my={"10px"}>{allSelectedString}</Text>
+                    {selectedOptions?.length !== 0 && (
+                      <Text
+                        size="14px"
+                        c="565656"
+                        mt={"10px"}
+                      >{`The employee ID will look like: ${selectedOptions
+                        .map((option) => optionCodeMap[option])
+                        .join("")}`}</Text>
+                    )}
 
                     <MultiSelect
+                      mt={"10px"}
                       maxDropdownHeight={150}
                       className={styles.multiSelect}
                       placeholder="Pick value"
-                      data={Object.keys(optionCodeMap)}
+                      data={allOptions}
                       onChange={handleMultiSelectChange}
                       clearable
                       classNames={{
@@ -220,7 +240,7 @@ const CompleteForm = () => {
                   </Text>
                   <Text fz="14px">
                     Streamline your organization by creating a new department
-                    and defining its key attributes
+                    for enhanced operational efficiency.
                   </Text>
                 </Box>
               </GridCol>

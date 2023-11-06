@@ -73,8 +73,8 @@ const AddImage = () => {
           <Text size="18px" weight={400}>
             Upload Image
           </Text>
-          <Text size="14px" mt="10px" tt="capitalize" c="565656">
-            supported image formats: jpg, .png, .gif, <br />
+          <Text size="14px" mt="10px" c="565656">
+            supported image formats: jpg, .png, <br />
             maximum file size: 200KB <br /> recommended dimensions: 200px x
             200px
           </Text>
