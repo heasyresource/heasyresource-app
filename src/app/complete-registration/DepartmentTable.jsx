@@ -70,6 +70,7 @@ export default function DepartmentTable({
       <Table.Td>
         <Group gap={0} justify="flex-start">
           <ActionIcon
+            disabled={uploading || isSubmitted}
             onClick={() => deleteRow(item.name)}
             variant="subtle"
             color="red"

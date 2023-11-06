@@ -6,6 +6,10 @@ import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import useUploadImage from "./useUploadImage";
+import { ActionIcon, Button, Group, Stack, Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { IconChecks } from "@tabler/icons-react";
+import { modals } from "@mantine/modals";
 
 const useCompleteReg = () => {
   const { data: session } = useSession();
@@ -71,6 +75,46 @@ const useCompleteReg = () => {
       return "Please select all options"; // Not all options are selected
     }
   };
+  const openModal = () =>
+    modals.open({
+      radius: "md",
+      centered: true,
+      children: (
+        <Stack py={"3rem"} gap={"15px"} justify="center" align="center">
+          <ActionIcon variant="transparent" size="xl">
+            <IconChecks
+              style={{
+                color: "#3377ff",
+                fontSize: "20px",
+                width: "100%",
+                height: "100%",
+              }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+          <Text fw={600} style={{ fontSize: "25px", color: "#000000" }}>
+            Submission Successful
+          </Text>
+
+          <Text
+            style={{ fontSize: "16px", color: "#1E1E1E", textAlign: "center" }}
+          >
+            Congratulations!, your request has been processed.
+          </Text>
+          <Group mt="1rem" justify="center" align="center">
+            <Button
+              variant="contained"
+              size="md"
+              style={{ backgroundColor: "#3377ff" }}
+              tt="capitalize"
+              onClick={() => modals.closeAll()}
+            >
+              ok
+            </Button>
+          </Group>
+        </Stack>
+      ),
+    });
   const handleSubmit = async (values) => {
     try {
       if (!logo.length) {
@@ -118,6 +162,8 @@ const useCompleteReg = () => {
           }
         );
         setIsSubmitted(true);
+
+        openModal();
       }
       setUploading(false);
       console.log(result, "complete registration");
@@ -186,6 +232,7 @@ const useCompleteReg = () => {
       }
     };
     getMetadata();
+    openModal();
   }, []);
   return {
     form,

@@ -186,6 +186,7 @@ const CompleteForm = () => {
                             value={"true"}
                             label="Yes"
                             onClick={() => setIsRadioChecked(true)}
+                            disabled={uploading || isSubmitted}
                           />
                           <Radio
                             classNames={{ radio: styles.radio }}
@@ -193,6 +194,7 @@ const CompleteForm = () => {
                             value={"false"}
                             label="No"
                             onClick={() => setIsRadioChecked(false)}
+                            disabled={uploading || isSubmitted}
                           />
                         </Group>
                       </RadioGroup>
@@ -270,7 +272,7 @@ const CompleteForm = () => {
             {uploading ? (
               <Loader color="white" type="dots" size="md" />
             ) : (
-              "   Continue"
+              "   Submit"
             )}
           </Button>
         </Group>
