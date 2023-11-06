@@ -164,29 +164,6 @@ const useSignup = () => {
     };
     getMetadata();
   }, []);
-
-  // const fields = [
-  //   {
-  //     value: '87616d36-f780-4886-9086-9320f7f89ad4',
-  //     label: "Information Technology",
-  //   },
-  //   {
-  //     value: '17616d36-f780-4886-9086-9320f7f89ad4',
-  //     label: "Graphic Designer",
-  //   },
-  //   {
-  //     value: '87616d36-f780-4886-9086-9320f7f89ad3',
-  //     label: "Cyber Security",
-  //   },
-  //   {
-  //     value: '87616d36-f782-4886-9086-9320f7f89ad4',
-  //     label: "Software Engineer",
-  //   },
-  //   {
-  //     value: '87614d36-f780-4886-9086-9320f7f89ad4',
-  //     label: "Data Analysis",
-  //   },
-  // ];
   return {
     companyInfoForm,
     companyRepForm,

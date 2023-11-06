@@ -14,7 +14,7 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const AddImage = () => {
+const AddComImg = ({ setLogo, loading, uploading, isSubmitted }) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -42,7 +42,8 @@ const AddImage = () => {
           variant="outline"
           style={{ borderRadius: "50%" }}
           color="blue"
-          src={imgUrl || "/assets/images/avata2.png"}
+          src={imgUrl || "/assets/images/cmpLogo.png"}
+          opacity={loading || uploading || isSubmitted ? ".5" : "1"}
         />
         <ActionIcon
           className="add-icon"
@@ -55,6 +56,7 @@ const AddImage = () => {
           size={"xl"}
           variant="filled"
           onClick={open}
+          disabled={loading || uploading || isSubmitted}
         >
           <IconPlus />
         </ActionIcon>
@@ -136,6 +138,7 @@ const AddImage = () => {
                         onClick={() => {
                           setImgUrl(image.dataURL);
                           close();
+                          setLogo(imgs);
                         }}
                         style={{
                           backgroundColor: "#3377FF",
@@ -170,4 +173,4 @@ const AddImage = () => {
   );
 };
 
-export default AddImage;
+export default AddComImg;
