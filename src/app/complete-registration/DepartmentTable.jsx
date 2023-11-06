@@ -12,7 +12,7 @@ import {
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { IconTrash } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DepartmentTable({
   setDepartmentTable,
@@ -22,6 +22,7 @@ export default function DepartmentTable({
   isSubmitted,
 }) {
   const [error, setError] = useState(false);
+  const [isExist, setIsExist] = useState(false);
   const departmentForm = useForm({
     initialValues: {
       name: "",
@@ -32,9 +33,23 @@ export default function DepartmentTable({
 
   const handleAddRow = () => {
     if (departmentForm.values.name && departmentForm.values.code) {
-      setDepartmentTable([...departmentTable, departmentForm.values]);
-      departmentForm.reset();
-      close();
+      // Check if the data already exists in the table
+      const dataAlreadyExists = departmentTable.some(
+        (row) =>
+          row.name === departmentForm.values.name &&
+          row.code === departmentForm.values.code
+      );
+
+      if (dataAlreadyExists) {
+        setIsExist(true);
+        setTimeout(() => {
+          setIsExist(false);
+        }, 2000);
+      } else {
+        setDepartmentTable([...departmentTable, departmentForm.values]);
+        departmentForm.reset();
+        close();
+      }
     } else {
       setError(true);
     }
@@ -110,10 +125,16 @@ export default function DepartmentTable({
               placeholder="MAR"
               mt="md"
               {...departmentForm.getInputProps("code")}
+              maxLength={3}
             />
             {error && (
               <Text style={{ fontSize: "13px", color: "red" }}>
                 Please fill in the required fields!
+              </Text>
+            )}
+            {isExist && (
+              <Text style={{ fontSize: "13px", color: "red" }}>
+                {`${departmentForm.values.name} and ${departmentForm.values.code} already exists`}
               </Text>
             )}
             <Button onClick={() => handleAddRow()} fullWidth mt="xl">

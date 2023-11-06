@@ -17,7 +17,7 @@ const useCompleteReg = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isRadioChecked, setIsRadioChecked] = useState(false);
   const [validationError, setValidationError] = useState(null);
-  const allOptions = ["Department Code", "Random Numbers", "Company Initials"];
+  const allOptions = ["Company Initials", "Department Code", "Random Numbers"];
   const allSelectedString = selectedOptions.join("");
   const [departmentTable, setDepartmentTable] = useState([]);
   const [isDptTableEmpty, setIsDptTableEmpty] = useState(false);

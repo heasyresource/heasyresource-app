@@ -79,12 +79,12 @@ const AddComImg = ({ setLogo, loading, uploading, isSubmitted }) => {
       >
         <Box p="20px">
           <Text size="18px" weight={400}>
-            Upload logo
+            Upload Logo
           </Text>
           <Text size="14px" mt="10px" c="565656">
-            supported image formats: jpg, .png <br />
-            maximum file size: 200KB <br /> recommended dimensions: 200px x
-            200px
+            Supported image formats: .jpg, .png <br />
+            Maximum file size: 200KB <br /> Recommended dimensions: (200 X
+            200)px
           </Text>
           <ImageUploading
             value={imgs}

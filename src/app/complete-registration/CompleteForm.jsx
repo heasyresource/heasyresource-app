@@ -32,7 +32,6 @@ const CompleteForm = () => {
     handleMultiSelectChange,
     setIsRadioChecked,
     optionCodeMap,
-    allSelectedString,
     handleSubmit,
     departmentTable,
     setLogo,
@@ -135,7 +134,7 @@ const CompleteForm = () => {
                 />
                 {form.values.emailDomain.length !== 0 && (
                   <Text size="14px" mt="10px" c="565656">
-                    {`Note: you will be able to add employee with this email domain ${form.values.emailDomain}`}
+                    {`Note: you will be able to add only employees with this email domain ${form.values.emailDomain}`}
                   </Text>
                 )}
               </GridCol>
@@ -156,7 +155,7 @@ const CompleteForm = () => {
                 />
                 {form.values.subdomain.length !== 0 && (
                   <Text size="14px" mt="10px" c="565656">
-                    {`Your domain will look like: ${form.values.subdomain}.heasyresource.com`}
+                    {`Your domain will look like: https://${form.values.subdomain}.heasyresource.com`}
                   </Text>
                 )}
               </GridCol>
