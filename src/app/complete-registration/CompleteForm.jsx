@@ -45,11 +45,12 @@ const CompleteForm = () => {
   } = useCompleteReg();
   return (
     <>
-      <Alert variant="light" color="yellow" icon={<IconInfoCircle />}>
-        We&apos;re currently reviewing your account to ensure it meets our
-        standards and policies
-      </Alert>
-
+      {isSubmitted && (
+        <Alert variant="light" color="yellow" icon={<IconInfoCircle />}>
+          We&apos;re currently reviewing your account to ensure it meets our
+          standards and policies
+        </Alert>
+      )}
       <form
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className={styles.containerContent}
