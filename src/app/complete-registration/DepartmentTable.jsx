@@ -100,6 +100,7 @@ export default function DepartmentTable({
           add department +
         </Button>
         <Modal
+          closeOnClickOutside={false}
           centered
           overlayProps={{
             backgroundOpacity: 0.55,
@@ -137,9 +138,31 @@ export default function DepartmentTable({
                 {`${departmentForm.values.name} and ${departmentForm.values.code} already exists`}
               </Text>
             )}
-            <Button onClick={() => handleAddRow()} fullWidth mt="xl">
-              Add
-            </Button>
+            <Group justify="flex-end" align="center" mt={"xl"}>
+              <Button
+                variant="outline"
+                color="#3377FF"
+                style={{ borderColor: "#3377FF" }}
+                tt="capitalize"
+                px="50px"
+                w={{ lg: "auto", md: "auto", sm: "auto" }}
+                onClick={close}
+              >
+                cancel
+              </Button>
+              <Button
+                variant="contained"
+                color="#3377FF"
+                tt="capitalize"
+                px="50px"
+                onClick={() => handleAddRow()}
+                style={{
+                  backgroundColor: "#3377FF",
+                }}
+              >
+                add
+              </Button>
+            </Group>
           </Paper>
         </Modal>
       </Group>

@@ -11,10 +11,10 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { useEmployementInfo } from "@/hooks";
+import { useEmploymentInfo } from "@/hooks";
 
 const EmployeeInfo = () => {
-  const { form, handleSubmit } = useEmployementInfo();
+  const { form, handleSubmit } = useEmploymentInfo();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
@@ -84,7 +84,7 @@ const EmployeeInfo = () => {
                 <Select
                   size="md"
                   withAsterisk
-                  label="Employement Status"
+                  label="Employment Status"
                   style={{ textAlign: "start", width: "100%" }}
                   data={[]}
                   classNames={{ label: classes.label, error: classes.error }}
@@ -116,7 +116,7 @@ const EmployeeInfo = () => {
                     backgroundColor: "#FF0000",
                   }}
                 >
-                  terminate employement
+                  terminate employment
                 </Button>
               </GridCol>
             </Grid>
