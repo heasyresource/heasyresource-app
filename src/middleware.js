@@ -1,7 +1,21 @@
-const unProtectedRoutes = ["/signin", "/signup", "/forgot-password", "/new-password", "/verfication"];
+const unProtectedRoutes = [
+  "/signin",
+  "/signup",
+  "/forgot-password",
+  "/new-password",
+  "/verfication",
+];
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/signin", "/signup", "/forgot-password", "/new-password", "/verfication"],
+  matcher: [
+    "/dashboard/:path*",
+    "/signin",
+    "/signup",
+    "/forgot-password",
+    "/new-password",
+    "/verfication",
+    "/complete-registration",
+  ],
 };
 
 import { getToken } from "next-auth/jwt";
@@ -17,6 +31,12 @@ export default async function middleware(req) {
   }
 
   if (req.nextUrl.pathname.startsWith("/dashboard") && !isAuthenticated) {
+    return NextResponse.redirect(new URL("/signin", req.url));
+  }
+  if (
+    req.nextUrl.pathname.startsWith("/complete-registration") &&
+    !isAuthenticated
+  ) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
   //   return await withAuth(req, {

@@ -1,7 +1,7 @@
 import { useForm } from "@mantine/form";
 import React from "react";
 
-const useEmployementInfo = () => {
+const useEmploymentInfo = () => {
   const form = useForm({
     initialValues: {
       title: "",
@@ -19,7 +19,7 @@ const useEmployementInfo = () => {
       joinedDate: (value) => (!value.length ? "Joined Date is required" : null),
       category: (value) => (!value.length ? "Job category is required" : null),
       status: (value) =>
-        !value.length ? "Employement status is required" : null,
+        !value.length ? "Employment status is required" : null,
       supervisor: (value) => (!value.length ? " Supervisor is required" : null),
       method: (value) => (!value.length ? "Report method is required" : null),
     },
@@ -37,4 +37,4 @@ const useEmployementInfo = () => {
   };
 };
 
-export default useEmployementInfo;
+export default useEmploymentInfo;

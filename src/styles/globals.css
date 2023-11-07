@@ -208,8 +208,14 @@ body .mantine-Textarea-wrapper textarea {
   font-size: 14px;
   white-space: nowrap;
 }
-.add-image {
+.mantine-Stepper-steps {
+  margin-top: 2rem !important;
   @media (max-width: 500px) {
+    margin-top: 1.25rem !important;
+  }
+}
+.add-image {
+  @media (max-width: 768px) {
     width: 150px;
     height: 150px;
   }
