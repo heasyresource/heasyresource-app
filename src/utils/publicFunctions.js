@@ -120,6 +120,58 @@ export const leaveList = [
     status: "Pending",
   },
 ];
+export const hiringList = [
+  {
+    id: "1",
+    vacancy: "Product Designer",
+    candidate: "Blessing Obi",
+    hiringManager: "Dayo Adegbite",
+    dateOfApplication: "2023-12-05",
+    status: "Shortlisted",
+  },
+  {
+    id: "1",
+    vacancy: "Product Designer",
+    candidate: "Blessing Obi",
+    hiringManager: "Dayo Adegbite",
+    dateOfApplication: "2023-12-05",
+    status: "Shortlisted",
+  },
+  {
+    id: "1",
+    vacancy: "Product Designer",
+    candidate: "Blessing Obi",
+    hiringManager: "Dayo Adegbite",
+    dateOfApplication: "2023-12-05",
+    status: "Shortlisted",
+  },
+];
+export const VacancyList = [
+  {
+    id: "1",
+    vacancy: "Product Designer",
+    candidate: "Blessing Obi",
+    hiringManager: "Dayo Adegbite",
+    dateOfApplication: "2023-12-05",
+    status: "Shortlisted",
+  },
+  {
+    id: "1",
+    vacancy: "Product Designer",
+    candidate: "Blessing Obi",
+    hiringManager: "Dayo Adegbite",
+    dateOfApplication: "2023-12-05",
+    status: "Shortlisted",
+  },
+  {
+    id: "1",
+    vacancy: "Product Designer",
+    candidate: "Blessing Obi",
+    hiringManager: "Dayo Adegbite",
+    dateOfApplication: "2023-12-05",
+    status: "Shortlisted",
+  },
+];
 export const leaveType = [
   {
     id: "1",

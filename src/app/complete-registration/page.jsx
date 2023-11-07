@@ -280,8 +280,10 @@ export default function CompleteRegistration() {
                                     <div>
                                         <Text fz={20} fw={500} c='#272727'>Employee Configuration</Text>
                                         <Space h='12px' />
-                                        <Text fz={15} fw={400} c='#5F5F5F'>Would you like us to automatically
-                                            generate an employee ID?</Text>
+                                        <Text fz={15} fw={400} c='#5F5F5F'>
+                                            Would you like us to automatically
+                                            generate an employee ID?
+                                        </Text>
                                     </div>
                                     <div>
                                         <Flex
