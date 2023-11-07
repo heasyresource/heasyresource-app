@@ -141,6 +141,53 @@ export const hiringList = [
     status: "Shortlisted",
   },
 ];
+export const CompanyList = [
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "under review"
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "pending"
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "active"
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "suspended"
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "on hold"
+  },
+];
 export const VacancyList = [
   {
     id: "1",

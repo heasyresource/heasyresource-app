@@ -1,0 +1,52 @@
+.container {
+  height: auto;
+  background-color: #f8f9fa;
+}
+
+.active {
+  color: #27E408;
+  text-transform: capitalize;
+}
+
+.underReview {
+  color: #E5D311;
+  text-transform: capitalize;
+}
+
+.pending {
+  color: #AEAEAE;
+  text-transform: capitalize;
+}
+
+.suspended {
+  color: #ff0000;
+  text-transform: capitalize;
+}
+
+.onHold {
+  color: #FF7A00;
+  text-transform: capitalize; 
+}
+
+.card {
+  margin: 0px auto;
+
+  @media (max-width: 780px) {
+    width: 80% !important;
+  }
+
+  @media (max-width: 500px) {
+    width: 100% !important;
+    margin: 0px;
+  }
+}
+
+.content {
+  max-width: 100%;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  @media (max-width: 768px) {
+    /* Assuming $mantine-breakpoint-md is 768px */
+    max-width: 100%;
+    margin-right: 0;
+  }
+}
