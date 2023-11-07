@@ -15,3 +15,5 @@ export { default as HolidayTypeTable } from "./LeaveLayout/HolidayTypeTable";
 export { default as AddHolidayType } from "./LeaveLayout/AddHolidayType";
 export { default as AddDepartment } from "./EmployeeLayout/AddDepartment";
 export { default as DepartmentsTable } from "./EmployeeLayout/DepartmentsTable";
+
+export { default as AddComImg } from "./AddComImg";

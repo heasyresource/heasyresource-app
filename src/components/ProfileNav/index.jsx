@@ -10,7 +10,7 @@ const data = [
   { link: "/dashboard/employee/personal-detail", label: "personal Details" },
   { link: "/dashboard/employee/contact-detail", label: "contact Details" },
   { link: "/dashboard/employee/emergency-contact", label: "emergency contact" },
-  { link: "/dashboard/employee/employement-info", label: "employement info" },
+  { link: "/dashboard/employee/employment-info", label: "employment info" },
   { link: "/dashboard/employee/qualifications", label: "qualifications" },
   { link: "/dashboard/employee/compensation", label: "compensation" },
 ];

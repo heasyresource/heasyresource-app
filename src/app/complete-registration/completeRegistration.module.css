@@ -1,84 +1,98 @@
-
+.title {
+  font-size: 1.5rem;
+  @media (max-width: 500px) {
+    font-size: 1.25rem;
+  }
+}
 .label {
-    font-size: 13px;
-    color: #4D4D4D;
+  font-size: 13px;
+  color: #4d4d4d;
 }
 
-
 .fileLabel {
-    font-size: 13px;
-    color: #4D4D4D;
-    background-color: rgb(236, 242, 255);
-    padding: 10px;
-    border-radius: 10px;
-  }
+  font-size: 13px;
+  color: #4d4d4d;
+  background-color: rgb(236, 242, 255);
+  padding: 10px;
+  border-radius: 10px;
+}
 
 .placeholder {
-    font-size: 11px;
+  font-size: 11px;
 }
 
 .pill {
-    background-color: #E7F7FF;
+  background-color: #e7f7ff;
 }
 
 .steps {
-    width: 60%;
-    margin: 0 auto;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .radio {
-    border-color: #3377FF;
+  border-color: #3377ff;
 }
 
 .container {
-    margin: 20px;
-    border-radius: 15px;
-    /* height: 100dvh; */
-    overflow: auto;
+  margin: 20px;
+  border-radius: 15px;
+  /* height: 100dvh; */
+  overflow: auto;
 }
 
 .containerContent {
-    padding: 40px;
-    padding-left: 100px;
+  padding: 25px;
 }
 
 .control {
-    @media (max-width: 760px) {
-      flex: 1;
-    }
+  @media (max-width: 760px) {
+    flex: 1;
   }
-
+}
 
 @media (max-width: 768px) {
-    .containerContent {
-        padding: 0px 20px;
-        padding-top: 40px;
-    }
+  .containerContent {
+    padding-top: 40px;
+  }
 
-    .container {
-        margin: 10px;
-        border-radius: 15px;
-    }
+  .container {
+    margin: 10px;
+    border-radius: 15px;
+  }
 }
 
 @media (max-width: 1024px) {
-    .steps {
-        width: 100%;
-        /* border: 1px solid red; */
-    }
+  .steps {
+    width: 100%;
+    /* border: 1px solid red; */
+  }
 }
 
 @media (max-width: 555px) {
-    .stepBody {
-        display: none;
-    }
+  .stepBody {
+    display: none;
+  }
 
-    .steps {
-        width: 100%;
-    }
+  .steps {
+    width: 100%;
+  }
 
-    .stepIcon {
-        transform: scale(0.8);
-
-    }
+  .stepIcon {
+    transform: scale(0.8);
+  }
+}
+.imgGrid {
+  display: flex;
+  justify-content: center;
+  @media (max-width: 1199px) {
+    justify-content: flex-start;
+    margin-bottom: 1.25rem;
+  }
+}
+.multiSelect {
+  width: 40%;
+  @media (max-width: 550px) {
+    width: 100%;
+  }
 }
