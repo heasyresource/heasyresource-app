@@ -14,7 +14,7 @@ const SlugCheck = () => {
       {pathname.includes("/personal-detail") && <PersonalDetail />}
       {pathname.includes("/contact-detail") && <ContactDetail />}
       {pathname.includes("/emergency-contact") && <EmergencyContact />}
-      {pathname.includes("/employement-info") && <EmployeeInfo />}
+      {pathname.includes("/employment-info") && <EmployeeInfo />}
       {pathname.includes("/qualifications") && <Qualification />}
       {pathname.includes("/compensation") && <Compensation />}
     </>

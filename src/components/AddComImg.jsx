@@ -7,6 +7,7 @@ import {
   Flex,
   Image,
   Modal,
+  Stack,
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -14,7 +15,7 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const AddImage = () => {
+const AddComImg = ({ setLogo, loading, uploading, isSubmitted }) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -24,41 +25,48 @@ const AddImage = () => {
   };
   return (
     <>
-      <Box
-        className="add-image"
-        w={{ lg: "200px", md: "150px", sm: "150px" }}
-        h={{ lg: "200px", md: "150px", sm: "150px" }}
-        style={{
-          border: "5px #3377FF solid",
-          borderRadius: "50%",
-          padding: "5px",
-          zIndex: "1",
-          position: "relative",
-        }}
-      >
-        <Avatar
-          w={"100%"}
-          h={"100%"}
-          variant="outline"
-          style={{ borderRadius: "50%" }}
-          color="blue"
-          src={imgUrl || "/assets/images/avata2.png"}
-        />
-        <ActionIcon
-          className="add-icon"
+      <Stack gap={"10px"}>
+        <Box
+          className="add-image"
+          w={{ lg: "200px", md: "150px", sm: "150px" }}
+          h={{ lg: "200px", md: "150px", sm: "150px" }}
           style={{
-            position: "absolute",
-
-            backgroundColor: "#3377FF",
+            border: "5px #3377FF solid",
+            borderRadius: "50%",
+            padding: "5px",
+            zIndex: "1",
+            position: "relative",
           }}
-          radius={"xl"}
-          size={"xl"}
-          variant="filled"
-          onClick={open}
         >
-          <IconPlus />
-        </ActionIcon>
-      </Box>
+          <Avatar
+            w={"100%"}
+            h={"100%"}
+            variant="outline"
+            style={{ borderRadius: "50%" }}
+            color="blue"
+            src={imgUrl || "/assets/images/cmpLogo.png"}
+            opacity={loading || uploading || isSubmitted ? ".5" : "1"}
+          />
+          <ActionIcon
+            className="add-icon"
+            style={{
+              position: "absolute",
+
+              backgroundColor: "#3377FF",
+            }}
+            radius={"xl"}
+            size={"xl"}
+            variant="filled"
+            onClick={open}
+            disabled={loading || uploading || isSubmitted}
+          >
+            <IconPlus />
+          </ActionIcon>
+        </Box>
+        <Text size="16px" mt="10px" c="565656" ta={"center"}>
+          Upload company logo
+        </Text>
+      </Stack>
       <Modal
         opened={opened}
         onClose={close}
@@ -71,10 +79,10 @@ const AddImage = () => {
       >
         <Box p="20px">
           <Text size="18px" weight={400}>
-            Upload Image
+            Upload Logo
           </Text>
           <Text size="14px" mt="10px" c="565656">
-            Supported image formats: .jpg, .png, <br />
+            Supported image formats: .jpg, .png <br />
             Maximum file size: 200KB <br /> Recommended dimensions: (200 X
             200)px
           </Text>
@@ -136,6 +144,7 @@ const AddImage = () => {
                         onClick={() => {
                           setImgUrl(image.dataURL);
                           close();
+                          setLogo(imgs);
                         }}
                         style={{
                           backgroundColor: "#3377FF",
@@ -170,4 +179,4 @@ const AddImage = () => {
   );
 };
 
-export default AddImage;
+export default AddComImg;

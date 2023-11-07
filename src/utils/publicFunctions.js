@@ -40,8 +40,7 @@ export const getSubdomain = (host) => {
 export const employeeList = [
   {
     id: "1",
-    avatar:
-      "https://images.unsplash.com/photo-1624298357597-fd92dfbec01d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    avatar: "/assets/images/avata2.png",
     firstName: "Robert",
     lastName: "Wolfkisser",
     employeeEmail: "rob_wolf@gmail.com",
@@ -51,8 +50,7 @@ export const employeeList = [
   },
   {
     id: "2",
-    avatar:
-      "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    avatar: "/assets/images/avata2.png",
     firstName: "Jill",
     lastName: "Jailbreaker",
     employeeEmail: "jj@breaker.com",
@@ -62,8 +60,7 @@ export const employeeList = [
   },
   {
     id: "3",
-    avatar:
-      "https://images.unsplash.com/photo-1632922267756-9b71242b1592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    avatar: "/assets/images/avata2.png",
     firstName: "Henry",
     lastName: "Silkeater",
     employeeEmail: "henry@silkeater.io",
@@ -73,8 +70,7 @@ export const employeeList = [
   },
   {
     id: "4",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=250&q=80",
+    avatar: "/assets/images/avata2.png",
     firstName: "Bill",
     lastName: "Horsefighter",
     employeeEmail: "bhorsefighter@gmail.com",
@@ -84,8 +80,7 @@ export const employeeList = [
   },
   {
     id: "5",
-    avatar:
-      "https://images.unsplash.com/photo-1630841539293-bd20634c5d72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto.format&fit=crop&w=250&q=80",
+    avatar: "/assets/images/avata2.png",
     firstName: "Jeremy",
     lastName: "Footviewer",
     employeeEmail: "jeremy@foot.dev",

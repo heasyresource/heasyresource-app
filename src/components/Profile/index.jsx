@@ -18,7 +18,6 @@ import {
   Modal,
   Stack,
   Button,
-  Divider,
   ActionIcon,
 } from "@mantine/core";
 import classes from "./profile.module.css";
@@ -78,7 +77,7 @@ export default function Profile() {
       <Menu position="bottom-end" offset={10}>
         <Menu.Target>
           <UserButton
-            image={null}
+            image={"/assets/images/avata2.png"}
             name={
               session && `${session.user.firstName} ${session.user.lastName}`
             }
