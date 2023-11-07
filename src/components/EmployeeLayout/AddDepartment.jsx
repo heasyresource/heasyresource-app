@@ -6,6 +6,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Modal,
   Stack,
   Text,
@@ -13,10 +14,13 @@ import {
 } from "@mantine/core";
 import classes from "./employeeLayout.module.css";
 import React from "react";
-import { useDisclosure } from "@mantine/hooks";
+
+import { useAddDepartment } from "@/hooks";
 
 const AddDepartment = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+  const { form, handleSubmit, loading, openedAdd, closeAdd, openAdd } =
+    useAddDepartment();
+
   return (
     <>
       <Flex
@@ -37,7 +41,7 @@ const AddDepartment = () => {
           Department
         </Text>
         <Button
-          onClick={open}
+          onClick={openAdd}
           variant="filled"
           tt={"capitalize"}
           style={{ backgroundColor: "#e7f7ff", color: "#000000" }}
@@ -47,8 +51,8 @@ const AddDepartment = () => {
       </Flex>
       <Modal
         closeOnClickOutside={false}
-        opened={opened}
-        onClose={close}
+        opened={openedAdd}
+        onClose={closeAdd}
         title="Add Leave Type"
         size="lg"
         centered
@@ -60,7 +64,9 @@ const AddDepartment = () => {
           >
             add department
           </Text>
-          <form>
+          <form
+            onSubmit={form.onSubmit((values) => handleSubmit(values, "add"))}
+          >
             <Stack gap={"2rem"} mt={"1rem"}>
               <Grid gutter={"xl"}>
                 <GridCol span={12}>
@@ -73,6 +79,8 @@ const AddDepartment = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
+                    {...form.getInputProps("name")}
+                    disabled={loading}
                   />
                 </GridCol>
                 <GridCol span={12}>
@@ -85,6 +93,9 @@ const AddDepartment = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
+                    maxLength={3}
+                    {...form.getInputProps("code")}
+                    disabled={loading}
                   />
                 </GridCol>
               </Grid>
@@ -104,7 +115,8 @@ const AddDepartment = () => {
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={close}
+                  onClick={closeAdd}
+                  disabled={loading}
                 >
                   cancel
                 </Button>
@@ -120,8 +132,13 @@ const AddDepartment = () => {
                   style={{
                     backgroundColor: "#3377FF",
                   }}
+                  disabled={loading}
                 >
-                  add
+                  {loading ? (
+                    <Loader color="white" type="dots" size="md" />
+                  ) : (
+                    "add"
+                  )}
                 </Button>
               </Group>
             </Stack>

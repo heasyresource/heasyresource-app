@@ -15,3 +15,4 @@ export { default as useAssignLeave } from "./useAssignLeave";
 export { default as useSearchLeave } from "./useSearchLeave";
 export { default as useCompleteReg } from "./useCompleteReg";
 export { default as useUploadImage } from "./useUploadImage";
+export { default as useAddDepartment } from "./useAddDepartment";

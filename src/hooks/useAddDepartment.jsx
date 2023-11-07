@@ -1,59 +1,43 @@
 "use client";
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
-import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
+import { getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
-const useAddHolidayType = () => {
+const useAddDepartment = () => {
   const subdomain = getSubdomain();
   const { data: session } = useSession();
-  const [holidays, setHolidays] = useState(null);
+  const [departments, setDepartments] = useState(null);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(false);
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
-  const [gettingDatas, setGettingDatas] = useState(false);
+  const [getttingDatas, setGettingDatas] = useState(false);
   const [isChanged, setIsChanged] = useState(null);
   const [itemID, setItemID] = useState("");
   const form = useForm({
     initialValues: {
       name: "",
-      isFullDay: "",
-      date: "",
-      availability: "",
-      isPaid: "",
-      comments: "",
+      code: "",
     },
     validate: {
-      name: (value) => (!value.length ? "Leave Type Name is required" : null),
-      availability: (value) =>
-        !value.length ? "Avalability is required" : null,
-      isFullDay: (value) => (!value.length ? "Field is required" : null),
-      date: (value) => (value.length === 0 ? "Date is required" : null),
-      isPaid: (value) => (!value.length ? "Field is required" : null),
+      name: (val) => (!val.length ? "Department name is required" : null),
+      code: (val) => (!val.length ? "Department code is required" : null),
     },
   });
   const editForm = useForm({
     initialValues: {
       name: "",
-      isFullDay: "",
-      date: "",
-      availability: "",
-      isPaid: "",
-      comments: "",
+      code: "",
     },
     validate: {
-      name: (value) => (!value.length ? "Leave Type Name is required" : null),
-      availability: (value) =>
-        !value.length ? "Avalability is required" : null,
-      isFullDay: (value) => (!value.length ? "Field is required" : null),
-      date: (value) => (value.length === 0 ? "Date is required" : null),
-      isPaid: (value) => (!value.length ? "Field is required" : null),
+      name: (val) => (!val.length ? "Department name is required" : null),
+      code: (val) => (!val.length ? "Department code is required" : null),
     },
   });
   const headerSettings = {
@@ -66,28 +50,21 @@ const useAddHolidayType = () => {
     setLoading(true);
     if (type === "add") {
       try {
-        const modifiedValues = {
-          ...data,
-          isPaid: data.isPaid === "Yes",
-          isFullDay: data.isFullDay === "Yes",
-          date: convertDateFormat(data.date),
-        };
         const response = await apiClient.post(
-          "/holiday-types",
-          modifiedValues,
+          "/departments",
+          data,
           headerSettings
         );
         notifications.show({
           color: "white",
           title: "Success",
-          message: "Holiday added successfully. ",
+          message: "Department added successfully. ",
           styles: successStyles,
           autoClose: 7000,
         });
         setLoading(false);
         setIsChanged(response);
         closeAdd();
-        form.reset();
       } catch (err) {
         if (err.errors) {
           err.errors.forEach((error) => {
@@ -103,8 +80,8 @@ const useAddHolidayType = () => {
           autoClose: 7000,
         });
         setLoading(false);
-        setIsChanged(false);
-        console.log(err, "Error Adding Holiday");
+
+        console.log(err, "Error Adding department");
       }
     }
   };
@@ -113,22 +90,23 @@ const useAddHolidayType = () => {
     try {
       if (itemID.length !== 0) {
         const response = await apiClient.delete(
-          `/holiday-types/${itemID}`,
+          `/departments/${itemID}`,
           headerSettings
         );
         notifications.show({
           color: "white",
           title: "Success",
-          message: "Holiday deleted successfully. ",
+          message: "Department deleted successfully. ",
           styles: successStyles,
           autoClose: 7000,
         });
+        console.log(response, "deleted department");
         setLoading(false);
         setItemID("");
         setIsChanged(response);
       }
     } catch (err) {
-      console.log(err, "Error deleting leave");
+      console.log(err, "Error deleting department");
       notifications.show({
         color: "red",
         message: "Something went wrong, please try again.",
@@ -136,8 +114,8 @@ const useAddHolidayType = () => {
         autoClose: 7000,
       });
       setLoading(false);
-      // setIsChanged(false);
-      console.log(err, "Error deleting holiday");
+
+      console.log(err, "Error deleting department");
     }
   };
   const handleEdit = async (data, type) => {
@@ -145,16 +123,9 @@ const useAddHolidayType = () => {
     if (type === "edit") {
       try {
         if (itemID.length !== 0) {
-          const modifiedValues = {
-            ...data,
-            isPaid: data.isPaid === "Yes",
-            isFullDay: data.isFullDay === "Yes",
-            date: convertDateFormat(data.date),
-          };
-
           const response = await apiClient.put(
-            `/holiday-types/${itemID}`,
-            modifiedValues,
+            `/departments/${itemID}`,
+            data,
             headerSettings
           );
           notifications.show({
@@ -177,18 +148,18 @@ const useAddHolidayType = () => {
           autoClose: 7000,
         });
         setLoading(false);
-        setIsChanged(false);
+
         console.log(err, "Error Edit department");
       }
     }
   };
-
-  const getHolidays = async () => {
+  const getDepartments = async () => {
     setGettingDatas(true);
     try {
-      const response = await apiClient.get("/holiday-types", headerSettings);
-      setHolidays(response?.results.data);
+      const response = await apiClient.get("/departments", headerSettings);
+      setDepartments(response?.results.data);
       setPagination(response?.results.meta);
+      console.log(response, "getting department");
       setGettingDatas(false);
     } catch (err) {
       setGettingDatas(false);
@@ -196,35 +167,37 @@ const useAddHolidayType = () => {
         color: "red",
         message: "Something went wrong, please try again.",
         styles: errorStyles,
-        autoClose: 7000,
+        autoClose: 2000,
       });
+      console.log(err, "Error getting departments");
     }
   };
-
   useEffect(() => {
-    getHolidays();
+    getDepartments();
   }, []);
   useEffect(() => {
-    getHolidays();
+    if (isChanged) {
+      getDepartments();
+    }
   }, [isChanged]);
   return {
-    form,
-    handleSubmit,
-    holidays,
-    openAdd,
-    openedAdd,
-    closeAdd,
     loading,
-    openEdit,
-    openedEdit,
-    closeEdit,
-    editForm,
-    gettingDatas,
-    setItemID,
+    form,
+    departments,
+    handleSubmit,
     handleDelete,
     handleEdit,
+    getttingDatas,
+    editForm,
+    setItemID,
+    openedAdd,
+    closeAdd,
+    openAdd,
+    openedEdit,
+    closeEdit,
+    openEdit,
     pagination,
   };
 };
 
-export default useAddHolidayType;
+export default useAddDepartment;

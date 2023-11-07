@@ -18,7 +18,7 @@ const EmployeeInfo = () => {
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
-        Employee Information
+        Employment Information
       </Text>
       <form
         style={{ height: "100%", marginTop: "2rem" }}

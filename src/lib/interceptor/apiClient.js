@@ -17,9 +17,17 @@ export const apiClient = {
       throw error.response.data;
     }
   },
-  get: async (endpoint) => {
+  get: async (endpoint, config) => {
     try {
-      const response = await api.get(endpoint);
+      const response = await api.get(endpoint, config);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
+  delete: async (endpoint, config) => {
+    try {
+      const response = await api.delete(endpoint, config);
       return response.data;
     } catch (error) {
       throw error.response.data;

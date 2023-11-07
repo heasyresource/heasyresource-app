@@ -6,6 +6,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Modal,
   Select,
   Stack,
@@ -13,16 +14,14 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
 import classes from "./leaveLayout.module.css";
 import React from "react";
-import { useDisclosure } from "@mantine/hooks";
 import { DateInput } from "@mantine/dates";
 import { useAddHolidayType } from "@/hooks";
 
 const AddLeaveType = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const { form, handleSubmit } = useAddHolidayType();
+  const { form, handleSubmit, openedAdd, closeAdd, openAdd, loading } =
+    useAddHolidayType();
   return (
     <>
       <Flex
@@ -43,7 +42,7 @@ const AddLeaveType = () => {
           Holiday Types
         </Text>
         <Button
-          onClick={open}
+          onClick={openAdd}
           variant="filled"
           tt={"capitalize"}
           style={{ backgroundColor: "#e7f7ff", color: "#000000" }}
@@ -53,8 +52,8 @@ const AddLeaveType = () => {
       </Flex>
       <Modal
         closeOnClickOutside={false}
-        opened={opened}
-        onClose={close}
+        opened={openedAdd}
+        onClose={closeAdd}
         title="Add Leave Type"
         size="xl"
         centered
@@ -66,7 +65,9 @@ const AddLeaveType = () => {
           >
             add holiday type
           </Text>
-          <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+          <form
+            onSubmit={form.onSubmit((values) => handleSubmit(values, "add"))}
+          >
             <Stack gap={"1.5rem"} mt={"1rem"}>
               <Grid gutter={"md"}>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -79,6 +80,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
+                    disabled={loading}
                     {...form.getInputProps("name")}
                   />
                 </GridCol>
@@ -94,6 +96,7 @@ const AddLeaveType = () => {
                       placeholder: classes.placeholder,
                     }}
                     {...form.getInputProps("date")}
+                    disabled={loading}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -106,7 +109,9 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("avalability")}
+                    {...form.getInputProps("availability")}
+                    disabled={loading}
+                    data={["All employees"]}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -119,7 +124,9 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("day")}
+                    {...form.getInputProps("isFullDay")}
+                    data={["Yes", "No"]}
+                    disabled={loading}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -132,7 +139,9 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("paid")}
+                    {...form.getInputProps("isPaid")}
+                    data={["Yes", "No"]}
+                    disabled={loading}
                   />
                 </GridCol>
               </Grid>
@@ -140,6 +149,7 @@ const AddLeaveType = () => {
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
                 {...form.getInputProps("notes")}
+                disabled={loading}
               />
               <Group
                 justify="flex-end"
@@ -156,7 +166,8 @@ const AddLeaveType = () => {
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={close}
+                  onClick={closeAdd}
+                  disabled={loading}
                 >
                   cancel
                 </Button>
@@ -172,8 +183,13 @@ const AddLeaveType = () => {
                   style={{
                     backgroundColor: "#3377FF",
                   }}
+                  disabled={loading}
                 >
-                  add
+                  {loading ? (
+                    <Loader color="white" type="dots" size="md" />
+                  ) : (
+                    "add"
+                  )}
                 </Button>
               </Group>
             </Stack>
