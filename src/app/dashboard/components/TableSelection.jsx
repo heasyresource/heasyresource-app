@@ -34,7 +34,11 @@ export function TableSelection() {
               width: "80px",
               render: ({ avatar }) => (
                 <Flex justify="center" align="center">
-                  <Avatar size={26} src={avatar} radius={26} />
+                  <Avatar
+                    size={26}
+                    src={avatar || "/assets/images/avata2.png"}
+                    radius={26}
+                  />
                 </Flex>
               ),
             },

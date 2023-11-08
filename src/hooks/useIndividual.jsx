@@ -78,6 +78,12 @@ const useIndividual = () => {
           form.setFieldError(field, message);
         });
       }
+      if (err.message === "Could not add employee with this email domain.") {
+        form.setFieldError(
+          "email",
+          "Could not add employee with this email domain"
+        );
+      }
       setLoading(false);
     }
   };
