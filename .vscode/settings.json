@@ -1,0 +1,27 @@
+{
+    "editor.tokenColorCustomizations": {
+      "textMateRules": [
+        {
+          "scope": [
+            "comment",
+            "keyword",
+            "storage.modifier",
+            "storage.type.class.js",
+            "storage.type.js"
+          ],
+          "settings": {
+            "fontStyle": "italic bold",
+          }
+        },
+        {
+          "scope": [
+            "keyword.control.conditional",
+            "keyword.operator"
+          ],
+          "settings": {
+            "fontStyle": ""
+          }
+        }
+      ]
+    },
+  }

@@ -1,10 +1,10 @@
-import HiringTable from "@/components/HiringLayout/HiringTable";
-import SearchFields from "@/components/HiringLayout/SearchFields";
+import AddCandidate from "@/components/HiringLayout/AddCandidate";
+import AddVacancy from "@/components/HiringLayout/AddVacancy";
 import HiringNav from "@/components/HiringNav";
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
 
-const Hiring = () => {
+const page = () => {
   return (
     <>
       <Card
@@ -23,11 +23,10 @@ const Hiring = () => {
         >
           <HiringNav tabTitle="Hiring" />
         </CardSection>
-        <SearchFields />
+        <AddVacancy />
       </Card>
-      <HiringTable />
     </>
   )
 };
 
-export default Hiring;
+export default page;

@@ -1,10 +1,12 @@
-import HiringTable from "@/components/HiringLayout/HiringTable";
-import SearchFields from "@/components/HiringLayout/SearchFields";
+import ApplicationFields from "@/components/HiringLayout/ApplicationFields";
+import CandidateProfile from "@/components/HiringLayout/CandidateProfile";
+import VacancySearchFields from "@/components/HiringLayout/VacancySearchFields";
+import VacancyTable from "@/components/HiringLayout/VacancyTable";
 import HiringNav from "@/components/HiringNav";
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
 
-const Hiring = () => {
+const ApplicationPhase = () => {
   return (
     <>
       <Card
@@ -23,11 +25,11 @@ const Hiring = () => {
         >
           <HiringNav tabTitle="Hiring" />
         </CardSection>
-        <SearchFields />
+        <ApplicationFields />
+        <CandidateProfile />
       </Card>
-      <HiringTable />
     </>
   )
 };
 
-export default Hiring;
+export default ApplicationPhase;
