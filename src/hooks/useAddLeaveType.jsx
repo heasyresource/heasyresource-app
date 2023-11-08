@@ -181,7 +181,7 @@ const useAddLeaveType = () => {
   };
   useEffect(() => {
     getLeaves();
-  }, []);
+  }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
       getLeaves();

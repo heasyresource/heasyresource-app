@@ -162,9 +162,9 @@ const DepartmentsTable = () => {
             ),
           },
         ]}
-        totalRecords={pagination && pagination.total}
-        recordsPerPage={pagination && pagination.perPage}
-        page={pagination && pagination.currentPage}
+        totalRecords={pagination?.total}
+        recordsPerPage={pagination?.perPage}
+        page={pagination?.currentPage}
         onPageChange={(page) => paginate(page)}
       />
 
@@ -216,6 +216,7 @@ const DepartmentsTable = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
+                    maxLength={3}
                     {...form.getInputProps("code")}
                     disabled={loading}
                   />

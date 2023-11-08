@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./profileNav.module.css";
 import { Badge, Box, Divider, Stack, Text } from "@mantine/core";
 import { AddImage } from "..";
+import { obfuscateToken } from "@/utils/encryptToken";
 
 const data = [
   { link: "/dashboard/employee/personal-detail", label: "personal Details" },
@@ -15,6 +16,8 @@ const data = [
   { link: "/dashboard/employee/compensation", label: "compensation" },
 ];
 const ProfileNav = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const pathname = usePathname();
   const links = data.map((item) => (
     <Link
@@ -26,6 +29,17 @@ const ProfileNav = () => {
       <span>{item.label}</span>
     </Link>
   ));
+  useEffect(() => {
+    const user =
+      localStorage.getItem("employee") &&
+      obfuscateToken(false, localStorage.getItem("employee") ?? "");
+    if (user) {
+      const parsedData = JSON.parse(user);
+      setFirstName(parsedData.firstName);
+      setLastName(parsedData.lastName);
+    }
+  }, []);
+
   return (
     <Box>
       <nav className={classes.navbar}>
@@ -46,7 +60,7 @@ const ProfileNav = () => {
               ta="center"
               style={{ fontWeight: 500, fontSize: "20px" }}
             >
-              Adesuwa Odunlami
+              {`${firstName} ${lastName}`}
             </Text>
             <Badge
               variant="light"

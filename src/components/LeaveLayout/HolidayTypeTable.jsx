@@ -22,7 +22,6 @@ import { IconEdit, IconTrash, IconTrashX } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import classes from "./leaveLayout.module.css";
 import { DateInput } from "@mantine/dates";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export default function HolidayTypeTable() {
   const {
@@ -48,7 +47,7 @@ export default function HolidayTypeTable() {
       isPaid: data?.isPaid === 1 ? "Paid" : "Unpaid",
       isFullDay: data?.isFullDay === 1 ? "Full Day" : "Half Day",
       comments: data?.comments === null ? "" : data?.comments,
-      // date: data?.date,
+      date: new Date(data?.date),
     });
     openEdit();
   };
@@ -192,9 +191,9 @@ export default function HolidayTypeTable() {
               ),
             },
           ]}
-          totalRecords={pagination && pagination.total}
-          recordsPerPage={pagination && pagination.perPage}
-          page={pagination && pagination.currentPage}
+          totalRecords={pagination?.total}
+          recordsPerPage={pagination?.perPage}
+          page={pagination?.currentPage}
           onPageChange={(page) => paginate(page)}
         />
       )}

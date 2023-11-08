@@ -1,12 +1,24 @@
 "use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { getSubdomain } from "@/utils/publicFunctions";
 import { Box, Button, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { IconUserPlus } from "@tabler/icons-react";
-import React, { useState } from "react";
+import { useSession } from "next-auth/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
 
 const useSearch = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const subdomain = getSubdomain();
+  const { data: session } = useSession();
+  const [employees, setEmployees] = useState(null);
+  const [pagination, setPagination] = useState(null);
+  const [gettingData, setGettingData] = useState(false);
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const form = useForm({
@@ -17,6 +29,13 @@ const useSearch = () => {
       employeeDepartment: "",
     },
   });
+
+  const headerSettings = {
+    headers: {
+      Authorization: `Bearer ${session?.user.token}`,
+      "x-subdomain-name": subdomain,
+    },
+  };
   const openModal = () =>
     modals.open({
       radius: "md",
@@ -60,10 +79,45 @@ const useSearch = () => {
       console.log(err, "values error");
     }
   };
+  const paginate = (page) => {
+    const params = new URLSearchParams(searchParams);
+    if (page) {
+      params.set("page", page);
+    } else {
+      params.delete("page");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+  const getEmployees = async (params = "") => {
+    setGettingData(true);
+    if (searchParams.get("page")) {
+      params = searchParams.get("page");
+    }
+    try {
+      const response = await apiClient.get(
+        `/employees/${session?.user.company.id}?page=${params || "1"}`,
+        headerSettings
+      );
+      setEmployees(response?.results.data);
+      setPagination(response?.results.meta);
+      setGettingData(false);
+    } catch (err) {
+      setGettingData(false);
+      console.log(err, "Error getting employees");
+    }
+  };
+  useEffect(() => {
+    getEmployees();
+  }, []);
+
   return {
     form,
     handleSubmit,
     loading,
+    paginate,
+    employees,
+    gettingData,
+    pagination,
   };
 };
 

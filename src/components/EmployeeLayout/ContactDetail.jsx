@@ -13,7 +13,8 @@ import classes from "./employeeLayout.module.css";
 import { useContactDetail } from "@/hooks";
 
 const ContactDetail = () => {
-  const { form, handleSubmit, loading } = useContactDetail();
+  const { form, handleSubmit, loading, LGA, countries, states } =
+    useContactDetail();
   return (
     <form
       onSubmit={form.onSubmit((values) => handleSubmit(values))}
@@ -34,10 +35,9 @@ const ContactDetail = () => {
               <TextInput
                 size="md"
                 withAsterisk
-                label="Full Name"
-                placeholder="John Smith"
+                label="Home Address"
                 disabled={loading}
-                {...form.getInputProps("fullName")}
+                {...form.getInputProps("street")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -50,9 +50,10 @@ const ContactDetail = () => {
                 placeholder="Ajeromi/Ifelodun"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                data={[]}
+                data={LGA}
                 disabled={loading}
-                {...form.getInputProps("lga")}
+                searchable
+                {...form.getInputProps("lgaId")}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -63,9 +64,10 @@ const ContactDetail = () => {
                 placeholder="Lagos State"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                data={[]}
+                data={states}
                 disabled={loading}
-                {...form.getInputProps("state")}
+                searchable
+                {...form.getInputProps("stateId")}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -75,7 +77,7 @@ const ContactDetail = () => {
                 label="Zip Code"
                 placeholder="2023920"
                 disabled={loading}
-                {...form.getInputProps("code")}
+                {...form.getInputProps("zipCode")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -87,9 +89,10 @@ const ContactDetail = () => {
                 label="Country"
                 placeholder="Nigeria"
                 disabled={loading}
-                {...form.getInputProps("country")}
+                searchable
+                {...form.getInputProps("countryId")}
                 style={{ textAlign: "start", width: "100%" }}
-                data={["Nigeria"]}
+                data={countries}
                 classNames={{ label: classes.label, error: classes.error }}
               />
             </Grid.Col>
@@ -113,9 +116,11 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Home"
                 disabled={loading}
-                {...form.getInputProps("homeTel")}
+                {...form.getInputProps("homePhoneNumber")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                leftSection={"+234"}
+                leftSectionWidth={50}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -125,9 +130,11 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Mobile"
                 disabled={loading}
-                {...form.getInputProps("mobileTel")}
+                {...form.getInputProps("mobilePhoneNumber")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                leftSection={"+234"}
+                leftSectionWidth={50}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -137,9 +144,11 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Work"
                 disabled={loading}
-                {...form.getInputProps("workTel")}
+                {...form.getInputProps("workPhoneNumber")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                leftSection={"+234"}
+                leftSectionWidth={50}
               />
             </Grid.Col>
           </Grid>
@@ -159,24 +168,11 @@ const ContactDetail = () => {
                 size="md"
                 type="email"
                 withAsterisk
-                label="Work Email"
+                label="Personal Email"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 disabled={loading}
                 placeholder="example@company.com"
-                {...form.getInputProps("workEmail")}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                type="email"
-                size="md"
-                withAsterisk
-                label="Personal Email"
-                placeholder="example@gmail.com"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                disabled={loading}
                 {...form.getInputProps("personalEmail")}
               />
             </Grid.Col>

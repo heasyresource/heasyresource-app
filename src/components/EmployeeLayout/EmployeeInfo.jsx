@@ -6,15 +6,18 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Select,
   Stack,
   Text,
   TextInput,
 } from "@mantine/core";
 import { useEmploymentInfo } from "@/hooks";
+import { DateInput } from "@mantine/dates";
 
 const EmployeeInfo = () => {
-  const { form, handleSubmit } = useEmploymentInfo();
+  const { form, handleSubmit, departments, employmentType, loading } =
+    useEmploymentInfo();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
@@ -36,59 +39,74 @@ const EmployeeInfo = () => {
 
             <Grid style={{ marginTop: "20px" }} gutter="xl">
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <Select
-                  data={["Front-End"]}
-                  size="md"
-                  withAsterisk
-                  label="Job Title"
-                  placeholder="Data Analysis"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("title")}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <Select
-                  size="md"
-                  withAsterisk
-                  label="Job Specification"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  data={[""]}
-                  {...form.getInputProps("specification")}
-                />
-              </GridCol>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  type="date"
-                  size="md"
-                  withAsterisk
-                  label="Joined Date"
-                  placeholder="DD/MM/YYYY"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("joinedDate")}
-                />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
                 <TextInput
                   size="md"
                   withAsterisk
-                  label="Job Category"
+                  label="Position"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("category")}
+                  {...form.getInputProps("position")}
+                  disabled={loading}
+                />
+              </GridCol>
+              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+                <Select
+                  size="md"
+                  withAsterisk
+                  label="Department"
+                  style={{ textAlign: "start", width: "100%" }}
+                  data={departments}
+                  classNames={{ label: classes.label, error: classes.error }}
+                  {...form.getInputProps("departmentId")}
+                  disabled={loading}
                 />
               </Grid.Col>
               <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
                 <Select
+                  size="md"
+                  withAsterisk
+                  label="Job Type"
+                  style={{ textAlign: "start", width: "100%" }}
+                  data={employmentType}
+                  classNames={{ label: classes.label, error: classes.error }}
+                  {...form.getInputProps("employmentTypeId")}
+                  disabled={loading}
+                />
+              </Grid.Col>
+              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+                <Select
+                  size="md"
+                  withAsterisk
+                  label="Job Mode"
+                  style={{ textAlign: "start", width: "100%" }}
+                  data={["On-Site", "Hybrid", "Remote"]}
+                  classNames={{ label: classes.label, error: classes.error }}
+                  {...form.getInputProps("workMode")}
+                  disabled={loading}
+                />
+              </Grid.Col>
+              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+                <Select
+                  disabled
                   size="md"
                   withAsterisk
                   label="Employment Status"
                   style={{ textAlign: "start", width: "100%" }}
-                  data={[]}
+                  data={["Pending", "Rejected", "Hired"]}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("status")}
+                />
+              </Grid.Col>
+
+              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+                <DateInput
+                  size="md"
+                  clearable
+                  withAsterisk
+                  style={{ textAlign: "start", width: "100%" }}
+                  label="Joined Date"
+                  classNames={{ label: classes.label, error: classes.error }}
+                  {...form.getInputProps("resumptionDate")}
+                  disabled={loading}
                 />
               </Grid.Col>
             </Grid>
@@ -105,53 +123,19 @@ const EmployeeInfo = () => {
             <Grid style={{ marginTop: "20px" }} gutter="xl">
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <Button
+                  disabled={loading}
                   variant="contained"
                   size="md"
                   color="#FF0000"
                   tt="capitalize"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  type="submit"
                   style={{
                     backgroundColor: "#FF0000",
                   }}
                 >
                   terminate employment
                 </Button>
-              </GridCol>
-            </Grid>
-          </Box>
-          <Box>
-            <Text
-              c="#4D4D4D"
-              tt="capitalize"
-              style={{ fontWeight: 500, fontSize: "18px", textAlign: "start" }}
-            >
-              Report to:
-            </Text>
-
-            <Grid style={{ marginTop: "20px" }} gutter="xl">
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <Select
-                  data={[]}
-                  size="md"
-                  withAsterisk
-                  label="Add Supervisor"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("supervisor")}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <Select
-                  size="md"
-                  withAsterisk
-                  label="Report Method"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  data={[""]}
-                  {...form.getInputProps("method")}
-                />
               </GridCol>
             </Grid>
           </Box>
@@ -170,6 +154,7 @@ const EmployeeInfo = () => {
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
+              disabled={loading}
             >
               cancel
             </Button>
@@ -185,8 +170,13 @@ const EmployeeInfo = () => {
               style={{
                 backgroundColor: "#3377FF",
               }}
+              disabled={loading}
             >
-              save
+              {loading ? (
+                <Loader color="white" type="dots" size="md" />
+              ) : (
+                "save"
+              )}
             </Button>
           </Group>
         </Stack>

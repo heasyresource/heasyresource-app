@@ -7,7 +7,10 @@ import { useSearch } from "@/hooks";
 const InputField = () => {
   const { loading, form, handleSubmit } = useSearch();
   return (
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+    <form
+      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      style={{ marginTop: "1rem" }}
+    >
       <Grid justify="space-between" className={classes.formWrap}>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }} mt={0}>
           <TextInput

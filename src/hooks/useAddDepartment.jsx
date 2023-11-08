@@ -169,7 +169,7 @@ const useAddDepartment = () => {
   };
   useEffect(() => {
     getDepartments();
-  }, []);
+  }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
       getDepartments();

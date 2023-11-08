@@ -35,26 +35,18 @@ const page = () => {
           <Stack justify="center" align="center" ta={"center"}>
             <AddImage />
             <Box>
-              <Text
-                tt="capitalize"
-                style={{ fontSize: "13px", fontWeight: 400 }}
-                c="#565656"
-              >
-                supported image formats: .jpg, .png, .gif
+              <Text style={{ fontSize: "13px", fontWeight: 400 }} c="#565656">
+                Supported image formats: .jpg, .png
               </Text>
               <Text
                 tt="capitalize"
                 style={{ fontSize: "13px", fontWeight: 400 }}
                 c="#565656"
               >
-                maximum file size: 1MB
+                Maximum file size: 1MB
               </Text>
-              <Text
-                tt="capitalize"
-                style={{ fontSize: "13px", fontWeight: 400 }}
-                c="#565656"
-              >
-                recommended dimension: 200px x 200px
+              <Text style={{ fontSize: "13px", fontWeight: 400 }} c="#565656">
+                Recommended dimension: (200 X 200)px
               </Text>
             </Box>
           </Stack>
