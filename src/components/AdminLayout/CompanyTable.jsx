@@ -5,9 +5,8 @@ import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import classes from "../../components/AdminLayout/admin.module.css";
-import { ActionIcon, Badge, Flex } from "@mantine/core";
+import { Badge} from "@mantine/core";
 import { usePathname } from "next/navigation";
-import { IconEye, IconTrash, IconDownload } from "@tabler/icons-react";
 import { clsx } from "clsx";
 
 const PAGE_SIZE = 10;
@@ -91,12 +90,14 @@ const CompanyTable = () => {
                 variant="light"
                 color="#3377FF"
                 size="md"
+                component="a"
+                href="/admin/company-general-info"
                 style={{
                   color: "#3377FF",
                   textTransform: "capitalize",
                   cursor: "pointer",
                 }}
-                // onClick={() => router.push("/dashboard/employee/personal-detail")}
+                // onClick={() => router.push("/admin/company-general-info")}
               >
                 more details
               </Badge>
