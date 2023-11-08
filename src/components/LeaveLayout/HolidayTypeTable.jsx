@@ -1,5 +1,4 @@
 "use client";
-
 import { useAddHolidayType } from "@/hooks";
 import { convertStringDate } from "@/utils/publicFunctions";
 import {
@@ -23,6 +22,7 @@ import { IconEdit, IconTrash, IconTrashX } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import classes from "./leaveLayout.module.css";
 import { DateInput } from "@mantine/dates";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export default function HolidayTypeTable() {
   const {
@@ -30,20 +30,23 @@ export default function HolidayTypeTable() {
     openedEdit,
     closeEdit,
     openEdit,
-    editForm,
+    form,
     gettingDatas,
     setItemID,
     loading,
     handleDelete,
     pagination,
+    paginate,
+    handleEdit,
   } = useAddHolidayType();
+
   const handleOpen = (data) => {
     setItemID(data?.id);
-    editForm.setValues({
+    form.setValues({
       name: data?.name,
       availability: data?.availability,
-      isPaid: data?.isPaid === 1 ? "Yes" : "No",
-      isFullDay: data?.isFullDay === 1 ? "Yes" : "No",
+      isPaid: data?.isPaid === 1 ? "Paid" : "Unpaid",
+      isFullDay: data?.isFullDay === 1 ? "Full Day" : "Half Day",
       comments: data?.comments === null ? "" : data?.comments,
       // date: data?.date,
     });
@@ -55,6 +58,10 @@ export default function HolidayTypeTable() {
       radius: "md",
       centered: true,
       closeOnClickOutside: false,
+      overlayProps: {
+        backgroundOpacity: 0.55,
+        blur: 3,
+      },
       children: (
         <Stack py={"3rem"} justify="center" align="center">
           <ActionIcon variant="transparent" size="xl">
@@ -113,6 +120,7 @@ export default function HolidayTypeTable() {
       ),
     });
   };
+
   return (
     <>
       {holidays?.length !== 0 && (
@@ -187,6 +195,7 @@ export default function HolidayTypeTable() {
           totalRecords={pagination && pagination.total}
           recordsPerPage={pagination && pagination.perPage}
           page={pagination && pagination.currentPage}
+          onPageChange={(page) => paginate(page)}
         />
       )}
       <Modal
@@ -196,6 +205,10 @@ export default function HolidayTypeTable() {
         title="Add Leave Type"
         size="lg"
         centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         <Box>
           <Text
@@ -205,7 +218,7 @@ export default function HolidayTypeTable() {
             edit holiday
           </Text>
           <form
-            onSubmit={editForm.onSubmit((values) => handleEdit(values, "edit"))}
+            onSubmit={form.onSubmit((values) => handleEdit(values, "edit"))}
           >
             <Stack gap={"1.5rem"} mt={"1rem"}>
               <Grid gutter={"md"}>
@@ -220,7 +233,7 @@ export default function HolidayTypeTable() {
                       placeholder: classes.placeholder,
                     }}
                     disabled={loading}
-                    {...editForm.getInputProps("name")}
+                    {...form.getInputProps("name")}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -234,7 +247,7 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("date")}
+                    {...form.getInputProps("date")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -248,7 +261,7 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("availability")}
+                    {...form.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
                   />
@@ -263,8 +276,8 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("isFullDay")}
-                    data={["Yes", "No"]}
+                    {...form.getInputProps("isFullDay")}
+                    data={["Full Day", "Half Day"]}
                     disabled={loading}
                   />
                 </GridCol>
@@ -278,8 +291,8 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("isPaid")}
-                    data={["Yes", "No"]}
+                    {...form.getInputProps("isPaid")}
+                    data={["Paid", "Unpaid"]}
                     disabled={loading}
                   />
                 </GridCol>
@@ -287,7 +300,7 @@ export default function HolidayTypeTable() {
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...editForm.getInputProps("comments")}
+                {...form.getInputProps("comments")}
                 disabled={loading}
               />
               <Group

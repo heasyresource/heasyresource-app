@@ -57,6 +57,10 @@ const AddLeaveType = () => {
         title="Add Leave Type"
         size="xl"
         centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         <Box>
           <Text
@@ -125,7 +129,7 @@ const AddLeaveType = () => {
                       placeholder: classes.placeholder,
                     }}
                     {...form.getInputProps("isFullDay")}
-                    data={["Yes", "No"]}
+                    data={["Full Day", "Half Day"]}
                     disabled={loading}
                   />
                 </GridCol>
@@ -140,7 +144,7 @@ const AddLeaveType = () => {
                       placeholder: classes.placeholder,
                     }}
                     {...form.getInputProps("isPaid")}
-                    data={["Yes", "No"]}
+                    data={["Paid", "Unpaid"]}
                     disabled={loading}
                   />
                 </GridCol>
@@ -148,7 +152,7 @@ const AddLeaveType = () => {
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...form.getInputProps("notes")}
+                {...form.getInputProps("comments")}
                 disabled={loading}
               />
               <Group

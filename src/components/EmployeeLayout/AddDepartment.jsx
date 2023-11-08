@@ -56,6 +56,10 @@ const AddDepartment = () => {
         title="Add Leave Type"
         size="lg"
         centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         <Box>
           <Text

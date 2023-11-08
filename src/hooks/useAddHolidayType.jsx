@@ -6,9 +6,13 @@ import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useAddHolidayType = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const subdomain = getSubdomain();
   const { data: session } = useSession();
   const [holidays, setHolidays] = useState(null);
@@ -38,24 +42,6 @@ const useAddHolidayType = () => {
       isPaid: (value) => (!value.length ? "Field is required" : null),
     },
   });
-  const editForm = useForm({
-    initialValues: {
-      name: "",
-      isFullDay: "",
-      date: "",
-      availability: "",
-      isPaid: "",
-      comments: "",
-    },
-    validate: {
-      name: (value) => (!value.length ? "Leave Type Name is required" : null),
-      availability: (value) =>
-        !value.length ? "Avalability is required" : null,
-      isFullDay: (value) => (!value.length ? "Field is required" : null),
-      date: (value) => (value.length === 0 ? "Date is required" : null),
-      isPaid: (value) => (!value.length ? "Field is required" : null),
-    },
-  });
   const headerSettings = {
     headers: {
       Authorization: `Bearer ${session?.user.token}`,
@@ -68,8 +54,8 @@ const useAddHolidayType = () => {
       try {
         const modifiedValues = {
           ...data,
-          isPaid: data.isPaid === "Yes",
-          isFullDay: data.isFullDay === "Yes",
+          isPaid: data.isPaid === "Paid",
+          isFullDay: data.isFullDay === "Full Day",
           date: convertDateFormat(data.date),
         };
         const response = await apiClient.post(
@@ -84,6 +70,7 @@ const useAddHolidayType = () => {
           styles: successStyles,
           autoClose: 7000,
         });
+        form.reset();
         setLoading(false);
         setIsChanged(response);
         closeAdd();
@@ -92,19 +79,12 @@ const useAddHolidayType = () => {
         if (err.errors) {
           err.errors.forEach((error) => {
             const { field, message } = error;
-            console.log(field, message, "message");
+
             form.setFieldError(field, message);
           });
         }
-        notifications.show({
-          color: "red",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
+
         setLoading(false);
-        setIsChanged(false);
-        console.log(err, "Error Adding Holiday");
       }
     }
   };
@@ -128,7 +108,6 @@ const useAddHolidayType = () => {
         setIsChanged(response);
       }
     } catch (err) {
-      console.log(err, "Error deleting leave");
       notifications.show({
         color: "red",
         message: "Something went wrong, please try again.",
@@ -136,8 +115,6 @@ const useAddHolidayType = () => {
         autoClose: 7000,
       });
       setLoading(false);
-      // setIsChanged(false);
-      console.log(err, "Error deleting holiday");
     }
   };
   const handleEdit = async (data, type) => {
@@ -147,8 +124,8 @@ const useAddHolidayType = () => {
         if (itemID.length !== 0) {
           const modifiedValues = {
             ...data,
-            isPaid: data.isPaid === "Yes",
-            isFullDay: data.isFullDay === "Yes",
+            isPaid: data.isPaid === "Paid",
+            isFullDay: data.isFullDay === "Full Day",
             date: convertDateFormat(data.date),
           };
 
@@ -160,7 +137,7 @@ const useAddHolidayType = () => {
           notifications.show({
             color: "white",
             title: "Success",
-            message: "Department updated successfully. ",
+            message: "Holiday updated successfully. ",
             styles: successStyles,
             autoClose: 7000,
           });
@@ -168,25 +145,40 @@ const useAddHolidayType = () => {
           setLoading(false);
           setItemID("");
           setIsChanged(response);
+          form.reset();
         }
       } catch (err) {
-        notifications.show({
-          color: "red",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
+        if (err.errors) {
+          err.errors.forEach((error) => {
+            const { field, message } = error;
+            form.setFieldError(field, message);
+          });
+        }
+
         setLoading(false);
-        setIsChanged(false);
-        console.log(err, "Error Edit department");
       }
     }
   };
-
-  const getHolidays = async () => {
+  const paginate = (page) => {
+    const params = new URLSearchParams(searchParams);
+    if (page) {
+      params.set("page", page);
+    } else {
+      params.delete("page");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+  const getHolidays = async (params = "") => {
     setGettingDatas(true);
+    if (searchParams.get("page")) {
+      params = searchParams.get("page");
+    }
+
     try {
-      const response = await apiClient.get("/holiday-types", headerSettings);
+      const response = await apiClient.get(
+        `/holiday-types?page=${params || "1"}`,
+        headerSettings
+      );
       setHolidays(response?.results.data);
       setPagination(response?.results.meta);
       setGettingDatas(false);
@@ -203,7 +195,7 @@ const useAddHolidayType = () => {
 
   useEffect(() => {
     getHolidays();
-  }, []);
+  }, [searchParams.get("page")]);
   useEffect(() => {
     getHolidays();
   }, [isChanged]);
@@ -218,11 +210,11 @@ const useAddHolidayType = () => {
     openEdit,
     openedEdit,
     closeEdit,
-    editForm,
     gettingDatas,
     setItemID,
     handleDelete,
     handleEdit,
+    paginate,
     pagination,
   };
 };

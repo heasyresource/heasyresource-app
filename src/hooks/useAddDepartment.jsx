@@ -6,9 +6,13 @@ import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useAddDepartment = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const subdomain = getSubdomain();
   const { data: session } = useSession();
   const [departments, setDepartments] = useState(null);
@@ -21,16 +25,6 @@ const useAddDepartment = () => {
   const [isChanged, setIsChanged] = useState(null);
   const [itemID, setItemID] = useState("");
   const form = useForm({
-    initialValues: {
-      name: "",
-      code: "",
-    },
-    validate: {
-      name: (val) => (!val.length ? "Department name is required" : null),
-      code: (val) => (!val.length ? "Department code is required" : null),
-    },
-  });
-  const editForm = useForm({
     initialValues: {
       name: "",
       code: "",
@@ -65,23 +59,16 @@ const useAddDepartment = () => {
         setLoading(false);
         setIsChanged(response);
         closeAdd();
+        form.reset();
       } catch (err) {
         if (err.errors) {
           err.errors.forEach((error) => {
             const { field, message } = error;
-            console.log(field, message, "message");
+
             form.setFieldError(field, message);
           });
         }
-        notifications.show({
-          color: "red",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
         setLoading(false);
-
-        console.log(err, "Error Adding department");
       }
     }
   };
@@ -100,13 +87,11 @@ const useAddDepartment = () => {
           styles: successStyles,
           autoClose: 7000,
         });
-        console.log(response, "deleted department");
         setLoading(false);
         setItemID("");
         setIsChanged(response);
       }
     } catch (err) {
-      console.log(err, "Error deleting department");
       notifications.show({
         color: "red",
         message: "Something went wrong, please try again.",
@@ -114,8 +99,6 @@ const useAddDepartment = () => {
         autoClose: 7000,
       });
       setLoading(false);
-
-      console.log(err, "Error deleting department");
     }
   };
   const handleEdit = async (data, type) => {
@@ -139,27 +122,40 @@ const useAddDepartment = () => {
           setLoading(false);
           setItemID("");
           setIsChanged(response);
+          form.reset();
         }
       } catch (err) {
-        notifications.show({
-          color: "red",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
+        if (err.errors) {
+          err.errors.forEach((error) => {
+            const { field, message } = error;
+            form.setFieldError(field, message);
+          });
+        }
         setLoading(false);
-
-        console.log(err, "Error Edit department");
       }
     }
   };
-  const getDepartments = async () => {
+  const paginate = (page) => {
+    const params = new URLSearchParams(searchParams);
+    if (page) {
+      params.set("page", page);
+    } else {
+      params.delete("page");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+  const getDepartments = async (params = "") => {
     setGettingDatas(true);
+    if (searchParams.get("page")) {
+      params = searchParams.get("page");
+    }
     try {
-      const response = await apiClient.get("/departments", headerSettings);
+      const response = await apiClient.get(
+        `/departments?page=${params || "1"}`,
+        headerSettings
+      );
       setDepartments(response?.results.data);
       setPagination(response?.results.meta);
-      console.log(response, "getting department");
       setGettingDatas(false);
     } catch (err) {
       setGettingDatas(false);
@@ -169,7 +165,6 @@ const useAddDepartment = () => {
         styles: errorStyles,
         autoClose: 2000,
       });
-      console.log(err, "Error getting departments");
     }
   };
   useEffect(() => {
@@ -188,7 +183,6 @@ const useAddDepartment = () => {
     handleDelete,
     handleEdit,
     getttingDatas,
-    editForm,
     setItemID,
     openedAdd,
     closeAdd,
@@ -197,6 +191,7 @@ const useAddDepartment = () => {
     closeEdit,
     openEdit,
     pagination,
+    paginate,
   };
 };
 

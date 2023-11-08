@@ -6,9 +6,13 @@ import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useAddLeaveType = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const subdomain = getSubdomain();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
@@ -21,19 +25,6 @@ const useAddLeaveType = () => {
   const [gettingData, setGettingData] = useState(false);
   const [itemID, setItemID] = useState("");
   const form = useForm({
-    initialValues: {
-      name: "",
-      availability: "",
-      isPaid: "",
-      comments: "",
-    },
-    validate: {
-      name: (val) => (!val.length ? "Leave Type is required" : null),
-      availability: (val) => (!val.length ? "Availability is required" : null),
-      isPaid: (val) => (!val.length ? "Select option" : null),
-    },
-  });
-  const editForm = useForm({
     initialValues: {
       name: "",
       availability: "",
@@ -59,7 +50,7 @@ const useAddLeaveType = () => {
       try {
         const modifiedValues = {
           ...data,
-          isPaid: data.isPaid === "Yes",
+          isPaid: data.isPaid === "Paid",
         };
         const response = await apiClient.post(
           "/leave-types",
@@ -76,23 +67,16 @@ const useAddLeaveType = () => {
         setLoading(false);
         setIsChanged(response);
         closeAdd();
+        form.reset();
       } catch (err) {
         if (err.errors) {
           err.errors.forEach((error) => {
             const { field, message } = error;
-            console.log(field, message, "message");
             form.setFieldError(field, message);
           });
         }
-        notifications.show({
-          color: "red",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
+
         setLoading(false);
-        setIsChanged(false);
-        console.log(err, "Error submitting");
       }
     }
   };
@@ -111,13 +95,11 @@ const useAddLeaveType = () => {
           styles: successStyles,
           autoClose: 7000,
         });
-        console.log(response, "deleted leave");
         setLoading(false);
         setItemID("");
         setIsChanged(response);
       }
     } catch (err) {
-      console.log(err, "Error deleting leave");
       notifications.show({
         color: "red",
         message: "Something went wrong, please try again.",
@@ -125,7 +107,6 @@ const useAddLeaveType = () => {
         autoClose: 7000,
       });
       setLoading(false);
-      console.log(err, "Error deleting leave");
     }
   };
   const handleEdit = async (data, type) => {
@@ -135,7 +116,7 @@ const useAddLeaveType = () => {
         if (itemID.length !== 0) {
           const modifiedValues = {
             ...data,
-            isPaid: data.isPaid === "Yes",
+            isPaid: data.isPaid === "Paid",
           };
           const response = await apiClient.put(
             `/leave-types/${itemID}`,
@@ -145,7 +126,7 @@ const useAddLeaveType = () => {
           notifications.show({
             color: "white",
             title: "Success",
-            message: "Department updated successfully. ",
+            message: "Leave updated successfully. ",
             styles: successStyles,
             autoClose: 7000,
           });
@@ -153,24 +134,38 @@ const useAddLeaveType = () => {
           setLoading(false);
           setItemID("");
           setIsChanged(response);
+          form.reset();
         }
       } catch (err) {
-        notifications.show({
-          color: "red",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
+        if (err.errors) {
+          err.errors.forEach((error) => {
+            const { field, message } = error;
+            form.setFieldError(field, message);
+          });
+        }
         setLoading(false);
-        setIsChanged(false);
-        console.log(err, "Error Edit department");
       }
     }
   };
-  const getLeaves = async () => {
+  const paginate = (page) => {
+    const params = new URLSearchParams(searchParams);
+    if (page) {
+      params.set("page", page);
+    } else {
+      params.delete("page");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+  const getLeaves = async (params = "") => {
     setGettingData(true);
+    if (searchParams.get("page")) {
+      params = searchParams.get("page");
+    }
     try {
-      const response = await apiClient.get("/leave-types", headerSettings);
+      const response = await apiClient.get(
+        `/leave-types?page=${params || "1"}`,
+        headerSettings
+      );
       setLeaves(response.results.data);
       setPagination(response.results.meta);
       setGettingData(false);
@@ -182,7 +177,6 @@ const useAddLeaveType = () => {
         styles: errorStyles,
         autoClose: 7000,
       });
-      console.log(err, "Error getting departments");
     }
   };
   useEffect(() => {
@@ -193,7 +187,6 @@ const useAddLeaveType = () => {
       getLeaves();
     }
   }, [isChanged]);
-  console.log(leaves, "leaves");
   return {
     form,
     gettingData,
@@ -207,10 +200,10 @@ const useAddLeaveType = () => {
     openEdit,
     closeEdit,
     openedEdit,
-    editForm,
     handleDelete,
     handleEdit,
     pagination,
+    paginate,
   };
 };
 

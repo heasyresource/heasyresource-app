@@ -1,5 +1,4 @@
 "use client";
-import { departmentType } from "@/utils/publicFunctions";
 import {
   ActionIcon,
   Box,
@@ -14,10 +13,9 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { IconEdit, IconTrash, IconTrashX } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./employeeLayout.module.css";
 import { useAddDepartment } from "@/hooks";
 import { modals } from "@mantine/modals";
@@ -28,17 +26,18 @@ const DepartmentsTable = () => {
     handleEdit,
     loading,
     getttingDatas,
-    editForm,
+    form,
     setItemID,
     openEdit,
     closeEdit,
     openedEdit,
+    paginate,
     pagination,
   } = useAddDepartment();
 
   const handleOpen = (data) => {
     setItemID(data?.id);
-    editForm.setValues({ name: data?.name, code: data?.code });
+    form.setValues({ name: data?.name, code: data?.code });
     openEdit();
   };
   const openModal = (data) => {
@@ -47,6 +46,10 @@ const DepartmentsTable = () => {
       radius: "md",
       centered: true,
       closeOnClickOutside: false,
+      overlayProps: {
+        backgroundOpacity: 0.55,
+        blur: 3,
+      },
       children: (
         <Stack py={"3rem"} justify="center" align="center">
           <ActionIcon variant="transparent" size="xl">
@@ -162,6 +165,7 @@ const DepartmentsTable = () => {
         totalRecords={pagination && pagination.total}
         recordsPerPage={pagination && pagination.perPage}
         page={pagination && pagination.currentPage}
+        onPageChange={(page) => paginate(page)}
       />
 
       <Modal
@@ -171,6 +175,10 @@ const DepartmentsTable = () => {
         title="Add Leave Type"
         size="lg"
         centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         <Box>
           <Text
@@ -180,7 +188,7 @@ const DepartmentsTable = () => {
             edit department
           </Text>
           <form
-            onSubmit={editForm.onSubmit((values) => handleEdit(values, "edit"))}
+            onSubmit={form.onSubmit((values) => handleEdit(values, "edit"))}
           >
             <Stack gap={"2rem"} mt={"1rem"}>
               <Grid gutter={"xl"}>
@@ -194,7 +202,7 @@ const DepartmentsTable = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("name")}
+                    {...form.getInputProps("name")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -208,7 +216,7 @@ const DepartmentsTable = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("code")}
+                    {...form.getInputProps("code")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -230,7 +238,7 @@ const DepartmentsTable = () => {
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
                   onClick={() => {
-                    editForm.setValues({ name: "", code: "" });
+                    form.setValues({ name: "", code: "" });
                     closeEdit();
                     setItemID("");
                   }}

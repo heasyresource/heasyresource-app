@@ -57,6 +57,10 @@ const AddLeaveType = () => {
         title="Add Leave Type"
         size="xl"
         centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         <Box>
           <Text
@@ -101,8 +105,8 @@ const AddLeaveType = () => {
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
                   <Select
-                    label="Paid"
-                    data={["Yes", "No"]}
+                    label="Paid or Unpaid"
+                    data={["Paid", "Unpaid"]}
                     withAsterisk
                     size="md"
                     classNames={{

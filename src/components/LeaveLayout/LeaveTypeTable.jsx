@@ -1,5 +1,4 @@
 "use client";
-
 import { useAddLeaveType } from "@/hooks";
 import {
   ActionIcon,
@@ -21,7 +20,6 @@ import { modals } from "@mantine/modals";
 import { IconTrashX, IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import classes from "./leaveLayout.module.css";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export default function LeaveTypeTable() {
   const {
@@ -31,21 +29,20 @@ export default function LeaveTypeTable() {
     openedEdit,
     closeEdit,
     setItemID,
-    editForm,
+    form,
     handleDelete,
     loading,
     handleEdit,
     pagination,
+    paginate,
   } = useAddLeaveType();
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+
   const handleOpen = (data) => {
     setItemID(data?.id);
-    editForm.setValues({
+    form.setValues({
       name: data?.name,
       availability: data?.availability,
-      isPaid: data?.isPaid === 1 ? "Yes" : "No",
+      isPaid: data?.isPaid === 1 ? "Paid" : "Unpaid",
       comments: data?.comments === null ? "" : data?.comments,
     });
     openEdit();
@@ -56,6 +53,10 @@ export default function LeaveTypeTable() {
       radius: "md",
       centered: true,
       closeOnClickOutside: false,
+      overlayProps: {
+        backgroundOpacity: 0.55,
+        blur: 3,
+      },
       children: (
         <Stack py={"3rem"} justify="center" align="center">
           <ActionIcon variant="transparent" size="xl">
@@ -110,15 +111,7 @@ export default function LeaveTypeTable() {
       ),
     });
   };
-  const paginate = (page) => {
-    const currentQuery = searchParams;
-    currentQuery.page = page;
-    const currentPath = router.pathname;
-    router.push({
-      pathname: currentPath,
-      query: currentQuery,
-    });
-  };
+
   return (
     <>
       <DataTable
@@ -174,6 +167,7 @@ export default function LeaveTypeTable() {
         totalRecords={pagination && pagination.total}
         recordsPerPage={pagination && pagination.perPage}
         page={pagination && pagination.currentPage}
+        onPageChange={(page) => paginate(page)}
       />
       <Modal
         closeOnClickOutside={false}
@@ -182,6 +176,10 @@ export default function LeaveTypeTable() {
         title="Add Leave Type"
         size="lg"
         centered
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
       >
         <Box>
           <Text
@@ -191,7 +189,7 @@ export default function LeaveTypeTable() {
             edit leave
           </Text>
           <form
-            onSubmit={editForm.onSubmit((values) => handleEdit(values, "edit"))}
+            onSubmit={form.onSubmit((values) => handleEdit(values, "edit"))}
           >
             <Stack gap={"2rem"} mt={"1rem"}>
               <Grid gutter={"xl"}>
@@ -205,7 +203,7 @@ export default function LeaveTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("name")}
+                    {...form.getInputProps("name")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -219,7 +217,7 @@ export default function LeaveTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("availability")}
+                    {...form.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
                   />
@@ -227,7 +225,7 @@ export default function LeaveTypeTable() {
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
                   <Select
                     label="Paid"
-                    data={["Yes", "No"]}
+                    data={["Paid", "Unpaid"]}
                     withAsterisk
                     size="md"
                     classNames={{
@@ -235,7 +233,7 @@ export default function LeaveTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...editForm.getInputProps("isPaid")}
+                    {...form.getInputProps("isPaid")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -243,7 +241,7 @@ export default function LeaveTypeTable() {
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...editForm.getInputProps("comments")}
+                {...form.getInputProps("comments")}
                 disabled={loading}
               />
               <Group
