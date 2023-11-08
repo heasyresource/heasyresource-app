@@ -8,11 +8,13 @@ import {
   GridCol,
   Group,
   Space,
+  Switch,
   Text,
   TextInput,
 } from "@mantine/core";
 import Profile from "@/components/Profile";
 import { IconBuildingSkyscraper } from "@tabler/icons-react";
+import CompanyProfile from "@/components/AdminLayout/CompanyProfile";
 
 const CompanyGeneralInfo = () => {
   return (
@@ -25,7 +27,7 @@ const CompanyGeneralInfo = () => {
                 <Avatar bg="#3377FF" radius={"xl"}>
                   <IconBuildingSkyscraper color="#ffff" />
                 </Avatar>
-                <Text c={"#555555"} fz={"20px"}>
+                <Text c={"#555555"} fz={{sm: '20px', base: '15px'}}>
                   TechNova Solutions
                 </Text>
               </Group>
@@ -35,19 +37,19 @@ const CompanyGeneralInfo = () => {
         </div>
         <Space h={50} />
         <Container px={53} size="100%">
-          <Text fz={24} fw={700}>
+          <Text px={20} fz={24} fw={700}>
             General Information
           </Text>
           <div className={classes.infoMainContent}>
             <Space h={36} />
             <div className={classes.generalInfo}>
               <Grid justify="space-between" align="center">
-                <GridCol span="content">
+                <GridCol span={{ xs: 12, sm: 12, md: 6, lg: 'content' }}>
                   <Avatar bg="#3377FF" size={"lg"} radius={"xl"}>
                     <IconBuildingSkyscraper color="#ffff" />
                   </Avatar>
                 </GridCol>
-                <GridCol span="content">
+                <GridCol span={{ xs: 12, sm: 12, md: 6, lg: 'content' }}>
                   <div
                     style={{
                       display: "flex",
@@ -63,7 +65,7 @@ const CompanyGeneralInfo = () => {
                     </Text>
                   </div>
                 </GridCol>
-                <GridCol span="content">
+                <GridCol span={{ xs: 12, sm: 12, md: 6, lg: 'content' }}>
                   <div
                     style={{
                       display: "flex",
@@ -79,7 +81,7 @@ const CompanyGeneralInfo = () => {
                     </Text>
                   </div>
                 </GridCol>
-                <GridCol span="content">
+                <GridCol span={{ xs: 12, sm: 12, md: 6, lg: 'content' }}>
                   <div
                     style={{
                       display: "flex",
@@ -95,7 +97,7 @@ const CompanyGeneralInfo = () => {
                     </Text>
                   </div>
                 </GridCol>
-                <GridCol span="content">
+                <GridCol span={{ xs: 12, sm: 12, md: 6, lg: 'content' }}>
                   <div
                     style={{
                       display: "flex",
@@ -111,39 +113,58 @@ const CompanyGeneralInfo = () => {
                     </Text>
                   </div>
                 </GridCol>
-                <GridCol span="content">
-                  <Group>
-                    <Button
-                      variant="filled"
-                      size="sm"
-                      color="#43D72B"
-                      component="a"
-                      tt="capitalize"
-                      px="50px"
-                      w={{ lg: "auto", md: "auto", sm: "auto" }}
-                      className={classes.btn}
-                    >
-                      Shortlist
-                    </Button>
-                    <Button
-                      variant="filled"
-                      size="sm"
-                      color="#FF0000"
-                      tt="capitalize"
-                      px="50px"
-                      w={{ lg: "auto", md: "auto", sm: "auto" }}
-                      className={classes.btn}
-                      type="submit"
-                    >
-                      Reject
-                    </Button>
-                  </Group>
+                <GridCol span={{ xs: 12, sm: 12, md: 6, lg: 'content' }}>
+                    <div className={classes.generalInfoButton}>
+                      <Button
+                        variant="filled"
+                        size="sm"
+                        color="#43D72B"
+                        component="a"
+                        tt="capitalize"
+                        px="50px"
+                        w={{ lg: "auto", md: "auto", sm: "auto" }}
+                        className={classes.btn}
+                      >
+                        Approve
+                      </Button>
+                      <Button
+                        variant="filled"
+                        size="sm"
+                        color="#FF0000"
+                        tt="capitalize"
+                        px="50px"
+                        w={{ lg: "auto", md: "auto", sm: "auto" }}
+                        className={classes.btn}
+                        type="submit"
+                      >
+                        Reject
+                      </Button>
+                    </div>
                 </GridCol>
               </Grid>
             </div>
             <Space h={36} />
             <div className={classes.companyProfile}>
-                Biscuit
+              <Group justify="space-between">
+                <Text
+                  tt={"capitalize"}
+                  style={{
+                    fontSize: "22px",
+                    fontWeight: 700,
+                  }}
+                >
+                  Candidate Profile
+                </Text>
+                <Switch
+                  labelPosition="left"
+                  label="Edit"
+                  classNames={{
+                    label: classes.editLabel,
+                  }}
+                />
+              </Group>
+              <Space h={46} />
+              <CompanyProfile />
             </div>
           </div>
         </Container>
