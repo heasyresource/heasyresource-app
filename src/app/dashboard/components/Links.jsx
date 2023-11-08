@@ -21,7 +21,7 @@ const data = [
     icon: IconUsers,
     subLink: true,
   },
-  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
+  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2, subLink: true },
   { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
   {
     link: "/dashboard/leave",
