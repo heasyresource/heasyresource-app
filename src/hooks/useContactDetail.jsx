@@ -16,6 +16,7 @@ const useContactDetail = () => {
   const [states, setStates] = useState(null);
   const [LGA, setLGA] = useState(null);
   const [userId, setUserId] = useState("");
+  const [isEmpty, setIsEmpty] = useState(true);
   const form = useForm({
     initialValues: {
       street: "",
@@ -35,10 +36,6 @@ const useContactDetail = () => {
       stateId: (value) => (!value.length ? "State is required" : null),
       zipCode: (value) => (!value.length ? "Zip Code is required" : null),
       countryId: (value) => (!value.length ? "Country is required" : null),
-      homePhoneNumber: (value) =>
-        value.length < 10 ? "Enter a valid  home phone number" : null,
-      workPhoneNumber: (value) =>
-        value.length < 10 ? "Enter a valid  work phone number" : null,
       mobilePhoneNumber: (value) =>
         value.length < 10 ? "Enter a valid  mobiile phone number" : null,
       personalEmail: (val) =>
@@ -91,6 +88,16 @@ const useContactDetail = () => {
   };
 
   useEffect(() => {
+    if (form.values.stateId.length !== 0) {
+      setIsEmpty(false);
+      const filteredItems = LGA.filter(
+        (item) => item.stateId === form.values.stateId
+      );
+      setLGA(filteredItems);
+    }
+  }, [form.values.stateId]);
+
+  useEffect(() => {
     const user =
       localStorage.getItem("employee") &&
       obfuscateToken(false, localStorage.getItem("employee") ?? "");
@@ -113,6 +120,7 @@ const useContactDetail = () => {
         const lga = res.results.lgas.map((option) => ({
           value: option.id,
           label: option.name,
+          stateId: option.stateId,
         }));
         setCountries(country);
         setStates(state);
@@ -130,6 +138,7 @@ const useContactDetail = () => {
     countries,
     states,
     LGA,
+    isEmpty,
   };
 };
 

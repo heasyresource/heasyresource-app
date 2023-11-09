@@ -74,20 +74,20 @@ const PersonalDetail = () => {
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <Select
+            <TextInput
               size="md"
               label="Nationality"
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              data={["Nigeria"]}
+              placeholder="Nigeria"
               {...form.getInputProps("nationality")}
               disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
-              data={["Single", "Married"]}
+              data={["Single", "Married", "Widowed", "Divorced", "Seperated"]}
               size="md"
               label="Marital Status"
               withAsterisk

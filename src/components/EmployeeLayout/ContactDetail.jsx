@@ -13,7 +13,7 @@ import classes from "./employeeLayout.module.css";
 import { useContactDetail } from "@/hooks";
 
 const ContactDetail = () => {
-  const { form, handleSubmit, loading, LGA, countries, states } =
+  const { form, handleSubmit, loading, LGA, countries, states, isEmpty } =
     useContactDetail();
   return (
     <form
@@ -46,20 +46,6 @@ const ContactDetail = () => {
               <Select
                 size="md"
                 withAsterisk
-                label="LGA"
-                placeholder="Ajeromi/Ifelodun"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                data={LGA}
-                disabled={loading}
-                searchable
-                {...form.getInputProps("lgaId")}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-              <Select
-                size="md"
-                withAsterisk
                 label="State"
                 placeholder="Lagos State"
                 style={{ textAlign: "start", width: "100%" }}
@@ -68,6 +54,22 @@ const ContactDetail = () => {
                 disabled={loading}
                 searchable
                 {...form.getInputProps("stateId")}
+                nothingFoundMessage="option not found"
+              />
+            </Grid.Col>
+            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              <Select
+                size="md"
+                withAsterisk
+                label="LGA"
+                placeholder="Ajeromi/Ifelodun"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                data={LGA}
+                disabled={loading || isEmpty}
+                searchable
+                {...form.getInputProps("lgaId")}
+                nothingFoundMessage="option not found"
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -111,7 +113,6 @@ const ContactDetail = () => {
           <Grid style={{ marginTop: "20px" }} gutter="xl">
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                type="number"
                 size="md"
                 withAsterisk
                 label="Home"
@@ -121,11 +122,14 @@ const ContactDetail = () => {
                 classNames={{ label: classes.label, error: classes.error }}
                 leftSection={"+234"}
                 leftSectionWidth={50}
+                type="tel"
+                maxLength={"11"}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                type="number"
+                type="tel"
+                maxLength={"11"}
                 size="md"
                 withAsterisk
                 label="Mobile"
@@ -139,7 +143,8 @@ const ContactDetail = () => {
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                type="number"
+                type="tel"
+                maxLength={"11"}
                 size="md"
                 withAsterisk
                 label="Work"
@@ -174,6 +179,19 @@ const ContactDetail = () => {
                 disabled={loading}
                 placeholder="example@company.com"
                 {...form.getInputProps("personalEmail")}
+              />
+            </Grid.Col>
+            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                type="email"
+                withAsterisk
+                label="Work Email"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                disabled={loading}
+                placeholder="example@company.com"
+                // {...form.getInputProps("personalEmail")}
               />
             </Grid.Col>
           </Grid>

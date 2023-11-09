@@ -37,13 +37,7 @@ const useIndividual = () => {
           : /^[A-Za-z]+$/.test(value)
           ? null
           : "Last Name must contain only alphabets.",
-      middleName: (value) =>
-        value.length < 1
-          ? "Middle Name is required"
-          : /^[A-Za-z]+$/.test(value)
-          ? null
-          : "Middle Name must contain only alphabets.",
-      position: (value) => (!value.length ? "Job Title is required" : null),
+      position: (value) => (!value.length ? "Position is required" : null),
       departmentId: (value) =>
         !value.length ? "Department is required" : null,
       email: (value) =>

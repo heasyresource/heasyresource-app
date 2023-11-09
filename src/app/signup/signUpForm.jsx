@@ -112,8 +112,7 @@ const SignUpForm = () => {
             <Box>
               <TextInput
                 size="md"
-                placeholder="https://pepsi.com"
-                type="url"
+                placeholder="www.example.com"
                 withAsterisk
                 {...companyInfoForm.getInputProps("companyWebsite")}
                 disabled={loadingCompanyInfo}

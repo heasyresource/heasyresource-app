@@ -38,12 +38,6 @@ const usePersonalDetail = () => {
           : /^[A-Za-z]+$/.test(value)
           ? null
           : "Last Name must contain only alphabets.",
-      middleName: (value) =>
-        !value.length
-          ? "Middle Name is required"
-          : /^[A-Za-z]+$/.test(value)
-          ? null
-          : "Middle Name must contain only alphabets.",
       nationality: (value) =>
         !value.length ? "Nationality is required" : null,
       maritalStatus: (value) =>
@@ -99,9 +93,9 @@ const usePersonalDetail = () => {
       obfuscateToken(false, localStorage.getItem("employee") ?? "");
     if (user) {
       const parsedData = JSON.parse(user);
-      form.setFieldValue("firstName", parsedData.firstName);
-      form.setFieldValue("lastName", parsedData.lastName);
-      form.setFieldValue("middleName", parsedData.middleName);
+      form.setFieldValue("firstName", parsedData.firstName || "");
+      form.setFieldValue("lastName", parsedData.lastName || "");
+      form.setFieldValue("middleName", parsedData.middleName || "");
       setUserId(parsedData.id);
     }
     const getMetadata = async () => {

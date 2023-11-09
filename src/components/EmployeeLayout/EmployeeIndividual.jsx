@@ -57,9 +57,8 @@ const EmployeeIndividual = () => {
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <Select
-              data={["Front-End Developer", "Forward Creative Representative"]}
-              label="Job Title"
+            <TextInput
+              label="Position"
               withAsterisk
               size="md"
               style={{ textAlign: "start", width: "100%" }}

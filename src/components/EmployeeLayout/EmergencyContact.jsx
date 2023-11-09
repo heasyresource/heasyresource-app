@@ -58,7 +58,14 @@ const EmergencyContact = () => {
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <Select
                 label="Relationship"
-                data={["Sibling", "Wife", "Husband", "Father", "Mother"]}
+                data={[
+                  "Sibling",
+                  "Parent",
+                  "Child",
+                  "Extended Family",
+                  "Friend",
+                  "Spouse",
+                ]}
                 withAsterisk
                 size="md"
                 {...form.getInputProps("relationship")}
@@ -89,6 +96,8 @@ const EmergencyContact = () => {
                 leftSection={"+234"}
                 leftSectionWidth={50}
                 disabled={loading}
+                maxLength={"11"}
+                type="tel"
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
