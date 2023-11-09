@@ -8,6 +8,7 @@ import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ const useVerification = () => {
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const [email, setEmail] = useState("");
+  const [verifyResult, setVerifyResult] = useState(null);
 
   const form = useForm({
     initialValues: {
@@ -26,9 +28,11 @@ const useVerification = () => {
       verificationCode: (val) => (val.length < 6 ? "Enter code" : null),
     },
   });
-  const handleRouteChange = () => {
+  const handleRouteChange = async () => {
     modals.closeAll();
-    router.push("/signin");
+    const result = await signIn("user-token", { redirect: false, ...verifyResult, callbackUrl: "/complete-registration" });
+    console.log({result});
+    router.push(result.url);
   };
   const openModal = () =>
     modals.open({
@@ -44,7 +48,7 @@ const useVerification = () => {
           px={isMobile ? 0 : 46}
         >
           <Box w={"50px"} h={"auto"}>
-            <Image src={"/assets/svgs/verified.svg"} alt="verified" />
+            <Image src="/assets/svgs/verified.svg" alt="verified" />
           </Box>
           <Box ta={"center"}>
             <Title order={isMobile ? 4 : 3} c="#000000">
@@ -74,7 +78,11 @@ const useVerification = () => {
       obfuscateToken(false, sessionStorage.getItem("verificationType") ?? "");
     try {
       if (type === "registration") {
-        await apiClient.post("/account/verify", { ...data, email: email });
+        const result = await apiClient.post("/account/verify", { ...data, email: email });
+        if (result.statusCode === 200) {
+          const { token, user } = result.results
+          setVerifyResult({ token: JSON.stringify(token), user: JSON.stringify(user) })
+        }
         setLoading(false);
         openModal();
       }

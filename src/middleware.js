@@ -3,7 +3,7 @@ const unProtectedRoutes = [
   "/signup",
   "/forgot-password",
   "/new-password",
-  "/verfication",
+  "/verification",
 ];
 
 export const config = {
@@ -13,7 +13,7 @@ export const config = {
     "/signup",
     "/forgot-password",
     "/new-password",
-    "/verfication",
+    "/verification",
     "/complete-registration",
   ],
 };
