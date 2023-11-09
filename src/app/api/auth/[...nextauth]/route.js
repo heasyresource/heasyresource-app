@@ -23,11 +23,31 @@ export const authOptions = {
         }
       },
     }),
+    CredentialsProvider({
+      id: 'user-token',
+      name: "UserToken",
+      credentials: {
+        token: { label: "token" },
+        user: { label: "user" },
+      },
+      async authorize(credentials, req) {
+        const { user, token } = credentials;
+        if (user && token) {
+          return { ...JSON.parse(user), ...JSON.parse(token) };
+        } else {
+          // Return null if user data could not be retrieved
+          return null;
+        }
+      },
+    }),
   ],
   pages: {
     signIn: "/signin",
   },
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt",
+    maxAge: 1 * 60 * 60, // 1 hours
+  },
   callbacks: {
     async jwt({ token, user }) {
       return { ...user, ...token };

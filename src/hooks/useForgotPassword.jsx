@@ -21,6 +21,20 @@ const useForgotPassword = () => {
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email address",
     },
   });
+  const handleResend = async (data) => {
+    try {
+      const value = {
+        email: data.email,
+      };
+      const res = await apiClient.post("/account/resend-code", value);
+      if (res.statusCode === 200) {
+        sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
+        router.push("/verification");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleSubmit = async (data) => {
     setLoading(true);
     try {
@@ -42,15 +56,20 @@ const useForgotPassword = () => {
       );
       router.push("/verification");
     } catch (err) {
-      console.log(err, "forgot password error");
       notifications.show({
         color: "red",
         title: "Error",
         message: err.message,
         styles: errorStyles,
-        autoClose: 15000,
+        autoClose: 7000,
       });
       setLoading(false);
+      if (
+        result.error ===
+        "Your account have not been verified, please verify your account."
+      ) {
+        handleResend(data);
+      }
     }
   };
 

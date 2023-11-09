@@ -1,17 +1,27 @@
 "use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { successStyles } from "@/utils/notificationTheme";
+import { getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
-import React from "react";
+import { notifications } from "@mantine/notifications";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const useIndividual = () => {
+  const router = useRouter();
+  const subdomain = getSubdomain();
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
+  const [fields, setFields] = useState(null);
   const form = useForm({
     initialValues: {
       firstName: "",
       middleName: "",
       lastName: "",
-      employeeId: "",
-      jobTitle: "",
-      department: "",
-      workEmail: "",
+      position: "",
+      departmentId: "",
+      email: "",
       gender: "",
     },
     validate: {
@@ -27,30 +37,72 @@ const useIndividual = () => {
           : /^[A-Za-z]+$/.test(value)
           ? null
           : "Last Name must contain only alphabets.",
-      middleName: (value) =>
-        value.length < 1
-          ? "Middle Name is required"
-          : /^[A-Za-z]+$/.test(value)
-          ? null
-          : "Middle Name must contain only alphabets.",
-      jobTitle: (value) => (!value.length ? "Job Title is required" : null),
-      employeeId: (value) => (!value.length ? "Employee ID is required" : null),
-      department: (value) => (!value.length ? "Department is required" : null),
-      workEmail: (value) =>
+      position: (value) => (!value.length ? "Position is required" : null),
+      departmentId: (value) =>
+        !value.length ? "Department is required" : null,
+      email: (value) =>
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email",
       gender: (value) => (!value.length ? "Gender is required" : null),
     },
   });
+  const headerSettings = {
+    headers: {
+      Authorization: `Bearer ${session?.user.token}`,
+      "x-subdomain-name": subdomain,
+    },
+  };
   const handleSubmit = async (data) => {
+    setLoading(true);
     try {
-      console.log(data, "value data");
+      await apiClient.post("employees", data, headerSettings);
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Employee added successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      router.push("/dashboard/employee");
+      setLoading(false);
     } catch (err) {
-      console.log(err, "value");
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          form.setFieldError(field, message);
+        });
+      }
+      if (err.message === "Could not add employee with this email domain.") {
+        form.setFieldError(
+          "email",
+          "Could not add employee with this email domain"
+        );
+      }
+      setLoading(false);
     }
   };
+  const getDepartments = async () => {
+    try {
+      const response = await apiClient.get(`/departments`, headerSettings);
+      const modifiedOptions = response?.results.data.map((option) => ({
+        value: option.id,
+        label: option.name,
+      }));
+      setFields(modifiedOptions);
+    } catch (err) {
+      console.log(err, "Error getting the department field");
+    }
+  };
+
+  useEffect(() => {
+    getDepartments();
+  }, []);
+
   return {
     form,
     handleSubmit,
+    fields,
+    loading,
   };
 };
 

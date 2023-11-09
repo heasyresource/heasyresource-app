@@ -1,39 +1,121 @@
+"use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { obfuscateToken } from "@/utils/encryptToken";
+import { successStyles } from "@/utils/notificationTheme";
+import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
-import React from "react";
+import { notifications } from "@mantine/notifications";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 
 const useEmploymentInfo = () => {
+  const subdomain = getSubdomain();
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [departments, setDepartments] = useState(null);
+  const [employmentType, setEmploymentType] = useState(null);
   const form = useForm({
     initialValues: {
-      title: "",
-      specification: "",
-      joinedDate: "",
-      category: "",
-      status: "",
-      supervisor: "",
-      method: "",
+      position: "",
+      resumptionDate: "",
+      departmentId: "",
+      employmentTypeId: "",
+      workMode: "",
     },
     validate: {
-      title: (value) => (!value.length ? "Job Title is required" : null),
-      specification: (value) =>
-        !value.length ? "Job specification is required" : null,
-      joinedDate: (value) => (!value.length ? "Joined Date is required" : null),
-      category: (value) => (!value.length ? "Job category is required" : null),
-      status: (value) =>
-        !value.length ? "Employment status is required" : null,
-      supervisor: (value) => (!value.length ? " Supervisor is required" : null),
-      method: (value) => (!value.length ? "Report method is required" : null),
+      position: (value) => (!value.length ? "Position is required" : null),
+      departmentId: (value) =>
+        !value.length ? "Department is required" : null,
+      resumptionDate: (value) =>
+        value.length === 0 ? "Joined Date is required" : null,
+      employmentTypeId: (value) =>
+        !value.length ? "Job Type is required" : null,
+      workMode: (value) => (!value.length ? "Job Mode is required" : null),
     },
   });
+
+  const headerSettings = {
+    headers: {
+      Authorization: `Bearer ${session?.user.token}`,
+      "x-subdomain-name": subdomain,
+    },
+  };
   const handleSubmit = async (data) => {
+    setLoading(true);
     try {
-      console.log(data);
+      if (userId.length !== 0) {
+        const modifiedValues = {
+          ...data,
+          resumptionDate: convertDateFormat(data.resumptionDate),
+        };
+        await apiClient.put(
+          `/employees/${userId}/employment-infos`,
+          modifiedValues,
+          headerSettings
+        );
+        notifications.show({
+          color: "white",
+          title: "Success",
+          message: "Employment Info added successfully. ",
+          styles: successStyles,
+          autoClose: 7000,
+        });
+      }
+      setLoading(false);
     } catch (err) {
-      console.log(err, "Error");
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          form.setFieldError(field, message);
+        });
+      }
     }
   };
+  useEffect(() => {
+    const user =
+      localStorage.getItem("employee") &&
+      obfuscateToken(false, localStorage.getItem("employee") ?? "");
+    if (user) {
+      const parsedData = JSON.parse(user);
+      setUserId(parsedData.id);
+    }
+    const getMetadata = async () => {
+      try {
+        const res = await apiClient.get("/metadata");
+
+        const type = res.results.employmentType.map((option) => ({
+          value: option.id,
+          label: option.name,
+        }));
+        setEmploymentType(type);
+      } catch (err) {
+        console.log(err, "Error getting the metadata");
+      }
+    };
+    const getDepartments = async () => {
+      try {
+        const response = await apiClient.get(`/departments`, headerSettings);
+        const department = response?.results.data.map((option) => ({
+          value: option.id,
+          label: option.name,
+        }));
+        setDepartments(department);
+      } catch (err) {
+        console.log(err, "Error getting the department field");
+      }
+    };
+    getMetadata();
+    getDepartments();
+  }, []);
   return {
     form,
     handleSubmit,
+    employmentType,
+    departments,
+    loading,
   };
 };
 

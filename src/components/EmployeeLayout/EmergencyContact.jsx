@@ -7,6 +7,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Select,
   Stack,
   Text,
@@ -15,7 +16,7 @@ import {
 import { useEmergencyContact } from "@/hooks";
 
 const EmergencyContact = () => {
-  const { form, handleSubmit } = useEmergencyContact();
+  const { form, handleSubmit, loading } = useEmergencyContact();
   return (
     <Box>
       <Text
@@ -39,6 +40,7 @@ const EmergencyContact = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...form.getInputProps("firstName")}
+                disabled={loading}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -50,15 +52,24 @@ const EmergencyContact = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...form.getInputProps("lastName")}
+                disabled={loading}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <Select
                 label="Relationship"
-                data={[]}
+                data={[
+                  "Sibling",
+                  "Parent",
+                  "Child",
+                  "Extended Family",
+                  "Friend",
+                  "Spouse",
+                ]}
                 withAsterisk
                 size="md"
                 {...form.getInputProps("relationship")}
+                disabled={loading}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -69,6 +80,7 @@ const EmergencyContact = () => {
                 withAsterisk
                 size="md"
                 style={{ textAlign: "start", width: "100%" }}
+                disabled={loading}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...form.getInputProps("homeAddress")}
               />
@@ -81,6 +93,11 @@ const EmergencyContact = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...form.getInputProps("phoneNumber")}
+                leftSection={"+234"}
+                leftSectionWidth={50}
+                disabled={loading}
+                maxLength={"11"}
+                type="tel"
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -92,6 +109,7 @@ const EmergencyContact = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...form.getInputProps("email")}
+                disabled={loading}
               />
             </GridCol>
           </Grid>
@@ -110,6 +128,7 @@ const EmergencyContact = () => {
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
+              disabled={loading}
             >
               cancel
             </Button>
@@ -126,7 +145,11 @@ const EmergencyContact = () => {
                 backgroundColor: "#3377FF",
               }}
             >
-              save
+              {loading ? (
+                <Loader color="white" type="dots" size="md" />
+              ) : (
+                "save"
+              )}
             </Button>
           </Group>
         </Stack>

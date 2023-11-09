@@ -1,8 +1,18 @@
 "use client";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { obfuscateToken } from "@/utils/encryptToken";
+import { successStyles } from "@/utils/notificationTheme";
+import { getSubdomain, normalizePhoneNumber } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
-import React from "react";
+import { notifications } from "@mantine/notifications";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 
 const useEmergencyContact = () => {
+  const subdomain = getSubdomain();
+  const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState("");
   const form = useForm({
     initialValues: {
       firstName: "",
@@ -35,16 +45,62 @@ const useEmergencyContact = () => {
         /^\S+@\S+$/.test(value) ? null : "Enter a valid email",
     },
   });
+
+  const headerSettings = {
+    headers: {
+      Authorization: `Bearer ${session?.user.token}`,
+      "x-subdomain-name": subdomain,
+    },
+  };
   const handleSubmit = async (data) => {
+    setLoading(true);
+    const normalizedPhoneNumber = normalizePhoneNumber(data.phoneNumber);
     try {
-      console.log(data, "value data");
+      if (userId.length !== 0) {
+        const modifiedValues = {
+          ...data,
+          type: "Emergency",
+          phoneNumber: normalizedPhoneNumber,
+        };
+        await apiClient.put(
+          `/employees/${userId}/next-of-kins`,
+          modifiedValues,
+          headerSettings
+        );
+        notifications.show({
+          color: "white",
+          title: "Success",
+          message: "Emergency contact added successfully. ",
+          styles: successStyles,
+          autoClose: 7000,
+        });
+      }
+      setLoading(false);
     } catch (err) {
-      console.log(err, "value");
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          form.setFieldError(field, message);
+        });
+      }
+      setLoading(false);
     }
   };
+  useEffect(() => {
+    const user =
+      localStorage.getItem("employee") &&
+      obfuscateToken(false, localStorage.getItem("employee") ?? "");
+    if (user) {
+      const parsedData = JSON.parse(user);
+      setUserId(parsedData.id);
+    }
+  }, []);
+
   return {
     form,
     handleSubmit,
+    loading,
   };
 };
 

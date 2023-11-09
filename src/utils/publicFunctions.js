@@ -37,6 +37,21 @@ export const getSubdomain = (host) => {
   }
   return subdomain;
 };
+export const convertDateFormat = (inputDate) => {
+  const date = new Date(inputDate);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
+};
+export const convertStringDate = (inputDate) => {
+  const date = new Date(inputDate);
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+
+  return formattedDate;
+};
 export const employeeList = [
   {
     id: "1",

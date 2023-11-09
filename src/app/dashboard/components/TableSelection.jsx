@@ -1,88 +1,114 @@
 "use client";
-
-import { employeeList } from "@/utils/publicFunctions";
-import { Avatar, Badge, Flex } from "@mantine/core";
+import { useSearch } from "@/hooks";
+import { obfuscateToken } from "@/utils/encryptToken";
+import { Avatar, Badge, Flex, Text } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
-const PAGE_SIZE = 10;
 export function TableSelection() {
   const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(employeeList.slice(0, PAGE_SIZE));
-
-  useEffect(() => {
-    const from = (page - 1) * PAGE_SIZE;
-    const to = from + PAGE_SIZE;
-    setRecords(employeeList.slice(from, to));
-  }, [page]);
-
+  const { paginate, employees, gettingData, pagination } = useSearch();
   return (
-    <DataTable
-      style={{ background: "none", marginTop: "3rem" }}
-      height={"auto"}
-      withRowBorders={false}
-      records={records}
-      columns={[
-        {
-          accessor: "index",
-          title: "S/N",
-          textAlign: "center",
+    <>
+      {employees?.length !== 0 && (
+        <DataTable
+          style={{ background: "none", marginTop: "3rem" }}
+          minHeight={"250px"}
+          loaderType="dots"
+          loaderColor="#3377FF"
+          fetching={gettingData}
+          withRowBorders={false}
+          records={employees}
+          columns={[
+            {
+              accessor: "index",
+              title: "S/N",
+              textAlign: "center",
+              render: (record) => employees.indexOf(record) + 1,
+            },
+            {
+              accessor: "avatar",
+              title: "",
+              textAlign: "center",
+              width: "80px",
+              render: ({ logoUrl }) => (
+                <Flex justify="center" align="center">
+                  <Avatar
+                    size={26}
+                    src={logoUrl || "/assets/images/avata2.png"}
+                    radius={26}
+                  />
+                </Flex>
+              ),
+            },
+            {
+              accessor: "firstName",
+              render: ({ firstName }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {firstName}
+                </Text>
+              ),
+            },
+            {
+              accessor: "lastName",
+              render: ({ lastName }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {lastName}
+                </Text>
+              ),
+            },
+            {
+              accessor: "email",
+            },
+            {
+              accessor: "department",
+              render: ({ employmentInfo }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {employmentInfo.department.name}
+                </Text>
+              ),
+            },
+            {
+              accessor: "role",
+              render: ({ role }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {role.name}
+                </Text>
+              ),
+            },
+            {
+              accessor: "moreDetails",
+              render: (employees) => (
+                <Badge
+                  radius="xs"
+                  variant="light"
+                  color="#3377FF"
+                  size="lg"
+                  style={{
+                    color: "#3377FF",
 
-          render: (record) => records.indexOf(record) + 1,
-        },
-        {
-          accessor: "avatar",
-          title: "",
-          textAlign: "center",
-          width: "80px",
-          render: ({ avatar }) => (
-            <Flex justify="center" align="center">
-              <Avatar size={26} src={avatar} radius={26} />
-            </Flex>
-          ),
-        },
-        {
-          accessor: "firstName",
-        },
-        {
-          accessor: "lastName",
-        },
-        {
-          accessor: "employeeEmail",
-        },
-        {
-          accessor: "department",
-        },
-        {
-          accessor: "role",
-        },
-        {
-          accessor: "moreDetails",
-          render: ({ moreDetails }) => (
-            <Badge
-              radius="xs"
-              variant="light"
-              color="#3377FF"
-              size="lg"
-              style={{
-                color: "#3377FF",
-
-                textTransform: "capitalize",
-                cursor: "pointer",
-              }}
-              onClick={() => router.push("/dashboard/employee/personal-detail")}
-            >
-              more details
-            </Badge>
-          ),
-        },
-      ]}
-      totalRecords={employeeList.length}
-      recordsPerPage={PAGE_SIZE}
-      page={page}
-      onPageChange={(p) => setPage(p)}
-    />
+                    textTransform: "capitalize",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    localStorage.setItem(
+                      "employee",
+                      obfuscateToken(true, JSON.stringify(employees))
+                    );
+                    router.push("/dashboard/employee/personal-detail");
+                  }}
+                >
+                  more details
+                </Badge>
+              ),
+            },
+          ]}
+          totalRecords={pagination?.total}
+          recordsPerPage={pagination?.perPage}
+          page={pagination?.currentPage}
+          onPageChange={(page) => paginate(page)}
+        />
+      )}
+    </>
   );
 }

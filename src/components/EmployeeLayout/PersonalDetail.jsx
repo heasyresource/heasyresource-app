@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   Group,
+  Loader,
   Radio,
   Select,
   Stack,
@@ -42,7 +43,6 @@ const PersonalDetail = () => {
             <TextInput
               size="md"
               label="Middle Name"
-              withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("middleName")}
@@ -73,20 +73,20 @@ const PersonalDetail = () => {
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <Select
+            <TextInput
               size="md"
               label="Nationality"
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              data={["Nigeria"]}
+              placeholder="Nigeria"
               {...form.getInputProps("nationality")}
               disabled={loading}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
-              data={["Single", "Married"]}
+              data={["Single", "Married", "Widowed", "Divorced", "Seperated"]}
               size="md"
               label="Marital Status"
               withAsterisk
@@ -105,7 +105,7 @@ const PersonalDetail = () => {
               label="Date of Birth"
               placeholder="DD/MM/YYYY"
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("dob")}
+              {...form.getInputProps("dateOfBirth")}
               disabled={loading}
             />
           </Grid.Col>
@@ -121,8 +121,18 @@ const PersonalDetail = () => {
               color="#3377FF"
             >
               <Group mt="xs">
-                <Radio value="male" label="Male" labelPosition="left" />
-                <Radio value="femaale" label="Female" labelPosition="left" />
+                <Radio
+                  value="Male"
+                  label="Male"
+                  disabled={loading}
+                  labelPosition="left"
+                />
+                <Radio
+                  value="Female"
+                  label="Female"
+                  disabled={loading}
+                  labelPosition="left"
+                />
               </Group>
             </Radio.Group>
           </Grid.Col>
@@ -162,7 +172,7 @@ const PersonalDetail = () => {
               backgroundColor: "#3377FF",
             }}
           >
-            save
+            {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
           </Button>
         </Group>
       </Stack>

@@ -8,6 +8,7 @@ import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -26,11 +27,14 @@ const useVerification = () => {
       verificationCode: (val) => (val.length < 6 ? "Enter code" : null),
     },
   });
-  const handleRouteChange = () => {
+  const handleRouteChange = async (payload) => {
     modals.closeAll();
-    router.push("/signin");
+    console.log({payload})
+    const result = await signIn("user-token", { redirect: false, ...payload, callbackUrl: "/complete-registration" });
+    console.log({result});
+    router.push(result.url);
   };
-  const openModal = () =>
+  const openModal = (payload) =>
     modals.open({
       radius: "md",
       centered: true,
@@ -44,19 +48,19 @@ const useVerification = () => {
           px={isMobile ? 0 : 46}
         >
           <Box w={"50px"} h={"auto"}>
-            <Image src={"/assets/svgs/verified.svg"} alt="verified" />
+            <Image src="/assets/svgs/verified.svg" alt="verified" />
           </Box>
           <Box ta={"center"}>
             <Title order={isMobile ? 4 : 3} c="#000000">
               Verification Successful
             </Title>
             <Text c="#1E1E1E" size="13px" mt="5px">
-              Your aacount has been verified successfully
+              Your acount has been verified successfully
             </Text>
           </Box>
           <Button
             fullWidth
-            onClick={() => handleRouteChange()}
+            onClick={() => handleRouteChange(payload)}
             tt="capitalize"
             bg="#3377FF"
             size="md"
@@ -74,12 +78,17 @@ const useVerification = () => {
       obfuscateToken(false, sessionStorage.getItem("verificationType") ?? "");
     try {
       if (type === "registration") {
-        await apiClient.post("/account/verify", { ...data, email: email });
-        setLoading(false);
-        openModal();
+        const result = await apiClient.post("/account/verify", { ...data, email: email });
+        if (result.statusCode === 200) {
+          const { token, user } = result.results
+          const payload = { token: JSON.stringify(token), user: JSON.stringify(user) }
+          console.log({payload});
+          setLoading(false);
+          openModal(payload);
+        }
       }
       if (type === "forgotPassword") {
-        const res = await apiClient.post(
+        await apiClient.post(
           "/password/verify-code",
           {
             email: email,

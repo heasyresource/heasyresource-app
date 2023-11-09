@@ -32,7 +32,9 @@ const useSignup = () => {
         /^\S+@\S+$/.test(val) ? null : "Enter a valid email",
       companyName: (val) => (val.length < 1 ? "Enter a valid name" : null),
       companyWebsite: (val) =>
-        /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(val)
+        /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(
+          val
+        )
           ? null
           : "Enter a valid url",
       companyPhoneNumber: (val) =>

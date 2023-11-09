@@ -4,6 +4,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Radio,
   Select,
   Stack,
@@ -14,7 +15,7 @@ import classes from "./employeeLayout.module.css";
 import { useIndividual } from "@/hooks";
 
 const EmployeeIndividual = () => {
-  const { form, handleSubmit } = useIndividual();
+  const { form, handleSubmit, fields, loading } = useIndividual();
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <Stack className={classes.individualWrap}>
@@ -28,17 +29,18 @@ const EmployeeIndividual = () => {
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("firstName")}
+              disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
               label="Middle Name"
-              withAsterisk
               size="md"
               placeholder="Smith"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("middleName")}
+              disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -50,40 +52,31 @@ const EmployeeIndividual = () => {
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("lastName")}
+              disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              label="Employee ID"
-              withAsterisk
-              size="md"
-              type="number"
-              placeholder="John"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("employeeId")}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <Select
-              data={["Front-End Developer"]}
-              label="Job Title"
+              label="Position"
               withAsterisk
               size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("jobTitle")}
+              {...form.getInputProps("position")}
+              disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
-              data={[]}
+              data={fields}
+              searchable
               label="Department"
               withAsterisk
               size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("department")}
+              {...form.getInputProps("departmentId")}
+              disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -94,7 +87,8 @@ const EmployeeIndividual = () => {
               size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("workEmail")}
+              {...form.getInputProps("email")}
+              disabled={loading}
             />
           </GridCol>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -105,11 +99,22 @@ const EmployeeIndividual = () => {
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("gender")}
+              disabled={loading}
               color="#3377FF"
             >
               <Group mt="xs">
-                <Radio value="male" label="Male" labelPosition="left" />
-                <Radio value="femaale" label="Female" labelPosition="left" />
+                <Radio
+                  value="Male"
+                  disabled={loading}
+                  label="Male"
+                  labelPosition="left"
+                />
+                <Radio
+                  value="Female"
+                  disabled={loading}
+                  label="Female"
+                  labelPosition="left"
+                />
               </Group>
             </Radio.Group>
           </Grid.Col>
@@ -129,6 +134,7 @@ const EmployeeIndividual = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            onClick={() => form.reset()}
           >
             cancel
           </Button>
@@ -145,7 +151,7 @@ const EmployeeIndividual = () => {
               backgroundColor: "#3377FF",
             }}
           >
-            save
+            {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
           </Button>
         </Group>
       </Stack>

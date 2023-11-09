@@ -6,38 +6,34 @@ import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const useAddLeaveType = () => {
+const useAddDepartment = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const subdomain = getSubdomain();
   const { data: session } = useSession();
+  const [departments, setDepartments] = useState(null);
+  const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isChanged, setIsChanged] = useState(null);
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
-  const [leaves, setLeaves] = useState(null);
-  const [pagination, setPagination] = useState(null);
-  const [gettingData, setGettingData] = useState(false);
+  const [getttingDatas, setGettingDatas] = useState(false);
+  const [isChanged, setIsChanged] = useState(null);
   const [itemID, setItemID] = useState("");
   const form = useForm({
     initialValues: {
       name: "",
-      availability: "",
-      isPaid: "",
-      comments: "",
+      code: "",
     },
     validate: {
-      name: (val) => (!val.length ? "Leave Type is required" : null),
-      availability: (val) => (!val.length ? "Availability is required" : null),
-      isPaid: (val) => (!val.length ? "Select option" : null),
+      name: (val) => (!val.length ? "Department name is required" : null),
+      code: (val) => (!val.length ? "Department code is required" : null),
     },
   });
-
   const headerSettings = {
     headers: {
       Authorization: `Bearer ${session?.user.token}`,
@@ -45,22 +41,18 @@ const useAddLeaveType = () => {
     },
   };
   const handleSubmit = async (data, type) => {
+    setLoading(true);
     if (type === "add") {
-      setLoading(true);
       try {
-        const modifiedValues = {
-          ...data,
-          isPaid: data.isPaid === "Paid",
-        };
         const response = await apiClient.post(
-          "/leave-types",
-          modifiedValues,
+          "/departments",
+          data,
           headerSettings
         );
         notifications.show({
           color: "white",
           title: "Success",
-          message: "Leave added successfully. ",
+          message: "Department added successfully. ",
           styles: successStyles,
           autoClose: 7000,
         });
@@ -72,10 +64,10 @@ const useAddLeaveType = () => {
         if (err.errors) {
           err.errors.forEach((error) => {
             const { field, message } = error;
+
             form.setFieldError(field, message);
           });
         }
-
         setLoading(false);
       }
     }
@@ -85,13 +77,13 @@ const useAddLeaveType = () => {
     try {
       if (itemID.length !== 0) {
         const response = await apiClient.delete(
-          `/leave-types/${itemID}`,
+          `/departments/${itemID}`,
           headerSettings
         );
         notifications.show({
           color: "white",
           title: "Success",
-          message: "Leave deleted successfully. ",
+          message: "Department deleted successfully. ",
           styles: successStyles,
           autoClose: 7000,
         });
@@ -114,19 +106,15 @@ const useAddLeaveType = () => {
     if (type === "edit") {
       try {
         if (itemID.length !== 0) {
-          const modifiedValues = {
-            ...data,
-            isPaid: data.isPaid === "Paid",
-          };
           const response = await apiClient.put(
-            `/leave-types/${itemID}`,
-            modifiedValues,
+            `/departments/${itemID}`,
+            data,
             headerSettings
           );
           notifications.show({
             color: "white",
             title: "Success",
-            message: "Leave updated successfully. ",
+            message: "Department updated successfully. ",
             styles: successStyles,
             autoClose: 7000,
           });
@@ -156,55 +144,55 @@ const useAddLeaveType = () => {
     }
     replace(`${pathname}?${params.toString()}`);
   };
-  const getLeaves = async (params = "") => {
-    setGettingData(true);
+  const getDepartments = async (params = "") => {
+    setGettingDatas(true);
     if (searchParams.get("page")) {
       params = searchParams.get("page");
     }
     try {
       const response = await apiClient.get(
-        `/leave-types?page=${params || "1"}`,
+        `/departments?page=${params || "1"}`,
         headerSettings
       );
-      setLeaves(response.results.data);
-      setPagination(response.results.meta);
-      setGettingData(false);
+      setDepartments(response?.results.data);
+      setPagination(response?.results.meta);
+      setGettingDatas(false);
     } catch (err) {
-      setGettingData(false);
+      setGettingDatas(false);
       notifications.show({
         color: "red",
         message: "Something went wrong, please try again.",
         styles: errorStyles,
-        autoClose: 7000,
+        autoClose: 2000,
       });
     }
   };
   useEffect(() => {
-    getLeaves();
+    getDepartments();
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
-      getLeaves();
+      getDepartments();
     }
   }, [isChanged]);
   return {
-    form,
-    gettingData,
-    handleSubmit,
-    openAdd,
-    openedAdd,
-    closeAdd,
     loading,
-    leaves,
-    setItemID,
-    openEdit,
-    closeEdit,
-    openedEdit,
+    form,
+    departments,
+    handleSubmit,
     handleDelete,
     handleEdit,
+    getttingDatas,
+    setItemID,
+    openedAdd,
+    closeAdd,
+    openAdd,
+    openedEdit,
+    closeEdit,
+    openEdit,
     pagination,
     paginate,
   };
 };
 
-export default useAddLeaveType;
+export default useAddDepartment;
