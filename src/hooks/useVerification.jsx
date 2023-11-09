@@ -18,7 +18,6 @@ const useVerification = () => {
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const [email, setEmail] = useState("");
-  const [verifyResult, setVerifyResult] = useState(null);
 
   const form = useForm({
     initialValues: {
@@ -28,13 +27,14 @@ const useVerification = () => {
       verificationCode: (val) => (val.length < 6 ? "Enter code" : null),
     },
   });
-  const handleRouteChange = async () => {
+  const handleRouteChange = async (payload) => {
     modals.closeAll();
-    const result = await signIn("user-token", { redirect: false, ...verifyResult, callbackUrl: "/complete-registration" });
+    console.log({payload})
+    const result = await signIn("user-token", { redirect: false, ...payload, callbackUrl: "/complete-registration" });
     console.log({result});
     router.push(result.url);
   };
-  const openModal = () =>
+  const openModal = (payload) =>
     modals.open({
       radius: "md",
       centered: true,
@@ -60,7 +60,7 @@ const useVerification = () => {
           </Box>
           <Button
             fullWidth
-            onClick={() => handleRouteChange()}
+            onClick={() => handleRouteChange(payload)}
             tt="capitalize"
             bg="#3377FF"
             size="md"
@@ -81,10 +81,11 @@ const useVerification = () => {
         const result = await apiClient.post("/account/verify", { ...data, email: email });
         if (result.statusCode === 200) {
           const { token, user } = result.results
-          setVerifyResult({ token: JSON.stringify(token), user: JSON.stringify(user) })
+          const payload = { token: JSON.stringify(token), user: JSON.stringify(user) }
+          console.log({payload});
+          setLoading(false);
+          openModal(payload);
         }
-        setLoading(false);
-        openModal();
       }
       if (type === "forgotPassword") {
         await apiClient.post(
