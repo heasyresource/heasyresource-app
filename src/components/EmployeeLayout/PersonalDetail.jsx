@@ -43,7 +43,6 @@ const PersonalDetail = () => {
             <TextInput
               size="md"
               label="Middle Name"
-              withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...form.getInputProps("middleName")}

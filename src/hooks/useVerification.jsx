@@ -51,7 +51,7 @@ const useVerification = () => {
               Verification Successful
             </Title>
             <Text c="#1E1E1E" size="13px" mt="5px">
-              Your aacount has been verified successfully
+              Your acount has been verified successfully
             </Text>
           </Box>
           <Button
@@ -79,7 +79,7 @@ const useVerification = () => {
         openModal();
       }
       if (type === "forgotPassword") {
-        const res = await apiClient.post(
+        await apiClient.post(
           "/password/verify-code",
           {
             email: email,

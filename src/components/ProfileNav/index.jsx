@@ -18,6 +18,7 @@ const data = [
 const ProfileNav = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [position, setPosition] = useState("");
   const pathname = usePathname();
   const links = data.map((item) => (
     <Link
@@ -37,6 +38,7 @@ const ProfileNav = () => {
       const parsedData = JSON.parse(user);
       setFirstName(parsedData.firstName);
       setLastName(parsedData.lastName);
+      setPosition(parsedData.employmentInfo.position);
     }
   }, []);
 
@@ -67,7 +69,7 @@ const ProfileNav = () => {
               color="#3377FF"
               style={{ color: "#3377FF", textTransform: "capitalize" }}
             >
-              fullstack developer
+              {position}
             </Badge>
           </Stack>
           <Divider my="sm" w={"100%"} />

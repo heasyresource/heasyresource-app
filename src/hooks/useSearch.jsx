@@ -98,8 +98,8 @@ const useSearch = () => {
         `/employees/${session?.user.company.id}?page=${params || "1"}`,
         headerSettings
       );
-      setEmployees(response?.results.data);
-      setPagination(response?.results.meta);
+      setEmployees(response?.results?.data);
+      setPagination(response?.results?.meta);
       setGettingData(false);
     } catch (err) {
       setGettingData(false);

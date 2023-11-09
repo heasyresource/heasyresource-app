@@ -24,7 +24,6 @@ export function TableSelection() {
               accessor: "index",
               title: "S/N",
               textAlign: "center",
-
               render: (record) => employees.indexOf(record) + 1,
             },
             {
@@ -32,11 +31,11 @@ export function TableSelection() {
               title: "",
               textAlign: "center",
               width: "80px",
-              render: ({ avatar }) => (
+              render: ({ logoUrl }) => (
                 <Flex justify="center" align="center">
                   <Avatar
                     size={26}
-                    src={avatar || "/assets/images/avata2.png"}
+                    src={logoUrl || "/assets/images/avata2.png"}
                     radius={26}
                   />
                 </Flex>
@@ -63,9 +62,19 @@ export function TableSelection() {
             },
             {
               accessor: "department",
+              render: ({ employmentInfo }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {employmentInfo.department.name}
+                </Text>
+              ),
             },
             {
               accessor: "role",
+              render: ({ role }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {role.name}
+                </Text>
+              ),
             },
             {
               accessor: "moreDetails",

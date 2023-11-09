@@ -35,7 +35,6 @@ const EmployeeIndividual = () => {
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
               label="Middle Name"
-              withAsterisk
               size="md"
               placeholder="Smith"
               style={{ textAlign: "start", width: "100%" }}
