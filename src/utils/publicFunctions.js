@@ -89,6 +89,53 @@ export const employeeList = [
     moreDetails: "Link to More Details",
   },
 ];
+export const CompensationList = [
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+];
 export const leaveList = [
   {
     id: "1",
@@ -149,7 +196,7 @@ export const CompanyList = [
     industry: "Technology",
     websiteURL: "www.technove.com",
     location: "Lagos State",
-    status: "under review"
+    status: "under review",
   },
   {
     id: "1",
@@ -158,7 +205,7 @@ export const CompanyList = [
     industry: "Technology",
     websiteURL: "www.technove.com",
     location: "Lagos State",
-    status: "pending"
+    status: "pending",
   },
   {
     id: "1",
@@ -167,7 +214,7 @@ export const CompanyList = [
     industry: "Technology",
     websiteURL: "www.technove.com",
     location: "Lagos State",
-    status: "active"
+    status: "active",
   },
   {
     id: "1",
@@ -176,7 +223,7 @@ export const CompanyList = [
     industry: "Technology",
     websiteURL: "www.technove.com",
     location: "Lagos State",
-    status: "suspended"
+    status: "suspended",
   },
   {
     id: "1",
@@ -185,7 +232,7 @@ export const CompanyList = [
     industry: "Technology",
     websiteURL: "www.technove.com",
     location: "Lagos State",
-    status: "on hold"
+    status: "on hold",
   },
 ];
 export const VacancyList = [
