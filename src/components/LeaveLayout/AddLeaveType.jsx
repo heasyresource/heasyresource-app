@@ -17,11 +17,14 @@ import {
 import classes from "./leaveLayout.module.css";
 import React from "react";
 
-import { useAddLeaveType } from "@/hooks";
-
-const AddLeaveType = () => {
-  const { form, handleSubmit, loading, openAdd, closeAdd, openedAdd } =
-    useAddLeaveType();
+const AddLeaveType = ({
+  form,
+  handleSubmit,
+  loading,
+  openAdd,
+  closeAdd,
+  openedAdd,
+}) => {
   return (
     <>
       <Flex
@@ -70,7 +73,7 @@ const AddLeaveType = () => {
             add leave type
           </Text>
           <form
-            onSubmit={form.onSubmit((values) => handleSubmit(values, "add"))}
+            onSubmit={form?.onSubmit((values) => handleSubmit(values, "add"))}
           >
             <Stack gap={"2rem"} mt={"1rem"}>
               <Grid gutter={"xl"}>
@@ -84,7 +87,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("name")}
+                    {...form?.getInputProps("name")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -98,7 +101,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("availability")}
+                    {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
                   />
@@ -114,7 +117,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("isPaid")}
+                    {...form?.getInputProps("isPaid")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -122,7 +125,7 @@ const AddLeaveType = () => {
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...form.getInputProps("comments")}
+                {...form?.getInputProps("comments")}
                 disabled={loading}
               />
               <Group

@@ -83,8 +83,11 @@ const useIndividual = () => {
   };
   const getDepartments = async () => {
     try {
-      const response = await apiClient.get(`/departments`, headerSettings);
-      const modifiedOptions = response?.results.data.map((option) => ({
+      const response = await apiClient.get(
+        `/departments?paginate=false`,
+        headerSettings
+      );
+      const modifiedOptions = response?.results.map((option) => ({
         value: option.id,
         label: option.name,
       }));

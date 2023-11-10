@@ -1,11 +1,11 @@
 "use client";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { getSubdomain } from "@/utils/publicFunctions";
 import { Box, Button, Stack, Text, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { IconUserPlus } from "@tabler/icons-react";
+import { getSubdomain } from "@/utils/publicFunctions";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect } from "react";

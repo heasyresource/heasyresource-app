@@ -17,11 +17,15 @@ import {
 import classes from "./leaveLayout.module.css";
 import React from "react";
 import { DateInput } from "@mantine/dates";
-import { useAddHolidayType } from "@/hooks";
 
-const AddLeaveType = () => {
-  const { form, handleSubmit, openedAdd, closeAdd, openAdd, loading } =
-    useAddHolidayType();
+const AddLeaveType = ({
+  form,
+  handleSubmit,
+  openedAdd,
+  closeAdd,
+  openAdd,
+  loading,
+}) => {
   return (
     <>
       <Flex
@@ -70,7 +74,7 @@ const AddLeaveType = () => {
             add holiday type
           </Text>
           <form
-            onSubmit={form.onSubmit((values) => handleSubmit(values, "add"))}
+            onSubmit={form?.onSubmit((values) => handleSubmit(values, "add"))}
           >
             <Stack gap={"1.5rem"} mt={"1rem"}>
               <Grid gutter={"md"}>
@@ -85,7 +89,7 @@ const AddLeaveType = () => {
                       placeholder: classes.placeholder,
                     }}
                     disabled={loading}
-                    {...form.getInputProps("name")}
+                    {...form?.getInputProps("name")}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -99,7 +103,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("date")}
+                    {...form?.getInputProps("date")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -113,7 +117,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("availability")}
+                    {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
                   />
@@ -128,7 +132,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("isFullDay")}
+                    {...form?.getInputProps("isFullDay")}
                     data={["Full Day", "Half Day"]}
                     disabled={loading}
                   />
@@ -143,7 +147,7 @@ const AddLeaveType = () => {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("isPaid")}
+                    {...form?.getInputProps("isPaid")}
                     data={["Paid", "Unpaid"]}
                     disabled={loading}
                   />
@@ -152,7 +156,7 @@ const AddLeaveType = () => {
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...form.getInputProps("comments")}
+                {...form?.getInputProps("comments")}
                 disabled={loading}
               />
               <Group

@@ -168,7 +168,7 @@ const SignUpForm = () => {
               )}
             </Button>
             <Flex justify="center" align="center">
-              <Text fw={700} c={"#494949"} size="sm" tt="capitalize">
+              <Text fw={700} c={"#494949"} size="sm">
                 Already have an account?{" "}
                 <Link
                   href="/signin"

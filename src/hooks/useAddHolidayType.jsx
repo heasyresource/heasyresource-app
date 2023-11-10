@@ -197,7 +197,9 @@ const useAddHolidayType = () => {
     getHolidays();
   }, [searchParams.get("page")]);
   useEffect(() => {
-    getHolidays();
+    if (isChanged !== null) {
+      getHolidays();
+    }
   }, [isChanged]);
   return {
     form,

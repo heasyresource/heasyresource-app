@@ -52,7 +52,7 @@ const data = [
   },
   { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
 ];
-const Header = () => {
+const Header = ({ companyName, logo }) => {
   const pathname = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -115,9 +115,17 @@ const Header = () => {
         <Stack justify="flex-start" my="lg">
           <Image src="/assets/svgs/HRlogo.svg" style={{ width: "120px" }} />
           <Group>
-            <Image src={"/jitto.svg"} alt="Company Logo" />
-            <Text fw={500} c="#616161" style={{ fontSize: "13px" }}>
-              Jitto Consultancy Ltd.
+            <Image
+              src={logo || ""}
+              style={{ width: "30px" }}
+              alt="Company Logo"
+            />
+            <Text
+              fw={500}
+              c="#616161"
+              style={{ fontSize: "13px", textTransform: "capitalize" }}
+            >
+              {companyName}
             </Text>
           </Group>
         </Stack>

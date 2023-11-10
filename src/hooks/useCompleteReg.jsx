@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import useUploadImage from "./useUploadImage";
 import { ActionIcon, Button, Group, Stack, Text } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import { IconChecks } from "@tabler/icons-react";
 import { modals } from "@mantine/modals";
 
@@ -22,7 +21,7 @@ const useCompleteReg = () => {
   const [isRadioChecked, setIsRadioChecked] = useState(false);
   const [validationError, setValidationError] = useState(null);
   const allOptions = ["Company Initials", "Department Code", "Random Numbers"];
-  const allSelectedString = selectedOptions.join("");
+  const allSelectedString = selectedOptions?.join("");
   const [departmentTable, setDepartmentTable] = useState([]);
   const [isDptTableEmpty, setIsDptTableEmpty] = useState(false);
   const [IDError, setIDError] = useState(false);
@@ -36,7 +35,7 @@ const useCompleteReg = () => {
       emailDomain: "",
       subdomain: "",
       autoGenerateEmployeeId: "",
-      employeeIdFormat: "",
+      employeeIdFormat: [],
     },
     validate: {
       address: (val) => (val.length < 1 ? "Company Address is required" : null),
@@ -53,6 +52,12 @@ const useCompleteReg = () => {
       subdomain: (val) => (!val.length ? "Sub domain is required" : null),
       autoGenerateEmployeeId: (val) =>
         !val.length ? "     Employee Configuration is required" : null,
+      employeeIdFormat: (val, value) =>
+        value.autoGenerateEmployeeId === "true" && val.length === 0
+          ? "Please generate the employee ID"
+          : val.length !== allOptions.length
+          ? "Please select all options"
+          : null,
     },
   });
 
@@ -124,11 +129,6 @@ const useCompleteReg = () => {
           styles: errorStyles,
           autoClose: 7000,
         });
-      } else if (
-        form.values.autoGenerateEmployeeId === "true" &&
-        selectedOptions.length !== allOptions.length
-      ) {
-        setIDError(true);
       } else if (!departmentTable.length) {
         setIsDptTableEmpty(true);
       } else {
@@ -194,7 +194,7 @@ const useCompleteReg = () => {
   }, [response]);
 
   useEffect(() => {
-    if (selectedOptions.length === allOptions.length) {
+    if (selectedOptions?.length === allOptions.length) {
       setIDError(false);
     }
   }, [selectedOptions]);
@@ -208,6 +208,19 @@ const useCompleteReg = () => {
     setSelectedOptions([]);
   }, [form.values.autoGenerateEmployeeId]);
 
+  const getDepartments = async (subdomain) => {
+    try {
+      const response = await apiClient.get(`/departments?page=1`, {
+        headers: {
+          Authorization: `Bearer ${session?.user.token}`,
+          "x-subdomain-name": subdomain,
+        },
+      });
+      setDepartmentTable(response?.results.data);
+    } catch (err) {
+      console.log(err, "Error getting department");
+    }
+  };
   useEffect(() => {
     const getMetadata = async () => {
       try {
@@ -231,15 +244,46 @@ const useCompleteReg = () => {
         console.log(err, "Error getting the metadata");
       }
     };
+    const getCompany = async () => {
+      try {
+        const response = await apiClient.get(
+          `/companies/${session?.user.company.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${session?.user.token}`,
+            },
+          }
+        );
+        const results = response?.results;
+        if (results.subdomain !== null) {
+          console.log(results.country.name);
+          setIsSubmitted(true);
+          setLogo(results.logoUrl);
+          setIsRadioChecked(results.autoGenerateEmployeeId === 1);
+          getDepartments(results.subdomain);
+          form.setValues({
+            address: results.address,
+            emailDomain: results.emailDomain || "",
+            subdomain: results.subdomain,
+            autoGenerateEmployeeId:
+              results.autoGenerateEmployeeId === 1 ? "true" : "false",
+            countryId: results.country.name,
+            companySizeId: results.companySize.size,
+            employeeIdFormat: results.employeeIdFormat,
+          });
+        }
+      } catch (err) {}
+    };
     getMetadata();
+    getCompany();
   }, []);
+  console.log(form.values.countryId, "opyion");
   return {
     form,
     isRadioChecked,
     validationError,
     selectedOptions,
     allOptions,
-    handleMultiSelectChange,
     cmpSize,
     countries,
     fields,
@@ -255,6 +299,7 @@ const useCompleteReg = () => {
     IDError,
     uploading,
     isSubmitted,
+    logo,
   };
 };
 

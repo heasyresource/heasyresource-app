@@ -5,9 +5,14 @@ import { Avatar, Badge, Flex, Text } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 
-export function TableSelection() {
+export function TableSelection({
+  paginate,
+  employees,
+  gettingData,
+  pagination,
+}) {
   const router = useRouter();
-  const { paginate, employees, gettingData, pagination } = useSearch();
+
   return (
     <>
       {employees?.length !== 0 && (

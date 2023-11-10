@@ -1,17 +1,18 @@
 "use client";
-import { Group, AppShell, Text, ActionIcon } from "@mantine/core";
+import { Group, AppShell, Text, ActionIcon, Box, Image } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
 import classes from "./dashboard.module.css";
-import Image from "next/image";
-import NextImage from "next/image";
+// import Image from "next/image";
 import { IconBell, IconMessageDots } from "@tabler/icons-react";
 import { useState } from "react";
 import { Header } from "@/components";
 import NavBar from "./components/NavBar";
 import Main from "./components/Main";
 import Profile from "@/components/Profile";
+import { useDashboard } from "@/hooks";
 const Layout = ({ children }) => {
+  const { logo, companyName } = useDashboard();
   const [opened, { toggle }] = useDisclosure();
   const [scrolled, setScrolled] = useState(false);
 
@@ -33,15 +34,14 @@ const Layout = ({ children }) => {
       >
         <Group justify="flex-end" gap="20" style={{ flexWrap: "nowrap" }}>
           <Group style={{ flexWrap: "nowrap" }}>
-            <Image
-              src={"/jitto.svg"}
-              width={28}
-              height={28}
-              component={NextImage}
-              alt="Company Logo"
-            />
-            <Text fw={500} c="#616161" style={{ whiteSpace: "nowrap" }}>
-              Jitto Consultancy Ltd.
+            <Image src={logo || ""} style={{ width: "30px" }} alt="" />
+
+            <Text
+              fw={500}
+              c="#616161"
+              style={{ whiteSpace: "nowrap", textTransform: "capitalize" }}
+            >
+              {companyName}
             </Text>
           </Group>
           <ActionIcon
@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
         </Group>
       </AppShell.Header>
       <AppShell.Header className={classes.mobileHeader}>
-        <Header />
+        <Header companyName={companyName} logo={logo} />
       </AppShell.Header>
 
       <NavBar />

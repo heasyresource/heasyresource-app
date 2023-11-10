@@ -1,11 +1,8 @@
-"use client";
 import { Button, Grid, GridCol, Group, Select, TextInput } from "@mantine/core";
 import classes from "../dashboard.module.css";
 import React from "react";
-import { useSearch } from "@/hooks";
 
-const InputField = () => {
-  const { loading, form, handleSubmit } = useSearch();
+const InputField = ({ loading, form, handleSubmit }) => {
   return (
     <form
       onSubmit={form.onSubmit((values) => handleSubmit(values))}

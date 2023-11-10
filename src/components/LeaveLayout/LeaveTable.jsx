@@ -1,9 +1,7 @@
 "use client";
-
-import { leaveList } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+
 import {
   ActionIcon,
   Flex,
@@ -14,114 +12,114 @@ import {
 } from "@mantine/core";
 import { IconCheck, IconX, IconDotsVertical } from "@tabler/icons-react";
 
-const PAGE_SIZE = 10;
-const LeaveTable = () => {
+const LeaveTable = ({ leaves, paginate, pagination, gettingData }) => {
   const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(leaveList.slice(0, PAGE_SIZE));
-
-  useEffect(() => {
-    const from = (page - 1) * PAGE_SIZE;
-    const to = from + PAGE_SIZE;
-    setRecords(leaveList.slice(from, to));
-  }, [page]);
-
   return (
-    <DataTable
-      style={{ background: "none", marginTop: "3rem" }}
-      height={"auto"}
-      withRowBorders={false}
-      records={records}
-      columns={[
-        {
-          accessor: "index",
-          title: "S/N",
-          textAlign: "center",
+    <>
+      {leaves?.length !== 0 && (
+        <DataTable
+          style={{ background: "none", marginTop: "3rem" }}
+          minHeight={"250px"}
+          loaderType="dots"
+          loaderColor="#3377FF"
+          fetching={gettingData}
+          withRowBorders={false}
+          records={leaves}
+          columns={[
+            {
+              accessor: "index",
+              title: "S/N",
+              textAlign: "center",
 
-          render: (record) => records.indexOf(record) + 1,
-        },
-        {
-          accessor: "date",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
-        {
-          accessor: "employeeName",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
-        {
-          accessor: "leaveType",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
-        {
-          accessor: "numberOfDays",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
-        {
-          accessor: "status",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
-        {
-          accessor: "actions",
-          title: "Actions",
-          width: "135px",
-          textAlign: "center",
-          render: () => (
-            <Flex justify="center" align="center">
-              <ActionIcon variant="filled" color="#84ADFF" radius="lg">
-                <IconCheck
-                  style={{ width: "70%", height: "70%" }}
-                  stroke={1.5}
-                />
-              </ActionIcon>
-              <ActionIcon
-                variant="filled"
-                color="#FF7A00"
-                radius="lg"
-                style={{ marginLeft: "10px" }}
-              >
-                <IconX style={{ width: "70%", height: "70%" }} stroke={1.5} />
-              </ActionIcon>
-              <Menu shadow="md" width={200}>
-                <MenuTarget>
-                  <ActionIcon variant="transparent" color="#838383">
-                    <IconDotsVertical
+              render: (record) => leaves.indexOf(record) + 1,
+            },
+            {
+              accessor: "date",
+              textAlign: "center",
+              textTransform: "capitalize",
+              noWrap: true,
+            },
+            {
+              accessor: "employeeName",
+              textAlign: "center",
+              textTransform: "capitalize",
+              noWrap: true,
+            },
+            {
+              accessor: "leaveType",
+              textAlign: "center",
+              textTransform: "capitalize",
+              noWrap: true,
+            },
+            {
+              accessor: "numberOfDays",
+              textAlign: "center",
+              textTransform: "capitalize",
+              noWrap: true,
+            },
+            {
+              accessor: "status",
+              textAlign: "center",
+              textTransform: "capitalize",
+              noWrap: true,
+            },
+            {
+              accessor: "actions",
+              title: "Actions",
+              width: "135px",
+              textAlign: "center",
+              render: () => (
+                <Flex justify="center" align="center">
+                  <ActionIcon variant="filled" color="#84ADFF" radius="lg">
+                    <IconCheck
                       style={{ width: "70%", height: "70%" }}
                       stroke={1.5}
                     />
                   </ActionIcon>
-                </MenuTarget>
-                <MenuDropdown>
-                  <MenuItem
-                    fz="xs"
-                    onClick={() =>
-                      router.push("/dashboard/employee/personal-detail")
-                    }
+                  <ActionIcon
+                    variant="filled"
+                    color="#FF7A00"
+                    radius="lg"
+                    style={{ marginLeft: "10px" }}
                   >
-                    Employee Details
-                  </MenuItem>
+                    <IconX
+                      style={{ width: "70%", height: "70%" }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+                  <Menu shadow="md" width={200}>
+                    <MenuTarget>
+                      <ActionIcon variant="transparent" color="#838383">
+                        <IconDotsVertical
+                          style={{ width: "70%", height: "70%" }}
+                          stroke={1.5}
+                        />
+                      </ActionIcon>
+                    </MenuTarget>
+                    <MenuDropdown>
+                      <MenuItem
+                        fz="xs"
+                        onClick={() =>
+                          router.push("/dashboard/employee/personal-detail")
+                        }
+                      >
+                        Employee Details
+                      </MenuItem>
 
-                  <MenuItem fz="xs">Leave Details</MenuItem>
-                </MenuDropdown>
-              </Menu>
-            </Flex>
-          ),
-        },
-      ]}
-      totalRecords={leaveList.length}
-      recordsPerPage={PAGE_SIZE}
-      page={page}
-      onPageChange={(p) => setPage(p)}
-    />
+                      <MenuItem fz="xs">Leave Details</MenuItem>
+                    </MenuDropdown>
+                  </Menu>
+                </Flex>
+              ),
+            },
+          ]}
+          totalRecords={pagination?.total}
+          recordsPerPage={pagination?.perPage}
+          page={pagination?.currentPage}
+          onPageChange={(page) => paginate(page)}
+        />
+      )}
+    </>
   );
 };
 export default LeaveTable;

@@ -19,25 +19,23 @@ import React from "react";
 import classes from "./employeeLayout.module.css";
 import { useAddDepartment } from "@/hooks";
 import { modals } from "@mantine/modals";
-const DepartmentsTable = () => {
-  const {
-    departments,
-    handleDelete,
-    handleEdit,
-    loading,
-    getttingDatas,
-    form,
-    setItemID,
-    openEdit,
-    closeEdit,
-    openedEdit,
-    paginate,
-    pagination,
-  } = useAddDepartment();
-
+const DepartmentsTable = ({
+  departments,
+  handleDelete,
+  handleEdit,
+  loading,
+  getttingDatas,
+  form,
+  setItemID,
+  openEdit,
+  closeEdit,
+  openedEdit,
+  paginate,
+  pagination,
+}) => {
   const handleOpen = (data) => {
     setItemID(data?.id);
-    form.setValues({ name: data?.name, code: data?.code });
+    form?.setValues({ name: data?.name, code: data?.code });
     openEdit();
   };
   const openModal = (data) => {

@@ -43,6 +43,7 @@ const CompleteForm = () => {
     isSubmitted,
     allOptions,
     selectedOptions,
+    logo,
   } = useCompleteReg();
   return (
     <>
@@ -62,6 +63,7 @@ const CompleteForm = () => {
         <Grid mt={"2rem"}>
           <GridCol span={{ lg: 3, md: 12, sm: 12 }} className={styles.imgGrid}>
             <AddComImg
+              logo={logo}
               setLogo={setLogo}
               loading={loading}
               uploading={uploading}
@@ -108,6 +110,7 @@ const CompleteForm = () => {
                   withAsterisk
                   data={cmpSize}
                   size="md"
+                  value={form?.values.companySizeId}
                   classNames={{
                     label: styles.label,
                     error: styles.error,
@@ -218,8 +221,10 @@ const CompleteForm = () => {
                       maxDropdownHeight={150}
                       className={styles.multiSelect}
                       placeholder="Pick value"
+                      // value={selectedOptions}
                       data={allOptions}
-                      onChange={handleMultiSelectChange}
+                      // onChange={handleMultiSelectChange}
+                      {...form.getInputProps("employeeIdFormat")}
                       clearable
                       classNames={{
                         pill: styles.pill,
