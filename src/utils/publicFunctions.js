@@ -136,6 +136,23 @@ export const CompensationList = [
     salary: "N350,000",
   },
 ];
+export const EarningsList = [
+  {
+    id: "1",
+    name: "Base Salary",
+    rate: "Monthly",
+  },
+  {
+    id: "2",
+    name: "Overtime Pay",
+    rate: "Hourly",
+  },
+  {
+    id: "3",
+    name: "Allowances",
+    rate: "Hourly",
+  },
+]
 export const leaveList = [
   {
     id: "1",

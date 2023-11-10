@@ -64,7 +64,9 @@
 .error {
   font-size: 12px;
 }
-
+.buttonText {
+  color: black;
+}
 .placeholder {
   font-size: 8px;
 }
