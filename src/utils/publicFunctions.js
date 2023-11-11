@@ -104,6 +104,124 @@ export const employeeList = [
     moreDetails: "Link to More Details",
   },
 ];
+export const CompensationList = [
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+  {
+    id: "1",
+    avatar: "/assets/images/avata2.png",
+    firstName: "Robert",
+    lastName: "Wolfkisser",
+    employeeEmail: "rob_wolf@gmail.com",
+    department: "IT Department",
+    salary: "N350,000",
+  },
+];
+export const EarningsList = [
+  {
+    id: "1",
+    name: "Base Salary",
+    rate: "Monthly",
+  },
+  {
+    id: "2",
+    name: "Overtime Pay",
+    rate: "Hourly",
+  },
+  {
+    id: "3",
+    name: "Allowances",
+    rate: "Hourly",
+  },
+]
+export const DeductionsList = [
+  {
+    id: "1",
+    name: "Income Tax",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "2",
+    name: "Health Insurance Premiums",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "3",
+    name: "Retirement Contributions",
+    unitAmount: "#30,000",
+  },
+]
+export const PaySlipList = [
+  {
+    id: "1",
+    name: "Base Salary",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "2",
+    name: "State Income Tax",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "3",
+    name: "Bonuses",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "4",
+    name: "Health Insurance Premiums",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "5",
+    name: "Health Insurance Premiums",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+]
 export const leaveList = [
   {
     id: "1",
@@ -154,6 +272,53 @@ export const hiringList = [
     hiringManager: "Dayo Adegbite",
     dateOfApplication: "2023-12-05",
     status: "Shortlisted",
+  },
+];
+export const CompanyList = [
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "under review",
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "pending",
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "active",
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "suspended",
+  },
+  {
+    id: "1",
+    companyName: "TechNova Solutions",
+    companySize: "51-200",
+    industry: "Technology",
+    websiteURL: "www.technove.com",
+    location: "Lagos State",
+    status: "on hold",
   },
 ];
 export const VacancyList = [
