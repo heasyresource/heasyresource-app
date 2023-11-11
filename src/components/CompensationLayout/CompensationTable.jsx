@@ -82,7 +82,12 @@ export function CompensationTable() {
           textAlign: "center",
           render: () => (
             <Flex justify="center" align="center">
-              <ActionIcon variant="transparent" radius="lg">
+              <ActionIcon
+               variant="transparent" 
+               radius="lg"
+               component="a"
+               href="/dashboard/compensation/employee-payslip"
+              >
                 <IconWallet
                   style={{ width: "70%", height: "70%" }}
                   stroke={1.5}
@@ -90,7 +95,6 @@ export function CompensationTable() {
               </ActionIcon>
               <ActionIcon
                 variant="transparent"
-                // color="#FF7A00"
                 radius="lg"
                 style={{ marginLeft: "10px" }}
               >
@@ -102,28 +106,6 @@ export function CompensationTable() {
                   stroke={1.5}
                 />
               </ActionIcon>
-              {/* <Menu shadow="md" width={200}>
-                <MenuTarget>
-                  <ActionIcon variant="transparent" color="#838383">
-                    <IconDotsVertical
-                      style={{ width: "70%", height: "70%" }}
-                      stroke={1.5}
-                    />
-                  </ActionIcon>
-                </MenuTarget>
-                <MenuDropdown>
-                  <MenuItem
-                    fz="xs"
-                    onClick={() =>
-                      router.push("/dashboard/employee/personal-detail")
-                    }
-                  >
-                    Employee Details
-                  </MenuItem>
-
-                  <MenuItem fz="xs">Leave Details</MenuItem>
-                </MenuDropdown>
-              </Menu> */}
             </Flex>
           ),
         },

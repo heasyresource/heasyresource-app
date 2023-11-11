@@ -153,6 +153,60 @@ export const EarningsList = [
     rate: "Hourly",
   },
 ]
+export const DeductionsList = [
+  {
+    id: "1",
+    name: "Income Tax",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "2",
+    name: "Health Insurance Premiums",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "3",
+    name: "Retirement Contributions",
+    unitAmount: "#30,000",
+  },
+]
+export const PaySlipList = [
+  {
+    id: "1",
+    name: "Base Salary",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "2",
+    name: "State Income Tax",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "3",
+    name: "Bonuses",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "4",
+    name: "Health Insurance Premiums",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "5",
+    name: "Health Insurance Premiums",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+]
 export const leaveList = [
   {
     id: "1",

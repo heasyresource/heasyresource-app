@@ -12,7 +12,11 @@ import {
 import { usePathname } from "next/navigation";
 import React from "react";
 import classes from "../CompensationLayout/Compensation.module.css";
-import { IconChevronDown, IconWalletOff, IconZoomMoney } from "@tabler/icons-react";
+import {
+  IconChevronDown,
+  IconWalletOff,
+  IconZoomMoney,
+} from "@tabler/icons-react";
 
 const CompensationNav = ({ tabTitle }) => {
   const pathname = usePathname();
@@ -26,7 +30,10 @@ const CompensationNav = ({ tabTitle }) => {
           w="auto"
           component="a"
           href="/dashboard/compensation"
-          data-active={"/dashboard/compensation" === pathname || undefined}
+          data-active={
+            "/dashboard/compensation" === pathname ||
+            "/dashboard/compensation/employee-payslip" === pathname ||
+           undefined}
           className={classes.btnLink}
           variant="filled"
         >
@@ -61,11 +68,10 @@ const CompensationNav = ({ tabTitle }) => {
               className={classes.btnLink}
               rightSection={<IconChevronDown size="1.3rem" color="#3377FF" />}
               data-active={
-                "/dashboard/employee/department" === pathname || undefined
+                "/dashboard/compensation/earnings" === pathname || undefined
               }
             >
               Salary Component
-              {/* <Space w="5px" /> */}
             </Button>
           </MenuTarget>
           <MenuDropdown>
@@ -75,9 +81,9 @@ const CompensationNav = ({ tabTitle }) => {
               className={classes.activeConfig}
               leftSection={<IconZoomMoney size="1rem" color="#3377FF" />}
               data-active={
-                "/dashboard/employee/department" === pathname || undefined
+                "/dashboard/compensation/earnings" === pathname || undefined
               }
-              href="/dashboard/employee/department"
+              href="/dashboard/compensation/earnings"
             >
               Earnings
             </MenuItem>
@@ -87,9 +93,9 @@ const CompensationNav = ({ tabTitle }) => {
               className={classes.activeConfig}
               leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
               data-active={
-                "/dashboard/employee/department" === pathname || undefined
+                "/dashboard/compensation/deductions" === pathname || undefined
               }
-              href="/dashboard/employee/department"
+              href="/dashboard/compensation/deductions"
             >
               Deductions
             </MenuItem>
