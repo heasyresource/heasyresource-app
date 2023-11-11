@@ -238,7 +238,7 @@ const useCompleteReg = () => {
           label: option.name,
         }));
         setCmpSize(modifiedOptions);
-        setCountries(modifiedOptions2);
+        // setCountries(modifiedOptions2);
         setFields(modifiedOptions3);
       } catch (err) {
         console.log(err, "Error getting the metadata");

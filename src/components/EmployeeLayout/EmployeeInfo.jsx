@@ -12,12 +12,15 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { useEmploymentInfo } from "@/hooks";
 import { DateInput } from "@mantine/dates";
 
-const EmployeeInfo = () => {
-  const { form, handleSubmit, departments, employmentType, loading } =
-    useEmploymentInfo();
+const EmployeeInfo = ({
+  employmentInfoForm,
+  handleInfoSubmit,
+  departments,
+  employmentType,
+  loading,
+}) => {
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
@@ -25,7 +28,9 @@ const EmployeeInfo = () => {
       </Text>
       <form
         style={{ height: "100%", marginTop: "2rem" }}
-        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+        onSubmit={employmentInfoForm?.onSubmit((values) =>
+          handleInfoSubmit(values)
+        )}
       >
         <Stack style={{ gap: "3rem" }}>
           <Box>
@@ -45,7 +50,7 @@ const EmployeeInfo = () => {
                   label="Position"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("position")}
+                  {...employmentInfoForm?.getInputProps("position")}
                   disabled={loading}
                 />
               </GridCol>
@@ -57,7 +62,7 @@ const EmployeeInfo = () => {
                   style={{ textAlign: "start", width: "100%" }}
                   data={departments}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("departmentId")}
+                  {...employmentInfoForm?.getInputProps("departmentId")}
                   disabled={loading}
                 />
               </Grid.Col>
@@ -69,7 +74,7 @@ const EmployeeInfo = () => {
                   style={{ textAlign: "start", width: "100%" }}
                   data={employmentType}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("employmentTypeId")}
+                  {...employmentInfoForm?.getInputProps("employmentTypeId")}
                   disabled={loading}
                 />
               </Grid.Col>
@@ -81,7 +86,7 @@ const EmployeeInfo = () => {
                   style={{ textAlign: "start", width: "100%" }}
                   data={["On-Site", "Hybrid", "Remote"]}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("workMode")}
+                  {...employmentInfoForm?.getInputProps("workMode")}
                   disabled={loading}
                 />
               </Grid.Col>
@@ -105,7 +110,7 @@ const EmployeeInfo = () => {
                   style={{ textAlign: "start", width: "100%" }}
                   label="Joined Date"
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("resumptionDate")}
+                  {...employmentInfoForm?.getInputProps("resumptionDate")}
                   disabled={loading}
                 />
               </Grid.Col>

@@ -14,7 +14,7 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const AddImage = () => {
+const AddImage = ({ logoUrl }) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -42,7 +42,7 @@ const AddImage = () => {
           variant="outline"
           style={{ borderRadius: "50%" }}
           color="blue"
-          src={imgUrl || "/assets/images/avata2.png"}
+          src={logoUrl || imgUrl || "/assets/images/avata2.png"}
         />
         <ActionIcon
           className="add-icon"

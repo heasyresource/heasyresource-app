@@ -3,8 +3,10 @@ import { apiClient } from "@/lib/interceptor/apiClient";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const useDashboard = () => {
+  // const dispatch = useDispatch();
   const { data: session } = useSession();
   const router = useRouter();
   const [logo, setLogo] = useState("");
@@ -23,9 +25,9 @@ const useDashboard = () => {
         const results = response?.results;
         setLogo(results.logoUrl);
         setCompanyName(results.name);
-        if (results.isActive !== 1) {
-          router.push("/complete-registration");
-        }
+        // if (results.isActive !== 1) {
+        //   router.push("/complete-registration");
+        // }
       } catch (err) {}
     };
     getCompany();

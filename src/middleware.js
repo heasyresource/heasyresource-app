@@ -39,6 +39,13 @@ export default async function middleware(req) {
   ) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
+  // if (
+  //   req.nextUrl.pathname.startsWith("/dashboard") &&
+  //   isAuthenticated &&
+  //   token.company.isActive === 0
+  // ) {
+  //   return NextResponse.redirect(new URL("/complete-registration", req.url));
+  // }
   //   return await withAuth(req, {
   //     pages: {
   //       signIn: "/signin",

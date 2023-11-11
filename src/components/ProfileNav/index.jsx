@@ -8,39 +8,25 @@ import { AddImage } from "..";
 import { obfuscateToken } from "@/utils/encryptToken";
 
 const data = [
-  { link: "/dashboard/employee/personal-detail", label: "personal Details" },
-  { link: "/dashboard/employee/contact-detail", label: "contact Details" },
-  { link: "/dashboard/employee/emergency-contact", label: "emergency contact" },
-  { link: "/dashboard/employee/employment-info", label: "employment info" },
-  { link: "/dashboard/employee/qualifications", label: "qualifications" },
-  { link: "/dashboard/employee/compensation", label: "compensation" },
+  { link: "/personal-detail", label: "personal Details" },
+  { link: "/contact-detail", label: "contact Details" },
+  { link: "/emergency-contact", label: "emergency contact" },
+  { link: "/employment-info", label: "employment info" },
+  { link: "/qualifications", label: "qualifications" },
+  { link: "/compensation", label: "compensation" },
 ];
-const ProfileNav = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [position, setPosition] = useState("");
+const ProfileNav = ({ position, firstName, lastName, id, logoUrl }) => {
   const pathname = usePathname();
   const links = data.map((item) => (
     <Link
       className={classes.link}
-      data-active={item.link === pathname || undefined}
-      href={item.link}
+      data-active={pathname.includes(item.link) || undefined}
+      href={`/dashboard/employee/${id}${item.link}`}
       key={item.label}
     >
       <span>{item.label}</span>
     </Link>
   ));
-  useEffect(() => {
-    const user =
-      localStorage.getItem("employee") &&
-      obfuscateToken(false, localStorage.getItem("employee") ?? "");
-    if (user) {
-      const parsedData = JSON.parse(user);
-      setFirstName(parsedData.firstName);
-      setLastName(parsedData.lastName);
-      setPosition(parsedData.employmentInfo.position);
-    }
-  }, []);
 
   return (
     <Box>
@@ -56,7 +42,7 @@ const ProfileNav = () => {
             gap="10px"
             className={classes.navbarContent}
           >
-            <AddImage />
+            <AddImage logoUrl={logoUrl} />
             <Text
               tt="capitalize"
               ta="center"
