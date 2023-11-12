@@ -41,23 +41,23 @@ const SettingsTable = ({ openEditModal }) => {
           render: (record) => records.indexOf(record) + 1,
         },
         {
-          accessor: "jobTitle",
+          accessor: "jobCategory",
           textAlign: "center",
           textTransform: "capitalize",
           noWrap: true,
         },
-        {
-          accessor: "jobStatus",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
-        {
-          accessor: "jobDescription",
-          textAlign: "center",
-          textTransform: "capitalize",
-          noWrap: true,
-        },
+        // {
+        //   accessor: "jobStatus",
+        //   textAlign: "center",
+        //   textTransform: "capitalize",
+        //   noWrap: true,
+        // },
+        // {
+        //   accessor: "jobDescription",
+        //   textAlign: "center",
+        //   textTransform: "capitalize",
+        //   noWrap: true,
+        // },
         {
           accessor: "actions",
           title: "Actions",

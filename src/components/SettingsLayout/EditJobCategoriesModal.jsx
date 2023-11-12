@@ -45,7 +45,7 @@ const EditJobCategoriesModal = ({ isEditOpen, isEditClose }) => {
                 <TextInput
                   size="md"
                   required
-                  label="Job Title"
+                  label="Job Category"
                   //   placeholder="Marketing"
                   style={{ width: "100%" }}
                   classNames={{
@@ -55,7 +55,7 @@ const EditJobCategoriesModal = ({ isEditOpen, isEditClose }) => {
                   }}
                 />
               </GridCol>
-              <GridCol span={{ lg: 12, md: 12, sm: 12 }}>
+              {/* <GridCol span={{ lg: 12, md: 12, sm: 12 }}>
                 <TextInput
                   size="md"
                   required
@@ -84,7 +84,7 @@ const EditJobCategoriesModal = ({ isEditOpen, isEditClose }) => {
                     placeholder: classes.placeholder,
                   }}
                 />
-              </GridCol>
+              </GridCol> */}
             </Grid>
             <Group
               justify="flex-end"

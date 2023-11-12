@@ -251,27 +251,19 @@ export const leaveList = [
 export const SettingsList = [
   {
     id: "1",
-    jobTitle: "Front End Developer",
-    jobStatus: "Active",
-    jobDescription: "Admin",
+    jobCategory: "Software Engineer",
   },
   {
-    id: "2",
-    jobTitle: "Front End Developer",
-    jobStatus: "Active",
-    jobDescription: "Admin",
+    id: "1",
+    jobCategory: "Software Engineer",
   },
   {
-    id: "3",
-    jobTitle: "Front End Developer",
-    jobStatus: "Active",
-    jobDescription: "Admin",
+    id: "1",
+    jobCategory: "Software Engineer",
   },
   {
-    id: "4",
-    jobTitle: "Front End Developer",
-    jobStatus: "Active",
-    jobDescription: "Admin",
+    id: "1",
+    jobCategory: "Software Engineer",
   },
 ];
 export const hiringList = [
