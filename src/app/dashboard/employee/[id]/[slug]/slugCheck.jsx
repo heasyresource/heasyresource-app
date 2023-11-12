@@ -10,6 +10,7 @@ import React from "react";
 
 const SlugCheck = () => {
   const pathname = usePathname();
+
   const {
     loading,
     handlePersonalSubmit,
@@ -28,9 +29,40 @@ const SlugCheck = () => {
     handleEmergencySubmit,
     employmentInfoForm,
     handleInfoSubmit,
-    employmentType,
     departments,
     logoUrl,
+    openExp,
+    openedExp,
+    closeExp,
+    openEdu,
+    closeEdu,
+    openedEdu,
+    experienceForm,
+    educationForm,
+    handleExpSubmit,
+    employmentType,
+    handleEduSubmit,
+    licenseForm,
+    openLcs,
+    closeLcs,
+    openedLcs,
+    handleLicenseSubmit,
+    workExp,
+    openEditExp,
+    closeEditExp,
+    openedEditExp,
+    setExpId,
+    handleEditExp,
+    educations,
+    handleEditEdu,
+    openEditEdu,
+    closeEditEdu,
+    openedEditEdu,
+    openEditLcs,
+    closeEditLcs,
+    openedEditLcs,
+    licenses,
+    handleEditLicense,
   } = useSingleEmployee();
   return (
     <EmployeeLayout
@@ -74,7 +106,43 @@ const SlugCheck = () => {
           employmentType={employmentType}
         />
       )}
-      {pathname.includes("/qualifications") && <Qualification />}
+      {pathname.includes("/qualifications") && (
+        <Qualification
+          loading={loading}
+          handleEduSubmit={handleEduSubmit}
+          handleExpSubmit={handleExpSubmit}
+          openEdu={openEdu}
+          openExp={openExp}
+          openedEdu={openedEdu}
+          openedExp={openedExp}
+          closeEdu={closeEdu}
+          closeExp={closeExp}
+          employmentType={employmentType}
+          educationForm={educationForm}
+          experienceForm={experienceForm}
+          workExp={workExp}
+          openEditExp={openEditExp}
+          closeEditExp={closeEditExp}
+          openedEditExp={openedEditExp}
+          setExpId={setExpId}
+          handleEditExp={handleEditExp}
+          educations={educations}
+          openEditEdu={openEditEdu}
+          closeEditEdu={closeEditEdu}
+          openedEditEdu={openedEditEdu}
+          handleEditEdu={handleEditEdu}
+          openEditLcs={openEditLcs}
+          closeEditLcs={closeEditLcs}
+          openedEditLcs={openedEditLcs}
+          licenseForm={licenseForm}
+          licenses={licenses}
+          openLcs={openLcs}
+          closeLcs={closeLcs}
+          openedLcs={openedLcs}
+          handleLicenseSubmit={handleLicenseSubmit}
+          handleEditLicense={handleEditLicense}
+        />
+      )}
       {pathname.includes("/compensation") && <Compensation />}
     </EmployeeLayout>
   );

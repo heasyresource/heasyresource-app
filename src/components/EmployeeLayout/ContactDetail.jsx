@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   Group,
+  Loader,
   Select,
   Stack,
   Text,
@@ -217,6 +218,8 @@ const ContactDetail = ({
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            disabled={loading}
+            onClick={() => contactForm?.reset()}
           >
             cancel
           </Button>
@@ -232,8 +235,9 @@ const ContactDetail = ({
             style={{
               backgroundColor: "#3377FF",
             }}
+            disabled={loading}
           >
-            save
+            {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
           </Button>
         </Group>
       </Stack>

@@ -1,197 +1,98 @@
 "use client";
-import {
-  Box,
-  Button,
-  Grid,
-  GridCol,
-  Group,
-  Stack,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { Box, Divider, Stack, Text } from "@mantine/core";
 import React from "react";
-import classes from "./employeeLayout.module.css";
-import { useQualification } from "@/hooks";
+import WorkExprience from "./WorkExprience";
+import Education from "./Education";
+import Licence from "./Licence";
 
-const Qualification = () => {
-  const { form, handleSubmit } = useQualification();
+const Qualification = ({
+  openExp,
+  openedExp,
+  closeExp,
+  openEdu,
+  closeEdu,
+  openedEdu,
+  experienceForm,
+  educationForm,
+  handleExpSubmit,
+  loading,
+  employmentType,
+  handleEduSubmit,
+  openLcs,
+  closeLcs,
+  openedLcs,
+  openEditLcs,
+  closeEditLcs,
+  openedEditLcs,
+  handleLicenseSubmit,
+  licenseForm,
+  workExp,
+  openEditExp,
+  closeEditExp,
+  openedEditExp,
+  setExpId,
+  handleEditExp,
+  educations,
+  handleEditEdu,
+  openEditEdu,
+  closeEditEdu,
+  openedEditEdu,
+  licenses,
+  handleEditLicense,
+}) => {
   return (
     <Box>
-      <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
+      <Text tt={"capitalize"} style={{ fontSize: "30px", fontWeight: 700 }}>
         qualifications
       </Text>
-      <form
-        style={{ height: "100%", marginTop: "2rem" }}
-        onSubmit={form.onSubmit((values) => handleSubmit(values))}
-      >
-        <Stack style={{ gap: "3rem" }}>
-          <Box>
-            <Text
-              c="#4D4D4D"
-              tt="capitalize"
-              style={{ fontWeight: 500, fontSize: "18px", textAlign: "start" }}
-            >
-              work exprience:
-            </Text>
 
-            <Grid style={{ marginTop: "20px" }} gutter="xl">
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Company Name"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("companyName")}
-                />
-              </GridCol>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Job Title"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("jobTitle")}
-                />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  type="date"
-                  size="md"
-                  withAsterisk
-                  label="Start Date"
-                  placeholder="DD/MM/YYYY"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("startDate")}
-                />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  type="date"
-                  size="md"
-                  withAsterisk
-                  label="End Date"
-                  placeholder="DD/MM/YYYY"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("endDate")}
-                />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 8, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  label="Comment"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("comment")}
-                />
-              </Grid.Col>
-            </Grid>
-          </Box>
-          <Box>
-            <Text
-              c="#4D4D4D"
-              tt="capitalize"
-              style={{ fontWeight: 500, fontSize: "18px", textAlign: "start" }}
-            >
-              Education
-            </Text>
-
-            <Grid style={{ marginTop: "20px" }} gutter="xl">
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Institute Name"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("instituteName")}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Specialization"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("specialization")}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  type="date"
-                  size="md"
-                  withAsterisk
-                  label="Start Year"
-                  placeholder="DD/MM/YYYY"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("eduStart")}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  type="date"
-                  label="End Year"
-                  placeholder="DD/MM/YYYY"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("eduEnd")}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Level"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("level")}
-                />
-              </GridCol>
-            </Grid>
-          </Box>
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
-            <Button
-              variant="outline"
-              size="md"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-            >
-              cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="md"
-              color="#3377FF"
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              type="submit"
-              style={{
-                backgroundColor: "#3377FF",
-              }}
-            >
-              save
-            </Button>
-          </Group>
-        </Stack>
-      </form>
+      <Stack style={{ gap: "3rem", marginTop: "20px" }}>
+        <WorkExprience
+          loading={loading}
+          employmentType={employmentType}
+          handleExpSubmit={handleExpSubmit}
+          workExp={workExp}
+          experienceForm={experienceForm}
+          openExp={openExp}
+          openedExp={openedExp}
+          closeExp={closeExp}
+          openEditExp={openEditExp}
+          closeEditExp={closeEditExp}
+          openedEditExp={openedEditExp}
+          setExpId={setExpId}
+          handleEditExp={handleEditExp}
+        />
+        <Divider my="md" />
+        <Education
+          openEdu={openEdu}
+          closeEdu={closeEdu}
+          openedEdu={openedEdu}
+          handleEduSubmit={handleEduSubmit}
+          educationForm={educationForm}
+          educations={educations}
+          loading={loading}
+          handleEditEdu={handleEditEdu}
+          openEditEdu={openEditEdu}
+          closeEditEdu={closeEditEdu}
+          openedEditEdu={openedEditEdu}
+          setExpId={setExpId}
+        />
+        <Divider my="md" />
+        <Licence
+          openEditLcs={openEditLcs}
+          closeEditLcs={closeEditLcs}
+          handleLicenseSubmit={handleLicenseSubmit}
+          handleEditLicense={handleEditLicense}
+          loading={loading}
+          openLcs={openLcs}
+          closeLcs={closeLcs}
+          openedEditLcs={openedEditLcs}
+          openedLcs={openedLcs}
+          licenseForm={licenseForm}
+          licenses={licenses}
+          setExpId={setExpId}
+        />
+      </Stack>
     </Box>
   );
 };

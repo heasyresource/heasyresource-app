@@ -14,7 +14,7 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const AddImage = ({ logoUrl }) => {
+const AddImage = ({ setLogo, logo, logoUrl, loading, uploading }) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -42,9 +42,11 @@ const AddImage = ({ logoUrl }) => {
           variant="outline"
           style={{ borderRadius: "50%" }}
           color="blue"
-          src={logoUrl || imgUrl || "/assets/images/avata2.png"}
+          src={imgUrl || logo || logoUrl || "/assets/images/avata2.png"}
+          opacity={loading || uploading ? ".5" : "1"}
         />
         <ActionIcon
+          disabled={loading || uploading}
           className="add-icon"
           style={{
             position: "absolute",
@@ -136,6 +138,7 @@ const AddImage = ({ logoUrl }) => {
                         onClick={() => {
                           setImgUrl(image.dataURL);
                           close();
+                          setLogo(imgs);
                         }}
                         style={{
                           backgroundColor: "#3377FF",

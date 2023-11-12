@@ -13,7 +13,6 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { useEmergencyContact } from "@/hooks";
 
 const EmergencyContact = ({
   emergencyForm,
@@ -149,6 +148,7 @@ const EmergencyContact = ({
               style={{
                 backgroundColor: "#3377FF",
               }}
+              disabled={loading}
             >
               {loading ? (
                 <Loader color="white" type="dots" size="md" />

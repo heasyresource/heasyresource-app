@@ -66,20 +66,6 @@ const useCompleteReg = () => {
     "Department Code": "001",
     "Random Numbers": "569509",
   };
-  const handleMultiSelectChange = (selected) => {
-    setSelectedOptions(selected);
-    const error = validateMultiSelect(selected, allOptions);
-    setValidationError(error);
-  };
-  const validateMultiSelect = (selectedOptions, allOptions) => {
-    if (selectedOptions.length === 0) {
-      return "Please generate the employee ID"; // No option selected
-    } else if (selectedOptions.length === allOptions.length) {
-      return null; // Validation passed, all options are selected
-    } else {
-      return "Please select all options"; // Not all options are selected
-    }
-  };
   const openModal = () =>
     modals.open({
       radius: "md",
@@ -238,7 +224,7 @@ const useCompleteReg = () => {
           label: option.name,
         }));
         setCmpSize(modifiedOptions);
-        // setCountries(modifiedOptions2);
+        setCountries(modifiedOptions2);
         setFields(modifiedOptions3);
       } catch (err) {
         console.log(err, "Error getting the metadata");

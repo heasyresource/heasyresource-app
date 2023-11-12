@@ -7,12 +7,22 @@ import {
   normalizePhoneNumber,
 } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
+import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useSingleEmployee = () => {
+  const [openedExp, { open: openExp, close: closeExp }] = useDisclosure(false);
+  const [openedEditExp, { open: openEditExp, close: closeEditExp }] =
+    useDisclosure(false);
+  const [openedEdu, { open: openEdu, close: closeEdu }] = useDisclosure(false);
+  const [openedEditEdu, { open: openEditEdu, close: closeEditEdu }] =
+    useDisclosure(false);
+  const [openedLcs, { open: openLcs, close: closeLcs }] = useDisclosure(false);
+  const [openedEditLcs, { open: openEditLcs, close: closeEditLcs }] =
+    useDisclosure(false);
   const param = useParams();
   const { id } = param;
   const subdomain = getSubdomain();
@@ -29,6 +39,10 @@ const useSingleEmployee = () => {
   const [position, setPosition] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(null);
   const [logoUrl, setLogoUrl] = useState(null);
+  const [workExp, setWorkExp] = useState(null);
+  const [educations, setEducations] = useState(null);
+  const [licenses, setLicenses] = useState(null);
+  const [expId, setExpId] = useState("");
 
   const personalForm = useForm({
     initialValues: {
@@ -139,6 +153,81 @@ const useSingleEmployee = () => {
       workMode: (value) => (!value.length ? "Job Mode is required" : null),
     },
   });
+  const experienceForm = useForm({
+    initialValues: {
+      companyName: "",
+      position: "",
+      location: "",
+      employmentTypeId: "",
+      workMode: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+      isPresent: false,
+    },
+    validate: {
+      companyName: (value) =>
+        !value.length ? "Company Name is required" : null,
+      position: (val) => (!val.length ? "Position is required" : null),
+
+      startDate: (val) => (val.length === 0 ? "Start Date is required" : null),
+
+      endDate: (val, values) =>
+        values.isPresent
+          ? null
+          : val.length === 0
+          ? "End Date is required"
+          : null,
+      location: (val) => (!val.length ? "Company Location is required" : null),
+      workMode: (val) => (!val.length ? "Job Mode is required" : null),
+      employmentTypeId: (val) => (!val.length ? "Job Type is required" : null),
+    },
+  });
+  const educationForm = useForm({
+    initialValues: {
+      institution: "",
+      degree: "",
+      fieldOfStudy: "",
+      grade: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+    },
+    validate: {
+      institution: (val) =>
+        !val.length ? "Institution Name is required" : null,
+      degree: (val) => (!val.length ? "Degree is required" : null),
+      fieldOfStudy: (val) =>
+        !val.length ? "Field of study is required" : null,
+      grade: (val) => (!val.length ? "Grade is required" : null),
+      startDate: (val) => (val.length === 0 ? "Start date is required" : null),
+      endDate: (val) => (val.length === 0 ? "End date is required" : null),
+    },
+  });
+  const licenseForm = useForm({
+    initialValues: {
+      name: "",
+      issuingOrganization: "",
+      issueDate: "",
+      expirationDate: "",
+      credentialId: "",
+      credentialUrl: "",
+    },
+    validate: {
+      name: (val) => (!val.length ? "Field is required" : null),
+      issuingOrganization: (val) => (!val.length ? "Field is required" : null),
+      credentialUrl: (val) =>
+        /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(
+          val
+        )
+          ? null
+          : "Enter a valid url",
+      credentialId: (val) => (!val.length ? "Field is required" : null),
+      issueDate: (val) => (val.length === 0 ? "Field is required" : null),
+      expirationDate: (val) => (val.length === 0 ? "Field is required" : null),
+    },
+  });
+
   const headerSettings = {
     headers: {
       Authorization: `Bearer ${session?.user.token}`,
@@ -289,6 +378,222 @@ const useSingleEmployee = () => {
       }
     }
   };
+  const handleExpSubmit = async (data) => {
+    setLoading(true);
+    const modifiedValues = {
+      ...data,
+      endDate: convertDateFormat(data.endDate),
+      startDate: convertDateFormat(data.startDate),
+    };
+    if (data.isPresent) {
+      delete modifiedValues.endDate;
+    }
+    try {
+      const response = await apiClient.post(
+        `/employees/${id}/work-experiences`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Work Exprience added successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      closeExp();
+      setIsSubmitted(response);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          experienceForm.setFieldError(field, message);
+        });
+      }
+    }
+  };
+  const handleEduSubmit = async (data) => {
+    setLoading(true);
+    const modifiedValues = {
+      ...data,
+      endDate: convertDateFormat(data.endDate),
+      startDate: convertDateFormat(data.startDate),
+    };
+    try {
+      const response = await apiClient.post(
+        `/employees/${id}/educations`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Education added successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      closeEdu();
+      setLoading(false);
+      setIsSubmitted(response);
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          educationForm.setFieldError(field, message);
+        });
+      }
+    }
+  };
+  const handleLicenseSubmit = async (data) => {
+    setLoading(true);
+    const modifiedValues = {
+      ...data,
+      issueDate: convertDateFormat(data.issueDate),
+      expirationDate: convertDateFormat(data.expirationDate),
+    };
+    try {
+      const response = await apiClient.post(
+        `/employees/${id}/license-or-certifications`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "License or Certication added successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      closeLcs();
+      setLoading(false);
+      setIsSubmitted(response);
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          licenseForm.setFieldError(field, message);
+        });
+      }
+    }
+  };
+  const handleEditExp = async (data) => {
+    setLoading(true);
+    const modifiedValues = {
+      ...data,
+      endDate: convertDateFormat(data.endDate),
+      startDate: convertDateFormat(data.startDate),
+    };
+    if (data.isPresent) {
+      delete modifiedValues.endDate;
+    }
+    try {
+      const response = await apiClient.put(
+        `/employees/${id}/work-experiences/${expId}`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Work Exprience updated successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      closeEditExp();
+      setIsSubmitted(response);
+      setLoading(false);
+      setExpId("");
+      experienceForm.reset();
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          experienceForm.setFieldError(field, message);
+        });
+      }
+    }
+  };
+  const handleEditEdu = async (data) => {
+    setLoading(true);
+    const modifiedValues = {
+      ...data,
+      endDate: convertDateFormat(data.endDate),
+      startDate: convertDateFormat(data.startDate),
+    };
+    try {
+      const response = await apiClient.put(
+        `/employees/${id}/educations/${expId}`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Education updated successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      closeEditEdu();
+      setLoading(false);
+      setIsSubmitted(response);
+      setExpId("");
+      educationForm.reset();
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          educationForm.setFieldError(field, message);
+        });
+      }
+    }
+  };
+  const handleEditLicense = async (data) => {
+    setLoading(true);
+    const modifiedValues = {
+      ...data,
+      issueDate: convertDateFormat(data.issueDate),
+      expirationDate: convertDateFormat(data.expirationDate),
+    };
+    try {
+      const response = await apiClient.put(
+        `/employees/${id}/license-or-certifications/${expId}`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "License or Certication updated successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      closeEditLcs();
+      setLoading(false);
+      setIsSubmitted(response);
+      setExpId("");
+      licenseForm.reset();
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+
+          licenseForm.setFieldError(field, message);
+        });
+      }
+    }
+  };
   const getMetadata = async () => {
     try {
       const res = await apiClient.get("/metadata");
@@ -342,10 +647,14 @@ const useSingleEmployee = () => {
       setLastName(results.lastName);
       setPosition(results.employmentInfo.position);
       setLogoUrl(results.logoUrl);
+      setWorkExp(results.workExperiences);
+      setEducations(results.educations);
+      setLicenses(results.licenseOrCertifications);
+      contactForm.setFieldValue("workEmail", results.email);
       personalForm.setValues({
         firstName: results.firstName,
         lastName: results.lastName,
-        middleName: results.middleName,
+        middleName: results.middleName === null ? "" : results.middleName,
         gender: results.gender,
         dateOfBirth:
           results.dateOfBirth === null ? "" : new Date(results.dateOfBirth),
@@ -376,7 +685,6 @@ const useSingleEmployee = () => {
           results.contactDetail.personalEmail === null
             ? ""
             : results.contactDetail.personalEmail,
-        workEmail: results.email,
       });
       emergencyForm.setValues({
         firstName: results.nextOfKin[0].firstName,
@@ -396,10 +704,9 @@ const useSingleEmployee = () => {
             : new Date(results.employmentInfo.resumptionDate),
         departmentId: results.employmentInfo.department.name,
       });
-    } catch (err) {
-      console.log(err, "Error getting employee");
-    }
+    } catch (err) {}
   };
+
   useEffect(() => {
     if (contactForm.values.stateId.length !== 0) {
       setIsEmpty(false);
@@ -420,7 +727,6 @@ const useSingleEmployee = () => {
     getEmployee();
     getDepartments();
   }, []);
-
   return {
     loading,
     handlePersonalSubmit,
@@ -442,6 +748,37 @@ const useSingleEmployee = () => {
     employmentType,
     departments,
     logoUrl,
+    openedExp,
+    openExp,
+    closeExp,
+    openEdu,
+    closeEdu,
+    openedEdu,
+    educationForm,
+    experienceForm,
+    handleExpSubmit,
+    handleEduSubmit,
+    openLcs,
+    openedLcs,
+    closeLcs,
+    licenseForm,
+    handleLicenseSubmit,
+    workExp,
+    openEditExp,
+    closeEditExp,
+    openedEditExp,
+    setExpId,
+    handleEditExp,
+    educations,
+    handleEditEdu,
+    openEditEdu,
+    closeEditEdu,
+    openedEditEdu,
+    openEditLcs,
+    closeEditLcs,
+    openedEditLcs,
+    licenses,
+    handleEditLicense,
   };
 };
 

@@ -61,11 +61,10 @@ const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
             <TextInput
               size="md"
               label="Employee ID"
-              type="number"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...personalForm?.getInputProps("employeeId")}
-              disabled={loading}
+              disabled
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -75,7 +74,7 @@ const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              placeholder="Nigeria"
+              placeholder="Nigerian"
               {...personalForm?.getInputProps("nationality")}
               disabled={loading}
             />
@@ -138,7 +137,7 @@ const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
           justify="flex-end"
           className={classes.btnWrap}
           align="center"
-          mt={"auto"}
+          mt={"6rem"}
         >
           <Button
             variant="outline"

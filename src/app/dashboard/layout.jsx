@@ -3,7 +3,6 @@ import { Group, AppShell, Text, ActionIcon, Box, Image } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
 import classes from "./dashboard.module.css";
-// import Image from "next/image";
 import { IconBell, IconMessageDots } from "@tabler/icons-react";
 import { useState } from "react";
 import { Header } from "@/components";
