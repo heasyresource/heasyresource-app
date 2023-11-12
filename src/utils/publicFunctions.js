@@ -167,7 +167,7 @@ export const EarningsList = [
     name: "Allowances",
     rate: "Hourly",
   },
-]
+];
 export const DeductionsList = [
   {
     id: "1",
@@ -184,7 +184,7 @@ export const DeductionsList = [
     name: "Retirement Contributions",
     unitAmount: "#30,000",
   },
-]
+];
 export const PaySlipList = [
   {
     id: "1",
@@ -221,7 +221,7 @@ export const PaySlipList = [
     deductions: "-",
     unitAmount: "#30,000",
   },
-]
+];
 export const leaveList = [
   {
     id: "1",
@@ -246,6 +246,24 @@ export const leaveList = [
     leaveType: "Vacation",
     numberOfDays: "22 days",
     status: "Pending",
+  },
+];
+export const SettingsList = [
+  {
+    id: "1",
+    jobCategory: "Software Engineer",
+  },
+  {
+    id: "1",
+    jobCategory: "Software Engineer",
+  },
+  {
+    id: "1",
+    jobCategory: "Software Engineer",
+  },
+  {
+    id: "1",
+    jobCategory: "Software Engineer",
   },
 ];
 export const hiringList = [
