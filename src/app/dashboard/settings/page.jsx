@@ -243,12 +243,12 @@ const Settings = () => {
                   <Button
                     className={classes.control}
                     size="lg"
-                    variant="default"
-                    color="gray"
+                    variant="outline"
+                    color="#3377FF"
                   >
                     Cancel
                   </Button>
-                  <Button className={classes.control} size="lg">
+                  <Button color="#3377FF" className={classes.control} size="lg">
                     Save
                   </Button>
                 </div>
