@@ -9,6 +9,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Select,
   Space,
   Stack,
   Switch,
@@ -95,7 +96,6 @@ const Settings = () => {
                   style={{ width: "100%" }}
                   classNames={{
                     label: classes.label,
-                    //   input: classes.input,
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}
@@ -159,6 +159,80 @@ const Settings = () => {
                   classNames={{
                     label: classes.label,
                     //   input: classes.input,
+                    error: classes.error,
+                    placeholder: classes.placeholder,
+                  }}
+                />
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+                <TextInput
+                  size="md"
+                  variant="filled"
+                  label="Company Address"
+                  value="123 Main Street, Cityville, Countryland"
+                  style={{ width: "100%" }}
+                  classNames={{
+                    label: classes.label,
+                    error: classes.error,
+                    placeholder: classes.placeholder,
+                  }}
+                />
+              </GridCol>
+
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+                <TextInput
+                  label="Country"
+                  size="md"
+                  value="United States"
+                  variant="filled"
+                  classNames={{
+                    label: classes.label,
+                    error: classes.error,
+                    placeholder: classes.placeholder,
+                  }}
+                  searchable
+                />
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+                <TextInput
+                  label="Company Size"
+                  value="51-100"
+                  withAsterisk
+                  size="md"
+                  variant="filled"
+                  classNames={{
+                    label: classes.label,
+                    error: classes.error,
+                    placeholder: classes.placeholder,
+                  }}
+                />
+              </GridCol>
+
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+                <TextInput
+                  size="md"
+                  variant="filled"
+                  label="Email Domain"
+                  value="example.com"
+                  style={{ width: "100%" }}
+                  classNames={{
+                    label: classes.label,
+                    error: classes.error,
+                    placeholder: classes.placeholder,
+                  }}
+                />
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+                <TextInput
+                  size="md"
+                  variant="filled"
+                  value="subdomain.example.com"
+                  type="text"
+                  withAsterisk
+                  label="Sub Domain"
+                  style={{ width: "100%" }}
+                  classNames={{
+                    label: classes.label,
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}

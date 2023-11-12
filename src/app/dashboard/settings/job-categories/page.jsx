@@ -1,27 +1,20 @@
 "use client";
 
 import {
-  Avatar,
-  Box,
   Button,
   Card,
   CardSection,
-  Grid,
-  GridCol,
   Group,
   Space,
-  Stack,
-  Switch,
   Text,
-  TextInput,
 } from "@mantine/core";
 import React, { useState } from "react";
 import SettingsNav from "@/components/SettingsLayout/SettingsNav";
 import SettingsTable from "@/components/SettingsLayout/SettingsTable";
-import EditJobTitlesModal from "@/components/SettingsLayout/EditJobTitlesModal";
-import AddJobTitlesModal from "@/components/SettingsLayout/AddJobTitlesModal";
+import AddJobCategoriesModal from "@/components/SettingsLayout/AddJobCategoriesModal";
+import EditJobCategoriesModal from "@/components/SettingsLayout/EditJobCategoriesModal";
 
-const JobTitles = () => {
+const JobCategories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -44,8 +37,8 @@ const JobTitles = () => {
   };
   return (
     <>
-      <AddJobTitlesModal isOpen={isModalOpen} onClose={closeModal} />
-      <EditJobTitlesModal
+      <AddJobCategoriesModal isOpen={isModalOpen} onClose={closeModal} />
+      <EditJobCategoriesModal
         isEditOpen={isEditModalOpen}
         isEditClose={closeEditModal}
       />
@@ -69,7 +62,7 @@ const JobTitles = () => {
       <Space h={"1rem"} />
       <>
         <Group px={40}>
-          <Text fw={700}>Job Titles</Text>
+          <Text fw={700}>Job Categories</Text>
           <Button
             onClick={openModal}
             variant="filled"
@@ -85,4 +78,4 @@ const JobTitles = () => {
   );
 };
 
-export default JobTitles;
+export default JobCategories;

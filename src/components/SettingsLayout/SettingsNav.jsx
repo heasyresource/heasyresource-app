@@ -49,24 +49,22 @@ const SettingsNav = ({ tabTitle }) => {
               fz="xs"
               component="a"
               className={classes.activeConfig}
-              leftSection={<IconZoomMoney size="1rem" color="#3377FF" />}
               data-active={"/dashboard/settings" === pathname || undefined}
               href="/dashboard/settings"
             >
               General Information
             </MenuItem>
-            <MenuItem
+            {/* <MenuItem
               fz="xs"
               component="a"
               className={classes.activeConfig}
-              leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
               data-active={
                 "/dashboard/compensation/deductions" === pathname || undefined
               }
               href="/dashboard/compensation/deductions"
             >
               Corporate Branding
-            </MenuItem>
+            </MenuItem> */}
           </MenuDropdown>
         </Menu>
         <Menu position="bottom-end" width={150}>
@@ -83,7 +81,7 @@ const SettingsNav = ({ tabTitle }) => {
               className={classes.btnLink}
               rightSection={<IconChevronDown size="1.3rem" color="#3377FF" />}
               data-active={
-                "/dashboard/settings/job-titles" === pathname || undefined
+                "/dashboard/settings/job-categories" === pathname || undefined
               }
             >
               Employment
@@ -94,13 +92,12 @@ const SettingsNav = ({ tabTitle }) => {
               fz="xs"
               component="a"
               className={classes.activeConfig}
-              // leftSection={<IconZoomMoney size="1rem" color="#3377FF" />}
-              data-active={"/dashboard/settings/job-titles" === pathname || undefined}
-              href="/dashboard/settings/job-titles"
+              data-active={"/dashboard/settings/job-categories" === pathname || undefined}
+              href="/dashboard/settings/job-categories"
             >
-              Job Titles
+              Job Categories
             </MenuItem>
-            <MenuItem
+            {/* <MenuItem
               fz="xs"
               component="a"
               className={classes.activeConfig}
@@ -122,8 +119,8 @@ const SettingsNav = ({ tabTitle }) => {
               // }
               // href="/dashboard/compensation/deductions"
             >
-              Job Categories
-            </MenuItem>
+              Job Titles
+            </MenuItem> */}
           </MenuDropdown>
         </Menu>
         <Menu position="bottom-end" width={150}>

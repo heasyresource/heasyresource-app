@@ -6,7 +6,9 @@ import {
   GridCol,
   Group,
   Modal,
+  Select,
   Stack,
+  Switch,
   Text,
   TextInput,
   Textarea,
@@ -15,16 +17,16 @@ import React, { useState } from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
 import { useAssignLeave } from "@/hooks";
 
-const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
+const AddJobCategoriesModal = ({ isOpen, onClose }) => {
   const [value, setValue] = useState([]);
   const { form, handleSubmit } = useAssignLeave();
 
   return (
     <Modal
-      opened={isEditOpen}
-      onClose={isEditClose}
+      opened={isOpen}
+      onClose={onClose}
       title="This is a fullscreen modal"
-      size='auto'
+      size="auto"
       radius={15}
       shadow="sm"
     >
@@ -36,7 +38,7 @@ const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
             fontWeight: 700,
           }}
         >
-          Edit Job Titles
+          Add Job Categories
         </Text>
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
           <Stack gap={"2rem"}>
@@ -74,7 +76,7 @@ const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
                 <Textarea
                   size="md"
                   required
-                  //   variant="filled"
+                //   variant="filled"
                   label="Note"
                   style={{ width: "100%" }}
                   classNames={{
@@ -88,7 +90,7 @@ const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
             </Grid>
             <Group
               justify="flex-end"
-              className={classes.controls}
+              className={classes.btnWrap}
               align="center"
               mt={"auto"}
             >
@@ -99,8 +101,8 @@ const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
                 px="50px"
-                w={{ lg: "auto", md: "auto", base: "100%" }}
-                className={classes.control}
+                w={{ lg: "auto", md: "auto", sm: "auto" }}
+                className={classes.btn}
               >
                 back
               </Button>
@@ -110,8 +112,8 @@ const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
                 color="#3377FF"
                 tt="capitalize"
                 px="50px"
-                w={{ lg: "auto", md: "auto", base: "100%" }}
-                className={classes.control}
+                w={{ lg: "auto", md: "auto", sm: "auto" }}
+                className={classes.btn}
                 type="submit"
                 style={{
                   backgroundColor: "#3377FF",
@@ -127,4 +129,4 @@ const EditJobTitlesModal = ({ isEditOpen, isEditClose }) => {
   );
 };
 
-export default EditJobTitlesModal;
+export default AddJobCategoriesModal;
