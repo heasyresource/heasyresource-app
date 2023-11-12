@@ -36,10 +36,6 @@ const Deductions = () => {
         isEditOpen={isEditModalOpen}
         isEditClose={closeEditModal}
       />
-      {/* <EditEarningsModal
-        isEditOpen={isEditModalOpen}
-        isEditClose={closeEditModal}
-      /> */}
       <AddDeductionsModal isOpen={isModalOpen} onClose={closeModal} />
       <Card
         style={{
@@ -74,7 +70,6 @@ const Deductions = () => {
         </Group>
       </Card>
       <DeductionsTable openEditModal={openEditModal} />
-      {/* <EarningsTable openEditModal={openEditModal} /> */}
       <Group justify="flex-end" my={"3rem"}>
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}

@@ -167,7 +167,7 @@ export const EarningsList = [
     name: "Allowances",
     rate: "Hourly",
   },
-]
+];
 export const DeductionsList = [
   {
     id: "1",
@@ -184,7 +184,7 @@ export const DeductionsList = [
     name: "Retirement Contributions",
     unitAmount: "#30,000",
   },
-]
+];
 export const PaySlipList = [
   {
     id: "1",
@@ -221,7 +221,7 @@ export const PaySlipList = [
     deductions: "-",
     unitAmount: "#30,000",
   },
-]
+];
 export const leaveList = [
   {
     id: "1",
@@ -246,6 +246,32 @@ export const leaveList = [
     leaveType: "Vacation",
     numberOfDays: "22 days",
     status: "Pending",
+  },
+];
+export const SettingsList = [
+  {
+    id: "1",
+    jobTitle: "Front End Developer",
+    jobStatus: "Active",
+    jobDescription: "Admin",
+  },
+  {
+    id: "2",
+    jobTitle: "Front End Developer",
+    jobStatus: "Active",
+    jobDescription: "Admin",
+  },
+  {
+    id: "3",
+    jobTitle: "Front End Developer",
+    jobStatus: "Active",
+    jobDescription: "Admin",
+  },
+  {
+    id: "4",
+    jobTitle: "Front End Developer",
+    jobStatus: "Active",
+    jobDescription: "Admin",
   },
 ];
 export const hiringList = [
