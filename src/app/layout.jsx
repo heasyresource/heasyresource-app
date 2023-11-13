@@ -11,7 +11,9 @@ import { Notifications } from "@mantine/notifications";
 import NextTopLoader from "nextjs-toploader";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Provider from "./context/client-provider";
+import ProviderWrap from "./context/client-provider";
+import { Provider } from "react-redux";
+import store from "@/store";
 
 export const metadata = {
   title: {
@@ -41,13 +43,16 @@ export default async function RootLayout({ children }) {
         <meta property="og:ste_name" content="Heasyresource" />
       </head>
       <body suppressHydrationWarning={true}>
+        {/* <Provider store={store}> */}
         <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
           <Notifications position="top-right" zIndex={1000} />
           <ModalsProvider>
             <NextTopLoader color="#3377FF" />
-            <Provider session={session}>{children}</Provider>
+
+            <ProviderWrap session={session}>{children}</ProviderWrap>
           </ModalsProvider>
         </MantineProvider>
+        {/* </Provider> */}
       </body>
     </html>
   );

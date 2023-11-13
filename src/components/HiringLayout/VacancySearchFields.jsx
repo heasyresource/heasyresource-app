@@ -24,7 +24,7 @@ const VacancySearchFields = () => {
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
           <Select
             size="md"
-            label="Job Title"
+            label="Employment Type"
             placeholder="Account Assistant"
             data={["Account Assistant"]}
             style={{ width: "100%" }}

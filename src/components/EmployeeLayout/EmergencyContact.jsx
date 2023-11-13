@@ -13,10 +13,14 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { useEmergencyContact } from "@/hooks";
+import { useRouter } from "next/navigation";
 
-const EmergencyContact = () => {
-  const { form, handleSubmit, loading } = useEmergencyContact();
+const EmergencyContact = ({
+  emergencyForm,
+  handleEmergencySubmit,
+  loading,
+}) => {
+  const router = useRouter();
   return (
     <Box>
       <Text
@@ -27,7 +31,9 @@ const EmergencyContact = () => {
       </Text>
       <form
         style={{ marginTop: "2rem" }}
-        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+        onSubmit={emergencyForm?.onSubmit((values) =>
+          handleEmergencySubmit(values)
+        )}
       >
         <Stack className={classes.individualWrap}>
           <Grid gutter={"lg"}>
@@ -39,7 +45,7 @@ const EmergencyContact = () => {
                 placeholder="John"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...form.getInputProps("firstName")}
+                {...emergencyForm?.getInputProps("firstName")}
                 disabled={loading}
               />
             </GridCol>
@@ -51,7 +57,7 @@ const EmergencyContact = () => {
                 placeholder="Smith"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...form.getInputProps("lastName")}
+                {...emergencyForm?.getInputProps("lastName")}
                 disabled={loading}
               />
             </GridCol>
@@ -68,7 +74,7 @@ const EmergencyContact = () => {
                 ]}
                 withAsterisk
                 size="md"
-                {...form.getInputProps("relationship")}
+                {...emergencyForm?.getInputProps("relationship")}
                 disabled={loading}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
@@ -82,7 +88,7 @@ const EmergencyContact = () => {
                 style={{ textAlign: "start", width: "100%" }}
                 disabled={loading}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...form.getInputProps("homeAddress")}
+                {...emergencyForm?.getInputProps("homeAddress")}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -92,7 +98,7 @@ const EmergencyContact = () => {
                 size="md"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...form.getInputProps("phoneNumber")}
+                {...emergencyForm?.getInputProps("phoneNumber")}
                 leftSection={"+234"}
                 leftSectionWidth={50}
                 disabled={loading}
@@ -108,7 +114,7 @@ const EmergencyContact = () => {
                 size="md"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...form.getInputProps("email")}
+                {...emergencyForm?.getInputProps("email")}
                 disabled={loading}
               />
             </GridCol>
@@ -129,8 +135,9 @@ const EmergencyContact = () => {
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               disabled={loading}
+              onClick={() => router.back()}
             >
-              cancel
+              back
             </Button>
             <Button
               variant="contained"
@@ -144,6 +151,7 @@ const EmergencyContact = () => {
               style={{
                 backgroundColor: "#3377FF",
               }}
+              disabled={loading}
             >
               {loading ? (
                 <Loader color="white" type="dots" size="md" />

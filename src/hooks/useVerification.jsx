@@ -29,15 +29,20 @@ const useVerification = () => {
   });
   const handleRouteChange = async (payload) => {
     modals.closeAll();
-    console.log({payload})
-    const result = await signIn("user-token", { redirect: false, ...payload, callbackUrl: "/complete-registration" });
-    console.log({result});
+    console.log({ payload });
+    const result = await signIn("user-token", {
+      redirect: false,
+      ...payload,
+      callbackUrl: "/complete-registration",
+    });
+    console.log({ result });
     router.push(result.url);
   };
   const openModal = (payload) =>
     modals.open({
       radius: "md",
       centered: true,
+      closeOnClickOutside: false,
       children: (
         <Stack
           gap={"20px"}
@@ -55,7 +60,7 @@ const useVerification = () => {
               Verification Successful
             </Title>
             <Text c="#1E1E1E" size="13px" mt="5px">
-              Your acount has been verified successfully
+              Your account has been verified successfully
             </Text>
           </Box>
           <Button
@@ -78,11 +83,17 @@ const useVerification = () => {
       obfuscateToken(false, sessionStorage.getItem("verificationType") ?? "");
     try {
       if (type === "registration") {
-        const result = await apiClient.post("/account/verify", { ...data, email: email });
+        const result = await apiClient.post("/account/verify", {
+          ...data,
+          email: email,
+        });
         if (result.statusCode === 200) {
-          const { token, user } = result.results
-          const payload = { token: JSON.stringify(token), user: JSON.stringify(user) }
-          console.log({payload});
+          const { token, user } = result.results;
+          const payload = {
+            token: JSON.stringify(token),
+            user: JSON.stringify(user),
+          };
+          console.log({ payload });
           setLoading(false);
           openModal(payload);
         }

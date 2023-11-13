@@ -1,5 +1,4 @@
 "use client";
-import { useAddHolidayType } from "@/hooks";
 import { convertStringDate } from "@/utils/publicFunctions";
 import {
   ActionIcon,
@@ -23,25 +22,23 @@ import { DataTable } from "mantine-datatable";
 import classes from "./leaveLayout.module.css";
 import { DateInput } from "@mantine/dates";
 
-export default function HolidayTypeTable() {
-  const {
-    holidays,
-    openedEdit,
-    closeEdit,
-    openEdit,
-    form,
-    gettingDatas,
-    setItemID,
-    loading,
-    handleDelete,
-    pagination,
-    paginate,
-    handleEdit,
-  } = useAddHolidayType();
-
+export default function HolidayTypeTable({
+  holidays,
+  openedEdit,
+  closeEdit,
+  openEdit,
+  form,
+  gettingDatas,
+  setItemID,
+  loading,
+  handleDelete,
+  pagination,
+  paginate,
+  handleEdit,
+}) {
   const handleOpen = (data) => {
     setItemID(data?.id);
-    form.setValues({
+    form?.setValues({
       name: data?.name,
       availability: data?.availability,
       isPaid: data?.isPaid === 1 ? "Paid" : "Unpaid",
@@ -56,6 +53,7 @@ export default function HolidayTypeTable() {
     modals.open({
       radius: "md",
       centered: true,
+      withCloseButton: false,
       closeOnClickOutside: false,
       overlayProps: {
         backgroundOpacity: 0.55,
@@ -137,7 +135,7 @@ export default function HolidayTypeTable() {
               title: "S/N",
               textAlign: "center",
               width: 70,
-              render: (record) => holidays.indexOf(record) + 1,
+              render: (record) => holidays?.indexOf(record) + 1,
             },
             {
               accessor: "name",
@@ -201,7 +199,7 @@ export default function HolidayTypeTable() {
         closeOnClickOutside={false}
         opened={openedEdit}
         onClose={closeEdit}
-        title="Add Leave Type"
+        withCloseButton={false}
         size="lg"
         centered
         overlayProps={{
@@ -217,7 +215,7 @@ export default function HolidayTypeTable() {
             edit holiday
           </Text>
           <form
-            onSubmit={form.onSubmit((values) => handleEdit(values, "edit"))}
+            onSubmit={form?.onSubmit((values) => handleEdit(values, "edit"))}
           >
             <Stack gap={"1.5rem"} mt={"1rem"}>
               <Grid gutter={"md"}>
@@ -232,7 +230,7 @@ export default function HolidayTypeTable() {
                       placeholder: classes.placeholder,
                     }}
                     disabled={loading}
-                    {...form.getInputProps("name")}
+                    {...form?.getInputProps("name")}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -246,7 +244,7 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("date")}
+                    {...form?.getInputProps("date")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -260,9 +258,10 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("availability")}
+                    {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -275,9 +274,10 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("isFullDay")}
+                    {...form?.getInputProps("isFullDay")}
                     data={["Full Day", "Half Day"]}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -290,16 +290,17 @@ export default function HolidayTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("isPaid")}
+                    {...form?.getInputProps("isPaid")}
                     data={["Paid", "Unpaid"]}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
               </Grid>
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...form.getInputProps("comments")}
+                {...form?.getInputProps("comments")}
                 disabled={loading}
               />
               <Group
@@ -317,7 +318,10 @@ export default function HolidayTypeTable() {
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={closeEdit}
+                  onClick={() => {
+                    closeEdit();
+                    form?.reset();
+                  }}
                   disabled={loading}
                 >
                   cancel

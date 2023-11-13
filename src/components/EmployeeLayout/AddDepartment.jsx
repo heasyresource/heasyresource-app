@@ -15,12 +15,14 @@ import {
 import classes from "./employeeLayout.module.css";
 import React from "react";
 
-import { useAddDepartment } from "@/hooks";
-
-const AddDepartment = () => {
-  const { form, handleSubmit, loading, openedAdd, closeAdd, openAdd } =
-    useAddDepartment();
-
+const AddDepartment = ({
+  form,
+  handleSubmit,
+  loading,
+  openedAdd,
+  closeAdd,
+  openAdd,
+}) => {
   return (
     <>
       <Flex

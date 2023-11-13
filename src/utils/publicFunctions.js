@@ -52,6 +52,65 @@ export const convertStringDate = (inputDate) => {
 
   return formattedDate;
 };
+export const calculateDateDifference = (start, end) => {
+  const startDate = new Date(start);
+
+  if (!end) {
+    // If end is null, return a default value or handle it as needed
+    return "";
+  }
+
+  const endDate = new Date(end);
+  const differenceInMs = endDate - startDate;
+
+  const daysDifference = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+  const monthsDifference = Math.floor(daysDifference / 30);
+  const yearsDifference = Math.floor(daysDifference / 365);
+  let resultString;
+
+  if (yearsDifference > 0) {
+    resultString = ` ·${yearsDifference} ${
+      yearsDifference === 1 ? "year" : "years"
+    }`;
+  } else if (monthsDifference > 0) {
+    resultString = ` ·${monthsDifference} ${
+      monthsDifference === 1 ? "month" : "months"
+    }`;
+  } else {
+    resultString = ` ·${daysDifference} ${
+      daysDifference === 1 ? "day" : "days"
+    }`;
+  }
+
+  return resultString;
+};
+export const formatMonthYear = (dateStr1, dateStr2) => {
+  const date1 = new Date(dateStr1);
+
+  if (!dateStr2) {
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+    }).format(date1);
+  }
+
+  const date2 = new Date(dateStr2);
+
+  const options = { year: "numeric", month: "short" };
+
+  const formattedDate1 = new Intl.DateTimeFormat("en-US", options).format(
+    date1
+  );
+  const formattedDate2 = new Intl.DateTimeFormat("en-US", options).format(
+    date2
+  );
+
+  if (formattedDate1 === formattedDate2) {
+    return formattedDate1;
+  } else {
+    return `${formattedDate1} - ${formattedDate2}`;
+  }
+};
 export const employeeList = [
   {
     id: "1",

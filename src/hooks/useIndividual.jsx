@@ -1,19 +1,22 @@
 "use client";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { successStyles } from "@/utils/notificationTheme";
+import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useUploadImage } from ".";
 
 const useIndividual = () => {
+  const { handleUpload, response, loading: uploading } = useUploadImage();
   const router = useRouter();
   const subdomain = getSubdomain();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [fields, setFields] = useState(null);
+  const [logo, setLogo] = useState("");
   const form = useForm({
     initialValues: {
       firstName: "",
@@ -52,18 +55,18 @@ const useIndividual = () => {
     },
   };
   const handleSubmit = async (data) => {
-    setLoading(true);
     try {
-      await apiClient.post("employees", data, headerSettings);
-      notifications.show({
-        color: "white",
-        title: "Success",
-        message: "Employee added successfully. ",
-        styles: successStyles,
-        autoClose: 7000,
-      });
-      router.push("/dashboard/employee");
-      setLoading(false);
+      if (!logo.length) {
+        notifications.show({
+          color: "red",
+          message: "Please add the employee image to continue!",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      } else {
+        setLoading(true);
+        await handleUpload(logo);
+      }
     } catch (err) {
       if (err.errors) {
         err.errors.forEach((error) => {
@@ -83,8 +86,11 @@ const useIndividual = () => {
   };
   const getDepartments = async () => {
     try {
-      const response = await apiClient.get(`/departments`, headerSettings);
-      const modifiedOptions = response?.results.data.map((option) => ({
+      const response = await apiClient.get(
+        `/departments?paginate=false`,
+        headerSettings
+      );
+      const modifiedOptions = response?.results.map((option) => ({
         value: option.id,
         label: option.name,
       }));
@@ -93,16 +99,58 @@ const useIndividual = () => {
       console.log(err, "Error getting the department field");
     }
   };
+  useEffect(() => {
+    if (response?.status === 200 || response?.status === 201) {
+      const handleEmployee = async () => {
+        try {
+          await apiClient.post(
+            "employees",
+            { ...form.values, logoUrl: response?.data.url },
+            headerSettings
+          );
+          notifications.show({
+            color: "white",
+            title: "Success",
+            message: "Employee added successfully. ",
+            styles: successStyles,
+            autoClose: 7000,
+          });
+          router.push("/dashboard/employee");
+        } catch (err) {
+          if (err.errors) {
+            err.errors.forEach((error) => {
+              const { field, message } = error;
+
+              form.setFieldError(field, message);
+            });
+          }
+          if (
+            err.message === "Could not add employee with this email domain."
+          ) {
+            form.setFieldError(
+              "email",
+              "Could not add employee with this email domain"
+            );
+          }
+          setLoading(false);
+        }
+      };
+      handleEmployee();
+    }
+  }, [response]);
 
   useEffect(() => {
     getDepartments();
   }, []);
-
+  console.log(logo, "jdjdjdj");
   return {
     form,
     handleSubmit,
     fields,
     loading,
+    setLogo,
+    logo,
+    uploading,
   };
 };
 

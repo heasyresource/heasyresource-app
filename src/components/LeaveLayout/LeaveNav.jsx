@@ -18,7 +18,7 @@ import React from "react";
 const LeaveNav = ({ tabTitle }) => {
   const pathname = usePathname();
   return (
-    <Group justify="space-between" mx="40px">
+    <Group justify="space-between" className={classes.mx}>
       <Text fz="24px" fw="700" tt={"capitalize"}>
         {tabTitle}
       </Text>

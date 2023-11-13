@@ -117,6 +117,7 @@ export default function Profile() {
         </Menu.Dropdown>
       </Menu>
       <Modal
+        withCloseButton={false}
         opened={opened}
         onClose={close}
         centered
@@ -160,7 +161,10 @@ export default function Profile() {
               size="md"
               style={{ backgroundColor: "#FF0000" }}
               tt="capitalize"
-              onClick={() => handleSignOut()}
+              onClick={() => {
+                handleSignOut();
+                close();
+              }}
             >
               sign out
             </Button>

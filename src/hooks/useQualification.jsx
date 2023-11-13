@@ -19,7 +19,8 @@ const useQualification = () => {
     validate: {
       companyName: (value) =>
         !value.length ? "Company Name is required" : null,
-      jobTitle: (value) => (!value.length ? "Job Title is required" : null),
+      jobTitle: (value) =>
+        !value.length ? "Employment Type is required" : null,
       startDate: (value) => (!value.length ? "Start Date is required" : null),
       endDate: (value) => (!value.length ? "End Date is required" : null),
       instituteName: (value) =>

@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   Group,
+  Loader,
   Select,
   Stack,
   Text,
@@ -10,14 +11,21 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "./employeeLayout.module.css";
-import { useContactDetail } from "@/hooks";
+import { useRouter } from "next/navigation";
 
-const ContactDetail = () => {
-  const { form, handleSubmit, loading, LGA, countries, states, isEmpty } =
-    useContactDetail();
+const ContactDetail = ({
+  contactForm,
+  handleContactSubmit,
+  loading,
+  LGA,
+  countries,
+  states,
+  isEmpty,
+}) => {
+  const router = useRouter();
   return (
     <form
-      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      onSubmit={contactForm?.onSubmit((values) => handleContactSubmit(values))}
       style={{ height: "100%" }}
     >
       <Stack style={{ gap: "3rem" }}>
@@ -37,7 +45,7 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Home Address"
                 disabled={loading}
-                {...form.getInputProps("street")}
+                {...contactForm?.getInputProps("street")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -53,7 +61,7 @@ const ContactDetail = () => {
                 data={states}
                 disabled={loading}
                 searchable
-                {...form.getInputProps("stateId")}
+                {...contactForm?.getInputProps("stateId")}
                 nothingFoundMessage="option not found"
               />
             </Grid.Col>
@@ -62,13 +70,13 @@ const ContactDetail = () => {
                 size="md"
                 withAsterisk
                 label="LGA"
-                placeholder="Ajeromi/Ifelodun"
+                placeholder="Select LGA"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 data={LGA}
                 disabled={loading || isEmpty}
                 searchable
-                {...form.getInputProps("lgaId")}
+                {...contactForm?.getInputProps("lgaId")}
                 nothingFoundMessage="option not found"
               />
             </Grid.Col>
@@ -79,7 +87,7 @@ const ContactDetail = () => {
                 label="Zip Code"
                 placeholder="2023920"
                 disabled={loading}
-                {...form.getInputProps("zipCode")}
+                {...contactForm?.getInputProps("zipCode")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
               />
@@ -92,7 +100,7 @@ const ContactDetail = () => {
                 placeholder="Nigeria"
                 disabled={loading}
                 searchable
-                {...form.getInputProps("countryId")}
+                {...contactForm?.getInputProps("countryId")}
                 style={{ textAlign: "start", width: "100%" }}
                 data={countries}
                 classNames={{ label: classes.label, error: classes.error }}
@@ -114,10 +122,9 @@ const ContactDetail = () => {
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                withAsterisk
                 label="Home"
                 disabled={loading}
-                {...form.getInputProps("homePhoneNumber")}
+                {...contactForm?.getInputProps("homePhoneNumber")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 leftSection={"+234"}
@@ -134,7 +141,7 @@ const ContactDetail = () => {
                 withAsterisk
                 label="Mobile"
                 disabled={loading}
-                {...form.getInputProps("mobilePhoneNumber")}
+                {...contactForm?.getInputProps("mobilePhoneNumber")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 leftSection={"+234"}
@@ -146,10 +153,9 @@ const ContactDetail = () => {
                 type="tel"
                 maxLength={"11"}
                 size="md"
-                withAsterisk
                 label="Work"
                 disabled={loading}
-                {...form.getInputProps("workPhoneNumber")}
+                {...contactForm?.getInputProps("workPhoneNumber")}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 leftSection={"+234"}
@@ -172,13 +178,12 @@ const ContactDetail = () => {
               <TextInput
                 size="md"
                 type="email"
-                withAsterisk
                 label="Personal Email"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 disabled={loading}
                 placeholder="example@company.com"
-                {...form.getInputProps("personalEmail")}
+                {...contactForm?.getInputProps("personalEmail")}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -189,9 +194,9 @@ const ContactDetail = () => {
                 label="Work Email"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                disabled={loading}
+                disabled
                 placeholder="example@company.com"
-                // {...form.getInputProps("personalEmail")}
+                {...contactForm?.getInputProps("workEmail")}
               />
             </Grid.Col>
           </Grid>
@@ -211,8 +216,10 @@ const ContactDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
+            disabled={loading}
+            onClick={() => router.back()}
           >
-            cancel
+            back
           </Button>
           <Button
             variant="contained"
@@ -226,8 +233,9 @@ const ContactDetail = () => {
             style={{
               backgroundColor: "#3377FF",
             }}
+            disabled={loading}
           >
-            save
+            {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
           </Button>
         </Group>
       </Stack>

@@ -1,13 +1,14 @@
 "use client";
-import { useSearch } from "@/hooks";
-import { obfuscateToken } from "@/utils/encryptToken";
 import { Avatar, Badge, Flex, Text } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export function TableSelection() {
-  const router = useRouter();
-  const { paginate, employees, gettingData, pagination } = useSearch();
+export function TableSelection({
+  paginate,
+  employees,
+  gettingData,
+  pagination,
+}) {
   return (
     <>
       {employees?.length !== 0 && (
@@ -43,6 +44,7 @@ export function TableSelection() {
             },
             {
               accessor: "firstName",
+              noWrap: true,
               render: ({ firstName }) => (
                 <Text tt="capitalize" style={{ fontSize: "15px" }}>
                   {firstName}
@@ -51,6 +53,7 @@ export function TableSelection() {
             },
             {
               accessor: "lastName",
+              noWrap: true,
               render: ({ lastName }) => (
                 <Text tt="capitalize" style={{ fontSize: "15px" }}>
                   {lastName}
@@ -59,47 +62,39 @@ export function TableSelection() {
             },
             {
               accessor: "email",
+              noWrap: true,
             },
             {
               accessor: "department",
+              noWrap: true,
               render: ({ employmentInfo }) => (
                 <Text tt="capitalize" style={{ fontSize: "15px" }}>
                   {employmentInfo.department.name}
                 </Text>
               ),
             },
-            {
-              accessor: "role",
-              render: ({ role }) => (
-                <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                  {role.name}
-                </Text>
-              ),
-            },
+
             {
               accessor: "moreDetails",
               render: (employees) => (
-                <Badge
-                  radius="xs"
-                  variant="light"
-                  color="#3377FF"
-                  size="lg"
-                  style={{
-                    color: "#3377FF",
-
-                    textTransform: "capitalize",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    localStorage.setItem(
-                      "employee",
-                      obfuscateToken(true, JSON.stringify(employees))
-                    );
-                    router.push("/dashboard/employee/personal-detail");
-                  }}
+                <Link
+                  href={`/dashboard/employee/${employees.id}/personal-detail`}
                 >
-                  more details
-                </Badge>
+                  <Badge
+                    radius="xs"
+                    variant="light"
+                    color="#3377FF"
+                    size="lg"
+                    style={{
+                      color: "#3377FF",
+
+                      textTransform: "capitalize",
+                      cursor: "pointer",
+                    }}
+                  >
+                    more details
+                  </Badge>
+                </Link>
               ),
             },
           ]}

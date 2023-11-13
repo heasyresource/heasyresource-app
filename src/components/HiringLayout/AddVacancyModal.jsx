@@ -66,7 +66,7 @@ const AddVacancyModal = ({ isOpen, onClose }) => {
                 <Select
                   size="md"
                   required
-                  label="Job Title"
+                  label="Employment Type"
                   style={{ width: "100%" }}
                   placeholder="Gbemisola Adebiyi"
                   data={["Gbemisola Adebiyi"]}
@@ -84,7 +84,7 @@ const AddVacancyModal = ({ isOpen, onClose }) => {
                   label="Description"
                   minRows={2}
                   classNames={{
-                    wrapper: classes.vacancyTextArea
+                    wrapper: classes.vacancyTextArea,
                   }}
                 />
               </GridCol>

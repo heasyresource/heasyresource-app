@@ -12,14 +12,13 @@ import {
 import { DateInput } from "@mantine/dates";
 import React from "react";
 import classes from "./employeeLayout.module.css";
-import { usePersonalDetail } from "@/hooks";
+import { useRouter } from "next/navigation";
 
-const PersonalDetail = () => {
-  const { form, loading, handleSubmit } = usePersonalDetail();
-
+const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
+  const router = useRouter();
   return (
     <form
-      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      onSubmit={personalForm.onSubmit((values) => handlePersonalSubmit(values))}
       style={{ height: "100%" }}
     >
       <Stack
@@ -35,7 +34,7 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("firstName")}
+              {...personalForm?.getInputProps("firstName")}
               disabled={loading}
             />
           </Grid.Col>
@@ -45,7 +44,7 @@ const PersonalDetail = () => {
               label="Middle Name"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("middleName")}
+              {...personalForm?.getInputProps("middleName")}
               disabled={loading}
             />
           </Grid.Col>
@@ -56,7 +55,7 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("lastName")}
+              {...personalForm?.getInputProps("lastName")}
               disabled={loading}
             />
           </Grid.Col>
@@ -64,12 +63,10 @@ const PersonalDetail = () => {
             <TextInput
               size="md"
               label="Employee ID"
-              type="number"
-              withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("employeeId")}
-              disabled={loading}
+              {...personalForm?.getInputProps("employeeId")}
+              disabled
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -79,8 +76,8 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              placeholder="Nigeria"
-              {...form.getInputProps("nationality")}
+              placeholder="Nigerian"
+              {...personalForm?.getInputProps("nationality")}
               disabled={loading}
             />
           </Grid.Col>
@@ -92,7 +89,7 @@ const PersonalDetail = () => {
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("maritalStatus")}
+              {...personalForm?.getInputProps("maritalStatus")}
               disabled={loading}
             />
           </Grid.Col>
@@ -105,7 +102,7 @@ const PersonalDetail = () => {
               label="Date of Birth"
               placeholder="DD/MM/YYYY"
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("dateOfBirth")}
+              {...personalForm?.getInputProps("dateOfBirth")}
               disabled={loading}
             />
           </Grid.Col>
@@ -116,7 +113,7 @@ const PersonalDetail = () => {
               label="Gender"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("gender")}
+              {...personalForm?.getInputProps("gender")}
               disabled={loading}
               color="#3377FF"
             >
@@ -142,7 +139,7 @@ const PersonalDetail = () => {
           justify="flex-end"
           className={classes.btnWrap}
           align="center"
-          mt={"auto"}
+          mt={"6rem"}
         >
           <Button
             variant="outline"
@@ -153,10 +150,10 @@ const PersonalDetail = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
-            onClick={() => form.reset}
+            onClick={() => router.back()}
             disabled={loading}
           >
-            cancel
+            back
           </Button>
           <Button
             variant="contained"

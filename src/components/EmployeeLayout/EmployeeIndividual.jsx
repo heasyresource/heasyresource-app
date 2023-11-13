@@ -12,12 +12,10 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "./employeeLayout.module.css";
-import { useIndividual } from "@/hooks";
 
-const EmployeeIndividual = () => {
-  const { form, handleSubmit, fields, loading } = useIndividual();
+const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
   return (
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+    <form onSubmit={form?.onSubmit((values) => handleSubmit(values))}>
       <Stack className={classes.individualWrap}>
         <Grid gutter={"lg"}>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -28,7 +26,7 @@ const EmployeeIndividual = () => {
               placeholder="John"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("firstName")}
+              {...form?.getInputProps("firstName")}
               disabled={loading}
             />
           </GridCol>
@@ -39,7 +37,7 @@ const EmployeeIndividual = () => {
               placeholder="Smith"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("middleName")}
+              {...form?.getInputProps("middleName")}
               disabled={loading}
             />
           </GridCol>
@@ -51,7 +49,7 @@ const EmployeeIndividual = () => {
               placeholder="Corner"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("lastName")}
+              {...form?.getInputProps("lastName")}
               disabled={loading}
             />
           </GridCol>
@@ -62,7 +60,7 @@ const EmployeeIndividual = () => {
               size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("position")}
+              {...form?.getInputProps("position")}
               disabled={loading}
             />
           </GridCol>
@@ -75,7 +73,7 @@ const EmployeeIndividual = () => {
               size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("departmentId")}
+              {...form?.getInputProps("departmentId")}
               disabled={loading}
             />
           </GridCol>
@@ -87,7 +85,7 @@ const EmployeeIndividual = () => {
               size="md"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("email")}
+              {...form?.getInputProps("email")}
               disabled={loading}
             />
           </GridCol>
@@ -98,7 +96,7 @@ const EmployeeIndividual = () => {
               label="Gender"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form.getInputProps("gender")}
+              {...form?.getInputProps("gender")}
               disabled={loading}
               color="#3377FF"
             >
@@ -134,7 +132,7 @@ const EmployeeIndividual = () => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
-            onClick={() => form.reset()}
+            onClick={() => form?.reset()}
           >
             cancel
           </Button>

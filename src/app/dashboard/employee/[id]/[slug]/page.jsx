@@ -1,8 +1,8 @@
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
 import SlugCheck from "./slugCheck";
-import { EmployeeLayout, EmployeeNav } from "@/components";
-import classes from "../employee.module.css";
+import { EmployeeNav } from "@/components";
+import classes from "../../employee.module.css";
 
 const page = () => {
   return (
@@ -24,9 +24,8 @@ const page = () => {
       >
         <EmployeeNav tabTitle={"employee details"} />
       </CardSection>
-      <EmployeeLayout>
-        <SlugCheck />
-      </EmployeeLayout>
+
+      <SlugCheck />
     </Card>
   );
 };

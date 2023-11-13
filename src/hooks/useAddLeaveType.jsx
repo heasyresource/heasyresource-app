@@ -20,10 +20,13 @@ const useAddLeaveType = () => {
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
-  const [leaves, setLeaves] = useState(null);
-  const [pagination, setPagination] = useState(null);
+  const [leaveTypes, setLeavesTypes] = useState(null);
+  const [employeeLeave, setEmployeeLeave] = useState(null);
+  const [leaveTypepagination, setLeaveTypePagination] = useState(null);
+  const [gettingLeaveType, setGettingLeaveType] = useState(false);
   const [gettingData, setGettingData] = useState(false);
   const [itemID, setItemID] = useState("");
+  const [leavePagination, setLeavePagination] = useState(null);
   const form = useForm({
     initialValues: {
       name: "",
@@ -156,8 +159,8 @@ const useAddLeaveType = () => {
     }
     replace(`${pathname}?${params.toString()}`);
   };
-  const getLeaves = async (params = "") => {
-    setGettingData(true);
+  const getLeaveTypes = async (params = "") => {
+    setGettingLeaveType(true);
     if (searchParams.get("page")) {
       params = searchParams.get("page");
     }
@@ -166,44 +169,66 @@ const useAddLeaveType = () => {
         `/leave-types?page=${params || "1"}`,
         headerSettings
       );
-      setLeaves(response.results.data);
-      setPagination(response.results.meta);
+      setLeavesTypes(response.results.data);
+      setLeaveTypePagination(response.results.meta);
+      setGettingLeaveType(false);
+    } catch (err) {
+      setGettingLeaveType(false);
+      // notifications.show({
+      //   color: "red",
+      //   message: "Something went wrong, please try again.",
+      //   styles: errorStyles,
+      //   autoClose: 7000,
+      // });
+    }
+  };
+  const getEmployeeLeaves = async (params = "") => {
+    setGettingData(true);
+    if (searchParams.get("page")) {
+      params = searchParams.get("page");
+    }
+    try {
+      const response = await apiClient.get(
+        `/employee/leaves?page=${params || "1"}`,
+        headerSettings
+      );
+      setEmployeeLeave(response.results.data);
+      setLeavePagination(response.results.meta);
       setGettingData(false);
     } catch (err) {
       setGettingData(false);
-      notifications.show({
-        color: "red",
-        message: "Something went wrong, please try again.",
-        styles: errorStyles,
-        autoClose: 7000,
-      });
+      console.log("");
     }
   };
   useEffect(() => {
-    getLeaves();
+    getLeaveTypes();
+    getEmployeeLeaves();
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
-      getLeaves();
+      getLeaveTypes();
     }
   }, [isChanged]);
   return {
     form,
+    gettingLeaveType,
     gettingData,
     handleSubmit,
     openAdd,
     openedAdd,
     closeAdd,
     loading,
-    leaves,
+    leaveTypes,
     setItemID,
     openEdit,
     closeEdit,
     openedEdit,
     handleDelete,
     handleEdit,
-    pagination,
+    leaveTypepagination,
+    leavePagination,
     paginate,
+    employeeLeave,
   };
 };
 

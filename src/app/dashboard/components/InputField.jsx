@@ -1,11 +1,8 @@
-"use client";
 import { Button, Grid, GridCol, Group, Select, TextInput } from "@mantine/core";
 import classes from "../dashboard.module.css";
 import React from "react";
-import { useSearch } from "@/hooks";
 
-const InputField = () => {
-  const { loading, form, handleSubmit } = useSearch();
+const InputField = ({ loading, form, handleSubmit }) => {
   return (
     <form
       onSubmit={form.onSubmit((values) => handleSubmit(values))}
@@ -75,7 +72,7 @@ const InputField = () => {
           />
         </GridCol>
       </Grid>
-      <Group justify="flex-end" mt={"3rem"}>
+      <Group justify="flex-end" mt={"1.5rem"}>
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}
           size="md"

@@ -21,25 +21,24 @@ import { IconTrashX, IconEdit, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
 import classes from "./leaveLayout.module.css";
 
-export default function LeaveTypeTable() {
-  const {
-    leaves,
-    gettingData,
-    openEdit,
-    openedEdit,
-    closeEdit,
-    setItemID,
-    form,
-    handleDelete,
-    loading,
-    handleEdit,
-    pagination,
-    paginate,
-  } = useAddLeaveType();
-
+export default function LeaveTypeTable({
+  leaves,
+  gettingData,
+  openEdit,
+  openedEdit,
+  closeEdit,
+  setItemID,
+  form,
+  handleDelete,
+  loading,
+  handleEdit,
+  pagination,
+  paginate,
+}) {
   const handleOpen = (data) => {
     setItemID(data?.id);
-    form.setValues({
+    console.log(data, "data edit");
+    form?.setValues({
       name: data?.name,
       availability: data?.availability,
       isPaid: data?.isPaid === 1 ? "Paid" : "Unpaid",
@@ -52,6 +51,7 @@ export default function LeaveTypeTable() {
     modals.open({
       radius: "md",
       centered: true,
+      withCloseButton: false,
       closeOnClickOutside: false,
       overlayProps: {
         backgroundOpacity: 0.55,
@@ -114,66 +114,68 @@ export default function LeaveTypeTable() {
 
   return (
     <>
-      <DataTable
-        style={{ background: "none", marginTop: "3rem" }}
-        minHeight={"250px"}
-        loaderType="dots"
-        loaderColor="#3377FF"
-        fetching={gettingData}
-        withRowBorders={false}
-        records={leaves}
-        columns={[
-          {
-            accessor: "index",
-            title: "S/N",
-            textAlign: "center",
-            width: 70,
-            render: (record) => leaves.indexOf(record) + 1,
-          },
-          {
-            accessor: "name",
+      {leaves?.length !== 0 && (
+        <DataTable
+          style={{ background: "none", marginTop: "3rem" }}
+          minHeight={"250px"}
+          loaderType="dots"
+          loaderColor="#3377FF"
+          fetching={gettingData}
+          withRowBorders={false}
+          records={leaves}
+          columns={[
+            {
+              accessor: "index",
+              title: "S/N",
+              textAlign: "center",
+              width: 70,
+              render: (record) => leaves.indexOf(record) + 1,
+            },
+            {
+              accessor: "name",
 
-            noWrap: true,
-          },
-          {
-            accessor: "actions",
-            title: "Actions",
-            width: "135px",
-            textAlign: "center",
-            render: (leaves) => (
-              <Flex justify="center" align="center">
-                <ActionIcon
-                  variant="transparent"
-                  onClick={() => handleOpen(leaves)}
-                >
-                  <IconEdit
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-                <ActionIcon
-                  variant="transparent"
-                  onClick={() => openModal(leaves)}
-                >
-                  <IconTrash
-                    style={{ width: "70%", height: "70%", color: "#FF7A00" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-              </Flex>
-            ),
-          },
-        ]}
-        totalRecords={pagination && pagination.total}
-        recordsPerPage={pagination && pagination.perPage}
-        page={pagination && pagination.currentPage}
-        onPageChange={(page) => paginate(page)}
-      />
+              noWrap: true,
+            },
+            {
+              accessor: "actions",
+              title: "Actions",
+              width: "135px",
+              textAlign: "center",
+              render: (leaves) => (
+                <Flex justify="center" align="center">
+                  <ActionIcon
+                    variant="transparent"
+                    onClick={() => handleOpen(leaves)}
+                  >
+                    <IconEdit
+                      style={{ width: "70%", height: "70%" }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+                  <ActionIcon
+                    variant="transparent"
+                    onClick={() => openModal(leaves)}
+                  >
+                    <IconTrash
+                      style={{ width: "70%", height: "70%", color: "#FF7A00" }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+                </Flex>
+              ),
+            },
+          ]}
+          totalRecords={pagination?.total}
+          recordsPerPage={pagination?.perPage}
+          page={pagination?.currentPage}
+          onPageChange={(page) => paginate(page)}
+        />
+      )}
       <Modal
+        withCloseButton={false}
         closeOnClickOutside={false}
         opened={openedEdit}
         onClose={closeEdit}
-        title="Add Leave Type"
         size="lg"
         centered
         overlayProps={{
@@ -189,7 +191,7 @@ export default function LeaveTypeTable() {
             edit leave
           </Text>
           <form
-            onSubmit={form.onSubmit((values) => handleEdit(values, "edit"))}
+            onSubmit={form?.onSubmit((values) => handleEdit(values, "edit"))}
           >
             <Stack gap={"2rem"} mt={"1rem"}>
               <Grid gutter={"xl"}>
@@ -203,7 +205,7 @@ export default function LeaveTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("name")}
+                    {...form?.getInputProps("name")}
                     disabled={loading}
                   />
                 </GridCol>
@@ -217,9 +219,10 @@ export default function LeaveTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("availability")}
+                    {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -233,15 +236,16 @@ export default function LeaveTypeTable() {
                       error: classes.error,
                       placeholder: classes.placeholder,
                     }}
-                    {...form.getInputProps("isPaid")}
+                    {...form?.getInputProps("isPaid")}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
               </Grid>
               <Textarea
                 style={{ height: "100% !important " }}
                 label="Notes/Comments"
-                {...form.getInputProps("comments")}
+                {...form?.getInputProps("comments")}
                 disabled={loading}
               />
               <Group
@@ -259,7 +263,10 @@ export default function LeaveTypeTable() {
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={closeEdit}
+                  onClick={() => {
+                    closeEdit();
+                    form?.reset();
+                  }}
                   disabled={loading}
                 >
                   cancel

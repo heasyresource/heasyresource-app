@@ -29,7 +29,6 @@ const CompleteForm = () => {
     countries,
     form,
     isRadioChecked,
-    handleMultiSelectChange,
     setIsRadioChecked,
     optionCodeMap,
     handleSubmit,
@@ -43,6 +42,7 @@ const CompleteForm = () => {
     isSubmitted,
     allOptions,
     selectedOptions,
+    logo,
   } = useCompleteReg();
   return (
     <>
@@ -62,6 +62,7 @@ const CompleteForm = () => {
         <Grid mt={"2rem"}>
           <GridCol span={{ lg: 3, md: 12, sm: 12 }} className={styles.imgGrid}>
             <AddComImg
+              logo={logo}
               setLogo={setLogo}
               loading={loading}
               uploading={uploading}
@@ -87,35 +88,66 @@ const CompleteForm = () => {
               </GridCol>
 
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <Select
-                  label="Country"
-                  withAsterisk
-                  data={countries}
-                  size="md"
-                  classNames={{
-                    label: styles.label,
-                    error: styles.error,
-                    placeholder: styles.placeholder,
-                  }}
-                  searchable
-                  {...form.getInputProps("countryId")}
-                  disabled={uploading || isSubmitted}
-                />
+                {isSubmitted ? (
+                  <TextInput
+                    label="Country"
+                    withAsterisk
+                    size="md"
+                    value={form?.values.countryId}
+                    classNames={{
+                      label: styles.label,
+                      error: styles.error,
+                      placeholder: styles.placeholder,
+                    }}
+                    disabled
+                  />
+                ) : (
+                  <Select
+                    label="Country"
+                    withAsterisk
+                    data={countries}
+                    size="md"
+                    classNames={{
+                      label: styles.label,
+                      error: styles.error,
+                      placeholder: styles.placeholder,
+                    }}
+                    // searchable
+                    {...form.getInputProps("countryId")}
+                    disabled={uploading || isSubmitted}
+                  />
+                )}
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <Select
-                  label="Company Size"
-                  withAsterisk
-                  data={cmpSize}
-                  size="md"
-                  classNames={{
-                    label: styles.label,
-                    error: styles.error,
-                    placeholder: styles.placeholder,
-                  }}
-                  {...form.getInputProps("companySizeId")}
-                  disabled={uploading || isSubmitted}
-                />
+                {isSubmitted ? (
+                  <TextInput
+                    size="md"
+                    label="Company Size"
+                    withAsterisk
+                    value={form?.values.companySizeId}
+                    classNames={{
+                      label: styles.label,
+                      error: styles.error,
+                      placeholder: styles.placeholder,
+                    }}
+                    disabled
+                  />
+                ) : (
+                  <Select
+                    label="Company Size"
+                    withAsterisk
+                    data={cmpSize}
+                    size="md"
+                    value={form?.values.companySizeId}
+                    classNames={{
+                      label: styles.label,
+                      error: styles.error,
+                      placeholder: styles.placeholder,
+                    }}
+                    {...form.getInputProps("companySizeId")}
+                    disabled={uploading || isSubmitted}
+                  />
+                )}
               </GridCol>
 
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -218,8 +250,10 @@ const CompleteForm = () => {
                       maxDropdownHeight={150}
                       className={styles.multiSelect}
                       placeholder="Pick value"
+                      // value={selectedOptions}
                       data={allOptions}
-                      onChange={handleMultiSelectChange}
+                      // onChange={handleMultiSelectChange}
+                      {...form.getInputProps("employeeIdFormat")}
                       clearable
                       classNames={{
                         pill: styles.pill,
