@@ -138,9 +138,6 @@ body {
   color: #fa5252;
 }
 
-.mantine-Modal-header {
-  display: none !important;
-}
 .mantine-FileInput-wrapper[data-with-right-section="true"]
   div[data-position="left"] {
   @media (max-width: 500px) {
@@ -195,9 +192,9 @@ body {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
 }
-.mantine-Textarea-wrapper {
-  height: 250px;
-}
+/* .mantine-Textarea-wrapper {
+  height: 200px;
+} */
 body .mantine-Textarea-wrapper textarea {
   height: 100% !important;
 }

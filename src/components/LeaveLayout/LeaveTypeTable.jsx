@@ -37,7 +37,8 @@ export default function LeaveTypeTable({
 }) {
   const handleOpen = (data) => {
     setItemID(data?.id);
-    form.setValues({
+    console.log(data, "data edit");
+    form?.setValues({
       name: data?.name,
       availability: data?.availability,
       isPaid: data?.isPaid === 1 ? "Paid" : "Unpaid",
@@ -50,6 +51,7 @@ export default function LeaveTypeTable({
     modals.open({
       radius: "md",
       centered: true,
+      withCloseButton: false,
       closeOnClickOutside: false,
       overlayProps: {
         backgroundOpacity: 0.55,
@@ -170,10 +172,10 @@ export default function LeaveTypeTable({
         />
       )}
       <Modal
+        withCloseButton={false}
         closeOnClickOutside={false}
         opened={openedEdit}
         onClose={closeEdit}
-        title="Add Leave Type"
         size="lg"
         centered
         overlayProps={{
@@ -220,6 +222,7 @@ export default function LeaveTypeTable({
                     {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -235,6 +238,7 @@ export default function LeaveTypeTable({
                     }}
                     {...form?.getInputProps("isPaid")}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
               </Grid>
@@ -259,7 +263,10 @@ export default function LeaveTypeTable({
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={closeEdit}
+                  onClick={() => {
+                    closeEdit();
+                    form?.reset();
+                  }}
                   disabled={loading}
                 >
                   cancel

@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "./employeeLayout.module.css";
-import { useContactDetail } from "@/hooks";
+import { useRouter } from "next/navigation";
 
 const ContactDetail = ({
   contactForm,
@@ -22,6 +22,7 @@ const ContactDetail = ({
   states,
   isEmpty,
 }) => {
+  const router = useRouter();
   return (
     <form
       onSubmit={contactForm?.onSubmit((values) => handleContactSubmit(values))}
@@ -69,7 +70,7 @@ const ContactDetail = ({
                 size="md"
                 withAsterisk
                 label="LGA"
-                placeholder="Ajeromi/Ifelodun"
+                placeholder="Select LGA"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 data={LGA}
@@ -121,7 +122,6 @@ const ContactDetail = ({
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                withAsterisk
                 label="Home"
                 disabled={loading}
                 {...contactForm?.getInputProps("homePhoneNumber")}
@@ -153,7 +153,6 @@ const ContactDetail = ({
                 type="tel"
                 maxLength={"11"}
                 size="md"
-                withAsterisk
                 label="Work"
                 disabled={loading}
                 {...contactForm?.getInputProps("workPhoneNumber")}
@@ -179,7 +178,6 @@ const ContactDetail = ({
               <TextInput
                 size="md"
                 type="email"
-                withAsterisk
                 label="Personal Email"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
@@ -219,9 +217,9 @@ const ContactDetail = ({
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
             disabled={loading}
-            onClick={() => contactForm?.reset()}
+            onClick={() => router.back()}
           >
-            cancel
+            back
           </Button>
           <Button
             variant="contained"

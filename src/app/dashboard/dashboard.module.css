@@ -118,7 +118,6 @@
   }
 }
 .formWrap {
-  margin-top: 2rem;
   @media (max-width: 768px) {
     margin: 0px;
     flex-direction: column;

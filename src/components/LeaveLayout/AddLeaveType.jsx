@@ -57,7 +57,7 @@ const AddLeaveType = ({
         closeOnClickOutside={false}
         opened={openedAdd}
         onClose={closeAdd}
-        title="Add Leave Type"
+        withCloseButton={false}
         size="xl"
         centered
         overlayProps={{
@@ -143,7 +143,10 @@ const AddLeaveType = ({
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={closeAdd}
+                  onClick={() => {
+                    closeAdd();
+                    form?.reset();
+                  }}
                   disabled={loading}
                 >
                   cancel

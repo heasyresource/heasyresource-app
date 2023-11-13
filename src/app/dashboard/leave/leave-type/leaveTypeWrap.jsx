@@ -13,15 +13,15 @@ const LeaveTypeWrap = () => {
     openAdd,
     closeAdd,
     openedAdd,
-    leaves,
-    gettingData,
+    leaveTypes,
+    gettingLeaveType,
     openEdit,
     openedEdit,
     closeEdit,
     setItemID,
     handleDelete,
     handleEdit,
-    pagination,
+    leaveTypepagination,
     paginate,
   } = useAddLeaveType();
   return (
@@ -53,15 +53,16 @@ const LeaveTypeWrap = () => {
       </Card>
       <LeaveTypeTable
         paginate={paginate}
-        pagination={pagination}
+        pagination={leaveTypepagination}
         handleEdit={handleEdit}
         setItemID={setItemID}
         closeEdit={closeEdit}
         openEdit={openEdit}
         handleDelete={handleDelete}
-        leaves={leaves}
-        gettingData={gettingData}
+        leaves={leaveTypes}
+        gettingData={gettingLeaveType}
         openedEdit={openedEdit}
+        form={form}
       />
     </>
   );

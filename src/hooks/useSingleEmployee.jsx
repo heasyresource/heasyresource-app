@@ -98,8 +98,6 @@ const useSingleEmployee = () => {
       countryId: (value) => (!value.length ? "Country is required" : null),
       mobilePhoneNumber: (value) =>
         value.length < 10 ? "Enter a valid  mobiile phone number" : null,
-      personalEmail: (val) =>
-        /^\S+@\S+$/.test(val) ? null : "Enter a valid personal email",
     },
   });
   const emergencyForm = useForm({
@@ -149,8 +147,8 @@ const useSingleEmployee = () => {
       resumptionDate: (value) =>
         value.length === 0 ? "Joined Date is required" : null,
       employmentTypeId: (value) =>
-        !value.length ? "Job Type is required" : null,
-      workMode: (value) => (!value.length ? "Job Mode is required" : null),
+        !value.length ? "Employment Type is required" : null,
+      workMode: (value) => (!value.length ? "WOrk Mode is required" : null),
     },
   });
   const experienceForm = useForm({
@@ -163,7 +161,7 @@ const useSingleEmployee = () => {
       description: "",
       startDate: "",
       endDate: "",
-      isPresent: false,
+      isPresent: true,
     },
     validate: {
       companyName: (value) =>
@@ -179,8 +177,9 @@ const useSingleEmployee = () => {
           ? "End Date is required"
           : null,
       location: (val) => (!val.length ? "Company Location is required" : null),
-      workMode: (val) => (!val.length ? "Job Mode is required" : null),
-      employmentTypeId: (val) => (!val.length ? "Job Type is required" : null),
+      workMode: (val) => (!val.length ? "Work Mode is required" : null),
+      employmentTypeId: (val) =>
+        !val.length ? "Employment Type is required" : null,
     },
   });
   const educationForm = useForm({
@@ -217,14 +216,15 @@ const useSingleEmployee = () => {
       name: (val) => (!val.length ? "Field is required" : null),
       issuingOrganization: (val) => (!val.length ? "Field is required" : null),
       credentialUrl: (val) =>
-        /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(
-          val
-        )
+        !val.length
+          ? null
+          : /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(
+              val
+            )
           ? null
           : "Enter a valid url",
-      credentialId: (val) => (!val.length ? "Field is required" : null),
+
       issueDate: (val) => (val.length === 0 ? "Field is required" : null),
-      expirationDate: (val) => (val.length === 0 ? "Field is required" : null),
     },
   });
 
@@ -267,38 +267,36 @@ const useSingleEmployee = () => {
       setLoading(false);
     }
   };
-  const handleContactSubmit = async (data, type) => {
+  const handleContactSubmit = async (data) => {
     setLoading(true);
     const normalizedHomeNumber = normalizePhoneNumber(data.homePhoneNumber);
     const normalizedWorkNumber = normalizePhoneNumber(data.workPhoneNumber);
     const normalizedMobileNumber = normalizePhoneNumber(data.mobilePhoneNumber);
     try {
-      if (type === "contact") {
-        const modifiedValues = {
-          ...data,
-          homePhoneNumber: !data.homePhoneNumber.length
-            ? ""
-            : normalizedHomeNumber,
-          workPhoneNumber: !data.workPhoneNumber.length
-            ? ""
-            : normalizedWorkNumber,
-          mobilePhoneNumber: normalizedMobileNumber,
-        };
-        const response = await apiClient.put(
-          `/employees/${id}/contact-details`,
-          modifiedValues,
-          headerSettings
-        );
-        notifications.show({
-          color: "white",
-          title: "Success",
-          message: "Contact details added successfully. ",
-          styles: successStyles,
-          autoClose: 7000,
-        });
-        setLoading(false);
-        setIsSubmitted(response);
-      }
+      const modifiedValues = {
+        ...data,
+        homePhoneNumber: !data.homePhoneNumber.length
+          ? ""
+          : normalizedHomeNumber,
+        workPhoneNumber: !data.workPhoneNumber.length
+          ? ""
+          : normalizedWorkNumber,
+        mobilePhoneNumber: normalizedMobileNumber,
+      };
+      const response = await apiClient.put(
+        `/employees/${id}/contact-details`,
+        modifiedValues,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Contact details added successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      setLoading(false);
+      setIsSubmitted(response);
     } catch (err) {
       setLoading(false);
       if (err.errors) {
@@ -404,6 +402,7 @@ const useSingleEmployee = () => {
       closeExp();
       setIsSubmitted(response);
       setLoading(false);
+      experienceForm.reset();
     } catch (err) {
       setLoading(false);
       if (err.errors) {
@@ -438,6 +437,7 @@ const useSingleEmployee = () => {
       closeEdu();
       setLoading(false);
       setIsSubmitted(response);
+      educationForm.reset();
     } catch (err) {
       setLoading(false);
       if (err.errors) {
@@ -472,6 +472,7 @@ const useSingleEmployee = () => {
       closeLcs();
       setLoading(false);
       setIsSubmitted(response);
+      licenseForm.reset();
     } catch (err) {
       setLoading(false);
       if (err.errors) {
@@ -645,11 +646,28 @@ const useSingleEmployee = () => {
       const results = response.results;
       setFirstName(results.firstName);
       setLastName(results.lastName);
+      employmentInfoForm?.setValues({
+        position: results.employmentInfo?.position,
+        workMode: results.employmentInfo?.workMode,
+        employmentTypeId:
+          results.employmentInfo?.employmentType?.id === null
+            ? ""
+            : results.employmentInfo?.employmentType?.id,
+        resumptionDate:
+          results.employmentInfo?.resumptionDate === null
+            ? ""
+            : new Date(results.employmentInfo?.resumptionDate),
+        departmentId:
+          results.employmentInfo?.department?.id === null
+            ? ""
+            : results.employmentInfo?.department?.id,
+      });
       setPosition(results.employmentInfo.position);
       setLogoUrl(results.logoUrl);
       setWorkExp(results.workExperiences);
       setEducations(results.educations);
       setLicenses(results.licenseOrCertifications);
+
       contactForm.setFieldValue("workEmail", results.email);
       personalForm.setValues({
         firstName: results.firstName,
@@ -685,24 +703,17 @@ const useSingleEmployee = () => {
           results.contactDetail.personalEmail === null
             ? ""
             : results.contactDetail.personalEmail,
+        countryId: results.contactDetail.country.id,
+        stateId: results.contactDetail.state.id,
+        lgaId: results.contactDetail.lga.id,
       });
       emergencyForm.setValues({
         firstName: results.nextOfKin[0].firstName,
         lastName: results.nextOfKin[0].lastName,
         relationship: results.nextOfKin[0].relationship,
-        email: results.nextOfKin[0].email,
         homeAddress: results.nextOfKin[0].homeAddress,
         phoneNumber: results.nextOfKin[0].phoneNumber.replace(/\+234/g, ""),
-      });
-      employmentInfoForm.setValues({
-        position: results.employmentInfo.position,
-        workMode: results.employmentInfo.workMode,
-        employmentTypeId: results.employmentInfo.employmentType,
-        resumptionDate:
-          results.employmentInfo.resumptionDate === null
-            ? ""
-            : new Date(results.employmentInfo.resumptionDate),
-        departmentId: results.employmentInfo.department.name,
+        email: results.nextOfKin[0].email,
       });
     } catch (err) {}
   };
@@ -710,7 +721,7 @@ const useSingleEmployee = () => {
   useEffect(() => {
     if (contactForm.values.stateId.length !== 0) {
       setIsEmpty(false);
-      const filteredItems = LGA.filter(
+      const filteredItems = LGA?.filter(
         (item) => item.stateId === contactForm.values.stateId
       );
       setLGA(filteredItems);

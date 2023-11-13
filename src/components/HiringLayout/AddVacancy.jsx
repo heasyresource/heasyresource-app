@@ -60,7 +60,7 @@ const AddVacancy = () => {
               <Select
                 size="md"
                 required
-                label="Job Title"
+                label="Employment Type"
                 style={{ width: "100%" }}
                 placeholder="Gbemisola Adebiyi"
                 data={["Gbemisola Adebiyi"]}
@@ -141,12 +141,12 @@ const AddVacancy = () => {
                 placeholder="https://www.heasyresource.com/careers/engineering/positions/senior-software-engineer"
                 rightSection={<IconEdit color="#3377FF" />}
                 classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                    wrapper: classes.wrapper,
-                    section: classes.section,
-                  }}
+                  label: classes.label,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                  wrapper: classes.wrapper,
+                  section: classes.section,
+                }}
               />
             </GridCol>
           </Grid>

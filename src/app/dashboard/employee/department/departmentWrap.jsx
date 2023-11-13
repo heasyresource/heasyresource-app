@@ -63,6 +63,7 @@ const DepartmentWrap = () => {
         closeEdit={closeEdit}
         openedEdit={openedEdit}
         departments={departments}
+        getttingDatas={getttingDatas}
       />
     </>
   );

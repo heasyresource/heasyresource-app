@@ -53,6 +53,7 @@ export default function HolidayTypeTable({
     modals.open({
       radius: "md",
       centered: true,
+      withCloseButton: false,
       closeOnClickOutside: false,
       overlayProps: {
         backgroundOpacity: 0.55,
@@ -198,7 +199,7 @@ export default function HolidayTypeTable({
         closeOnClickOutside={false}
         opened={openedEdit}
         onClose={closeEdit}
-        title="Add Leave Type"
+        withCloseButton={false}
         size="lg"
         centered
         overlayProps={{
@@ -260,6 +261,7 @@ export default function HolidayTypeTable({
                     {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -275,6 +277,7 @@ export default function HolidayTypeTable({
                     {...form?.getInputProps("isFullDay")}
                     data={["Full Day", "Half Day"]}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -290,6 +293,7 @@ export default function HolidayTypeTable({
                     {...form?.getInputProps("isPaid")}
                     data={["Paid", "Unpaid"]}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
               </Grid>
@@ -314,7 +318,10 @@ export default function HolidayTypeTable({
                   px="50px"
                   w={{ lg: "auto", md: "auto", sm: "auto" }}
                   className={classes.btn}
-                  onClick={closeEdit}
+                  onClick={() => {
+                    closeEdit();
+                    form?.reset();
+                  }}
                   disabled={loading}
                 >
                   cancel

@@ -72,7 +72,7 @@ const InputField = ({ loading, form, handleSubmit }) => {
           />
         </GridCol>
       </Grid>
-      <Group justify="flex-end" mt={"3rem"}>
+      <Group justify="flex-end" mt={"1.5rem"}>
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}
           size="md"

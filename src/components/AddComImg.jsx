@@ -70,7 +70,7 @@ const AddComImg = ({ setLogo, logo, loading, uploading, isSubmitted }) => {
       <Modal
         opened={opened}
         onClose={close}
-        title="Upload Image"
+        closeOnClickOutside={false}
         centered
         overlayProps={{
           backgroundOpacity: 0.55,

@@ -84,7 +84,7 @@ const Licence = ({
                     <Image src={"/assets/images/company.png"} />
                   </Box>
                   <Box>
-                    <Flex justify={"flex-start"} align={"center"}>
+                    <Flex justify={"flex-start"} align={"flex-start"}>
                       <Text
                         style={{
                           fontWeight: 600,
@@ -122,6 +122,9 @@ const Licence = ({
                     >{`issued ${formatMonthYear(item.issueDate, null)}`}</Text>
 
                     <Button
+                      component="a"
+                      target="_blank"
+                      href={item.credentialUrl}
                       size="sm"
                       mt={"5px"}
                       variant="outline"
@@ -140,6 +143,7 @@ const Licence = ({
         )}
       </Box>
       <Modal
+        title="Add License or Certification"
         size="xl"
         closeOnClickOutside={false}
         centered
@@ -155,124 +159,127 @@ const Licence = ({
             handleLicenseSubmit(values)
           )}
         >
-          <Stack gap={"3rem"}>
-            <Grid style={{ marginTop: "20px" }} gutter="xl">
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Name"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("name")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Issuing organization"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("issuingOrganization")}
-                  placeholder="Microsoft"
-                  disabled={loading}
-                />
-              </GridCol>
+          <Grid
+            style={{
+              margin: "20px 0",
+              maxHeight: "400px",
+              overflowY: "scroll",
+            }}
+            gutter="xl"
+          >
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                withAsterisk
+                label="Name"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("name")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                withAsterisk
+                label="Issuing organization"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("issuingOrganization")}
+                placeholder="Microsoft"
+                disabled={loading}
+              />
+            </GridCol>
 
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <DateInput
-                  size="md"
-                  clearable
-                  withAsterisk
-                  label="Issue Date"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("issueDate")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <DateInput
-                  size="md"
-                  clearable
-                  withAsterisk
-                  label="Expiration Date"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("expirationDate")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  withAsterisk
-                  size="md"
-                  label="Credential ID"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("credentialId")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  withAsterisk
-                  size="md"
-                  label="Credential Url"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("credentialUrl")}
-                  disabled={loading}
-                />
-              </GridCol>
-            </Grid>
-            <Group
-              justify="flex-end"
-              className={classes.btnWrap}
-              align="center"
-              mt={"auto"}
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <DateInput
+                size="md"
+                clearable
+                withAsterisk
+                label="Issue Date"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("issueDate")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <DateInput
+                size="md"
+                clearable
+                label="Expiration Date"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("expirationDate")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                label="Credential ID"
+                size="md"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("credentialId")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                label="Credential URL"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("credentialUrl")}
+                disabled={loading}
+              />
+            </GridCol>
+          </Grid>
+          <Group
+            justify="flex-end"
+            className={classes.btnWrap}
+            align="center"
+            mt={"auto"}
+          >
+            <Button
+              variant="outline"
+              size="md"
+              color="#3377FF"
+              style={{ borderColor: "#3377FF" }}
+              tt="capitalize"
+              px="50px"
+              w={{ lg: "auto", md: "auto", sm: "auto" }}
+              className={classes.btn}
+              onClick={closeLcs}
+              disabled={loading}
             >
-              <Button
-                variant="outline"
-                size="md"
-                color="#3377FF"
-                style={{ borderColor: "#3377FF" }}
-                tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
-                onClick={closeLcs}
-                disabled={loading}
-              >
-                cancel
-              </Button>
-              <Button
-                variant="contained"
-                size="md"
-                color="#3377FF"
-                tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
-                type="submit"
-                style={{
-                  backgroundColor: "#3377FF",
-                }}
-                disabled={loading}
-              >
-                {loading ? (
-                  <Loader color="white" type="dots" size="md" />
-                ) : (
-                  "save"
-                )}
-              </Button>
-            </Group>
-          </Stack>
+              cancel
+            </Button>
+            <Button
+              variant="contained"
+              size="md"
+              color="#3377FF"
+              tt="capitalize"
+              px="50px"
+              w={{ lg: "auto", md: "auto", sm: "auto" }}
+              className={classes.btn}
+              type="submit"
+              style={{
+                backgroundColor: "#3377FF",
+              }}
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader color="white" type="dots" size="md" />
+              ) : (
+                "save"
+              )}
+            </Button>
+          </Group>
         </form>
       </Modal>
       <Modal
+        title="Edit License or Certification"
         size="xl"
         closeOnClickOutside={false}
         centered
@@ -288,121 +295,123 @@ const Licence = ({
             handleEditLicense(values)
           )}
         >
-          <Stack gap={"3rem"}>
-            <Grid style={{ marginTop: "20px" }} gutter="xl">
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Name"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("name")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Issuing organization"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("issuingOrganization")}
-                  placeholder="Microsoft"
-                  disabled={loading}
-                />
-              </GridCol>
+          <Grid
+            style={{
+              margin: "20px 0",
+              overflowY: "scroll",
+              maxHeight: "400px",
+            }}
+            gutter="xl"
+          >
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                withAsterisk
+                label="Name"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("name")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                withAsterisk
+                label="Issuing organization"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("issuingOrganization")}
+                placeholder="Microsoft"
+                disabled={loading}
+              />
+            </GridCol>
 
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <DateInput
-                  size="md"
-                  clearable
-                  withAsterisk
-                  label="Issue Date"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("issueDate")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <DateInput
-                  size="md"
-                  clearable
-                  withAsterisk
-                  label="Expiration Date"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("expirationDate")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  withAsterisk
-                  size="md"
-                  label="Credential ID"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("credentialId")}
-                  disabled={loading}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  withAsterisk
-                  size="md"
-                  label="Credential Url"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                  {...licenseForm?.getInputProps("credentialUrl")}
-                  disabled={loading}
-                />
-              </GridCol>
-            </Grid>
-            <Group
-              justify="flex-end"
-              className={classes.btnWrap}
-              align="center"
-              mt={"auto"}
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <DateInput
+                size="md"
+                clearable
+                withAsterisk
+                label="Issue Date"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("issueDate")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <DateInput
+                size="md"
+                clearable
+                label="Expiration Date"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("expirationDate")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                label="Credential ID"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("credentialId")}
+                disabled={loading}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                label="Credential URL"
+                style={{ textAlign: "start", width: "100%" }}
+                classNames={{ label: classes.label, error: classes.error }}
+                {...licenseForm?.getInputProps("credentialUrl")}
+                disabled={loading}
+              />
+            </GridCol>
+          </Grid>
+          <Group
+            justify="flex-end"
+            className={classes.btnWrap}
+            align="center"
+            mt={"auto"}
+          >
+            <Button
+              variant="outline"
+              size="md"
+              color="#3377FF"
+              style={{ borderColor: "#3377FF" }}
+              tt="capitalize"
+              px="50px"
+              w={{ lg: "auto", md: "auto", sm: "auto" }}
+              className={classes.btn}
+              onClick={closeEditLcs}
+              disabled={loading}
             >
-              <Button
-                variant="outline"
-                size="md"
-                color="#3377FF"
-                style={{ borderColor: "#3377FF" }}
-                tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
-                onClick={closeEditLcs}
-                disabled={loading}
-              >
-                cancel
-              </Button>
-              <Button
-                variant="contained"
-                size="md"
-                color="#3377FF"
-                tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
-                type="submit"
-                style={{
-                  backgroundColor: "#3377FF",
-                }}
-                disabled={loading}
-              >
-                {loading ? (
-                  <Loader color="white" type="dots" size="md" />
-                ) : (
-                  "save"
-                )}
-              </Button>
-            </Group>
-          </Stack>
+              cancel
+            </Button>
+            <Button
+              variant="contained"
+              size="md"
+              color="#3377FF"
+              tt="capitalize"
+              px="50px"
+              w={{ lg: "auto", md: "auto", sm: "auto" }}
+              className={classes.btn}
+              type="submit"
+              style={{
+                backgroundColor: "#3377FF",
+              }}
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader color="white" type="dots" size="md" />
+              ) : (
+                "update"
+              )}
+            </Button>
+          </Group>
         </form>
       </Modal>
     </>

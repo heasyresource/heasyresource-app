@@ -13,12 +13,14 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
+import { useRouter } from "next/navigation";
 
 const EmergencyContact = ({
   emergencyForm,
   handleEmergencySubmit,
   loading,
 }) => {
+  const router = useRouter();
   return (
     <Box>
       <Text
@@ -133,8 +135,9 @@ const EmergencyContact = ({
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               disabled={loading}
+              onClick={() => router.back()}
             >
-              cancel
+              back
             </Button>
             <Button
               variant="contained"

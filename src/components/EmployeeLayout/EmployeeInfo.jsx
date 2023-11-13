@@ -13,6 +13,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
+import { useRouter } from "next/navigation";
 
 const EmployeeInfo = ({
   employmentInfoForm,
@@ -21,6 +22,7 @@ const EmployeeInfo = ({
   employmentType,
   loading,
 }) => {
+  const router = useRouter();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
@@ -70,7 +72,7 @@ const EmployeeInfo = ({
                 <Select
                   size="md"
                   withAsterisk
-                  label="Job Type"
+                  label="Employement Type"
                   style={{ textAlign: "start", width: "100%" }}
                   data={employmentType}
                   classNames={{ label: classes.label, error: classes.error }}
@@ -82,7 +84,7 @@ const EmployeeInfo = ({
                 <Select
                   size="md"
                   withAsterisk
-                  label="Job Mode"
+                  label="Work Mode"
                   style={{ textAlign: "start", width: "100%" }}
                   data={["On-Site", "Hybrid", "Remote"]}
                   classNames={{ label: classes.label, error: classes.error }}
@@ -160,8 +162,9 @@ const EmployeeInfo = ({
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               disabled={loading}
+              onClick={() => router.back()}
             >
-              cancel
+              back
             </Button>
             <Button
               variant="contained"

@@ -117,6 +117,7 @@ export default function Profile() {
         </Menu.Dropdown>
       </Menu>
       <Modal
+        withCloseButton={false}
         opened={opened}
         onClose={close}
         centered

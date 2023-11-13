@@ -6,7 +6,12 @@ import { IconCalendarBolt } from "@tabler/icons-react";
 const SearchFields = () => {
   return (
     <form style={{ marginTop: "1rem" }}>
-      <Grid gutter='xl' px={40} justify="space-between" className={classes.formWrap}>
+      <Grid
+        gutter="xl"
+        px={40}
+        justify="space-between"
+        className={classes.formWrap}
+      >
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
           <TextInput
             size="md"
@@ -25,7 +30,7 @@ const SearchFields = () => {
           <Select
             size="md"
             required
-            label="Job Title"
+            label="Employment Type"
             style={{ width: "100%" }}
             placeholder="Account Assistant"
             data={["Account Assistant"]}
