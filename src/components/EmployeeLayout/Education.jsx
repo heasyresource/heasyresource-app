@@ -83,7 +83,7 @@ const Education = ({
               <Box key={item.institution}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
                   <Box style={{ width: "45px", height: "45px" }}>
-                    <Image src={"/assets/svgs/education.svg"} />
+                    <Image src={"/assets/images/education.png"} />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>

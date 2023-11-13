@@ -90,7 +90,7 @@ const WorkExprience = ({
               <Box key={item.companyName}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
                   <Box style={{ width: "45px", height: "45px" }}>
-                    <Image src={"/assets/images/company.png"} />
+                    <Image src={"/assets/images/workExprience.png"} />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>

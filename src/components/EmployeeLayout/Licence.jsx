@@ -81,7 +81,7 @@ const Licence = ({
               <Box key={item.name}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
                   <Box style={{ width: "45px", height: "45px" }}>
-                    <Image src={"/assets/images/company.png"} />
+                    <Image src={"/assets/images/certificate.png"} />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>
