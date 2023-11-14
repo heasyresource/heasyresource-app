@@ -1,4 +1,3 @@
-"use client";
 import {
   Image,
   Container,
@@ -23,8 +22,6 @@ import Logo from "../../../components/JobListingsLayout/jobLogo.svg";
 import NextImage from "next/image";
 import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
 
-const jobdata = ["", "", "", "", ""];
-
 const jobBadge = ["Front-end", "Back-end", "Database"];
 
 const jobBadges = jobBadge.map((item) => (
@@ -37,6 +34,7 @@ const jobBadges = jobBadge.map((item) => (
     classNames={{
       label: classes.label,
     }}
+    key={item}
   >
     {item}
   </Badge>
