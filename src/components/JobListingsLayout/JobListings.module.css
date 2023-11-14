@@ -1,0 +1,56 @@
+.inner {
+  /* display: flex;
+    justify-content: space-between; */
+  /* width: 100%; */
+  /* padding-top: calc(var(--mantine-spacing-xl) * 4);
+    padding-bottom: calc(var(--mantine-spacing-xl) * 4); */
+}
+
+.content {
+  /* max-width: rem(480px);
+    margin-right: calc(var(--mantine-spacing-xl) * 3);
+  
+    @media (max-width: $mantine-breakpoint-md) {
+      max-width: 100%;
+      margin-right: 0;
+    } */
+}
+
+.label {
+  color: black;
+  font-size: 10px;
+}
+
+.icon {
+  color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+}
+
+.job {
+  @mixin hover {
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-8)
+    );
+  }
+}
+
+.controls {
+  margin-top: calc(var(--mantine-spacing-xl) * 2);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    margin-top: var(--mantine-spacing-xl);
+  }
+}
+
+.control {
+  height: rem(54px);
+  padding-left: rem(38px);
+  padding-right: rem(38px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: rem(54px);
+    padding-left: rem(18px);
+    padding-right: rem(18px);
+    flex: 1;
+  }
+}
