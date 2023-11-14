@@ -131,14 +131,14 @@ export default function JobDetails() {
                       <Space h={20} />
                       <Text ta={"justify"} fz={16} style={{ marginBottom: 20 }}>
                         Join our dynamic tech team as a Full Stack Developer,
-                        where you'll play a key role in designing and
+                        where you&apos;ll play a key role in designing and
                         implementing cutting-edge web solutions. As a Full Stack
-                        Developer, you'll be involved in the entire software
+                        Developer, you&apos;ll be involved in the entire software
                         development life cycle, from concept to deployment,
                         ensuring seamless user experiences. Collaborate with
                         cross-functional teams, contribute to both front-end and
                         back-end development, and stay at the forefront of
-                        emerging technologies. If you're passionate about
+                        emerging technologies. If you&apos;re passionate about
                         crafting innovative solutions and thrive in a
                         collaborative environment, this is the opportunity for
                         you.
@@ -185,7 +185,7 @@ export default function JobDetails() {
                       <Space h={20} />
                       <List>
                         <ListItem>
-                          Bachelor's degree in Computer Science, Software
+                          Bachelor&apos;s degree in Computer Science, Software
                           Engineering, or a related field.
                         </ListItem>
                         <ListItem>
