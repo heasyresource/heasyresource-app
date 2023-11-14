@@ -29,12 +29,13 @@ import NextImage from "next/image";
 import { IconArrowUp, IconBriefcase2, IconMapPin } from "@tabler/icons-react";
 import { useIndividual } from "@/hooks";
 
-const jobdata = ["", "", "", "", ""];
+const jobdata = [{id: '1'}, {}, {}, {}, {}];
 
 const jobBadge = ["Front-end", "Back-end", "Database"];
 
-const jobBadges = jobBadge.map((item) => (
+const jobBadges = jobBadge.map((item, i) => (
   <Badge
+    key={i}
     color="#F4F4F4"
     radius="sm"
     px={9}

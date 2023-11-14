@@ -20,8 +20,9 @@ const jobdata = ["", "", "", "", ""];
 
 const jobBadge = ["Front-end", "Back-end", "Database"];
 
-const jobBadges = jobBadge.map((item) => (
+const jobBadges = jobBadge.map((item, i) => (
   <Badge
+    key={i}
     color="#F4F4F4"
     radius="sm"
     px={9}
@@ -57,20 +58,16 @@ export default function JobListings() {
               </Text>
             </Flex>
           </Center>
-          <Container size={'95%'} py={66}>
+          <Container size={"95%"} py={66}>
             <Stack gap={"xl"}>
-              {jobdata.map((item) => (
+              {jobdata.map((item, i) => (
                 <UnstyledButton
+                  key={i}
                   className={classes.job}
                   component="a"
                   href="/job-listings/job-details"
                 >
-                  <Card
-                    bg={"#ffff"}
-                    shadow="sm"
-                    padding="lg"
-                    radius="md"
-                  >
+                  <Card bg={"#ffff"} shadow="sm" padding="lg" radius="md">
                     <Group justify="space-between" py={20}>
                       <Flex direction={"column"}>
                         <div style={{ display: "flex", gap: "10px" }}>
