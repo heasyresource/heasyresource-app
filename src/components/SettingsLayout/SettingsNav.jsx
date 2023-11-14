@@ -14,8 +14,6 @@ import React from "react";
 import classes from "./Settings.module.css";
 import {
   IconChevronDown,
-  IconWalletOff,
-  IconZoomMoney,
 } from "@tabler/icons-react";
 
 const SettingsNav = ({ tabTitle }) => {

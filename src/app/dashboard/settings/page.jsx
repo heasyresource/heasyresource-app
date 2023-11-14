@@ -68,7 +68,12 @@ const Settings = () => {
           <Text ta={{ base: "center", md: "left" }} py={30} fz={24} fw={700}>
             Company Information
           </Text>
-          <Switch defaultChecked labelPosition="left" label="Edit" />
+          <Switch
+            color="#3377FF"
+            defaultChecked
+            labelPosition="left"
+            label="Edit"
+          />
         </Group>
         <Group px={40}>
           <AddComImg
