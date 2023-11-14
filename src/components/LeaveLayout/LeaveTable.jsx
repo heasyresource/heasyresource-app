@@ -1,6 +1,6 @@
 "use client";
 import { DataTable } from "mantine-datatable";
-import { useRouter } from "next/navigation";
+import classes from "./leaveLayout.module.css";
 
 import {
   ActionIcon,
@@ -9,11 +9,58 @@ import {
   MenuTarget,
   MenuDropdown,
   MenuItem,
+  Text,
+  Button,
+  Group,
+  Stack,
+  Textarea,
+  Modal,
+  Badge,
 } from "@mantine/core";
-import { IconCheck, IconX, IconDotsVertical } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconX,
+  IconDotsVertical,
+  IconAlertCircleFilled,
+} from "@tabler/icons-react";
+import Link from "next/link";
+import { useDisclosure } from "@mantine/hooks";
 
-const LeaveTable = ({ leaves, paginate, pagination, gettingData }) => {
-  const router = useRouter();
+const LeaveTable = ({
+  leaves,
+  paginate,
+  pagination,
+  gettingData,
+  setItemID,
+  handleApprove,
+  handleReject,
+  rejectForm,
+  loading,
+}) => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const [openedApp, { open: openApp, close: closeApp }] = useDisclosure(false);
+  const getDate = (timestamp) => {
+    const datePortion = new Date(timestamp)?.toISOString().split("T")[0];
+    return datePortion;
+  };
+  const getDaysDifference = (start, end) => {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+
+    const timeDifference = date2 - date1;
+
+    const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    return Math.round(daysDifference);
+  };
+  const openReject = (data) => {
+    setItemID(data.id);
+    open();
+  };
+  const openApprove = (data) => {
+    setItemID(data.id);
+    openApp();
+  };
   return (
     <>
       {leaves?.length !== 0 && (
@@ -34,59 +81,109 @@ const LeaveTable = ({ leaves, paginate, pagination, gettingData }) => {
               render: (record) => leaves.indexOf(record) + 1,
             },
             {
-              accessor: "date",
+              accessor: "createdAt",
+              title: "Date",
               textAlign: "center",
               textTransform: "capitalize",
               noWrap: true,
+              render: ({ createdAt }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {getDate(createdAt)}
+                </Text>
+              ),
             },
             {
-              accessor: "employeeName",
+              accessor: "user",
+              title: "Employee Name",
               textAlign: "center",
               textTransform: "capitalize",
               noWrap: true,
+              render: ({ user }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {`${user.firstName} ${user.lastName}`}
+                </Text>
+              ),
             },
             {
               accessor: "leaveType",
               textAlign: "center",
               textTransform: "capitalize",
               noWrap: true,
+              render: ({ leaveType }) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {leaveType.name}
+                </Text>
+              ),
             },
             {
-              accessor: "numberOfDays",
+              accessor: "",
+              title: "Number of Days",
               textAlign: "center",
               textTransform: "capitalize",
               noWrap: true,
+              render: (leaves) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {`${getDaysDifference(leaves.startDate, leaves.endDate)} ${
+                    getDaysDifference(leaves.startDate, leaves.endDate) > 1
+                      ? "days"
+                      : "day"
+                  }`}
+                </Text>
+              ),
             },
             {
               accessor: "status",
               textAlign: "center",
               textTransform: "capitalize",
               noWrap: true,
+              render: ({ status }) => (
+                <>
+                  {status === "Approved" && (
+                    <Badge color="#14cf14">{status}</Badge>
+                  )}
+                  {status === "Pending" && <Badge color="grey">{status}</Badge>}
+                  {status === "Rejected" && <Badge color="red">{status}</Badge>}
+                </>
+              ),
             },
             {
               accessor: "actions",
               title: "Actions",
               width: "135px",
               textAlign: "center",
-              render: () => (
+              render: (leaves) => (
                 <Flex justify="center" align="center">
-                  <ActionIcon variant="filled" color="#84ADFF" radius="lg">
-                    <IconCheck
-                      style={{ width: "70%", height: "70%" }}
-                      stroke={1.5}
-                    />
-                  </ActionIcon>
-                  <ActionIcon
-                    variant="filled"
-                    color="#FF7A00"
-                    radius="lg"
-                    style={{ marginLeft: "10px" }}
-                  >
-                    <IconX
-                      style={{ width: "70%", height: "70%" }}
-                      stroke={1.5}
-                    />
-                  </ActionIcon>
+                  {leaves.approvedBy === null && leaves.rejectedBy === null && (
+                    <ActionIcon
+                      variant="filled"
+                      color="#84ADFF"
+                      radius="lg"
+                      onClick={() => {
+                        openApprove(leaves);
+                      }}
+                    >
+                      <IconCheck
+                        style={{ width: "70%", height: "70%" }}
+                        stroke={1.5}
+                      />
+                    </ActionIcon>
+                  )}
+                  {leaves.approvedBy === null && leaves.rejectedBy === null && (
+                    <ActionIcon
+                      variant="filled"
+                      color="#FF7A00"
+                      radius="lg"
+                      style={{ marginLeft: "10px" }}
+                      onClick={() => {
+                        openReject(leaves);
+                      }}
+                    >
+                      <IconX
+                        style={{ width: "70%", height: "70%" }}
+                        stroke={1.5}
+                      />
+                    </ActionIcon>
+                  )}
                   <Menu shadow="md" width={200}>
                     <MenuTarget>
                       <ActionIcon variant="transparent" color="#838383">
@@ -97,13 +194,13 @@ const LeaveTable = ({ leaves, paginate, pagination, gettingData }) => {
                       </ActionIcon>
                     </MenuTarget>
                     <MenuDropdown>
-                      <MenuItem
-                        fz="xs"
-                        onClick={() =>
-                          router.push("/dashboard/employee/personal-detail")
-                        }
-                      >
-                        Employee Details
+                      <MenuItem fz="xs">
+                        <Link
+                          href={`/dashboard/employee/${leaves.userId}/personal-detail`}
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          Employee Details
+                        </Link>
                       </MenuItem>
 
                       <MenuItem fz="xs">Leave Details</MenuItem>
@@ -119,6 +216,125 @@ const LeaveTable = ({ leaves, paginate, pagination, gettingData }) => {
           onPageChange={(page) => paginate(page)}
         />
       )}
+
+      <Modal
+        title="Reject Leave"
+        closeOnClickOutside={false}
+        withCloseButton={false}
+        centered
+        opened={opened}
+        onClose={close}
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+      >
+        <form
+          onSubmit={rejectForm?.onSubmit((values) => {
+            handleReject(values);
+            close();
+          })}
+        >
+          <Textarea
+            label="Reason"
+            classNames={{
+              label: classes.label,
+              error: classes.error,
+              placeholder: classes.placeholder,
+            }}
+            {...rejectForm?.getInputProps("reasonForRejection")}
+            disabled={loading}
+            autosize={true}
+            minRows={2}
+          />
+          <Group mt="1rem" justify="flex-end" align="center">
+            <Button
+              variant="outline"
+              size="md"
+              color="#A3A3A3"
+              style={{ borderColor: "#A3A3A3" }}
+              tt="capitalize"
+              onClick={() => {
+                close();
+                rejectForm?.reset();
+                setItemID("");
+              }}
+            >
+              cancel
+            </Button>
+            <Button
+              variant="contained"
+              size="md"
+              style={{ backgroundColor: "#FF0000" }}
+              tt="capitalize"
+              type="submit"
+            >
+              reject
+            </Button>
+          </Group>
+        </form>
+      </Modal>
+      <Modal
+        closeOnClickOutside={false}
+        withCloseButton={false}
+        centered
+        opened={openedApp}
+        onClose={closeApp}
+        overlayProps={{
+          backgroundOpacity: 0.55,
+          blur: 3,
+        }}
+      >
+        <Stack py={"3rem"} justify="center" align="center">
+          <ActionIcon variant="transparent" size="xl">
+            <IconAlertCircleFilled
+              style={{
+                color: "#3377FF",
+                fontSize: "20px",
+                width: "100%",
+                height: "100%",
+              }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+          <Text fw={600} style={{ fontSize: "25px", color: "#000000" }}>
+            Confirm Approve
+          </Text>
+
+          <Text
+            style={{ fontSize: "16px", color: "#1E1E1E", textAlign: "center" }}
+          >
+            Are you sure you want to approve this leave?
+          </Text>
+          <Group mt="1rem" justify="flex-end" align="center">
+            <Button
+              variant="outline"
+              size="md"
+              color="#A3A3A3"
+              style={{ borderColor: "#A3A3A3" }}
+              tt="capitalize"
+              onClick={() => {
+                closeApp();
+                setItemID("");
+              }}
+            >
+              cancel
+            </Button>
+            <Button
+              variant="contained"
+              size="md"
+              style={{ backgroundColor: "#3377FF" }}
+              tt="capitalize"
+              onClick={() => {
+                handleApprove();
+                closeApp();
+              }}
+            >
+              approve
+            </Button>
+          </Group>
+        </Stack>
+      </Modal>
     </>
   );
 };

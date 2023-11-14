@@ -38,7 +38,7 @@ const useAddHolidayType = () => {
       availability: (value) =>
         !value.length ? "Avalability is required" : null,
       isFullDay: (value) => (!value.length ? "Field is required" : null),
-      date: (value) => (value.length === 0 ? "Date is required" : null),
+      date: (value) => (value?.length === 0 ? "Date is required" : null),
       isPaid: (value) => (!value.length ? "Field is required" : null),
     },
   });

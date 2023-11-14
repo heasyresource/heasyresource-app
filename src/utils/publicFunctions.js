@@ -69,19 +69,18 @@ export const calculateDateDifference = (start, end) => {
   let resultString;
 
   if (yearsDifference > 0) {
-    resultString = ` ·${yearsDifference} ${
+    resultString = ` · ${yearsDifference} ${
       yearsDifference === 1 ? "year" : "years"
     }`;
   } else if (monthsDifference > 0) {
-    resultString = ` ·${monthsDifference} ${
+    resultString = ` · ${monthsDifference} ${
       monthsDifference === 1 ? "month" : "months"
     }`;
   } else {
-    resultString = ` ·${daysDifference} ${
+    resultString = ` · ${daysDifference} ${
       daysDifference === 1 ? "day" : "days"
     }`;
   }
-
   return resultString;
 };
 export const formatMonthYear = (dateStr1, dateStr2) => {

@@ -17,9 +17,7 @@ const page = () => {
     >
       <CardSection
         className={classes.cardSection}
-        pt="25px"
-        pb={"48px"}
-        px={"25px"}
+        py="25px"
         style={{ borderBottom: "1px solid #DDDDDD" }}
       >
         <EmployeeNav tabTitle={"employee details"} />

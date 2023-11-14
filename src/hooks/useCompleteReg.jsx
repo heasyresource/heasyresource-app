@@ -242,7 +242,6 @@ const useCompleteReg = () => {
         );
         const results = response?.results;
         if (results.subdomain !== null) {
-          console.log(results.country.name);
           setIsSubmitted(true);
           setLogo(results.logoUrl);
           setIsRadioChecked(results.autoGenerateEmployeeId === 1);
@@ -253,8 +252,8 @@ const useCompleteReg = () => {
             subdomain: results.subdomain,
             autoGenerateEmployeeId:
               results.autoGenerateEmployeeId === 1 ? "true" : "false",
-            countryId: results.country.name,
-            companySizeId: results.companySize.size,
+            countryId: results.country.id,
+            companySizeId: results.companySize.id,
             employeeIdFormat: results.employeeIdFormat,
           });
         }

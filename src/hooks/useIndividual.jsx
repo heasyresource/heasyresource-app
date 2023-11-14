@@ -142,7 +142,6 @@ const useIndividual = () => {
   useEffect(() => {
     getDepartments();
   }, []);
-  console.log(logo, "jdjdjdj");
   return {
     form,
     handleSubmit,

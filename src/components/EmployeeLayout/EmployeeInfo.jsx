@@ -22,6 +22,8 @@ const EmployeeInfo = ({
   employmentType,
   loading,
 }) => {
+  const currentDate = new Date();
+
   const router = useRouter();
   return (
     <Box>
@@ -66,6 +68,7 @@ const EmployeeInfo = ({
                   classNames={{ label: classes.label, error: classes.error }}
                   {...employmentInfoForm?.getInputProps("departmentId")}
                   disabled={loading}
+                  allowDeselect={false}
                 />
               </Grid.Col>
               <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -78,6 +81,7 @@ const EmployeeInfo = ({
                   classNames={{ label: classes.label, error: classes.error }}
                   {...employmentInfoForm?.getInputProps("employmentTypeId")}
                   disabled={loading}
+                  allowDeselect={false}
                 />
               </Grid.Col>
               <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -90,6 +94,7 @@ const EmployeeInfo = ({
                   classNames={{ label: classes.label, error: classes.error }}
                   {...employmentInfoForm?.getInputProps("workMode")}
                   disabled={loading}
+                  allowDeselect={false}
                 />
               </Grid.Col>
               <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -101,19 +106,20 @@ const EmployeeInfo = ({
                   style={{ textAlign: "start", width: "100%" }}
                   data={["Pending", "Rejected", "Hired"]}
                   classNames={{ label: classes.label, error: classes.error }}
+                  allowDeselect={false}
                 />
               </Grid.Col>
 
               <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
                 <DateInput
                   size="md"
-                  clearable
                   withAsterisk
                   style={{ textAlign: "start", width: "100%" }}
                   label="Joined Date"
                   classNames={{ label: classes.label, error: classes.error }}
                   {...employmentInfoForm?.getInputProps("resumptionDate")}
                   disabled={loading}
+                  maxDate={currentDate}
                 />
               </Grid.Col>
             </Grid>

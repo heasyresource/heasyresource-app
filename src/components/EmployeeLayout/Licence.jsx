@@ -17,9 +17,8 @@ import {
 import React from "react";
 import classes from "./employeeLayout.module.css";
 import { DateInput } from "@mantine/dates";
-import { IconEdit } from "@tabler/icons-react";
+import { IconEdit, IconLink } from "@tabler/icons-react";
 import { formatMonthYear } from "@/utils/publicFunctions";
-import { IconLink } from "@tabler/icons-react";
 
 const Licence = ({
   openLcs,
@@ -35,13 +34,14 @@ const Licence = ({
   setExpId,
   handleEditLicense,
 }) => {
+  const currentDate = new Date();
   const handleEdit = (data) => {
     setExpId(data.id);
     licenseForm?.setValues({
       name: data.name,
       issuingOrganization: data.issuingOrganization,
-      credentialUrl: data.credentialUrl,
-      credentialId: data.credentialId,
+      credentialUrl: data.credentialUrl !== null ? data.credentialUrl : "",
+      credentialId: data.credentialId !== null ? data.credentialId : "",
       issueDate: new Date(data.issueDate),
       expirationDate: new Date(data.expirationDate),
     });
@@ -77,10 +77,17 @@ const Licence = ({
         )}
         {licenses?.length !== 0 && (
           <Stack mt={"md"}>
-            {licenses?.map((item) => (
-              <Box key={item.name}>
+            {licenses?.map((item, index) => (
+              <Box key={item.name + index}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
-                  <Box style={{ width: "45px", height: "45px" }}>
+                  <Box
+                    style={{
+                      width: "100%",
+                      maxWidth: "45px",
+                      maxHeight: "45px",
+                      height: "100%",
+                    }}
+                  >
                     <Image src={"/assets/images/certificate.png"} />
                   </Box>
                   <Box>
@@ -120,21 +127,29 @@ const Licence = ({
                         textTransform: "capitalize",
                       }}
                     >{`issued ${formatMonthYear(item.issueDate, null)}`}</Text>
-
-                    <Button
-                      component="a"
-                      target="_blank"
-                      href={item.credentialUrl}
-                      size="sm"
-                      mt={"5px"}
-                      variant="outline"
-                      rightSection={<IconLink />}
-                      color="#3377FF"
-                      style={{ borderColor: "#3377FF" }}
-                      radius="xl"
-                    >
-                      Show credential
-                    </Button>
+                    {item.credentialId !== null && (
+                      <Text
+                        style={{
+                          fontSize: "14px",
+                        }}
+                      >{`CredentialID: ${item.credentialId}`}</Text>
+                    )}
+                    {item.credentialUrl !== null && (
+                      <Button
+                        component="a"
+                        target="_blank"
+                        href={item.credentialUrl}
+                        size="sm"
+                        mt={"5px"}
+                        variant="outline"
+                        rightSection={<IconLink />}
+                        color="#3377FF"
+                        style={{ borderColor: "#3377FF" }}
+                        radius="xl"
+                      >
+                        Show credential
+                      </Button>
+                    )}
                   </Box>
                 </Flex>
               </Box>
@@ -146,6 +161,7 @@ const Licence = ({
         title="Add License or Certification"
         size="xl"
         closeOnClickOutside={false}
+        withCloseButton={false}
         centered
         opened={openedLcs}
         onClose={closeLcs}
@@ -194,24 +210,24 @@ const Licence = ({
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="Issue Date"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...licenseForm?.getInputProps("issueDate")}
                 disabled={loading}
+                maxDate={currentDate || ""}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 label="Expiration Date"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...licenseForm?.getInputProps("expirationDate")}
                 disabled={loading}
+                minDate={licenseForm?.values.issueDate || ""}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -250,7 +266,10 @@ const Licence = ({
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
-              onClick={closeLcs}
+              onClick={() => {
+                closeLcs();
+                licenseForm?.reset();
+              }}
               disabled={loading}
             >
               cancel
@@ -282,6 +301,7 @@ const Licence = ({
         title="Edit License or Certification"
         size="xl"
         closeOnClickOutside={false}
+        withCloseButton={false}
         centered
         opened={openedEditLcs}
         onClose={closeEditLcs}
@@ -330,24 +350,24 @@ const Licence = ({
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="Issue Date"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...licenseForm?.getInputProps("issueDate")}
                 disabled={loading}
+                maxDate={currentDate || ""}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 label="Expiration Date"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...licenseForm?.getInputProps("expirationDate")}
                 disabled={loading}
+                minDate={licenseForm?.values.issueDate || ""}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -386,7 +406,10 @@ const Licence = ({
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
-              onClick={closeEditLcs}
+              onClick={() => {
+                closeEditLcs();
+                licenseForm?.reset();
+              }}
               disabled={loading}
             >
               cancel

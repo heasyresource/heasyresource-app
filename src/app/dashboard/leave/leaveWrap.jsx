@@ -5,8 +5,17 @@ import { Card, CardSection } from "@mantine/core";
 import React from "react";
 
 const LeaveWrap = () => {
-  const { employeeLeave, paginate, leavePagination, gettingData } =
-    useAddLeaveType();
+  const {
+    employeeLeave,
+    paginate,
+    leavePagination,
+    gettingData,
+    setItemID,
+    handleReject,
+    handleApprove,
+    rejectForm,
+    loading,
+  } = useAddLeaveType();
   return (
     <>
       <Card
@@ -28,6 +37,11 @@ const LeaveWrap = () => {
         paginate={paginate}
         pagination={leavePagination}
         gettingData={gettingData}
+        setItemID={setItemID}
+        handleApprove={handleApprove}
+        handleReject={handleReject}
+        rejectForm={rejectForm}
+        loading={loading}
       />
     </>
   );

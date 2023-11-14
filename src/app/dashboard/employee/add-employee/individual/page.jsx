@@ -1,16 +1,7 @@
-import {
-  Box,
-  Card,
-  CardSection,
-  Grid,
-  GridCol,
-  Stack,
-  Text,
-} from "@mantine/core";
-import classes from "../../employee.module.css";
+import { Card, CardSection } from "@mantine/core";
+
 import React from "react";
-import { AddImage, EmployeeNav } from "@/components";
-import EmployeeIndividual from "@/components/EmployeeLayout/EmployeeIndividual";
+import { EmployeeNav } from "@/components";
 import IndividualWrap from "./IndividualWrap";
 
 const page = () => {
@@ -24,11 +15,7 @@ const page = () => {
         margin: "0px",
       }}
     >
-      <CardSection
-        pt="25px"
-        pb="55px"
-        style={{ borderBottom: "1px solid #DDDDDD" }}
-      >
+      <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
         <EmployeeNav tabTitle={"add Employee"} />
       </CardSection>
       <IndividualWrap />

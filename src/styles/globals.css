@@ -89,9 +89,11 @@ body {
   justify-content: center;
   align-items: center;
 }
-.mantine-DatePicker-levelsGroup,
-.mantine-DateInput-levelsGroup {
+.mantine-DatePicker-levelsGroup {
   max-width: 20rem;
+}
+.mantine-DateInput-levelsGroup {
+  max-width: 15rem;
 }
 .mantine-DatePicker-month,
 .mantine-DatePicker-monthsList,

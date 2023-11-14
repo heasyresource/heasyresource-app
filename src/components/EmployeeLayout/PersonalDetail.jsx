@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 
 const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
   const router = useRouter();
+  const currentDate = new Date();
   return (
     <form
       onSubmit={personalForm.onSubmit((values) => handlePersonalSubmit(values))}
@@ -83,7 +84,7 @@ const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
-              data={["Single", "Married", "Widowed", "Divorced", "Seperated"]}
+              data={["Single", "Married", "Widowed", "Divorced", "Separated"]}
               size="md"
               label="Marital Status"
               withAsterisk
@@ -91,12 +92,12 @@ const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
               classNames={{ label: classes.label, error: classes.error }}
               {...personalForm?.getInputProps("maritalStatus")}
               disabled={loading}
+              allowDeselect={false}
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
             <DateInput
               size="md"
-              clearable
               withAsterisk
               style={{ textAlign: "start", width: "100%" }}
               label="Date of Birth"
@@ -104,6 +105,8 @@ const PersonalDetail = ({ loading, handlePersonalSubmit, personalForm }) => {
               classNames={{ label: classes.label, error: classes.error }}
               {...personalForm?.getInputProps("dateOfBirth")}
               disabled={loading}
+              maxDate={currentDate}
+              valueFormat="DD/MM/YYYY"
             />
           </Grid.Col>
           <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>

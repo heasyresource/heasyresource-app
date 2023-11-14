@@ -1,7 +1,17 @@
 "use client";
-import { Avatar, Badge, Flex, Text } from "@mantine/core";
+import {
+  Avatar,
+  ActionIcon,
+  Flex,
+  Text,
+  Menu,
+  MenuItem,
+  MenuTarget,
+  MenuDropdown,
+} from "@mantine/core";
 import { DataTable } from "mantine-datatable";
 import Link from "next/link";
+import { IconDotsVertical } from "@tabler/icons-react";
 
 export function TableSelection({
   paginate,
@@ -75,26 +85,40 @@ export function TableSelection({
             },
 
             {
-              accessor: "moreDetails",
+              accessor: "",
+              title: "Actions",
+              width: "10%",
               render: (employees) => (
-                <Link
-                  href={`/dashboard/employee/${employees.id}/personal-detail`}
-                >
-                  <Badge
-                    radius="xs"
-                    variant="light"
-                    color="#3377FF"
-                    size="lg"
-                    style={{
-                      color: "#3377FF",
-
-                      textTransform: "capitalize",
-                      cursor: "pointer",
-                    }}
-                  >
-                    more details
-                  </Badge>
-                </Link>
+                <>
+                  <Menu shadow="md" width={200} withArrow>
+                    <MenuTarget>
+                      <ActionIcon variant="transparent" color="#838383">
+                        <IconDotsVertical
+                          style={{ width: "70%", height: "70%" }}
+                          stroke={1.5}
+                        />
+                      </ActionIcon>
+                    </MenuTarget>
+                    <MenuDropdown>
+                      <MenuItem>
+                        <Link
+                          style={{ textDecoration: "none", color: "inherit" }}
+                          href={`/dashboard/employee/${employees.id}/personal-detail`}
+                        >
+                          Employee Details
+                        </Link>
+                      </MenuItem>
+                      <MenuItem>
+                        <Link
+                          style={{ textDecoration: "none", color: "inherit" }}
+                          href={`/dashboard/leave/${employees.id}?firstName=${employees.firstName}&lastName=${employees.lastName}`}
+                        >
+                          Assign Leave
+                        </Link>
+                      </MenuItem>
+                    </MenuDropdown>
+                  </Menu>
+                </>
               ),
             },
           ]}

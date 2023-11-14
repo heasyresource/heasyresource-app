@@ -5,6 +5,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Select,
   Stack,
   Text,
@@ -18,7 +19,16 @@ import { IconCalendarBolt } from "@tabler/icons-react";
 import { useAssignLeave } from "@/hooks";
 
 const AssignLeaveForm = () => {
-  const { form, handleSubmit } = useAssignLeave();
+  const currentDate = new Date();
+  const {
+    form,
+    handleSubmit,
+    leaveTypes,
+    loading,
+    router,
+    firstName,
+    lastName,
+  } = useAssignLeave();
   return (
     <Box>
       <Text
@@ -29,23 +39,25 @@ const AssignLeaveForm = () => {
       </Text>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <Stack gap={"2rem"} mt={"1rem"}>
-          <Grid gutter={"xl"}>
-            <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-              <TextInput
-                label="Employee Name"
-                withAsterisk
-                size="md"
-                classNames={{
-                  label: classes.label,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-                {...form.getInputProps("name")}
-              />
-            </GridCol>
+          <Grid gutter={"lg"}>
+            {firstName !== null && lastName !== null && (
+              <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
+                <TextInput
+                  size="md"
+                  label="Employee Name"
+                  disabled
+                  classNames={{
+                    label: classes.label,
+                    error: classes.error,
+                    placeholder: classes.placeholder,
+                  }}
+                  defaultValue={`${firstName} ${lastName}`}
+                />
+              </GridCol>
+            )}
             <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
               <Select
-                data={[]}
+                data={leaveTypes}
                 label="Leave Type"
                 withAsterisk
                 size="md"
@@ -54,9 +66,12 @@ const AssignLeaveForm = () => {
                   error: classes.error,
                   placeholder: classes.placeholder,
                 }}
-                {...form.getInputProps("type")}
+                {...form.getInputProps("leaveTypeId")}
+                allowDeselect={false}
+                disabled={loading}
               />
             </GridCol>
+
             <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
               <DateInput
                 label="From Date"
@@ -69,7 +84,10 @@ const AssignLeaveForm = () => {
                 }}
                 rightSectionWidth={80}
                 rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
-                {...form.getInputProps("from")}
+                {...form.getInputProps("startDate")}
+                valueFormat="DD/MM/YYYY"
+                disabled={loading}
+                minDate={currentDate}
               />
             </GridCol>
             <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -84,14 +102,19 @@ const AssignLeaveForm = () => {
                 }}
                 rightSectionWidth={80}
                 rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
-                {...form.getInputProps("to")}
+                {...form.getInputProps("endDate")}
+                valueFormat="DD/MM/YYYY"
+                disabled={loading}
+                minDate={form.values.startDate || ""}
               />
             </GridCol>
           </Grid>
           <Textarea
-            style={{ height: "100% !important " }}
-            label="Notes/Comments"
-            {...form.getInputProps("notes")}
+            label="Comments"
+            {...form.getInputProps("comments")}
+            disabled={loading}
+            autosize
+            minRows={2}
           />
           <Group
             justify="flex-end"
@@ -108,8 +131,10 @@ const AssignLeaveForm = () => {
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
+              disabled={loading}
+              onClick={() => router.back()}
             >
-              cancel
+              back
             </Button>
             <Button
               variant="contained"
@@ -123,8 +148,13 @@ const AssignLeaveForm = () => {
               style={{
                 backgroundColor: "#3377FF",
               }}
+              disabled={loading}
             >
-              assign
+              {loading ? (
+                <Loader color="white" type="dots" size="md" />
+              ) : (
+                "assign"
+              )}
             </Button>
           </Group>
         </Stack>

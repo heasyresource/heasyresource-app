@@ -31,7 +31,7 @@ const useDashboard = () => {
         //   router.push("/complete-registration");
         // }
       } catch (err) {
-        console.log(err, "shksjkb");
+        console.log(err);
       }
     };
     // const getEmployee = async () => {

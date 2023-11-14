@@ -40,6 +40,14 @@ const useAddLeaveType = () => {
       isPaid: (val) => (!val.length ? "Select option" : null),
     },
   });
+  const rejectForm = useForm({
+    initialValues: {
+      reasonForRejection: "",
+    },
+    validate: {
+      reasonForRejection: (val) => (!val.length ? "Field is required" : null),
+    },
+  });
 
   const headerSettings = {
     headers: {
@@ -150,6 +158,68 @@ const useAddLeaveType = () => {
       }
     }
   };
+  const handleReject = async (data) => {
+    setLoading(true);
+    try {
+      if (itemID.length !== 0) {
+        const response = await apiClient.put(
+          `/employee/leaves/${itemID}/reject`,
+          data,
+          headerSettings
+        );
+        notifications.show({
+          color: "white",
+          title: "Success",
+          message: "Leave rejected successfully",
+          styles: successStyles,
+          autoClose: 7000,
+        });
+        setIsChanged(response);
+        setItemID("");
+        setLoading(false);
+        rejectForm.reset();
+      }
+    } catch (err) {
+      setItemID("");
+      setLoading(false);
+      if (err.statusCode >= 400) {
+        notifications.show({
+          color: "red",
+          message: "Something went wrong, please try again",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
+    }
+  };
+  const handleApprove = async () => {
+    try {
+      const response = await apiClient.put(
+        `/employee/leaves/${itemID}/approve`,
+        null,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Leave approved successfully",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      setIsChanged(response);
+      setItemID("");
+    } catch (err) {
+      setItemID("");
+      if (err.statusCode >= 400) {
+        notifications.show({
+          color: "red",
+          message: "Something went wrong, please try again",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
+    }
+  };
   const paginate = (page) => {
     const params = new URLSearchParams(searchParams);
     if (page) {
@@ -207,6 +277,7 @@ const useAddLeaveType = () => {
   useEffect(() => {
     if (isChanged) {
       getLeaveTypes();
+      getEmployeeLeaves();
     }
   }, [isChanged]);
   return {
@@ -229,6 +300,9 @@ const useAddLeaveType = () => {
     leavePagination,
     paginate,
     employeeLeave,
+    handleReject,
+    handleApprove,
+    rejectForm,
   };
 };
 

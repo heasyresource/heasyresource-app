@@ -63,6 +63,7 @@ const ContactDetail = ({
                 searchable
                 {...contactForm?.getInputProps("stateId")}
                 nothingFoundMessage="option not found"
+                allowDeselect={false}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -78,6 +79,7 @@ const ContactDetail = ({
                 searchable
                 {...contactForm?.getInputProps("lgaId")}
                 nothingFoundMessage="option not found"
+                allowDeselect={false}
               />
             </Grid.Col>
             <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
@@ -86,6 +88,8 @@ const ContactDetail = ({
                 withAsterisk
                 label="Zip Code"
                 placeholder="2023920"
+                type="number"
+                maxLength={7}
                 disabled={loading}
                 {...contactForm?.getInputProps("zipCode")}
                 style={{ textAlign: "start", width: "100%" }}
@@ -104,6 +108,7 @@ const ContactDetail = ({
                 style={{ textAlign: "start", width: "100%" }}
                 data={countries}
                 classNames={{ label: classes.label, error: classes.error }}
+                allowDeselect={false}
               />
             </Grid.Col>
           </Grid>

@@ -88,66 +88,36 @@ const CompleteForm = () => {
               </GridCol>
 
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                {isSubmitted ? (
-                  <TextInput
-                    label="Country"
-                    withAsterisk
-                    size="md"
-                    value={form?.values.countryId}
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    disabled
-                  />
-                ) : (
-                  <Select
-                    label="Country"
-                    withAsterisk
-                    data={countries}
-                    size="md"
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    // searchable
-                    {...form.getInputProps("countryId")}
-                    disabled={uploading || isSubmitted}
-                  />
-                )}
+                <Select
+                  label="Country"
+                  withAsterisk
+                  data={countries}
+                  size="md"
+                  classNames={{
+                    label: styles.label,
+                    error: styles.error,
+                    placeholder: styles.placeholder,
+                  }}
+                  searchable
+                  {...form.getInputProps("countryId")}
+                  disabled={uploading || isSubmitted}
+                />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                {isSubmitted ? (
-                  <TextInput
-                    size="md"
-                    label="Company Size"
-                    withAsterisk
-                    value={form?.values.companySizeId}
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    disabled
-                  />
-                ) : (
-                  <Select
-                    label="Company Size"
-                    withAsterisk
-                    data={cmpSize}
-                    size="md"
-                    value={form?.values.companySizeId}
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    {...form.getInputProps("companySizeId")}
-                    disabled={uploading || isSubmitted}
-                  />
-                )}
+                <Select
+                  label="Company Size"
+                  withAsterisk
+                  data={cmpSize}
+                  size="md"
+                  value={form?.values.companySizeId}
+                  classNames={{
+                    label: styles.label,
+                    error: styles.error,
+                    placeholder: styles.placeholder,
+                  }}
+                  {...form.getInputProps("companySizeId")}
+                  disabled={uploading || isSubmitted}
+                />
               </GridCol>
 
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>

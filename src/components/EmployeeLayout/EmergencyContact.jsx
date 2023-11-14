@@ -78,6 +78,7 @@ const EmergencyContact = ({
                 disabled={loading}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                allowDeselect={false}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>

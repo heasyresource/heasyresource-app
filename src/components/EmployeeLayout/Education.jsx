@@ -82,7 +82,14 @@ const Education = ({
             {educations?.map((item) => (
               <Box key={item.institution}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
-                  <Box style={{ width: "45px", height: "45px" }}>
+                  <Box
+                    style={{
+                      width: "100%",
+                      maxWidth: "45px",
+                      maxHeight: "45px",
+                      height: "100%",
+                    }}
+                  >
                     <Image src={"/assets/images/education.png"} />
                   </Box>
                   <Box>
@@ -149,6 +156,7 @@ const Education = ({
       </Box>
       <Modal
         title="Add Education"
+        withCloseButton={false}
         size="xl"
         closeOnClickOutside={false}
         centered
@@ -222,7 +230,6 @@ const Education = ({
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="Start Date"
                 style={{ textAlign: "start", width: "100%" }}
@@ -234,7 +241,6 @@ const Education = ({
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="End Date"
                 style={{ textAlign: "start", width: "100%" }}
@@ -251,6 +257,8 @@ const Education = ({
                 classNames={{ label: classes.label, error: classes.error }}
                 {...educationForm?.getInputProps("description")}
                 disabled={loading}
+                minRows={2}
+                autosize
               />
             </Grid.Col>
           </Grid>
@@ -269,7 +277,10 @@ const Education = ({
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
-              onClick={closeEdu}
+              onClick={() => {
+                closeEdu();
+                educationForm?.reset();
+              }}
               disabled={loading}
             >
               cancel
@@ -300,6 +311,7 @@ const Education = ({
       <Modal
         title="Edit Education"
         size="xl"
+        withCloseButton={false}
         closeOnClickOutside={false}
         centered
         opened={openedEditEdu}
@@ -370,7 +382,6 @@ const Education = ({
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="Start Date"
                 style={{ textAlign: "start", width: "100%" }}
@@ -382,7 +393,6 @@ const Education = ({
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="End Date"
                 style={{ textAlign: "start", width: "100%" }}
@@ -399,6 +409,8 @@ const Education = ({
                 classNames={{ label: classes.label, error: classes.error }}
                 {...educationForm?.getInputProps("description")}
                 disabled={loading}
+                minRows={2}
+                autosize
               />
             </Grid.Col>
           </Grid>
@@ -417,7 +429,10 @@ const Education = ({
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
-              onClick={closeEditEdu}
+              onClick={() => {
+                closeEditEdu();
+                educationForm?.reset();
+              }}
               disabled={loading}
             >
               cancel
