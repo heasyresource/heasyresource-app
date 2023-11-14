@@ -1,61 +1,23 @@
-"use client";
-import {
-  ActionIcon,
-  Box,
-  Button,
-  FileInput,
-  Grid,
-  GridCol,
-  Group,
-  Select,
-  SimpleGrid,
-  Stack,
-  Switch,
-  Text,
-  TextInput,
-  Textarea,
-} from "@mantine/core";
+import { Grid, GridCol, Stack, TextInput, Textarea } from "@mantine/core";
 import React from "react";
-import classes from "../HiringLayout/HiringLayout.module.css";
-import { useAssignLeave } from "@/hooks";
-import { IconDownload } from "@tabler/icons-react";
+import classes from '../AdminLayout/admin.module.css'
 
-const CandidateProfile = () => {
-  const { form, handleSubmit } = useAssignLeave();
+const CompanyProfile = () => {
   return (
-    <Box px={72} pt={30}>
-      <Group justify="space-between">
-        <Text
-          tt={"capitalize"}
-          style={{
-            fontSize: "22px",
-            fontWeight: 700,
-          }}
-        >
-          Candidate Profile
-        </Text>
-        <Switch
-          labelPosition="left"
-          label="Edit"
-          classNames={{
-            label: classes.editLabel,
-          }}
-        />
-      </Group>
-      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+    <>
         <Stack gap={"2rem"}>
           <Grid
-            gutter={{lg: 'xl', sm: '2xl'}}
+            gutter="xl"
             justify="flex-start"
             className={classes.formWrap}
             p={20}
           >
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
               <TextInput
                 size="md"
                 variant="filled"
-                value={"Kenechukwu Okafor"}
-                label="First Name"
+                value={"TechNova Solutions"}
+                label="Organization Name"
                 placeholder="Oludare"
                 style={{ width: "100%" }}
                 classNames={{
@@ -66,12 +28,12 @@ const CandidateProfile = () => {
                 }}
               />
             </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
               <TextInput
                 size="md"
                 variant="filled"
-                value={"Front End Developer"}
-                label="Middle Name"
+                value={"51 - 100"}
+                label="Number of Employees"
                 style={{ width: "100%" }}
                 placeholder="Amope"
                 classNames={{
@@ -82,12 +44,12 @@ const CandidateProfile = () => {
                 }}
               />
             </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
               <TextInput
                 size="md"
                 variant="filled"
-                value={"Jadesola Lawal"}
-                label="Last Name"
+                value={"TNS5678"}
+                label="Registration Number"
                 style={{ width: "100%" }}
                 placeholder="Adeshewa"
                 classNames={{
@@ -98,75 +60,43 @@ const CandidateProfile = () => {
                 }}
               />
             </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"Junior HR Manager"}
-                label="Vacancy"
-                style={{ width: "100%" }}
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"02-10-2023"}
-                label="Date of Application"
-                style={{ width: "100%" }}
-                placeholder="Amope"
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"oludareshewa@gmail.com"}
-                label="Email"
-                style={{ width: "100%" }}
-                placeholder="Adeshewa"
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"oludareshewa@gmail.com"}
-                label="Email"
-                style={{ width: "100%" }}
-                placeholder="Adeshewa"
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
               <TextInput
                 size="md"
                 variant="filled"
                 value={"+234 000 000 0000"}
-                label="Phone Number"
+                label="Phone"
+                style={{ width: "100%" }}
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"+234 000 000 0000"}
+                label="Phone 2"
+                style={{ width: "100%" }}
+                placeholder="Amope"
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"@technovasolutions.com"}
+                label="Email"
                 style={{ width: "100%" }}
                 placeholder="Adeshewa"
                 classNames={{
@@ -177,29 +107,105 @@ const CandidateProfile = () => {
                 }}
               />
             </GridCol>
-            <GridCol>
-              <Box>
-                <Text fz={15} pb={10}>
-                  Resume
-                </Text>
-                <Button
-                  variant="contained"
-                  px={"30px"}
-                  size="lg"
-                  leftSection={<IconDownload size={28} />}
-                  style={{
-                    backgroundColor: "#3377FF",
-                  }}
-                >
-                  Download
-                </Button>
-              </Box>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"@technovasolutions.com"}
+                label="Domain"
+                style={{ width: "100%" }}
+                placeholder="Adeshewa"
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"12, Marina Street"}
+                label="Address"
+                style={{ width: "100%" }}
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 6 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"Lagos Island"}
+                label="City"
+                style={{ width: "100%" }}
+                placeholder="Adeshewa"
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 6, md: 6, sm: 6 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"Lagos"}
+                label="State"
+                style={{ width: "100%" }}
+                placeholder="Adeshewa"
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 6, md: 6, sm:12 }}>
+              <TextInput
+                size="md"
+                variant="filled"
+                value={"0000753951"}
+                label="Zip Code"
+                style={{ width: "100%" }}
+                placeholder="Adeshewa"
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 12, md: 6, sm: 12 }}>
+              <Textarea
+                size="md"
+                variant="filled"
+                value={"0000753951"}
+                label="Zip Code"
+                style={{ width: "100%" }}
+                placeholder="Adeshewa"
+                classNames={{
+                  label: classes.label,
+                  //   input: classes.input,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
             </GridCol>
           </Grid>
         </Stack>
-      </form>
-    </Box>
+    </>
   );
 };
 
-export default CandidateProfile;
+export default CompanyProfile;
