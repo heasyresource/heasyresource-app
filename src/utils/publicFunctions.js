@@ -281,6 +281,43 @@ export const PaySlipList = [
     unitAmount: "#30,000",
   },
 ];
+export const LeaveDetailsList = [
+  {
+    id: "1",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "2",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "3",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "4",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "5",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+]
 export const leaveList = [
   {
     id: "1",
