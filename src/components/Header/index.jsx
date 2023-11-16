@@ -26,8 +26,6 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconAlignLeft } from "@tabler/icons-react";
-import { IconBell } from "@tabler/icons-react";
 import EmployeeProfile from "@/app/employee/components/EmployeeProfile";
 
 const data = [
