@@ -1,4 +1,4 @@
-import VacancyWrap from "./VacancyWrap";
+import VacancyWrap from "./vacancyWrap";
 import React from "react";
 
 const Vacancies = () => {
