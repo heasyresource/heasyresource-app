@@ -15,17 +15,13 @@ const AddCandidatePage = () => {
           margin: "0px",
         }}
       >
-        <CardSection
-          pt="25px"
-          pb="55px"
-          style={{ borderBottom: "1px solid #DDDDDD" }}
-        >
+        <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
           <HiringNav tabTitle="Hiring" />
         </CardSection>
         <AddCandidate />
       </Card>
     </>
-  )
+  );
 };
 
 export default AddCandidatePage;

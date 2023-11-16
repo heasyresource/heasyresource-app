@@ -1,204 +1,297 @@
 "use client";
 import {
-  ActionIcon,
-  Box,
   Button,
-  FileInput,
-  Flex,
   Grid,
   GridCol,
   Group,
+  Loader,
   Modal,
   Select,
-  Stack,
   Switch,
   Text,
   TextInput,
-  Textarea,
 } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
-import { IconEdit } from "@tabler/icons-react";
-import { useAssignLeave } from "@/hooks";
-import { useDisclosure } from "@mantine/hooks";
+import { RichTextEditor } from "@mantine/tiptap";
 
-const AddVacancyModal = ({ isOpen, onClose }) => {
-  const [value, setValue] = useState([]);
-  const { form, handleSubmit } = useAssignLeave();
+const AddVacancyModal = ({
+  isOpen,
+  onClose,
+  employmentType,
+  categories,
+  handleVacancySubmit,
+  vacancyForm,
+  loading,
+  rteError,
+  editor,
+}) => {
+  useEffect(() => {
+    if (loading) {
+      editor?.setOptions({ editable: false });
+    }
+    //eslint-disable-next-line
+  }, [loading]);
 
   return (
     <Modal
       opened={isOpen}
       onClose={onClose}
-      title="This is a fullscreen modal"
-      size="70%"
-      radius={15}
-      shadow="sm"
+      withCloseButton={false}
+      closeOnClickOutside={false}
+      size="xl"
+      centered
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
     >
-      <Box px={72} pt={30}>
-        <Text
-          tt={"capitalize"}
-          style={{
-            fontSize: "22px",
-            fontWeight: 700,
-          }}
+      <Text
+        tt={"capitalize"}
+        style={{
+          fontSize: "22px",
+          fontWeight: 700,
+        }}
+      >
+        Add Vacancy
+      </Text>
+      <form
+        onSubmit={vacancyForm?.onSubmit((values) => {
+          handleVacancySubmit(values);
+        })}
+      >
+        <Grid
+          gutter="xl"
+          style={{ margin: "20px 0", maxHeight: "400px", overflowY: "scroll" }}
         >
-          Add Vacancy
-        </Text>
-        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-          <Stack gap={"2rem"}>
-            <Grid gutter="xl" className={classes.formWrap}>
-              <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  required
-                  label="Vacancy Name"
-                  placeholder="Marketing"
-                  style={{ width: "100%" }}
-                  classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                  }}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>
-                <Select
-                  size="md"
-                  required
-                  label="Employment Type"
-                  style={{ width: "100%" }}
-                  placeholder="Gbemisola Adebiyi"
-                  data={["Gbemisola Adebiyi"]}
-                  classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                  }}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 9, md: 6, sm: 12 }}>
-                <Textarea
-                  // placeholder="Autosize with no rows limit"
-                  required
-                  label="Description"
-                  minRows={2}
-                  classNames={{
-                    wrapper: classes.vacancyTextArea,
-                  }}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  required
-                  label="Hiring Manager"
-                  placeholder="odebiyi@gmail.cosm"
-                  style={{ width: "100%" }}
-                  classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                  }}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  required
-                  label="Number of Positions"
-                  style={{ width: "100%" }}
-                  placeholder="odebiyi@gmail.com"
-                  classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                  }}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 12, md: 6, sm: 12 }}>
-                <Flex direction={"column"}>
-                  <Switch.Group value={value} onChange={setValue}>
-                    <Switch
-                      size="md"
-                      labelPosition="left"
-                      value="Active"
-                      label="Active"
-                      classNames={{
-                        label: classes.switchLabel,
-                        error: classes.error,
-                        placeholder: classes.placeholder,
-                      }}
-                    />
-                    <Switch
-                      size="md"
-                      labelPosition="left"
-                      value="Publish on the Web"
-                      label="Publish on the Web"
-                      classNames={{
-                        label: classes.switchLabel,
-                        error: classes.error,
-                        placeholder: classes.placeholder,
-                      }}
-                    />
-                  </Switch.Group>
-                </Flex>
-              </GridCol>
-              <GridCol span={{ lg: 11, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  leftSection={"Web Page URL:"}
-                  leftSectionWidth={150}
-                  placeholder="https://www.heasyresource.com/careers/engineering/positions/senior-software-engineer"
-                  rightSection={<IconEdit color="#3377FF" />}
-                  classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                    wrapper: classes.wrapper,
-                    section: classes.section,
-                  }}
-                />
-              </GridCol>
-            </Grid>
+          <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+            <TextInput
+              size="md"
+              withAsterisk
+              label="Job Title"
+              placeholder="Marketing"
+              style={{ width: "100%" }}
+              classNames={{
+                label: classes.label,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              {...vacancyForm?.getInputProps("title")}
+              disabled={loading}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+            <Select
+              size="md"
+              withAsterisk
+              label="Job Category"
+              style={{ width: "100%" }}
+              data={categories}
+              classNames={{
+                label: classes.label,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              allowDeselect={false}
+              {...vacancyForm?.getInputProps("jobCategoryId")}
+              disabled={loading}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <Select
+              size="md"
+              withAsterisk
+              label="Employment Type"
+              style={{ width: "100%" }}
+              data={employmentType}
+              classNames={{
+                label: classes.label,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              allowDeselect={false}
+              {...vacancyForm?.getInputProps("employmentTypeId")}
+              disabled={loading}
+            />
+          </GridCol>
+          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+            <Select
+              size="md"
+              withAsterisk
+              label="Work Mode"
+              style={{ textAlign: "start", width: "100%" }}
+              data={["On-Site", "Hybrid", "Remote"]}
+              classNames={{ label: classes.label, error: classes.error }}
+              allowDeselect={false}
+              {...vacancyForm?.getInputProps("workMode")}
+              disabled={loading}
+            />
+          </Grid.Col>
+          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+            <TextInput
+              size="md"
+              withAsterisk
+              label="Location"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...vacancyForm?.getInputProps("location")}
+              disabled={loading}
+            />
+          </Grid.Col>
+          <GridCol span={12}>
+            <RichTextEditor editor={editor}>
+              <RichTextEditor.Toolbar sticky stickyOffset={60}>
+                <RichTextEditor.ControlsGroup>
+                  <RichTextEditor.Bold />
+                  <RichTextEditor.Italic />
+                  <RichTextEditor.Underline />
+                  <RichTextEditor.Strikethrough />
+                  <RichTextEditor.ClearFormatting />
+                  <RichTextEditor.Highlight />
+                  <RichTextEditor.Code />
+                </RichTextEditor.ControlsGroup>
 
-            <Group
-              justify="flex-end"
-              className={classes.btnWrap}
-              align="center"
-              mt={"auto"}
-            >
-              <Button
-                variant="outline"
-                size="md"
-                color="#3377FF"
-                style={{ borderColor: "#3377FF" }}
-                tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
-              >
-                cancel
-              </Button>
-              <Button
-                variant="contained"
-                size="md"
-                color="#3377FF"
-                tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
-                type="submit"
-                style={{
-                  backgroundColor: "#3377FF",
-                }}
-              >
-                save
-              </Button>
-            </Group>
-          </Stack>
-        </form>
-      </Box>
+                <RichTextEditor.ControlsGroup>
+                  <RichTextEditor.H1 />
+                  <RichTextEditor.H2 />
+                  <RichTextEditor.H3 />
+                  <RichTextEditor.H4 />
+                </RichTextEditor.ControlsGroup>
+
+                <RichTextEditor.ControlsGroup>
+                  <RichTextEditor.Blockquote />
+                  <RichTextEditor.Hr />
+                  <RichTextEditor.BulletList />
+                  <RichTextEditor.OrderedList />
+                  <RichTextEditor.Subscript />
+                  <RichTextEditor.Superscript />
+                </RichTextEditor.ControlsGroup>
+
+                <RichTextEditor.ControlsGroup>
+                  <RichTextEditor.Link />
+                  <RichTextEditor.Unlink />
+                </RichTextEditor.ControlsGroup>
+
+                <RichTextEditor.ControlsGroup>
+                  <RichTextEditor.AlignLeft />
+                  <RichTextEditor.AlignCenter />
+                  <RichTextEditor.AlignJustify />
+                  <RichTextEditor.AlignRight />
+                </RichTextEditor.ControlsGroup>
+              </RichTextEditor.Toolbar>
+
+              <RichTextEditor.Content />
+            </RichTextEditor>
+            {rteError && (
+              <Text style={{ color: "red", fontSize: "12px" }}>
+                Description is required
+              </Text>
+            )}
+          </GridCol>
+          <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+            <TextInput
+              size="md"
+              withAsterisk
+              label="Hiring Manager"
+              style={{ width: "100%" }}
+              classNames={{
+                label: classes.label,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              {...vacancyForm?.getInputProps("hiringManager")}
+              disabled={loading}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+            <TextInput
+              size="md"
+              withAsterisk
+              type="number"
+              label="Number of Positions"
+              style={{ width: "100%" }}
+              classNames={{
+                label: classes.label,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              {...vacancyForm?.getInputProps("numberOfPosition")}
+              disabled={loading}
+            />
+          </GridCol>
+          <GridCol span={12}>
+            <Switch
+              size="md"
+              labelPosition="left"
+              {...vacancyForm?.getInputProps("isActive")}
+              defaultChecked={vacancyForm?.values.isActive}
+              label="Active"
+              classNames={{
+                label: classes.switchLabel,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              disabled={loading}
+            />
+
+            <Switch
+              size="md"
+              labelPosition="left"
+              defaultChecked={vacancyForm?.values.isPublished}
+              {...vacancyForm?.getInputProps("isPublished")}
+              label="Publish on the Web"
+              classNames={{
+                label: classes.switchLabel,
+                error: classes.error,
+                placeholder: classes.placeholder,
+              }}
+              disabled={loading}
+            />
+          </GridCol>
+        </Grid>
+
+        <Group
+          justify="flex-end"
+          className={classes.btnWrap}
+          align="center"
+          mt={"auto"}
+        >
+          <Button
+            variant="outline"
+            size="md"
+            color="#3377FF"
+            style={{ borderColor: "#3377FF" }}
+            tt="capitalize"
+            px="50px"
+            w={{ lg: "auto", md: "auto", sm: "auto" }}
+            className={classes.btn}
+            onClick={() => {
+              onClose();
+              vacancyForm?.reset();
+              editor?.commands.setContent("");
+            }}
+            disabled={loading}
+          >
+            cancel
+          </Button>
+          <Button
+            variant="contained"
+            size="md"
+            color="#3377FF"
+            tt="capitalize"
+            px="50px"
+            w={{ lg: "auto", md: "auto", sm: "auto" }}
+            className={classes.btn}
+            type="submit"
+            style={{
+              backgroundColor: "#3377FF",
+            }}
+            disabled={loading}
+          >
+            {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
+          </Button>
+        </Group>
+      </form>
     </Modal>
   );
 };

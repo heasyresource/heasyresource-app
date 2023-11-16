@@ -23,8 +23,8 @@ const useAddLeaveType = () => {
   const [leaveTypes, setLeavesTypes] = useState(null);
   const [employeeLeave, setEmployeeLeave] = useState(null);
   const [leaveTypepagination, setLeaveTypePagination] = useState(null);
-  const [gettingLeaveType, setGettingLeaveType] = useState(false);
-  const [gettingData, setGettingData] = useState(false);
+  const [gettingLeaveType, setGettingLeaveType] = useState(true);
+  const [gettingData, setGettingData] = useState(true);
   const [itemID, setItemID] = useState("");
   const [leavePagination, setLeavePagination] = useState(null);
   const form = useForm({
@@ -38,6 +38,14 @@ const useAddLeaveType = () => {
       name: (val) => (!val.length ? "Leave Type is required" : null),
       availability: (val) => (!val.length ? "Availability is required" : null),
       isPaid: (val) => (!val.length ? "Select option" : null),
+    },
+  });
+  const rejectForm = useForm({
+    initialValues: {
+      reasonForRejection: "",
+    },
+    validate: {
+      reasonForRejection: (val) => (!val.length ? "Field is required" : null),
     },
   });
 
@@ -150,6 +158,68 @@ const useAddLeaveType = () => {
       }
     }
   };
+  const handleReject = async (data) => {
+    setLoading(true);
+    try {
+      if (itemID.length !== 0) {
+        const response = await apiClient.put(
+          `/employee/leaves/${itemID}/reject`,
+          data,
+          headerSettings
+        );
+        notifications.show({
+          color: "white",
+          title: "Success",
+          message: "Leave rejected successfully",
+          styles: successStyles,
+          autoClose: 7000,
+        });
+        setIsChanged(response);
+        setItemID("");
+        setLoading(false);
+        rejectForm.reset();
+      }
+    } catch (err) {
+      setItemID("");
+      setLoading(false);
+      if (err.statusCode >= 400) {
+        notifications.show({
+          color: "red",
+          message: "Something went wrong, please try again",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
+    }
+  };
+  const handleApprove = async () => {
+    try {
+      const response = await apiClient.put(
+        `/employee/leaves/${itemID}/approve`,
+        null,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Leave approved successfully",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      setIsChanged(response);
+      setItemID("");
+    } catch (err) {
+      setItemID("");
+      if (err.statusCode >= 400) {
+        notifications.show({
+          color: "red",
+          message: "Something went wrong, please try again",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
+    }
+  };
   const paginate = (page) => {
     const params = new URLSearchParams(searchParams);
     if (page) {
@@ -174,12 +244,6 @@ const useAddLeaveType = () => {
       setGettingLeaveType(false);
     } catch (err) {
       setGettingLeaveType(false);
-      // notifications.show({
-      //   color: "red",
-      //   message: "Something went wrong, please try again.",
-      //   styles: errorStyles,
-      //   autoClose: 7000,
-      // });
     }
   };
   const getEmployeeLeaves = async (params = "") => {
@@ -203,11 +267,14 @@ const useAddLeaveType = () => {
   useEffect(() => {
     getLeaveTypes();
     getEmployeeLeaves();
+    //eslint-disable-next-line
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
       getLeaveTypes();
+      getEmployeeLeaves();
     }
+    //eslint-disable-next-line
   }, [isChanged]);
   return {
     form,
@@ -229,6 +296,9 @@ const useAddLeaveType = () => {
     leavePagination,
     paginate,
     employeeLeave,
+    handleReject,
+    handleApprove,
+    rejectForm,
   };
 };
 

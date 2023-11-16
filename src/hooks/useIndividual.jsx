@@ -137,12 +137,13 @@ const useIndividual = () => {
       };
       handleEmployee();
     }
+    //eslint-disable-next-line
   }, [response]);
 
   useEffect(() => {
     getDepartments();
+    //eslint-disable-next-line
   }, []);
-  console.log(logo, "jdjdjdj");
   return {
     form,
     handleSubmit,

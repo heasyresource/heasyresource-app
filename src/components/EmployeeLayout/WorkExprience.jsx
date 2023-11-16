@@ -20,7 +20,7 @@ import {
 import classes from "./employeeLayout.module.css";
 import { DateInput } from "@mantine/dates";
 import { IconEdit } from "@tabler/icons-react";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   calculateDateDifference,
   formatMonthYear,
@@ -41,6 +41,7 @@ const WorkExprience = ({
   setExpId,
   handleEditExp,
 }) => {
+  const currentDate = new Date();
   const handleEdit = (data) => {
     setExpId(data.id);
     experienceForm?.setValues({
@@ -56,6 +57,14 @@ const WorkExprience = ({
     });
     openEditExp();
   };
+  useEffect(() => {
+    if (experienceForm?.values.isPresent) {
+      experienceForm?.setValues({
+        endDate: "",
+      });
+    }
+  }, [experienceForm]);
+
   return (
     <>
       <Box>
@@ -89,8 +98,18 @@ const WorkExprience = ({
             {workExp?.map((item) => (
               <Box key={item.companyName}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
-                  <Box style={{ width: "45px", height: "45px" }}>
-                    <Image src={"/assets/images/workExprience.png"} />
+                  <Box
+                    style={{
+                      width: "100%",
+                      maxWidth: "45px",
+                      maxHeight: "45px",
+                      height: "100%",
+                    }}
+                  >
+                    <Image
+                      src={"/assets/images/workExprience.png"}
+                      alt="work"
+                    />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>
@@ -134,7 +153,7 @@ const WorkExprience = ({
                     )} ${calculateDateDifference(
                       item.startDate,
                       item.endDate
-                    )} ${item.isPresent === 1 && "· present"}`}</Text>
+                    )} ${item.isPresent === 1 ? "· present" : ""}`}</Text>
                     <Text
                       style={{
                         fontSize: "14px",
@@ -164,6 +183,7 @@ const WorkExprience = ({
         title="Add Work Experience"
         size="xl"
         closeOnClickOutside={false}
+        withCloseButton={false}
         centered
         opened={openedExp}
         onClose={closeExp}
@@ -220,7 +240,7 @@ const WorkExprience = ({
                 allowDeselect={false}
               />
             </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+            <Grid.Col span={{ lg: 6, md: 6, sm: 12 }}>
               <Select
                 size="md"
                 withAsterisk
@@ -233,7 +253,7 @@ const WorkExprience = ({
                 allowDeselect={false}
               />
             </Grid.Col>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
                 withAsterisk
@@ -257,28 +277,33 @@ const WorkExprience = ({
                 label="I currently work here"
               />
             </GridCol>
-            <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
+            <Grid.Col span={{ lg: 6, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="Start Date"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...experienceForm?.getInputProps("startDate")}
                 disabled={loading}
+                maxDate={currentDate}
               />
             </Grid.Col>
-            <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
+            <Grid.Col span={{ lg: 6, md: 6, sm: 12 }}>
               <DateInput
-                clearable
                 size="md"
                 withAsterisk
                 label="End Date"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...experienceForm?.getInputProps("endDate")}
-                disabled={loading || experienceForm.values.isPresent}
+                disabled={
+                  loading ||
+                  experienceForm.values.isPresent ||
+                  experienceForm?.values.startDate?.length === 0
+                }
+                minDate={experienceForm?.values.startDate}
+                maxDate={currentDate}
               />
             </Grid.Col>
             <Grid.Col span={12}>
@@ -288,6 +313,8 @@ const WorkExprience = ({
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
                 {...experienceForm?.getInputProps("description")}
+                minRows={2}
+                autosize
               />
             </Grid.Col>
           </Grid>
@@ -307,7 +334,10 @@ const WorkExprience = ({
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
-              onClick={closeExp}
+              onClick={() => {
+                closeExp();
+                experienceForm?.reset();
+              }}
               disabled={loading}
             >
               cancel
@@ -339,6 +369,7 @@ const WorkExprience = ({
         title="Edit Work Experience"
         size="xl"
         closeOnClickOutside={false}
+        withCloseButton={false}
         centered
         opened={openedEditExp}
         onClose={closeEditExp}
@@ -380,7 +411,7 @@ const WorkExprience = ({
                 disabled={loading}
               />
             </GridCol>
-            <Grid.Col span={{ lg: 6, md: 6, sm: 12 }}>
+            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
               <Select
                 data={employmentType}
                 size="md"
@@ -433,7 +464,6 @@ const WorkExprience = ({
             <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
               <DateInput
                 size="md"
-                clearable
                 withAsterisk
                 label="Start Date"
                 style={{ textAlign: "start", width: "100%" }}
@@ -444,7 +474,6 @@ const WorkExprience = ({
             </Grid.Col>
             <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
               <DateInput
-                clearable
                 size="md"
                 withAsterisk
                 label="End Date"
@@ -483,7 +512,10 @@ const WorkExprience = ({
               px="50px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
-              onClick={closeEditExp}
+              onClick={() => {
+                closeEditExp();
+                experienceForm?.reset();
+              }}
               disabled={loading}
             >
               cancel

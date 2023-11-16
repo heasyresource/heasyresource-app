@@ -6,17 +6,12 @@ import {
   MenuDropdown,
   MenuItem,
   MenuTarget,
-  Space,
   Text,
 } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import React from "react";
 import classes from "../CompensationLayout/Compensation.module.css";
-import {
-  IconChevronDown,
-  IconWalletOff,
-  IconZoomMoney,
-} from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 
 const CompensationNav = ({ tabTitle }) => {
   const pathname = usePathname();
@@ -33,7 +28,8 @@ const CompensationNav = ({ tabTitle }) => {
           data-active={
             "/dashboard/compensation" === pathname ||
             "/dashboard/compensation/employee-payslip" === pathname ||
-           undefined}
+            undefined
+          }
           className={classes.btnLink}
           variant="filled"
         >
@@ -46,10 +42,7 @@ const CompensationNav = ({ tabTitle }) => {
           variant="filled"
           className={classes.btnLink}
           data-active={
-            "/dashboard/compensation/add-payroll" === pathname ||
-            // "/dashboard/employee/add-employee/individual" === pathname ||
-            // "/dashboard/employee/add-employee/bulk" === pathname ||
-            undefined
+            "/dashboard/compensation/add-payroll" === pathname || undefined
           }
         >
           Add Payroll
@@ -79,7 +72,6 @@ const CompensationNav = ({ tabTitle }) => {
               fz="xs"
               component="a"
               className={classes.activeConfig}
-              leftSection={<IconZoomMoney size="1rem" color="#3377FF" />}
               data-active={
                 "/dashboard/compensation/earnings" === pathname || undefined
               }
@@ -91,7 +83,6 @@ const CompensationNav = ({ tabTitle }) => {
               fz="xs"
               component="a"
               className={classes.activeConfig}
-              leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
               data-active={
                 "/dashboard/compensation/deductions" === pathname || undefined
               }

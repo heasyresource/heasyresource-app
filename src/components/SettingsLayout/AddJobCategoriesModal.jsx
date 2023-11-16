@@ -5,88 +5,63 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Modal,
-  Select,
   Stack,
-  Switch,
   Text,
   TextInput,
-  Textarea,
 } from "@mantine/core";
-import React, { useState } from "react";
+import React from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
-import { useAssignLeave } from "@/hooks";
 
-const AddJobCategoriesModal = ({ isOpen, onClose }) => {
-  const [value, setValue] = useState([]);
-  const { form, handleSubmit } = useAssignLeave();
-
+const AddJobCategoriesModal = ({
+  isOpen,
+  onClose,
+  form,
+  handleSubmit,
+  loading,
+}) => {
   return (
     <Modal
       opened={isOpen}
       onClose={onClose}
-      title="This is a fullscreen modal"
-      size="auto"
-      radius={15}
+      withCloseButton={false}
+      closeOnClickOutside={false}
+      size="lg"
       shadow="sm"
+      centered
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
     >
-      <Box px={30} pt={30}>
+      <Box>
         <Text
-          tt={"capitalize"}
           style={{
             fontSize: "22px",
             fontWeight: 700,
           }}
         >
-          Add Job Categories
+          Add Job Category
         </Text>
-        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <form onSubmit={form?.onSubmit((values) => handleSubmit(values))}>
           <Stack gap={"2rem"}>
             <Grid gutter="xl" className={classes.formWrap}>
               <GridCol span={{ lg: 12, md: 12, sm: 12 }}>
                 <TextInput
                   size="md"
-                  required
+                  withAsterisk
                   label="Job Category"
-                  //   placeholder="Marketing"
+                  {...form?.getInputProps("name")}
                   style={{ width: "100%" }}
                   classNames={{
                     label: classes.label,
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}
+                  disabled={loading}
                 />
               </GridCol>
-              {/* <GridCol span={{ lg: 12, md: 12, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  required
-                  label="Job Description"
-                  style={{ width: "100%" }}
-                  //   placeholder="2.8%"
-                  data={["Gbemisola Adebiyi"]}
-                  classNames={{
-                    label: classes.label,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                  }}
-                />
-              </GridCol>
-              <GridCol>
-                <Textarea
-                  size="md"
-                  required
-                //   variant="filled"
-                  label="Note"
-                  style={{ width: "100%" }}
-                  classNames={{
-                    label: classes.label,
-                    //   input: classes.input,
-                    error: classes.error,
-                    placeholder: classes.placeholder,
-                  }}
-                />
-              </GridCol> */}
             </Grid>
             <Group
               justify="flex-end"
@@ -100,26 +75,31 @@ const AddJobCategoriesModal = ({ isOpen, onClose }) => {
                 color="#3377FF"
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
-                px="50px"
                 w={{ lg: "auto", md: "auto", sm: "auto" }}
                 className={classes.btn}
+                disabled={loading}
+                onClick={onClose}
               >
-                back
+                cancel
               </Button>
               <Button
                 variant="contained"
                 size="md"
                 color="#3377FF"
                 tt="capitalize"
-                px="50px"
                 w={{ lg: "auto", md: "auto", sm: "auto" }}
                 className={classes.btn}
                 type="submit"
                 style={{
                   backgroundColor: "#3377FF",
                 }}
+                disabled={loading}
               >
-                continue
+                {loading ? (
+                  <Loader color="white" type="dots" size="md" />
+                ) : (
+                  "add"
+                )}
               </Button>
             </Group>
           </Stack>

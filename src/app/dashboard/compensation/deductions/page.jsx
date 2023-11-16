@@ -46,11 +46,7 @@ const Deductions = () => {
           margin: "0px",
         }}
       >
-        <CardSection
-          pt="25px"
-          pb="55px"
-          style={{ borderBottom: "1px solid #DDDDDD" }}
-        >
+        <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
           <CompensationNav tabTitle={"Compensation"} />
         </CardSection>
         <Group gap={30} px={40} py={45}>

@@ -1,6 +1,6 @@
 "use client";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { successStyles } from "@/utils/notificationTheme";
+import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import {
   convertDateFormat,
   getSubdomain,
@@ -73,7 +73,7 @@ const useSingleEmployee = () => {
       maritalStatus: (value) =>
         !value.length ? "Marital Status is required" : null,
       dateOfBirth: (value) =>
-        value.length === 0 ? "Date of Birth is required" : null,
+        value?.length === 0 ? "Date of Birth is required" : null,
       gender: (value) => (!value.length ? "Gender is required" : null),
     },
   });
@@ -168,12 +168,12 @@ const useSingleEmployee = () => {
         !value.length ? "Company Name is required" : null,
       position: (val) => (!val.length ? "Position is required" : null),
 
-      startDate: (val) => (val.length === 0 ? "Start Date is required" : null),
+      startDate: (val) => (val?.length === 0 ? "Start Date is required" : null),
 
       endDate: (val, values) =>
         values.isPresent
           ? null
-          : val.length === 0
+          : val?.length === 0
           ? "End Date is required"
           : null,
       location: (val) => (!val.length ? "Company Location is required" : null),
@@ -264,6 +264,15 @@ const useSingleEmployee = () => {
           personalForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
       setLoading(false);
     }
   };
@@ -306,6 +315,15 @@ const useSingleEmployee = () => {
           contactForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
     }
   };
   const handleEmergencySubmit = async (data) => {
@@ -340,6 +358,15 @@ const useSingleEmployee = () => {
           emergencyForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
       setLoading(false);
     }
   };
@@ -372,6 +399,15 @@ const useSingleEmployee = () => {
           const { field, message } = error;
 
           employmentInfoForm.setFieldError(field, message);
+        });
+      }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
         });
       }
     }
@@ -412,6 +448,15 @@ const useSingleEmployee = () => {
           experienceForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
     }
   };
   const handleEduSubmit = async (data) => {
@@ -447,6 +492,15 @@ const useSingleEmployee = () => {
           educationForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
     }
   };
   const handleLicenseSubmit = async (data) => {
@@ -454,7 +508,10 @@ const useSingleEmployee = () => {
     const modifiedValues = {
       ...data,
       issueDate: convertDateFormat(data.issueDate),
-      expirationDate: convertDateFormat(data.expirationDate),
+      expirationDate:
+        data.expirationDate.length !== 0
+          ? convertDateFormat(data.expirationDate)
+          : "",
     };
     try {
       const response = await apiClient.post(
@@ -480,6 +537,15 @@ const useSingleEmployee = () => {
           const { field, message } = error;
 
           licenseForm.setFieldError(field, message);
+        });
+      }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
         });
       }
     }
@@ -521,6 +587,15 @@ const useSingleEmployee = () => {
           experienceForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
     }
   };
   const handleEditEdu = async (data) => {
@@ -557,6 +632,15 @@ const useSingleEmployee = () => {
           educationForm.setFieldError(field, message);
         });
       }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
+        });
+      }
     }
   };
   const handleEditLicense = async (data) => {
@@ -564,7 +648,10 @@ const useSingleEmployee = () => {
     const modifiedValues = {
       ...data,
       issueDate: convertDateFormat(data.issueDate),
-      expirationDate: convertDateFormat(data.expirationDate),
+      expirationDate:
+        data.expirationDate.length !== 0
+          ? convertDateFormat(data.expirationDate)
+          : "",
     };
     try {
       const response = await apiClient.put(
@@ -591,6 +678,15 @@ const useSingleEmployee = () => {
           const { field, message } = error;
 
           licenseForm.setFieldError(field, message);
+        });
+      }
+      if (err.statusCode === 500) {
+        notifications.show({
+          color: "white",
+          title: "Failed",
+          message: "Something went wrong, please try again.",
+          styles: errorStyles,
+          autoClose: 7000,
         });
       }
     }
@@ -719,24 +815,28 @@ const useSingleEmployee = () => {
   };
 
   useEffect(() => {
-    if (contactForm.values.stateId.length !== 0) {
+    if (contactForm.values.stateId?.length !== 0) {
       setIsEmpty(false);
       const filteredItems = LGA?.filter(
-        (item) => item.stateId === contactForm.values.stateId
+        (item) => item.stateId === contactForm.values?.stateId
       );
       setLGA(filteredItems);
     }
+    //eslint-disable-next-line
   }, [contactForm.values.stateId]);
   useEffect(() => {
     if (isSubmitted !== null) {
       getEmployee();
     }
+    //eslint-disable-next-line
   }, [isSubmitted]);
 
   useEffect(() => {
     getMetadata();
     getEmployee();
     getDepartments();
+
+    //eslint-disable-next-line
   }, []);
   return {
     loading,

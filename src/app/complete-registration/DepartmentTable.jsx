@@ -102,6 +102,7 @@ export default function DepartmentTable({
         </Button>
         <Modal
           closeOnClickOutside={false}
+          withCloseButton={false}
           centered
           overlayProps={{
             backgroundOpacity: 0.55,
@@ -109,7 +110,6 @@ export default function DepartmentTable({
           }}
           opened={opened}
           onClose={close}
-          title="Focus demo"
         >
           <Paper p={20}>
             <TextInput

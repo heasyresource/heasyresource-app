@@ -7,23 +7,23 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Select,
-  SimpleGrid,
   Stack,
   Switch,
   Text,
   TextInput,
-  Textarea,
 } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
-import { useAssignLeave } from "@/hooks";
-import { IconDownload } from "@tabler/icons-react";
+import { IconArrowUp } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
-const CandidateProfile = () => {
-  const { form, handleSubmit } = useAssignLeave();
+const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const router = useRouter();
   return (
-    <Box px={72} pt={30}>
+    <Box pt={30}>
       <Group justify="space-between">
         <Text
           tt={"capitalize"}
@@ -35,6 +35,8 @@ const CandidateProfile = () => {
           Candidate Profile
         </Text>
         <Switch
+          checked={isEdit}
+          onChange={(e) => setIsEdit(e.currentTarget.checked)}
           labelPosition="left"
           label="Edit"
           classNames={{
@@ -42,160 +44,221 @@ const CandidateProfile = () => {
           }}
         />
       </Group>
-      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+      <form
+        style={{ marginTop: "1.5rem" }}
+        onSubmit={form.onSubmit((values) => handleEdit(values))}
+      >
         <Stack gap={"2rem"}>
-          <Grid
-            gutter={{lg: 'xl', sm: '2xl'}}
-            justify="flex-start"
-            className={classes.formWrap}
-            p={20}
-          >
+          <Grid gutter="xl" justify="flex-start" className={classes.formWrap}>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                variant="filled"
-                value={"Kenechukwu Okafor"}
+                withAsterisk
                 label="First Name"
-                placeholder="Oludare"
+                placeholder="John"
                 style={{ width: "100%" }}
                 classNames={{
                   label: classes.label,
-                  //   input: classes.input,
                   error: classes.error,
-                  placeholder: classes.placeholder,
                 }}
+                {...form.getInputProps("firstName")}
+                disabled={loading || isEdit}
               />
             </GridCol>
+
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                variant="filled"
-                value={"Front End Developer"}
-                label="Middle Name"
-                style={{ width: "100%" }}
-                placeholder="Amope"
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"Jadesola Lawal"}
+                withAsterisk
                 label="Last Name"
                 style={{ width: "100%" }}
-                placeholder="Adeshewa"
+                placeholder="Alli"
                 classNames={{
                   label: classes.label,
-                  //   input: classes.input,
                   error: classes.error,
-                  placeholder: classes.placeholder,
                 }}
+                {...form.getInputProps("lastName")}
+                disabled={loading || isEdit}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
+                disabled={loading || isEdit}
                 size="md"
-                variant="filled"
-                value={"Junior HR Manager"}
-                label="Vacancy"
-                style={{ width: "100%" }}
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"02-10-2023"}
-                label="Date of Application"
-                style={{ width: "100%" }}
-                placeholder="Amope"
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"oludareshewa@gmail.com"}
+                withAsterisk
                 label="Email"
                 style={{ width: "100%" }}
-                placeholder="Adeshewa"
+                {...form.getInputProps("email")}
                 classNames={{
                   label: classes.label,
-                  //   input: classes.input,
                   error: classes.error,
-                  placeholder: classes.placeholder,
                 }}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
+                disabled={loading || isEdit}
                 size="md"
-                variant="filled"
-                value={"oludareshewa@gmail.com"}
-                label="Email"
-                style={{ width: "100%" }}
-                placeholder="Adeshewa"
-                classNames={{
-                  label: classes.label,
-                  //   input: classes.input,
-                  error: classes.error,
-                  placeholder: classes.placeholder,
-                }}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                variant="filled"
-                value={"+234 000 000 0000"}
+                withAsterisk
+                type="number"
                 label="Phone Number"
                 style={{ width: "100%" }}
-                placeholder="Adeshewa"
+                placeholder="700 000 0000"
+                {...form.getInputProps("phoneNumber")}
                 classNames={{
                   label: classes.label,
-                  //   input: classes.input,
                   error: classes.error,
-                  placeholder: classes.placeholder,
+                }}
+                leftSectionWidth={50}
+                leftSection={"+234"}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                withAsterisk
+                label="Address"
+                style={{ width: "100%" }}
+                {...form.getInputProps("address")}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                }}
+                disabled={loading || isEdit}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                withAsterisk
+                label="City"
+                style={{ width: "100%" }}
+                {...form.getInputProps("city")}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                }}
+                disabled={loading || isEdit}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <Select
+                size="md"
+                withAsterisk
+                label="State"
+                style={{ width: "100%" }}
+                data={states}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                }}
+                allowDeselect={false}
+                {...form.getInputProps("stateId")}
+                disabled={loading || isEdit}
+                searchable
+                nothingFoundMessage="No state found"
+              />
+            </GridCol>
+            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+              <Select
+                size="md"
+                withAsterisk
+                label="Country"
+                style={{ width: "100%" }}
+                data={countries}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                }}
+                allowDeselect={false}
+                {...form.getInputProps("countryId")}
+                disabled={loading || isEdit}
+                searchable
+                nothingFoundMessage="No country found"
+              />
+            </GridCol>
+
+            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+              <FileInput
+                required
+                disabled={loading || isEdit}
+                label="Select File"
+                withAsterisk
+                placeholder="No file selected"
+                variant="filled"
+                size="md"
+                leftSectionWidth={140}
+                accept=".pdf, .doc, .docx"
+                {...form.getInputProps("resumeUrl")}
+                leftSection={
+                  <Button
+                    disabled
+                    style={{
+                      textTransform: "capitalize",
+                      backgroundColor: "#fff",
+                    }}
+                  >
+                    browse file
+                  </Button>
+                }
+                rightSection={
+                  <ActionIcon
+                    disabled
+                    size={"md"}
+                    color="#fff"
+                    style={{ backgroundColor: "#fff" }}
+                  >
+                    <IconArrowUp color="#817F7F" />
+                  </ActionIcon>
+                }
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
                 }}
               />
             </GridCol>
-            <GridCol>
-              <Box>
-                <Text fz={15} pb={10}>
-                  Resume
-                </Text>
-                <Button
-                  variant="contained"
-                  px={"30px"}
-                  size="lg"
-                  leftSection={<IconDownload size={28} />}
-                  style={{
-                    backgroundColor: "#3377FF",
-                  }}
-                >
-                  Download
-                </Button>
-              </Box>
-            </GridCol>
           </Grid>
+          <Group
+            justify="flex-end"
+            className={classes.btnWrap}
+            align="center"
+            mt={"2rem"}
+          >
+            <Button
+              variant="outline"
+              size="md"
+              color="#3377FF"
+              style={{ borderColor: "#3377FF" }}
+              tt="capitalize"
+              px="50px"
+              w={{ lg: "auto", md: "auto", sm: "auto" }}
+              className={classes.btn}
+              onClick={() => router.back()}
+              disabled={loading}
+            >
+              back
+            </Button>
+            <Button
+              variant="contained"
+              size="md"
+              color="#3377FF"
+              tt="capitalize"
+              px="50px"
+              w={{ lg: "auto", md: "auto", sm: "auto" }}
+              className={classes.btn}
+              type="submit"
+              style={{
+                backgroundColor: "#3377FF",
+              }}
+              disabled={loading || isEdit}
+            >
+              {loading ? (
+                <Loader color="white" type="dots" size="md" />
+              ) : (
+                "submit"
+              )}
+            </Button>
+          </Group>
         </Stack>
       </form>
     </Box>

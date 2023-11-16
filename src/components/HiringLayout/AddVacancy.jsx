@@ -17,8 +17,7 @@ import {
 } from "@mantine/core";
 import React, { useState } from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
-import { DateInput } from "@mantine/dates";
-import { IconArrowUp, IconCalendarBolt, IconEdit } from "@tabler/icons-react";
+import { IconEdit } from "@tabler/icons-react";
 import { useAssignLeave } from "@/hooks";
 
 const AddVacancy = () => {
@@ -36,9 +35,9 @@ const AddVacancy = () => {
         Add Vacancy
       </Text>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-        <Stack gap={"2rem"}>
+        <Stack gap={"1.5rem"}>
           <Grid
-            gutter="xl"
+            gutter="lg"
             // justify="space-between"
             className={classes.formWrap}
           >
@@ -72,10 +71,7 @@ const AddVacancy = () => {
               />
             </GridCol>
             <GridCol span={{ lg: 9, md: 6, sm: 12 }}>
-              <Textarea
-                style={{ height: "50% !important " }}
-                label="Notes/Comments"
-              />
+              <Textarea autosize minRows={4} label="Notes/Comments" />
             </GridCol>
             <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>
               <TextInput
