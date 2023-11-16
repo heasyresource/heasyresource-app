@@ -107,7 +107,7 @@ const useAddApplicant = () => {
         const modifiedValue = {
           ...form.values,
           phoneNumber: normalizePhoneNumber(form.values.phoneNumber),
-          resumeUrl: response1.data.url,
+          resumeUrl: response1.data.secure_url,
         };
         try {
           await apiClient.post(
@@ -162,7 +162,7 @@ const useAddApplicant = () => {
         try {
           const response = await apiClient.put(
             `/applicants/${slug}`,
-            { ...form.values, resumeUrl: response2.data.url },
+            { ...form.values, resumeUrl: response2.data.secure_url },
             headerSettings
           );
           notifications.show({

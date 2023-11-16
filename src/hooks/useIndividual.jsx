@@ -105,7 +105,7 @@ const useIndividual = () => {
         try {
           await apiClient.post(
             "employees",
-            { ...form.values, logoUrl: response?.data.url },
+            { ...form.values, logoUrl: response?.data.secure_url },
             headerSettings
           );
           notifications.show({
