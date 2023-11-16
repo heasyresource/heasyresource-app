@@ -111,6 +111,38 @@ export const formatMonthYear = (dateStr1, dateStr2) => {
     return `${formattedDate1} - ${formattedDate2}`;
   }
 };
+export const employeeCompensationList = [
+  {
+    grossSalary: "N906,345",
+    amountPaid: "N806,456",
+    date: "May 19, 2023",
+    status: "successful",
+  },
+  {
+    grossSalary: "N906,345",
+    amountPaid: "N806,456",
+    date: "May 19, 2023",
+    status: "successful",
+  },
+  {
+    grossSalary: "N906,345",
+    amountPaid: "N806,456",
+    date: "May 19, 2023",
+    status: "successful",
+  },
+  {
+    grossSalary: "N906,345",
+    amountPaid: "N806,456",
+    date: "May 19, 2023",
+    status: "successful",
+  },
+  {
+    grossSalary: "N906,345",
+    amountPaid: "N806,456",
+    date: "May 19, 2023",
+    status: "successful",
+  },
+];
 export const employeeList = [
   {
     id: "1",
@@ -244,6 +276,43 @@ export const DeductionsList = [
     unitAmount: "#30,000",
   },
 ];
+export const employeePaySlipList = [
+  {
+    id: "1",
+    name: "Base Salary",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "2",
+    name: "State Income Tax",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "3",
+    name: "Bonuses",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "4",
+    name: "Health Insurance Premiums",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+  {
+    id: "5",
+    name: "Health Insurance Premiums",
+    earnings: "#150,000",
+    deductions: "-",
+    unitAmount: "#30,000",
+  },
+];
 export const PaySlipList = [
   {
     id: "1",
@@ -281,6 +350,43 @@ export const PaySlipList = [
     unitAmount: "#30,000",
   },
 ];
+export const LeaveDetailsList = [
+  {
+    id: "1",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "2",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "3",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "4",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+  {
+    id: "5",
+    leaveType: "Maternity Leave",
+    entitledDays: "20days",
+    startDate: "Mon., 12th Jan. 2023",
+    endDate: "Mon., 12th Jan. 2023",
+  },
+]
 export const leaveList = [
   {
     id: "1",

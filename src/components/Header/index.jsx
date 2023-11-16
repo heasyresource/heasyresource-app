@@ -23,11 +23,11 @@ import {
   IconUserDollar,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
-import Profile from "../Profile";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconAlignLeft } from "@tabler/icons-react";
 import { IconBell } from "@tabler/icons-react";
+import EmployeeProfile from "@/app/employee/components/EmployeeProfile";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
@@ -99,8 +99,7 @@ const Header = ({ companyName, logo }) => {
                 <IconBell color="#3F3F3F" />
               </Indicator>
             </ActionIcon>
-
-            <Profile />
+            <EmployeeProfile />
           </Group>
         </Flex>
       </header>

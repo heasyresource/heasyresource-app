@@ -19,8 +19,6 @@ import {
 import classes from "../../../components/SettingsLayout/Settings.module.css";
 import React, { useState } from "react";
 import SettingsNav from "@/components/SettingsLayout/SettingsNav";
-import { IconBuilding, IconBuildingSkyscraper } from "@tabler/icons-react";
-import { IconDownload } from "@tabler/icons-react";
 import { AddComImg } from "@/components";
 import { useCompleteReg } from "@/hooks";
 
