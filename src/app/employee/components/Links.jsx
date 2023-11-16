@@ -23,6 +23,7 @@ const data = [
     link: "/employee/compensation",
     label: "Compensation",
     icon: IconUserDollar,
+    subLink: true,
   },
   {
     link: "/employee/calendar",

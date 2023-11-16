@@ -6,7 +6,7 @@ import LeaveDetailsTable from "../components/LeaveDetailsTable";
 
 const Leave = () => {
   return (
-    <Container className={classes.container} size="100%">
+    <Container className={classes.leaveContainer} size="100%">
       <div className={classes.inner}>
         <div className={classes.content}>
           <Grid justify="space-between" py={"2rem"} gutter={"lg"}>

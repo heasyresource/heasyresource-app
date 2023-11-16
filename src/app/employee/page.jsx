@@ -156,63 +156,12 @@ const Dashboard = async () => {
                     </Card>
                   </Paper>
                 </GridCol>
-                <GridCol span={{ base: 12, xs: "content" }}>
+                <GridCol span={{ base: 12, xs: 'content' }}>
                   <Paper radius={"md"} p={"20px"}>
                     <DatePicker type="multiple" />
                   </Paper>
                 </GridCol>
-                <GridCol span={{ base: 12, xs: "auto" }}>
-                  <Paper h={280.7} radius={"md"} p={"20px"}>
-                    <Group justify="space-between">
-                      <Text fw={500} fz={16}>
-                        Time at Work
-                      </Text>
-                      <Text fz={12} c={"#3F3F3F"}>
-                        Oct. 12th, 21:29 31/10/2023
-                      </Text>
-                    </Group>
-                    <div
-                      style={{
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      <div
-                        style={{
-                          transform: "rotate(-90deg)",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                        }}
-                      >
-                        <Progress
-                          style={{ width: "50%" }}
-                          color="cyan"
-                          size="xl"
-                          value={50}
-                        />
-                      </div>
-                    </div>
-                  </Paper>
-                </GridCol>
-                <GridCol span={{ base: 12, xs: 8 }}>
-                  <Paper
-                    bg={"#ffff"}
-                    style={{ borderRadius: "15px" }}
-                    py={20}
-                    h={280}
-                  >
-                    <Group px={20} pb={15} justify="space-between">
-                      <Text>Payment History</Text>
-                      <Link className={classes.detailsLink} href={"#"}>
-                        more details
-                      </Link>
-                    </Group>
-                    <PaymentTable />
-                  </Paper>
-                </GridCol>
-                <GridCol span={{ base: 12, xs: 4 }}>
+                <GridCol span={{ base: 12, xs: 'auto' }}>
                   <Paper style={{ borderRadius: "15px" }} p={20} h={280}>
                     <Text c={"#808080"}>Next Leave</Text>
                     <Space h={20} />
@@ -225,6 +174,22 @@ const Dashboard = async () => {
                     <Text c={"#2D2D2D"} fz={15} fw={700}>
                       28 Days
                     </Text>
+                  </Paper>
+                </GridCol>
+                <GridCol span={{ base: 12, xs: 12 }}>
+                  <Paper
+                    bg={"#ffff"}
+                    style={{ borderRadius: "15px" }}
+                    py={20}
+                    h={280}
+                  >
+                    <Group px={20} pb={15} justify="space-between">
+                      <Text>Payment History</Text>
+                      <Link className={classes.detailsLink} href={"/employee/compensation"}>
+                        more details
+                      </Link>
+                    </Group>
+                    <PaymentTable />
                   </Paper>
                 </GridCol>
               </Grid>

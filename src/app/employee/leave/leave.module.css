@@ -11,6 +11,13 @@
   background-color: #f8f9fa;
 }
 
+.leaveContainer {
+  height: 100vh;
+  background-color: #f8f9fa;
+  /* background-color: #ffff; */
+  border-radius: 15px;
+}
+
 .generalInfo {
   background-color: #ffff;
   padding: 30px 20px;
@@ -239,5 +246,3 @@
     width: 100%;
   }
 }
-
-

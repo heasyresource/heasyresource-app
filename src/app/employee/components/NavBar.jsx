@@ -14,7 +14,7 @@ const NavBar = () => {
           <Group justify="center" mt={35} mb={70}>
             <Logo h={35} />
           </Group>
-          <Box style={{ paddingRight: "25px", borderTop: "2px solid #EFEFEF" }}>
+          <Box style={{ paddingRight: "25px"}}>
             <Links />
           </Box>
         </div>

@@ -23,20 +23,22 @@ const EmployeePaySlipTable = ({ openEditModal }) => {
     <>
       <DataTable
         style={{ background: "none", marginTop: "1rem" }}
+        horizontalSpacing="xl"
         height={"auto"}
         withRowBorders={false}
         records={records}
         columns={[
-          {
-            accessor: "index",
-            title: "S/N",
-            textAlign: "center",
+          // {
+          //   accessor: "index",
+          //   title: "S/N",
+          //   textAlign: "center",
 
-            render: (record) => records.indexOf(record) + 1,
-          },
+          //   render: (record) => records.indexOf(record) + 1,
+          // },
           {
             accessor: "name",
-            textAlign: "center",
+            textAlign: "start",
+            // marginLeft: "40px",
             textTransform: "capitalize",
             noWrap: true,
           },
