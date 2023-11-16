@@ -3,8 +3,10 @@
 import { Card, CardSection, Space, Text } from "@mantine/core";
 import React from "react";
 import SettingsNav from "@/components/SettingsLayout/SettingsNav";
-
 import SettingWrap from "./settingWrap";
+import { AddComImg } from "@/components";
+import { useCompleteReg } from "@/hooks";
+
 
 const Settings = () => {
   return (

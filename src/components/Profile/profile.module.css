@@ -4,3 +4,13 @@
     display: none;
   }
 }
+
+.menuLink {
+  color: #424242;
+  &[data-active] {
+    &,
+    &:hover {
+      color: #3377ff;
+    }
+  }
+}
