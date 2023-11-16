@@ -1,6 +1,18 @@
 {
-  "version": 2,
-  "installOptions": {
-    "flags": ["--force"]
+    "version": 2,
+    "builds": [
+      {
+        "src": "./src",
+        "use": "@vercel/node" 
+      }
+    ],
+    "functions": {
+      "api/**/*.js": {
+        "runtime": "@vercel/node"
+      }
+    },
+    "installOptions": {
+      "flags": ["--force"] 
+    }
   }
-}
+  
