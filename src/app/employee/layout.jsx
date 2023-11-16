@@ -8,8 +8,8 @@ import { useState } from "react";
 import { Header } from "@/components";
 import NavBar from "./components/NavBar";
 import Main from "./components/Main";
-import Profile from "@/components/Profile";
 import { useDashboard } from "@/hooks";
+import EmployeeProfile from "./components/EmployeeProfile";
 const Layout = ({ children }) => {
   const { logo, companyName } = useDashboard();
   const [opened, { toggle }] = useDisclosure();
@@ -59,15 +59,13 @@ const Layout = ({ children }) => {
           >
             <IconMessageDots color="black" />
           </ActionIcon>
-          <Profile />
+          <EmployeeProfile />
         </Group>
       </AppShell.Header>
       <AppShell.Header className={classes.mobileHeader}>
         <Header companyName={companyName} logo={logo} />
       </AppShell.Header>
-
       <NavBar />
-
       <Main>{children}</Main>
     </AppShell>
   );

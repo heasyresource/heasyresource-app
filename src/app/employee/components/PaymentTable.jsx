@@ -58,7 +58,7 @@ export default function PaymentTable() {
       h={240}
       onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
     >
-      <Table stickyHeader stickyHeaderOffset={60}>
+      <Table stickyHeader stickyheaderoffset={60}>
         <Table.Thead
           className={cx(classes.header, { [classes.scrolled]: scrolled })}
         >
