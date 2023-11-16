@@ -173,7 +173,7 @@ const useCompleteReg = () => {
           form.values.autoGenerateEmployeeId === "true"
             ? ["Company Initials", "Department Code", "Random Numbers"]
             : null,
-        logoUrl: response?.data.url,
+        logoUrl: response?.data.secure_url,
       };
       handleCompletion(updatedData);
     }
