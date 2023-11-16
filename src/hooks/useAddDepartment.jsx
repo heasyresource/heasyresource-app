@@ -21,7 +21,7 @@ const useAddDepartment = () => {
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
-  const [getttingDatas, setGettingDatas] = useState(false);
+  const [getttingDatas, setGettingDatas] = useState(true);
   const [isChanged, setIsChanged] = useState(null);
   const [itemID, setItemID] = useState("");
   const form = useForm({
@@ -169,11 +169,14 @@ const useAddDepartment = () => {
   };
   useEffect(() => {
     getDepartments();
+
+    //eslint-disable-next-line
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
       getDepartments();
     }
+    //eslint-disable-next-line
   }, [isChanged]);
   return {
     loading,

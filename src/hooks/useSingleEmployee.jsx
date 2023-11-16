@@ -822,17 +822,21 @@ const useSingleEmployee = () => {
       );
       setLGA(filteredItems);
     }
+    //eslint-disable-next-line
   }, [contactForm.values.stateId]);
   useEffect(() => {
     if (isSubmitted !== null) {
       getEmployee();
     }
+    //eslint-disable-next-line
   }, [isSubmitted]);
 
   useEffect(() => {
     getMetadata();
     getEmployee();
     getDepartments();
+
+    //eslint-disable-next-line
   }, []);
   return {
     loading,

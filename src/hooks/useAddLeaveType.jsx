@@ -23,8 +23,8 @@ const useAddLeaveType = () => {
   const [leaveTypes, setLeavesTypes] = useState(null);
   const [employeeLeave, setEmployeeLeave] = useState(null);
   const [leaveTypepagination, setLeaveTypePagination] = useState(null);
-  const [gettingLeaveType, setGettingLeaveType] = useState(false);
-  const [gettingData, setGettingData] = useState(false);
+  const [gettingLeaveType, setGettingLeaveType] = useState(true);
+  const [gettingData, setGettingData] = useState(true);
   const [itemID, setItemID] = useState("");
   const [leavePagination, setLeavePagination] = useState(null);
   const form = useForm({
@@ -244,12 +244,6 @@ const useAddLeaveType = () => {
       setGettingLeaveType(false);
     } catch (err) {
       setGettingLeaveType(false);
-      // notifications.show({
-      //   color: "red",
-      //   message: "Something went wrong, please try again.",
-      //   styles: errorStyles,
-      //   autoClose: 7000,
-      // });
     }
   };
   const getEmployeeLeaves = async (params = "") => {
@@ -273,12 +267,14 @@ const useAddLeaveType = () => {
   useEffect(() => {
     getLeaveTypes();
     getEmployeeLeaves();
+    //eslint-disable-next-line
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged) {
       getLeaveTypes();
       getEmployeeLeaves();
     }
+    //eslint-disable-next-line
   }, [isChanged]);
   return {
     form,

@@ -21,7 +21,7 @@ const useAddHolidayType = () => {
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
-  const [gettingDatas, setGettingDatas] = useState(false);
+  const [gettingDatas, setGettingDatas] = useState(true);
   const [isChanged, setIsChanged] = useState(null);
   const [itemID, setItemID] = useState("");
   const form = useForm({
@@ -195,11 +195,14 @@ const useAddHolidayType = () => {
 
   useEffect(() => {
     getHolidays();
+
+    //eslint-disable-next-line
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged !== null) {
       getHolidays();
     }
+    //eslint-disable-next-line
   }, [isChanged]);
   return {
     form,

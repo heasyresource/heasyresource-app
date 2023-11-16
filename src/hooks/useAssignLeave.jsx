@@ -100,6 +100,7 @@ const useAssignLeave = () => {
   };
   useEffect(() => {
     getLeaveTypes();
+    //eslint-disable-next-line
   }, []);
 
   return {

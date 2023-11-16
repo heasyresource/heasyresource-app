@@ -90,7 +90,10 @@ const Education = ({
                       height: "100%",
                     }}
                   >
-                    <Image src={"/assets/images/education.png"} />
+                    <Image
+                      src={"/assets/images/education.png"}
+                      alt="education"
+                    />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>

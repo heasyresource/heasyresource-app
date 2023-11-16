@@ -48,6 +48,8 @@ const useDashboard = () => {
     // };
     getCompany();
     // getEmployee();
+
+    //eslint-disable-next-line
   }, []);
 
   return {

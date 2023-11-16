@@ -1,9 +1,7 @@
 import React from "react";
-import { Button, Grid, GridCol, Group, Select, TextInput } from "@mantine/core";
-import { DateInput } from "@mantine/dates";
+import { Button, Grid, GridCol, Group, Select } from "@mantine/core";
 import classes from "./HiringLayout.module.css";
-import { IconCalendarBolt } from "@tabler/icons-react";
-const VacancySearchFields = () => {
+const VacancySearchFields = ({ loading }) => {
   return (
     <form style={{ marginTop: "1rem" }}>
       <Grid justify="space-between" className={classes.formWrap}>
@@ -19,6 +17,7 @@ const VacancySearchFields = () => {
               error: classes.error,
               placeholder: classes.placeholder,
             }}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -34,6 +33,7 @@ const VacancySearchFields = () => {
               placeholder: classes.placeholder,
             }}
             rightSectionWidth={70}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -49,6 +49,7 @@ const VacancySearchFields = () => {
               placeholder: classes.placeholder,
             }}
             rightSectionWidth={70}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -64,20 +65,11 @@ const VacancySearchFields = () => {
               placeholder: classes.placeholder,
             }}
             rightSectionWidth={70}
+            allowDeselect={false}
           />
         </GridCol>
       </Grid>
       <Group justify="flex-end" mt={"3rem"}>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          variant="outline"
-          color="#3377FF"
-          px={"40px"}
-          type="submit"
-        >
-          reset
-        </Button>
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}
           size="md"

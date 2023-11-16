@@ -21,7 +21,12 @@ const data = [
     icon: IconUsers,
     subLink: true,
   },
-  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2, subLink: true },
+  {
+    link: "/dashboard/hiring",
+    label: "Hiring",
+    icon: IconBriefcase2,
+    subLink: true,
+  },
   { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
   {
     link: "/dashboard/leave",
@@ -33,8 +38,14 @@ const data = [
     link: "/dashboard/compensation",
     label: "Compensation",
     icon: IconUserDollar,
+    subLink: true,
   },
-  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
+  {
+    link: "/dashboard/settings",
+    label: "Settings",
+    icon: IconSettings,
+    subLink: true,
+  },
 ];
 
 const Links = () => {

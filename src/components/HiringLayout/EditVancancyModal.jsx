@@ -1,4 +1,3 @@
-"use client";
 import {
   Button,
   Grid,
@@ -10,17 +9,18 @@ import {
   Switch,
   Text,
   TextInput,
+  Textarea,
 } from "@mantine/core";
 import React, { useEffect } from "react";
-import classes from "../HiringLayout/HiringLayout.module.css";
+import classes from "./HiringLayout.module.css";
 import { RichTextEditor } from "@mantine/tiptap";
 
-const AddVacancyModal = ({
+const EditVancancyModal = ({
   isOpen,
   onClose,
   employmentType,
   categories,
-  handleVacancySubmit,
+  handleEditVacancy,
   vacancyForm,
   loading,
   rteError,
@@ -32,7 +32,6 @@ const AddVacancyModal = ({
     }
     //eslint-disable-next-line
   }, [loading]);
-
   return (
     <Modal
       opened={isOpen}
@@ -53,11 +52,11 @@ const AddVacancyModal = ({
           fontWeight: 700,
         }}
       >
-        Add Vacancy
+        Edit Vacancy
       </Text>
       <form
         onSubmit={vacancyForm?.onSubmit((values) => {
-          handleVacancySubmit(values);
+          handleEditVacancy(values);
         })}
       >
         <Grid
@@ -114,7 +113,7 @@ const AddVacancyModal = ({
               disabled={loading}
             />
           </GridCol>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <Select
               size="md"
               withAsterisk
@@ -126,8 +125,8 @@ const AddVacancyModal = ({
               {...vacancyForm?.getInputProps("workMode")}
               disabled={loading}
             />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
               size="md"
               withAsterisk
@@ -137,7 +136,7 @@ const AddVacancyModal = ({
               {...vacancyForm?.getInputProps("location")}
               disabled={loading}
             />
-          </Grid.Col>
+          </GridCol>
           <GridCol span={12}>
             <RichTextEditor editor={editor}>
               <RichTextEditor.Toolbar sticky stickyOffset={60}>
@@ -288,7 +287,11 @@ const AddVacancyModal = ({
             }}
             disabled={loading}
           >
-            {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
+            {loading ? (
+              <Loader color="white" type="dots" size="md" />
+            ) : (
+              "update"
+            )}
           </Button>
         </Group>
       </form>
@@ -296,4 +299,4 @@ const AddVacancyModal = ({
   );
 };
 
-export default AddVacancyModal;
+export default EditVancancyModal;

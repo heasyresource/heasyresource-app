@@ -1,6 +1,6 @@
 "use client";
 import {
-    ActionIcon,
+  ActionIcon,
   Box,
   Button,
   FileInput,
@@ -42,7 +42,7 @@ const AddCandidate = () => {
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                required
+                withAsterisk
                 label="First Name"
                 placeholder="Marketing"
                 style={{ width: "100%" }}
@@ -56,7 +56,6 @@ const AddCandidate = () => {
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                required
                 label="Middle Name"
                 style={{ width: "100%" }}
                 placeholder="Gbemisola Adebiyi"
@@ -70,7 +69,7 @@ const AddCandidate = () => {
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                required
+                withAsterisk
                 label="Last Name"
                 style={{ width: "100%" }}
                 placeholder="Alli"
@@ -84,7 +83,7 @@ const AddCandidate = () => {
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <Select
                 size="md"
-                required
+                withAsterisk
                 label="Vacancy"
                 style={{ width: "100%" }}
                 placeholder="Junior Account Manager"
@@ -94,12 +93,13 @@ const AddCandidate = () => {
                   error: classes.error,
                   placeholder: classes.placeholder,
                 }}
+                allowDeselect={false}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <DateInput
                 size="md"
-                required
+                withAsterisk
                 label="Date of Application"
                 placeholder="02-05-2023"
                 style={{ width: "100%" }}
@@ -110,12 +110,13 @@ const AddCandidate = () => {
                 }}
                 rightSectionWidth={70}
                 rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
+                valueFormat="DD/MM/YYYY"
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                required
+                withAsterisk
                 label="Email"
                 style={{ width: "100%" }}
                 placeholder="odebiyi@gmail.com"
@@ -129,15 +130,18 @@ const AddCandidate = () => {
             <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                required
+                withAsterisk
+                type="number"
                 label="Phone Number"
                 style={{ width: "100%" }}
-                placeholder="+234 000 000 0000"
+                placeholder="700 000 0000"
                 classNames={{
                   label: classes.label,
                   error: classes.error,
                   placeholder: classes.placeholder,
                 }}
+                leftSectionWidth={50}
+                leftSection={"+234"}
               />
             </GridCol>
             <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
@@ -178,8 +182,10 @@ const AddCandidate = () => {
             </GridCol>
           </Grid>
           <Textarea
+            autosize
+            minRows={2}
             style={{ height: "100% !important " }}
-            label="Notes/Comments"
+            label="Comments"
             {...form.getInputProps("notes")}
           />
           <Group
@@ -198,7 +204,7 @@ const AddCandidate = () => {
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
             >
-              cancel
+              back
             </Button>
             <Button
               variant="contained"

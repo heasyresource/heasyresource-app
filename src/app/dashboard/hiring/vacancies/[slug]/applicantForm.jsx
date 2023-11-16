@@ -10,43 +10,32 @@ import {
   Loader,
   Select,
   Stack,
-  Switch,
   Text,
   TextInput,
 } from "@mantine/core";
-import React, { useState } from "react";
-import classes from "../HiringLayout/HiringLayout.module.css";
+import React from "react";
+import classes from "../../../dashboard.module.css";
+import useAddApplicant from "@/hooks/useAddApplicant";
 import { IconArrowUp } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
 
-const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
-  const [isEdit, setIsEdit] = useState(false);
-  const router = useRouter();
+const ApplicantForm = () => {
+  const { form, loading, handleSubmit, states, countries, router } =
+    useAddApplicant();
   return (
-    <Box pt={30}>
-      <Group justify="space-between">
-        <Text
-          tt={"capitalize"}
-          style={{
-            fontSize: "22px",
-            fontWeight: 700,
-          }}
-        >
-          Candidate Profile
-        </Text>
-        <Switch
-          checked={isEdit}
-          onChange={(e) => setIsEdit(e.currentTarget.checked)}
-          labelPosition="left"
-          label="Edit"
-          classNames={{
-            label: classes.editLabel,
-          }}
-        />
-      </Group>
+    <Box>
+      <Text
+        tt={"capitalize"}
+        style={{
+          fontSize: "20px",
+          fontWeight: 600,
+          marginTop: "15px",
+        }}
+      >
+        Add Candidate
+      </Text>
       <form
         style={{ marginTop: "1.5rem" }}
-        onSubmit={form.onSubmit((values) => handleEdit(values))}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
       >
         <Stack gap={"2rem"}>
           <Grid gutter="xl" justify="flex-start" className={classes.formWrap}>
@@ -62,7 +51,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
                 {...form.getInputProps("firstName")}
-                disabled={loading || isEdit}
+                disabled={loading}
               />
             </GridCol>
 
@@ -78,12 +67,12 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
                 {...form.getInputProps("lastName")}
-                disabled={loading || isEdit}
+                disabled={loading}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                disabled={loading || isEdit}
+                disabled={loading}
                 size="md"
                 withAsterisk
                 label="Email"
@@ -97,7 +86,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                disabled={loading || isEdit}
+                disabled={loading}
                 size="md"
                 withAsterisk
                 type="number"
@@ -124,7 +113,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   label: classes.label,
                   error: classes.error,
                 }}
-                disabled={loading || isEdit}
+                disabled={loading}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -138,7 +127,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   label: classes.label,
                   error: classes.error,
                 }}
-                disabled={loading || isEdit}
+                disabled={loading}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -154,7 +143,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 }}
                 allowDeselect={false}
                 {...form.getInputProps("stateId")}
-                disabled={loading || isEdit}
+                disabled={loading}
                 searchable
                 nothingFoundMessage="No state found"
               />
@@ -172,7 +161,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 }}
                 allowDeselect={false}
                 {...form.getInputProps("countryId")}
-                disabled={loading || isEdit}
+                disabled={loading}
                 searchable
                 nothingFoundMessage="No country found"
               />
@@ -181,7 +170,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
             <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
               <FileInput
                 required
-                disabled={loading || isEdit}
+                disabled={loading}
                 label="Select File"
                 withAsterisk
                 placeholder="No file selected"
@@ -250,7 +239,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
               style={{
                 backgroundColor: "#3377FF",
               }}
-              disabled={loading || isEdit}
+              disabled={loading}
             >
               {loading ? (
                 <Loader color="white" type="dots" size="md" />
@@ -265,4 +254,4 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
   );
 };
 
-export default CandidateProfile;
+export default ApplicantForm;

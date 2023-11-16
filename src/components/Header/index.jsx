@@ -3,7 +3,6 @@ import React from "react";
 import classes from "./header.module.css";
 import {
   ActionIcon,
-  Burger,
   Divider,
   Drawer,
   Flex,
@@ -21,13 +20,13 @@ import {
   IconCalendarBolt,
   IconGraph,
   IconUserDollar,
+  IconBell,
+  IconAlignLeft,
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import Profile from "../Profile";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconAlignLeft } from "@tabler/icons-react";
-import { IconBell } from "@tabler/icons-react";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
@@ -37,8 +36,18 @@ const data = [
     icon: IconUsers,
     subLink: true,
   },
-  { link: "/dashboard/hiring", label: "Hiring", icon: IconBriefcase2 },
-  { link: "/dashboard/performance", label: "Performance", icon: IconGraph },
+  {
+    link: "/dashboard/hiring",
+    label: "Hiring",
+    icon: IconBriefcase2,
+    subLink: true,
+  },
+  {
+    link: "/dashboard/performance",
+    label: "Performance",
+    icon: IconGraph,
+    subLink: true,
+  },
   {
     link: "/dashboard/leave",
     label: "Leave",
@@ -49,8 +58,14 @@ const data = [
     link: "/dashboard/compensation",
     label: "Compensation",
     icon: IconUserDollar,
+    subLink: true,
   },
-  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
+  {
+    link: "/dashboard/settings",
+    label: "Settings",
+    icon: IconSettings,
+    subLink: true,
+  },
 ];
 const Header = ({ companyName, logo }) => {
   const pathname = usePathname();
@@ -113,7 +128,11 @@ const Header = ({ companyName, logo }) => {
         withCloseButton={false}
       >
         <Stack justify="flex-start" my="lg">
-          <Image src="/assets/svgs/HRlogo.svg" style={{ width: "120px" }} />
+          <Image
+            src="/assets/svgs/HRlogo.svg"
+            style={{ width: "120px" }}
+            alt="logo"
+          />
           <Group>
             <Image
               src={logo || ""}

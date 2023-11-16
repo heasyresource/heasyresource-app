@@ -8,6 +8,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Highlight,
   Loader,
   MultiSelect,
   Radio,
@@ -41,7 +42,6 @@ const CompleteForm = () => {
     uploading,
     isSubmitted,
     allOptions,
-    selectedOptions,
     logo,
   } = useCompleteReg();
   return (
@@ -154,12 +154,25 @@ const CompleteForm = () => {
                   }}
                   {...form.getInputProps("subdomain")}
                   disabled={uploading || isSubmitted}
+                  pattern="^[a-zA-Z0-9]+$"
+                  title="Subdomain should contain only alphabets and numbers"
                 />
-                {form.values.subdomain.length !== 0 && (
-                  <Text size="14px" mt="10px" c="565656">
-                    {`Your domain will look like: https://${form.values.subdomain}.heasyresource.com`}
-                  </Text>
-                )}
+
+                <Highlight
+                  highlightStyles={{
+                    fontWeight: "bold",
+                  }}
+                  color="#e7f7ff"
+                  size="14px"
+                  mt="10px"
+                  highlight={form.values.subdomain || "subdomain"}
+                >
+                  {`Your domain will look like: https://${
+                    form.values.subdomain.length !== 0
+                      ? form.values.subdomain
+                      : "subdomain"
+                  }.heasyresource.com`}
+                </Highlight>
               </GridCol>
 
               <GridCol span={12} style={{ marginTop: "20px" }}>
@@ -205,12 +218,12 @@ const CompleteForm = () => {
                 </Stack>
                 {isRadioChecked && (
                   <>
-                    {selectedOptions?.length !== 0 && (
+                    {form.values.employeeIdFormat.length !== 0 && (
                       <Text
                         size="14px"
                         c="565656"
                         mt={"10px"}
-                      >{`The employee ID will look like: ${selectedOptions
+                      >{`The employee ID will look like: ${form.values.employeeIdFormat
                         .map((option) => optionCodeMap[option])
                         .join("")}`}</Text>
                     )}

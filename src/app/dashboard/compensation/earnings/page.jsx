@@ -27,7 +27,7 @@ const AddEarnings = () => {
   };
 
   const closeEditModal = () => {
-    setIsEditModalOpen(false)
+    setIsEditModalOpen(false);
   };
 
   return (
@@ -36,10 +36,7 @@ const AddEarnings = () => {
         isEditOpen={isEditModalOpen}
         isEditClose={closeEditModal}
       />
-      <AddEarningsModal 
-        isOpen={isModalOpen} 
-        onClose={closeModal} 
-      />
+      <AddEarningsModal isOpen={isModalOpen} onClose={closeModal} />
       <Card
         style={{
           backgroundColor: "#ffff",
@@ -49,14 +46,10 @@ const AddEarnings = () => {
           margin: "0px",
         }}
       >
-        <CardSection
-          pt="25px"
-          pb="55px"
-          style={{ borderBottom: "1px solid #DDDDDD" }}
-        >
+        <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
           <CompensationNav tabTitle={"Compensation"} />
         </CardSection>
-        <Group gap={30} px={40} py={45}>
+        <Group gap={30} mx="lg" py={20}>
           <Text fz={24} fw={700}>
             Earnings
           </Text>

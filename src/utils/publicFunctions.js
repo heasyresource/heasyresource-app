@@ -334,7 +334,7 @@ export const hiringList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "2",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",
@@ -342,7 +342,7 @@ export const hiringList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "3",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",
@@ -352,7 +352,7 @@ export const hiringList = [
 ];
 export const CompanyList = [
   {
-    id: "1",
+    id: "",
     companyName: "TechNova Solutions",
     companySize: "51-200",
     industry: "Technology",
@@ -407,7 +407,7 @@ export const VacancyList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "2",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",
@@ -415,7 +415,7 @@ export const VacancyList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "3",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",

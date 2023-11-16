@@ -6,20 +6,17 @@ import {
   MenuDropdown,
   MenuItem,
   MenuTarget,
-  Space,
   Text,
 } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import React from "react";
 import classes from "./Settings.module.css";
-import {
-  IconChevronDown,
-} from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 
 const SettingsNav = ({ tabTitle }) => {
   const pathname = usePathname();
   return (
-    <Group justify="space-between" mx="40px">
+    <Group justify="space-between" className={classes.mx}>
       <Text fz="24px" fw="700" tt={"capitalize"}>
         {tabTitle}
       </Text>
@@ -52,17 +49,6 @@ const SettingsNav = ({ tabTitle }) => {
             >
               General Information
             </MenuItem>
-            {/* <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              data-active={
-                "/dashboard/compensation/deductions" === pathname || undefined
-              }
-              href="/dashboard/compensation/deductions"
-            >
-              Corporate Branding
-            </MenuItem> */}
           </MenuDropdown>
         </Menu>
         <Menu position="bottom-end" width={150}>
@@ -90,7 +76,9 @@ const SettingsNav = ({ tabTitle }) => {
               fz="xs"
               component="a"
               className={classes.activeConfig}
-              data-active={"/dashboard/settings/job-categories" === pathname || undefined}
+              data-active={
+                "/dashboard/settings/job-categories" === pathname || undefined
+              }
               href="/dashboard/settings/job-categories"
             >
               Job Categories

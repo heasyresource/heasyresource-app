@@ -88,7 +88,10 @@ const Licence = ({
                       height: "100%",
                     }}
                   >
-                    <Image src={"/assets/images/certificate.png"} />
+                    <Image
+                      src={"/assets/images/certificate.png"}
+                      alt="licence"
+                    />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>

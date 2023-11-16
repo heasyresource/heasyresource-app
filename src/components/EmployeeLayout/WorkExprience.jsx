@@ -63,7 +63,7 @@ const WorkExprience = ({
         endDate: "",
       });
     }
-  }, [experienceForm?.values.isPresent]);
+  }, [experienceForm]);
 
   return (
     <>
@@ -106,7 +106,10 @@ const WorkExprience = ({
                       height: "100%",
                     }}
                   >
-                    <Image src={"/assets/images/workExprience.png"} />
+                    <Image
+                      src={"/assets/images/workExprience.png"}
+                      alt="work"
+                    />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>

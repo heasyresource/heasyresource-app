@@ -19,7 +19,7 @@ const useCompleteReg = () => {
   const [fields, setFields] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isRadioChecked, setIsRadioChecked] = useState(false);
-  const [validationError, setValidationError] = useState(null);
+  const [validationError] = useState(null);
   const allOptions = ["Company Initials", "Department Code", "Random Numbers"];
   const allSelectedString = selectedOptions?.join("");
   const [departmentTable, setDepartmentTable] = useState([]);
@@ -51,11 +51,12 @@ const useCompleteReg = () => {
           : "Enter valid email domain",
       subdomain: (val) => (!val.length ? "Sub domain is required" : null),
       autoGenerateEmployeeId: (val) =>
-        !val.length ? "     Employee Configuration is required" : null,
+        !val.length ? "Employee Configuration is required" : null,
       employeeIdFormat: (val, value) =>
         value.autoGenerateEmployeeId === "true" && val.length === 0
           ? "Please generate the employee ID"
-          : val.length !== allOptions.length
+          : value.autoGenerateEmployeeId === "true" &&
+            val.length !== allOptions.length
           ? "Please select all options"
           : null,
     },
@@ -161,7 +162,6 @@ const useCompleteReg = () => {
         styles: errorStyles,
         autoClose: 7000,
       });
-      console.log(err, "Error submitting completion data");
     }
   };
   useEffect(() => {
@@ -177,12 +177,14 @@ const useCompleteReg = () => {
       };
       handleCompletion(updatedData);
     }
+    //eslint-disable-next-line
   }, [response]);
 
   useEffect(() => {
     if (selectedOptions?.length === allOptions.length) {
       setIDError(false);
     }
+    //eslint-disable-next-line
   }, [selectedOptions]);
   useEffect(() => {
     if (departmentTable.length !== 0) {
@@ -242,7 +244,7 @@ const useCompleteReg = () => {
         );
         const results = response?.results;
         if (results.subdomain !== null) {
-          setIsSubmitted(true);
+          // setIsSubmitted(true);
           setLogo(results.logoUrl);
           setIsRadioChecked(results.autoGenerateEmployeeId === 1);
           getDepartments(results.subdomain);
@@ -261,12 +263,11 @@ const useCompleteReg = () => {
     };
     getMetadata();
     getCompany();
+    //eslint-disable-next-line
   }, []);
-  console.log(form.values.countryId, "opyion");
   return {
     form,
     isRadioChecked,
-    validationError,
     selectedOptions,
     allOptions,
     cmpSize,
