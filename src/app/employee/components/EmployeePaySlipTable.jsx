@@ -1,22 +1,22 @@
 "use client";
 
-import { PaySlipList } from "@/utils/publicFunctions";
+import { employeePaySlipList } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const PAGE_SIZE = 10;
-const PaySLipTable = ({ openEditModal }) => {
+const EmployeePaySlipTable = ({ openEditModal }) => {
   const pathname = usePathname();
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(PaySlipList.slice(0, PAGE_SIZE));
+  const [records, setRecords] = useState(employeePaySlipList.slice(0, PAGE_SIZE));
 
   useEffect(() => {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE;
-    setRecords(PaySlipList.slice(from, to));
+    setRecords(employeePaySlipList.slice(from, to));
   }, [page]);
 
   return (
@@ -59,7 +59,7 @@ const PaySLipTable = ({ openEditModal }) => {
             noWrap: true,
           },
         ]}
-        totalRecords={PaySlipList.length}
+        totalRecords={employeePaySlipList.length}
         recordsPerPage={PAGE_SIZE}
         page={page}
         onPageChange={(p) => setPage(p)}
@@ -67,4 +67,4 @@ const PaySLipTable = ({ openEditModal }) => {
     </>
   );
 };
-export default PaySLipTable;
+export default EmployeePaySlipTable;
