@@ -24,6 +24,10 @@ const useChangePassword = () => {
       currentPassword: "",
       newPassword: "",
     },
+    validate: {
+      newPassword: (value) =>
+        value.length >= 8 ? null : "Password should be 8 characters",
+    },
   });
   const handleRouteChange = () => {
     modals.closeAll();
