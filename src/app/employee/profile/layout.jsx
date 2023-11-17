@@ -72,7 +72,7 @@ const ProfileLayout = ({ children }) => {
                 flexDirection: "column",
                 justifyContent: "center",
               }}
-              // className={classes.align}
+              className={classes.align}
             >
               <Text
                 ta={{ base: "center", md: "left" }}

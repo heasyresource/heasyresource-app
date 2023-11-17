@@ -27,6 +27,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import EmployeeProfile from "@/app/employee/components/EmployeeProfile";
+import Profile from "../Profile";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
@@ -114,7 +115,7 @@ const Header = ({ companyName, logo }) => {
                 <IconBell color="#3F3F3F" />
               </Indicator>
             </ActionIcon>
-            <EmployeeProfile />
+            <Profile />
           </Group>
         </Flex>
       </header>
