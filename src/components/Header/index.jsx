@@ -27,6 +27,7 @@ import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import EmployeeProfile from "@/app/employee/components/EmployeeProfile";
+import Profile from "../Profile";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
@@ -40,12 +41,6 @@ const data = [
     link: "/dashboard/hiring",
     label: "Hiring",
     icon: IconBriefcase2,
-    subLink: true,
-  },
-  {
-    link: "/dashboard/performance",
-    label: "Performance",
-    icon: IconGraph,
     subLink: true,
   },
   {
@@ -114,7 +109,7 @@ const Header = ({ companyName, logo }) => {
                 <IconBell color="#3F3F3F" />
               </Indicator>
             </ActionIcon>
-            <EmployeeProfile />
+            <Profile />
           </Group>
         </Flex>
       </header>
@@ -126,27 +121,28 @@ const Header = ({ companyName, logo }) => {
         zIndex={1000000}
         withCloseButton={false}
       >
-        <Stack justify="flex-start" my="lg">
+        <Flex align={'center'} direction={"row"} my="lg">
           <Image
             src="/assets/svgs/HRlogo.svg"
-            style={{ width: "120px" }}
+            style={{ height: "27px" }}
             alt="logo"
           />
-          <Group>
+          <Divider color="#d3d3d35e" mx={10} size="sm" orientation="vertical" />
+          <Flex gap={5} align={'center'} direction={'column'}>
             <Image
               src={logo || ""}
-              style={{ width: "30px" }}
+              style={{ width: "54px" }}
               alt="Company Logo"
             />
-            <Text
+            {/* <Text
               fw={500}
-              c="#616161"
-              style={{ fontSize: "13px", textTransform: "capitalize" }}
+              c="#ced4da"
+              style={{ wordWrap: "break-word", fontSize: "12px", textTransform: "capitalize" }}
             >
               {companyName}
-            </Text>
-          </Group>
-        </Stack>
+            </Text> */}
+          </Flex>
+        </Flex>
         <Divider mt="4rem" />
         <Stack mt={"1rem"} pr={"20px"}>
           {links}
