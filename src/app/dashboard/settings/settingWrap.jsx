@@ -17,8 +17,17 @@ import React, { useState } from "react";
 import classes from "../dashboard.module.css";
 
 const SettingWrap = () => {
-  const [isEdit, setIsEdit] = useState(true);
-  const { form, fields, companySize, countries, logoUrl } = useSetting();
+  const [isEdit, setIsEdit] = useState(false);
+  const {
+    form,
+    fields,
+    companySize,
+    countries,
+    logoUrl,
+    loading,
+    handleSubmit,
+    setLogoUrl,
+  } = useSetting();
   return (
     <Card
       style={{
@@ -50,11 +59,16 @@ const SettingWrap = () => {
         />
       </Group>
 
-      <form>
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <Grid>
           <GridCol span={{ lg: 3, md: 12, sm: 12 }}>
             <Stack justify="center" align="center" gap={".5rem"}>
-              <AddComImg logo={logoUrl} isEdit={isEdit} />
+              <AddComImg
+                logo={logoUrl}
+                isEdit={!isEdit}
+                setLogo={setLogoUrl}
+                uploading={loading}
+              />
             </Stack>
           </GridCol>
           <GridCol span={{ lg: 9, md: 12, sm: 12 }}>
@@ -98,7 +112,7 @@ const SettingWrap = () => {
                     label: classes.label,
                     error: classes.error,
                   }}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -113,7 +127,7 @@ const SettingWrap = () => {
 
                     error: classes.error,
                   }}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -130,7 +144,7 @@ const SettingWrap = () => {
 
                     error: classes.error,
                   }}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                   maxLength={11}
                   type="tel"
                 />
@@ -147,7 +161,7 @@ const SettingWrap = () => {
 
                     error: classes.error,
                   }}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -164,7 +178,7 @@ const SettingWrap = () => {
                     error: classes.error,
                   }}
                   {...form.getInputProps("industryId")}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -179,7 +193,7 @@ const SettingWrap = () => {
                     label: classes.label,
                     error: classes.error,
                   }}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -193,7 +207,7 @@ const SettingWrap = () => {
                     label: classes.label,
                     error: classes.error,
                   }}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
 
@@ -210,7 +224,7 @@ const SettingWrap = () => {
                   }}
                   searchable
                   allowDeselect={false}
-                  disabled={isEdit}
+                  disabled={!isEdit || loading}
                 />
               </GridCol>
             </Grid>
@@ -221,7 +235,7 @@ const SettingWrap = () => {
                 color="white"
                 bg="#3377ff"
                 type="submit"
-                disabled={isEdit}
+                disabled={!isEdit || loading}
               >
                 Save
               </Button>

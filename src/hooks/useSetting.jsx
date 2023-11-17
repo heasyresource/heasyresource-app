@@ -8,8 +8,10 @@ import { notifications } from "@mantine/notifications";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import useUploadImage from "./useUploadImage";
 
 const useSetting = () => {
+  const { handleUpload, response, loading: imgLoading } = useUploadImage();
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
@@ -27,6 +29,7 @@ const useSetting = () => {
   const [isChanged, setIsChanged] = useState(null);
   const [loading, setLoading] = useState(false);
   const [categoryId, setCategoryId] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const [logoUrl, setLogoUrl] = useState("");
   const form = useForm({
@@ -77,6 +80,26 @@ const useSetting = () => {
       Authorization: `Bearer ${session?.user.token}`,
       "x-subdomain-name": subdomain,
     },
+  };
+  const handleSubmit = async (data) => {
+    setLoading(true);
+    try {
+      await handleUpload(logo);
+    } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          form.setFieldError(field, message);
+        });
+      }
+      notifications.show({
+        color: "red",
+        message: "Something went wrong, please try again!",
+        styles: errorStyles,
+        autoClose: 7000,
+      });
+      setLoading(false);
+    }
   };
   const handleCategoryAdd = async (data) => {
     setLoading(true);
@@ -294,6 +317,8 @@ const useSetting = () => {
     loading,
     gettingCategory,
     setCategoryId,
+    setLogoUrl,
+    handleSubmit,
   };
 };
 

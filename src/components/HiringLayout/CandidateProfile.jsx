@@ -46,7 +46,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
       </Group>
       <form
         style={{ marginTop: "1.5rem" }}
-        onSubmit={form.onSubmit((values) => handleEdit(values))}
+        onSubmit={form?.onSubmit((values) => handleEdit(values))}
       >
         <Stack gap={"2rem"}>
           <Grid gutter="xl" justify="flex-start" className={classes.formWrap}>
@@ -61,8 +61,8 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   label: classes.label,
                   error: classes.error,
                 }}
-                {...form.getInputProps("firstName")}
-                disabled={loading || isEdit}
+                {...form?.getInputProps("firstName")}
+                disabled={loading || !isEdit}
               />
             </GridCol>
 
@@ -77,18 +77,18 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   label: classes.label,
                   error: classes.error,
                 }}
-                {...form.getInputProps("lastName")}
-                disabled={loading || isEdit}
+                {...form?.getInputProps("lastName")}
+                disabled={loading || !isEdit}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                disabled={loading || isEdit}
+                disabled={loading || !isEdit}
                 size="md"
                 withAsterisk
                 label="Email"
                 style={{ width: "100%" }}
-                {...form.getInputProps("email")}
+                {...form?.getInputProps("email")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -97,14 +97,14 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
               <TextInput
-                disabled={loading || isEdit}
+                disabled={loading || !isEdit}
                 size="md"
                 withAsterisk
                 type="tel"
                 label="Phone Number"
                 style={{ width: "100%" }}
                 placeholder="700 000 0000"
-                {...form.getInputProps("phoneNumber")}
+                {...form?.getInputProps("phoneNumber")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -120,12 +120,12 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 withAsterisk
                 label="Address"
                 style={{ width: "100%" }}
-                {...form.getInputProps("address")}
+                {...form?.getInputProps("address")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
                 }}
-                disabled={loading || isEdit}
+                disabled={loading || !isEdit}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -134,12 +134,12 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 withAsterisk
                 label="City"
                 style={{ width: "100%" }}
-                {...form.getInputProps("city")}
+                {...form?.getInputProps("city")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
                 }}
-                disabled={loading || isEdit}
+                disabled={loading || !isEdit}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -154,8 +154,8 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
                 allowDeselect={false}
-                {...form.getInputProps("stateId")}
-                disabled={loading || isEdit}
+                {...form?.getInputProps("stateId")}
+                disabled={loading || !isEdit}
                 searchable
                 nothingFoundMessage="No state found"
               />
@@ -172,8 +172,8 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
                 allowDeselect={false}
-                {...form.getInputProps("countryId")}
-                disabled={loading || isEdit}
+                {...form?.getInputProps("countryId")}
+                disabled={loading || !isEdit}
                 searchable
                 nothingFoundMessage="No country found"
               />
@@ -182,7 +182,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
             <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
               <FileInput
                 required
-                disabled={loading || isEdit}
+                disabled={loading || !isEdit}
                 label="Select File"
                 withAsterisk
                 placeholder="No file selected"
@@ -190,7 +190,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 size="md"
                 leftSectionWidth={140}
                 accept=".pdf, .doc, .docx"
-                {...form.getInputProps("resumeUrl")}
+                {...form?.getInputProps("resumeUrl")}
                 leftSection={
                   <Button
                     disabled
@@ -231,7 +231,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
               color="#3377FF"
               style={{ borderColor: "#3377FF" }}
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               onClick={() => router.back()}
@@ -244,14 +244,14 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               type="submit"
               style={{
                 backgroundColor: "#3377FF",
               }}
-              disabled={loading || isEdit}
+              disabled={loading || !isEdit}
             >
               {loading ? (
                 <Loader color="white" type="dots" size="md" />

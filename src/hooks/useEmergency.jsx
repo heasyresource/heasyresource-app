@@ -119,6 +119,7 @@ const useEmergency = () => {
     if (isChanged !== null) {
       getEmployee();
     }
+    //eslint-disable-next-line
   }, [isChanged]);
 
   useEffect(() => {

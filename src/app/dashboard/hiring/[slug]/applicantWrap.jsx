@@ -21,6 +21,7 @@ const ApplicantWrap = () => {
     openedReject,
     openReject,
     closeReject,
+    vacancy,
   } = useAddApplicant();
   return (
     <>
@@ -37,6 +38,7 @@ const ApplicantWrap = () => {
         openedReject={openedReject}
         openReject={openReject}
         closeReject={closeReject}
+        vacancy={vacancy}
       />
       <CandidateProfile
         states={states}
