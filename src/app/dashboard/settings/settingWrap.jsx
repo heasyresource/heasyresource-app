@@ -131,6 +131,8 @@ const SettingWrap = () => {
                     error: classes.error,
                   }}
                   disabled={isEdit}
+                  maxLength={11}
+                  type="tel"
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>

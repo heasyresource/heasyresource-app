@@ -89,7 +89,8 @@ const ApplicantForm = () => {
                 disabled={loading}
                 size="md"
                 withAsterisk
-                type="number"
+                type="tel"
+                maxLength={11}
                 label="Phone Number"
                 style={{ width: "100%" }}
                 placeholder="700 000 0000"
@@ -232,7 +233,7 @@ const ApplicantForm = () => {
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               type="submit"

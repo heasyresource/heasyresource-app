@@ -100,7 +100,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 disabled={loading || isEdit}
                 size="md"
                 withAsterisk
-                type="number"
+                type="tel"
                 label="Phone Number"
                 style={{ width: "100%" }}
                 placeholder="700 000 0000"
@@ -111,6 +111,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 }}
                 leftSectionWidth={50}
                 leftSection={"+234"}
+                maxLength={11}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>

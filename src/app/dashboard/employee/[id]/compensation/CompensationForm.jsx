@@ -11,20 +11,15 @@ import {
   TextInput,
 } from "@mantine/core";
 import React from "react";
-import classes from "./employeeLayout.module.css";
-import { useEmployeeCompensation } from "@/hooks";
+import classes from "../../employee.module.css";
 
-const Compensation = () => {
-  const { handleSubmit, form } = useEmployeeCompensation();
+const CompensationForm = () => {
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
         Compensation
       </Text>
-      <form
-        style={{ height: "100%", marginTop: "2rem" }}
-        onSubmit={form.onSubmit((value) => handleSubmit(value))}
-      >
+      <form style={{ height: "100%", marginTop: "2rem" }}>
         <Stack style={{ gap: "3rem" }}>
           <Box>
             <Text
@@ -43,7 +38,6 @@ const Compensation = () => {
                   label="Salary Component Title"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("title")}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -54,10 +48,9 @@ const Compensation = () => {
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
                   data={[""]}
-                  {...form.getInputProps("pay")}
                 />
               </GridCol>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <Select
                   size="md"
                   withAsterisk
@@ -65,29 +58,26 @@ const Compensation = () => {
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
                   data={[""]}
-                  {...form.getInputProps("currency")}
                 />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <TextInput
                   size="md"
                   withAsterisk
                   label="Amount"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("amount")}
                 />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 8, md: 6, sm: 12 }}>
+              </GridCol>
+              <GridCol span={{ lg: 8, md: 6, sm: 12 }}>
                 <TextInput
                   size="md"
                   withAsterisk
                   label="Comment"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...form.getInputProps("comment")}
                 />
-              </Grid.Col>
+              </GridCol>
             </Grid>
           </Box>
 
@@ -103,7 +93,7 @@ const Compensation = () => {
               color="#3377FF"
               style={{ borderColor: "#3377FF" }}
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
             >
@@ -114,7 +104,7 @@ const Compensation = () => {
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               type="submit"
@@ -131,4 +121,4 @@ const Compensation = () => {
   );
 };
 
-export default Compensation;
+export default CompensationForm;

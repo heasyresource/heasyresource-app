@@ -131,7 +131,7 @@ const page = () => {
           color="#3377FF"
           style={{ borderColor: "#3377FF" }}
           tt="capitalize"
-          px="50px"
+          px="30px"
           w={{ lg: "auto", md: "auto", sm: "auto" }}
           className={classes.btn}
         >
@@ -142,7 +142,7 @@ const page = () => {
           size="md"
           color="#3377FF"
           tt="capitalize"
-          px="50px"
+          px="30px"
           w={{ lg: "auto", md: "auto", sm: "auto" }}
           className={classes.btn}
           type="submit"

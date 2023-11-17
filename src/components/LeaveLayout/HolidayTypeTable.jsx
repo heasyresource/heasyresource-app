@@ -217,7 +217,13 @@ export default function HolidayTypeTable({
           <form
             onSubmit={form?.onSubmit((values) => handleEdit(values, "edit"))}
           >
-            <Stack gap={"1.5rem"} mt={"1rem"}>
+            <Box
+              style={{
+                margin: "20px 0",
+                overflowY: "scroll",
+                maxHeight: "400px",
+              }}
+            >
               <Grid gutter={"md"}>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
                   <TextInput
@@ -298,56 +304,58 @@ export default function HolidayTypeTable({
                 </GridCol>
               </Grid>
               <Textarea
-                style={{ height: "100% !important " }}
+                mt={"md"}
+                autosize
+                minRows={5}
                 label="Notes/Comments"
                 {...form?.getInputProps("comments")}
                 disabled={loading}
               />
-              <Group
-                justify="flex-end"
-                className={classes.btnWrap}
-                align="center"
-                mt={"auto"}
+            </Box>
+            <Group
+              justify="flex-end"
+              className={classes.btnWrap}
+              align="center"
+              mt={"auto"}
+            >
+              <Button
+                variant="outline"
+                size="md"
+                color="#3377FF"
+                style={{ borderColor: "#3377FF" }}
+                tt="capitalize"
+                px="50px"
+                w={{ lg: "auto", md: "auto", sm: "auto" }}
+                className={classes.btn}
+                onClick={() => {
+                  closeEdit();
+                  form?.reset();
+                }}
+                disabled={loading}
               >
-                <Button
-                  variant="outline"
-                  size="md"
-                  color="#3377FF"
-                  style={{ borderColor: "#3377FF" }}
-                  tt="capitalize"
-                  px="50px"
-                  w={{ lg: "auto", md: "auto", sm: "auto" }}
-                  className={classes.btn}
-                  onClick={() => {
-                    closeEdit();
-                    form?.reset();
-                  }}
-                  disabled={loading}
-                >
-                  cancel
-                </Button>
-                <Button
-                  variant="contained"
-                  size="md"
-                  color="#3377FF"
-                  tt="capitalize"
-                  px="50px"
-                  w={{ lg: "auto", md: "auto", sm: "auto" }}
-                  className={classes.btn}
-                  type="submit"
-                  style={{
-                    backgroundColor: "#3377FF",
-                  }}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <Loader color="white" type="dots" size="md" />
-                  ) : (
-                    "add"
-                  )}
-                </Button>
-              </Group>
-            </Stack>
+                cancel
+              </Button>
+              <Button
+                variant="contained"
+                size="md"
+                color="#3377FF"
+                tt="capitalize"
+                px="50px"
+                w={{ lg: "auto", md: "auto", sm: "auto" }}
+                className={classes.btn}
+                type="submit"
+                style={{
+                  backgroundColor: "#3377FF",
+                }}
+                disabled={loading}
+              >
+                {loading ? (
+                  <Loader color="white" type="dots" size="md" />
+                ) : (
+                  "add"
+                )}
+              </Button>
+            </Group>
           </form>
         </Box>
       </Modal>

@@ -1,45 +1,47 @@
 "use client";
+import Education from "@/components/EmployeeLayout/Education";
+import Licence from "@/components/EmployeeLayout/Licence";
+import WorkExprience from "@/components/EmployeeLayout/WorkExprience";
+import { useQualification } from "@/hooks";
 import { Box, Divider, Stack, Text } from "@mantine/core";
 import React from "react";
-import WorkExprience from "./WorkExprience";
-import Education from "./Education";
-import Licence from "./Licence";
 
-const Qualification = ({
-  openExp,
-  openedExp,
-  closeExp,
-  openEdu,
-  closeEdu,
-  openedEdu,
-  experienceForm,
-  educationForm,
-  handleExpSubmit,
-  loading,
-  employmentType,
-  handleEduSubmit,
-  openLcs,
-  closeLcs,
-  openedLcs,
-  openEditLcs,
-  closeEditLcs,
-  openedEditLcs,
-  handleLicenseSubmit,
-  licenseForm,
-  workExp,
-  openEditExp,
-  closeEditExp,
-  openedEditExp,
-  setExpId,
-  handleEditExp,
-  educations,
-  handleEditEdu,
-  openEditEdu,
-  closeEditEdu,
-  openedEditEdu,
-  licenses,
-  handleEditLicense,
-}) => {
+const QualificationWrap = () => {
+  const {
+    handleEduSubmit,
+    handleExpSubmit,
+    handleLicenseSubmit,
+    openEditEdu,
+    openEditExp,
+    openEditLcs,
+    openEdu,
+    openExp,
+    openLcs,
+    openedEditEdu,
+    openedEditExp,
+    openedEditLcs,
+    openedEdu,
+    openedExp,
+    openedLcs,
+    closeEditEdu,
+    closeEditExp,
+    closeEditLcs,
+    closeEdu,
+    closeExp,
+    closeLcs,
+    licenseForm,
+    licenses,
+    workExp,
+    experienceForm,
+    educationForm,
+    setExpId,
+    handleEditEdu,
+    handleEditExp,
+    loading,
+    handleEditLicense,
+    employmentTypes,
+    educations,
+  } = useQualification();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "30px", fontWeight: 700 }}>
@@ -49,7 +51,7 @@ const Qualification = ({
       <Stack style={{ gap: "3rem", marginTop: "20px" }}>
         <WorkExprience
           loading={loading}
-          employmentType={employmentType}
+          employmentType={employmentTypes}
           handleExpSubmit={handleExpSubmit}
           workExp={workExp}
           experienceForm={experienceForm}
@@ -97,4 +99,4 @@ const Qualification = ({
   );
 };
 
-export default Qualification;
+export default QualificationWrap;

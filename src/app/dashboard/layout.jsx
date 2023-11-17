@@ -11,7 +11,7 @@ import Main from "./components/Main";
 import Profile from "@/components/Profile";
 import { useDashboard } from "@/hooks";
 const Layout = ({ children }) => {
-  const { logo, companyName } = useDashboard();
+  const { logo, companyName, companyRep } = useDashboard();
   const [opened, { toggle }] = useDisclosure();
   const [scrolled, setScrolled] = useState(false);
 
@@ -59,7 +59,7 @@ const Layout = ({ children }) => {
           >
             <IconMessageDots color="black" />
           </ActionIcon>
-          <Profile />
+          <Profile position={companyRep} />
         </Group>
       </AppShell.Header>
       <AppShell.Header className={classes.mobileHeader}>

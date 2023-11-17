@@ -5,118 +5,115 @@ import {
   GridCol,
   Group,
   Loader,
-  Radio,
-  Select,
-  Stack,
+  Modal,
   TextInput,
 } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import React from "react";
 import classes from "./employeeLayout.module.css";
 
-const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
+const AddLicenceModal = ({
+  licenseForm,
+  handleLicenseSubmit,
+  loading,
+  closeLcs,
+  openedLcs,
+}) => {
+  const currentDate = new Date();
   return (
-    <form onSubmit={form?.onSubmit((values) => handleSubmit(values))}>
-      <Stack className={classes.individualWrap}>
-        <Grid gutter={"lg"}>
+    <Modal
+      title="Add License or Certification"
+      size="xl"
+      closeOnClickOutside={false}
+      withCloseButton={false}
+      centered
+      opened={openedLcs}
+      onClose={closeLcs}
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
+    >
+      <form
+        onSubmit={licenseForm?.onSubmit((values) =>
+          handleLicenseSubmit(values)
+        )}
+      >
+        <Grid
+          style={{
+            margin: "20px 0",
+            maxHeight: "400px",
+            overflowY: "scroll",
+          }}
+          gutter="xl"
+        >
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              label="First Name"
+              size="md"
               withAsterisk
-              size="md"
-              placeholder="John"
+              label="Name"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("firstName")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              label="Middle Name"
-              size="md"
-              placeholder="Smith"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("middleName")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              label="Last Name"
-              withAsterisk
-              size="md"
-              placeholder="Corner"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("lastName")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              label="Position"
-              withAsterisk
-              size="md"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("position")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <Select
-              data={fields}
-              searchable
-              label="Department"
-              withAsterisk
-              size="md"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("departmentId")}
+              {...licenseForm?.getInputProps("name")}
               disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              label="Work Email"
-              type="email"
-              withAsterisk
               size="md"
+              withAsterisk
+              label="Issuing organization"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("email")}
+              {...licenseForm?.getInputProps("issuingOrganization")}
+              placeholder="Microsoft"
               disabled={loading}
             />
           </GridCol>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <Radio.Group
+
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <DateInput
               size="md"
               withAsterisk
-              label="Gender"
+              label="Issue Date"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("gender")}
+              {...licenseForm?.getInputProps("issueDate")}
               disabled={loading}
-            >
-              <Group mt="xs">
-                <Radio
-                  value="Male"
-                  disabled={loading}
-                  label="Male"
-                  labelPosition="left"
-                  color="#3377FF"
-                />
-                <Radio
-                  value="Female"
-                  disabled={loading}
-                  label="Female"
-                  labelPosition="left"
-                  color="#3377FF"
-                />
-              </Group>
-            </Radio.Group>
-          </Grid.Col>
+              maxDate={currentDate || ""}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <DateInput
+              size="md"
+              label="Expiration Date"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...licenseForm?.getInputProps("expirationDate")}
+              disabled={loading}
+              minDate={licenseForm?.values.issueDate || ""}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <TextInput
+              label="Credential ID"
+              size="md"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...licenseForm?.getInputProps("credentialId")}
+              disabled={loading}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <TextInput
+              size="md"
+              label="Credential URL"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...licenseForm?.getInputProps("credentialUrl")}
+              disabled={loading}
+            />
+          </GridCol>
         </Grid>
         <Group
           justify="flex-end"
@@ -133,7 +130,11 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
-            onClick={() => form?.reset()}
+            onClick={() => {
+              closeLcs();
+              licenseForm?.reset();
+            }}
+            disabled={loading}
           >
             cancel
           </Button>
@@ -149,13 +150,14 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
             style={{
               backgroundColor: "#3377FF",
             }}
+            disabled={loading}
           >
             {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
           </Button>
         </Group>
-      </Stack>
-    </form>
+      </form>
+    </Modal>
   );
 };
 
-export default EmployeeIndividual;
+export default AddLicenceModal;

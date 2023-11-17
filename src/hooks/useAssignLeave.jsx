@@ -83,8 +83,11 @@ const useAssignLeave = () => {
   };
   const getLeaveTypes = async () => {
     try {
-      const response = await apiClient.get(`/leave-types`, headerSettings);
-      const modifiedOptions = response.results.data.map((l) => ({
+      const response = await apiClient.get(
+        `/leave-types?paginate=false`,
+        headerSettings
+      );
+      const modifiedOptions = response.results.map((l) => ({
         value: l.id,
         label: l.name,
       }));

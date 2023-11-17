@@ -1,10 +1,10 @@
+import { EmployeeNav } from "@/components";
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
-import SlugCheck from "./slugCheck";
-import { EmployeeNav } from "@/components";
-import classes from "../../employee.module.css";
+import classes from "../employee.module.css";
+import LayoutWrap from "./LayoutWrap";
 
-const page = () => {
+const layout = ({ children }) => {
   return (
     <Card
       style={{
@@ -22,10 +22,9 @@ const page = () => {
       >
         <EmployeeNav tabTitle={"employee details"} />
       </CardSection>
-
-      <SlugCheck />
+      <LayoutWrap>{children}</LayoutWrap>
     </Card>
   );
 };
 
-export default page;
+export default layout;

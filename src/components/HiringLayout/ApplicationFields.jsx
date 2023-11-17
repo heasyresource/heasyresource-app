@@ -121,7 +121,7 @@ const ApplicationFields = ({
                     color="#43D72B"
                     component="a"
                     tt="capitalize"
-                    px="50px"
+                    px="30px"
                     w={{ lg: "auto", md: "auto", sm: "auto" }}
                     className={classes.btn}
                     onClick={openShortlist}
@@ -133,7 +133,7 @@ const ApplicationFields = ({
                     size="sm"
                     color="#FF0000"
                     tt="capitalize"
-                    px="50px"
+                    px="30px"
                     w={{ lg: "auto", md: "auto", sm: "auto" }}
                     className={classes.btn}
                     type="submit"
@@ -223,7 +223,7 @@ const ApplicationFields = ({
         withCloseButton={false}
         size={"lg"}
         closeOnClickOutside={false}
-        title="Shorlist Applicant"
+        title="Shortlist Applicant"
         overlayProps={{
           backgroundOpacity: 0.55,
           blur: 3,

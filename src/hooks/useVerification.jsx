@@ -3,7 +3,7 @@ import { apiClient } from "@/lib/interceptor/apiClient";
 import { obfuscateToken } from "@/utils/encryptToken";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { getSubdomain } from "@/utils/publicFunctions";
-import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Image, Stack, Text, Title, Loader } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
@@ -18,6 +18,7 @@ const useVerification = () => {
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const [email, setEmail] = useState("");
+  const [routeLoading, setRouteLoading] = useState(false);
 
   const form = useForm({
     initialValues: {
@@ -28,21 +29,23 @@ const useVerification = () => {
     },
   });
   const handleRouteChange = async (payload) => {
+    setRouteLoading(true);
     modals.closeAll();
     console.log({ payload });
     const result = await signIn("user-token", {
-      redirect: false,
+      redirect: true,
       ...payload,
       callbackUrl: "/complete-registration",
     });
-    console.log({ result });
-    router.push(result.url);
+
+    // router.push(result.url);
   };
   const openModal = (payload) =>
     modals.open({
       radius: "md",
       centered: true,
       closeOnClickOutside: false,
+      withCloseButton: false,
       children: (
         <Stack
           gap={"20px"}
@@ -70,7 +73,11 @@ const useVerification = () => {
             bg="#3377FF"
             size="md"
           >
-            continue
+            {routeLoading ? (
+              <Loader size="md" color="white" type="dots" />
+            ) : (
+              "continue"
+            )}
           </Button>
         </Stack>
       ),
@@ -125,10 +132,10 @@ const useVerification = () => {
 
       notifications.show({
         color: "red",
-        title: "Unsuccessful",
+        title: "Failed",
         message: err.message,
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 7000,
       });
     }
   };
@@ -155,7 +162,7 @@ const useVerification = () => {
         title: "Success",
         message: "Check your mail for code",
         styles: successStyles,
-        autoClose: 2000,
+        autoClose: 7000,
       });
       setLoading(false);
     } catch (err) {
@@ -165,7 +172,7 @@ const useVerification = () => {
         title: "Error",
         message: err.message,
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 7000,
       });
     }
   };
