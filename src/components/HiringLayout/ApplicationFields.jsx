@@ -35,6 +35,7 @@ const ApplicationFields = ({
   openedReject,
   openReject,
   closeReject,
+  vacancy,
 }) => {
   return (
     <>
@@ -71,11 +72,12 @@ const ApplicationFields = ({
                 fontSize: "small",
                 color: "#515151",
                 marginBottom: "4px",
+                textTransform: "capitalize",
               }}
             >
               Vacancy
             </Text>
-            <Text style={{ fontSize: "20px" }}>Front End Developer</Text>
+            <Text style={{ fontSize: "20px" }}>{vacancy?.title}</Text>
           </GridCol>
           <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
             <Text
@@ -87,7 +89,9 @@ const ApplicationFields = ({
             >
               Hiring Manager
             </Text>
-            <Text style={{ fontSize: "20px" }}>Jadesola Lawal</Text>
+            <Text style={{ fontSize: "20px", textTransform: "capitalize" }}>
+              {vacancy?.hiringManager}
+            </Text>
           </GridCol>
           <GridCol>
             <Group

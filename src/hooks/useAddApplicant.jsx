@@ -47,6 +47,7 @@ const useAddApplicant = () => {
   const [isChanged, setIsChanged] = useState(null);
   const [applicantId, setApplicantId] = useState("");
   const [status, seStatus] = useState("");
+  const [vacancy, setVacancy] = useState(null);
 
   const form = useForm({
     initialValues: {
@@ -327,6 +328,7 @@ const useAddApplicant = () => {
         );
         const result = response.result;
         seStatus(result.status);
+        setVacancy(result.vacancy);
         form.setValues({
           lastName: result.lastName,
           firstName: result.firstName,
@@ -389,6 +391,7 @@ const useAddApplicant = () => {
     openedReject,
     openReject,
     closeReject,
+    vacancy,
   };
 };
 

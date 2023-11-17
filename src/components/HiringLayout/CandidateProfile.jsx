@@ -46,7 +46,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
       </Group>
       <form
         style={{ marginTop: "1.5rem" }}
-        onSubmit={form.onSubmit((values) => handleEdit(values))}
+        onSubmit={form?.onSubmit((values) => handleEdit(values))}
       >
         <Stack gap={"2rem"}>
           <Grid gutter="xl" justify="flex-start" className={classes.formWrap}>
@@ -61,7 +61,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   label: classes.label,
                   error: classes.error,
                 }}
-                {...form.getInputProps("firstName")}
+                {...form?.getInputProps("firstName")}
                 disabled={loading || !isEdit}
               />
             </GridCol>
@@ -77,7 +77,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   label: classes.label,
                   error: classes.error,
                 }}
-                {...form.getInputProps("lastName")}
+                {...form?.getInputProps("lastName")}
                 disabled={loading || !isEdit}
               />
             </GridCol>
@@ -88,7 +88,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 withAsterisk
                 label="Email"
                 style={{ width: "100%" }}
-                {...form.getInputProps("email")}
+                {...form?.getInputProps("email")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -104,7 +104,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 label="Phone Number"
                 style={{ width: "100%" }}
                 placeholder="700 000 0000"
-                {...form.getInputProps("phoneNumber")}
+                {...form?.getInputProps("phoneNumber")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -120,7 +120,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 withAsterisk
                 label="Address"
                 style={{ width: "100%" }}
-                {...form.getInputProps("address")}
+                {...form?.getInputProps("address")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -134,7 +134,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 withAsterisk
                 label="City"
                 style={{ width: "100%" }}
-                {...form.getInputProps("city")}
+                {...form?.getInputProps("city")}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -154,7 +154,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
                 allowDeselect={false}
-                {...form.getInputProps("stateId")}
+                {...form?.getInputProps("stateId")}
                 disabled={loading || !isEdit}
                 searchable
                 nothingFoundMessage="No state found"
@@ -172,7 +172,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
                 allowDeselect={false}
-                {...form.getInputProps("countryId")}
+                {...form?.getInputProps("countryId")}
                 disabled={loading || !isEdit}
                 searchable
                 nothingFoundMessage="No country found"
@@ -190,7 +190,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 size="md"
                 leftSectionWidth={140}
                 accept=".pdf, .doc, .docx"
-                {...form.getInputProps("resumeUrl")}
+                {...form?.getInputProps("resumeUrl")}
                 leftSection={
                   <Button
                     disabled
