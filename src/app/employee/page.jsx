@@ -5,15 +5,12 @@ import {
   Badge,
   Box,
   Card,
-  CardSection,
   Container,
   Divider,
-  Flex,
   Grid,
   GridCol,
   Group,
   Paper,
-  Progress,
   ScrollArea,
   SimpleGrid,
   Space,
@@ -27,16 +24,15 @@ import { DatePicker } from "@mantine/dates";
 import { useCompleteReg } from "@/hooks";
 import AddEmployeeImg from "./components/AddEmployeeImg";
 import {
-  IconAt,
   IconBrandLinkedin,
   IconBrandTelegram,
-  IconPhoneCall,
+  IconBrandDiscordFilled
 } from "@tabler/icons-react";
-import classes from "./dashboard.module.css";
-import { IconBrandDiscordFilled } from "@tabler/icons-react";
+import classes from "./dashboard.module.cssomo";
 import Link from "next/link";
 import PaymentTable from "./components/PaymentTable";
 
+// eslint-disable-next-line @next/next/no-async-client-component
 const Dashboard = async () => {
   const { setLogo, loading, uploading, isSubmitted } = useCompleteReg();
   // const session = await getServerSession(authOptions);
