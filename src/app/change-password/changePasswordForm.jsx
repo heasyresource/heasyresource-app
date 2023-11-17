@@ -51,9 +51,7 @@ export default function ChangePasswordForm() {
   return (
     <>
       <Text c="dimmed" fz="md" ta="left" mt={"15px"}>
-        Change your default password{" "}
-        {/* <br style={{ display: isMobile ? "none" : "block" }} /> and access all
-        features */}
+        Change your default password
       </Text>
       <form
         className="mt-[2rem]"
@@ -116,7 +114,7 @@ export default function ChangePasswordForm() {
             mt="1rem"
             disabled={loading}
           >
-            {loading ? <Loader type="dots" color="white" /> : "Update Password"}
+            {loading ? <Loader type="dots" color="white" /> : "Change Password"}
           </Button>
         </Stack>
       </form>
