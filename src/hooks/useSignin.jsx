@@ -19,7 +19,8 @@ const useSignin = () => {
       password: "",
     },
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Enter a valid email address"),
+      email: (val) =>
+        /^\S+@\S+$/.test(val) ? null : "Enter a valid email address",
       password: (val) => (val.length <= 1 ? "Password is required" : null),
     },
   });
@@ -41,7 +42,11 @@ const useSignin = () => {
   // Form Submit Function
   const handleSignInSubmit = async (data) => {
     setLoadingSignIn(true);
-    const result = await signIn("credentials", { redirect: false, ...data, callbackUrl: "/dashboard" });
+    const result = await signIn("credentials", {
+      redirect: false,
+      ...data,
+      callbackUrl: "/dashboard",
+    });
     console.log({ result });
     if (result.status === 200) {
       notifications.show({
@@ -49,7 +54,7 @@ const useSignin = () => {
         title: "Success",
         message: "Logged In Successfully.",
         styles: successStyles,
-        autoClose: 2000,
+        autoClose: 7000,
       });
       setLoadingSignIn(false);
       router.push(result.url);
@@ -60,9 +65,12 @@ const useSignin = () => {
         title: "Failed",
         message: result.error,
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 7000,
       });
-      if (result.error === "Your account have not been verified, please verify your account.") {
+      if (
+        result.error ===
+        "Your account have not been verified, please verify your account."
+      ) {
         handleResend(data);
       }
     }

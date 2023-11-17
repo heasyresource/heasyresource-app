@@ -105,7 +105,7 @@ const useIndividual = () => {
         try {
           await apiClient.post(
             "employees",
-            { ...form.values, logoUrl: response?.data.url },
+            { ...form.values, logoUrl: response?.data.secure_url },
             headerSettings
           );
           notifications.show({
@@ -137,12 +137,13 @@ const useIndividual = () => {
       };
       handleEmployee();
     }
+    //eslint-disable-next-line
   }, [response]);
 
   useEffect(() => {
     getDepartments();
+    //eslint-disable-next-line
   }, []);
-  console.log(logo, "jdjdjdj");
   return {
     form,
     handleSubmit,

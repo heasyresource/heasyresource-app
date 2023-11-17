@@ -15,7 +15,14 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const AddComImg = ({ setLogo, logo, loading, uploading, isSubmitted }) => {
+const AddComImg = ({
+  setLogo,
+  logo,
+  loading,
+  uploading,
+  isSubmitted,
+  isEdit,
+}) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -58,7 +65,7 @@ const AddComImg = ({ setLogo, logo, loading, uploading, isSubmitted }) => {
             size={"xl"}
             variant="filled"
             onClick={open}
-            disabled={loading || uploading || isSubmitted}
+            disabled={loading || uploading || isSubmitted || isEdit}
           >
             <IconPlus />
           </ActionIcon>

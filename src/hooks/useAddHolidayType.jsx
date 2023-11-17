@@ -21,7 +21,7 @@ const useAddHolidayType = () => {
   const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
   const [openedEdit, { open: openEdit, close: closeEdit }] =
     useDisclosure(false);
-  const [gettingDatas, setGettingDatas] = useState(false);
+  const [gettingDatas, setGettingDatas] = useState(true);
   const [isChanged, setIsChanged] = useState(null);
   const [itemID, setItemID] = useState("");
   const form = useForm({
@@ -38,7 +38,7 @@ const useAddHolidayType = () => {
       availability: (value) =>
         !value.length ? "Avalability is required" : null,
       isFullDay: (value) => (!value.length ? "Field is required" : null),
-      date: (value) => (value.length === 0 ? "Date is required" : null),
+      date: (value) => (value?.length === 0 ? "Date is required" : null),
       isPaid: (value) => (!value.length ? "Field is required" : null),
     },
   });
@@ -195,11 +195,14 @@ const useAddHolidayType = () => {
 
   useEffect(() => {
     getHolidays();
+
+    //eslint-disable-next-line
   }, [searchParams.get("page")]);
   useEffect(() => {
     if (isChanged !== null) {
       getHolidays();
     }
+    //eslint-disable-next-line
   }, [isChanged]);
   return {
     form,

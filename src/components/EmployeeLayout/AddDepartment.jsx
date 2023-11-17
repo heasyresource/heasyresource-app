@@ -55,7 +55,7 @@ const AddDepartment = ({
         closeOnClickOutside={false}
         opened={openedAdd}
         onClose={closeAdd}
-        title="Add Leave Type"
+        withCloseButton={false}
         size="lg"
         centered
         overlayProps={{

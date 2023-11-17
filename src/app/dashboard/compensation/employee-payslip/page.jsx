@@ -30,11 +30,7 @@ const EmployeeSlip = () => {
           margin: "0px",
         }}
       >
-        <CardSection
-          pt="25px"
-          pb="55px"
-          style={{ borderBottom: "1px solid #DDDDDD" }}
-        >
+        <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
           <CompensationNav tabTitle={"Compensation"} />
         </CardSection>
         <Text ta={{ base: "center", md: "left" }} p={40} fz={24} fw={700}>
@@ -139,7 +135,7 @@ const EmployeeSlip = () => {
         </Group>
       </Card>
       <PaySLipTable />
-      <Group justify="space-between" className={classes.controlBtn}  my={"3rem"}>
+      <Group justify="space-between" className={classes.controlBtn} my={"3rem"}>
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}
           size="md"

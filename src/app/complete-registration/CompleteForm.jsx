@@ -8,6 +8,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Highlight,
   Loader,
   MultiSelect,
   Radio,
@@ -41,7 +42,6 @@ const CompleteForm = () => {
     uploading,
     isSubmitted,
     allOptions,
-    selectedOptions,
     logo,
   } = useCompleteReg();
   return (
@@ -88,66 +88,36 @@ const CompleteForm = () => {
               </GridCol>
 
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                {isSubmitted ? (
-                  <TextInput
-                    label="Country"
-                    withAsterisk
-                    size="md"
-                    value={form?.values.countryId}
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    disabled
-                  />
-                ) : (
-                  <Select
-                    label="Country"
-                    withAsterisk
-                    data={countries}
-                    size="md"
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    // searchable
-                    {...form.getInputProps("countryId")}
-                    disabled={uploading || isSubmitted}
-                  />
-                )}
+                <Select
+                  label="Country"
+                  withAsterisk
+                  data={countries}
+                  size="md"
+                  classNames={{
+                    label: styles.label,
+                    error: styles.error,
+                    placeholder: styles.placeholder,
+                  }}
+                  searchable
+                  {...form.getInputProps("countryId")}
+                  disabled={uploading || isSubmitted}
+                />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                {isSubmitted ? (
-                  <TextInput
-                    size="md"
-                    label="Company Size"
-                    withAsterisk
-                    value={form?.values.companySizeId}
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    disabled
-                  />
-                ) : (
-                  <Select
-                    label="Company Size"
-                    withAsterisk
-                    data={cmpSize}
-                    size="md"
-                    value={form?.values.companySizeId}
-                    classNames={{
-                      label: styles.label,
-                      error: styles.error,
-                      placeholder: styles.placeholder,
-                    }}
-                    {...form.getInputProps("companySizeId")}
-                    disabled={uploading || isSubmitted}
-                  />
-                )}
+                <Select
+                  label="Company Size"
+                  withAsterisk
+                  data={cmpSize}
+                  size="md"
+                  value={form?.values.companySizeId}
+                  classNames={{
+                    label: styles.label,
+                    error: styles.error,
+                    placeholder: styles.placeholder,
+                  }}
+                  {...form.getInputProps("companySizeId")}
+                  disabled={uploading || isSubmitted}
+                />
               </GridCol>
 
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -184,12 +154,25 @@ const CompleteForm = () => {
                   }}
                   {...form.getInputProps("subdomain")}
                   disabled={uploading || isSubmitted}
+                  pattern="^[a-zA-Z0-9]+$"
+                  title="Subdomain should contain only alphabets and numbers"
                 />
-                {form.values.subdomain.length !== 0 && (
-                  <Text size="14px" mt="10px" c="565656">
-                    {`Your domain will look like: https://${form.values.subdomain}.heasyresource.com`}
-                  </Text>
-                )}
+
+                <Highlight
+                  highlightStyles={{
+                    fontWeight: "bold",
+                  }}
+                  color="#e7f7ff"
+                  size="14px"
+                  mt="10px"
+                  highlight={form.values.subdomain || "subdomain"}
+                >
+                  {`Your domain will look like: https://${
+                    form.values.subdomain.length !== 0
+                      ? form.values.subdomain
+                      : "subdomain"
+                  }.heasyresource.com`}
+                </Highlight>
               </GridCol>
 
               <GridCol span={12} style={{ marginTop: "20px" }}>
@@ -219,6 +202,7 @@ const CompleteForm = () => {
                             label="Yes"
                             onClick={() => setIsRadioChecked(true)}
                             disabled={uploading || isSubmitted}
+                            color="#3377FF"
                           />
                           <Radio
                             classNames={{ radio: styles.radio }}
@@ -227,6 +211,7 @@ const CompleteForm = () => {
                             label="No"
                             onClick={() => setIsRadioChecked(false)}
                             disabled={uploading || isSubmitted}
+                            color="#3377FF"
                           />
                         </Group>
                       </RadioGroup>
@@ -235,12 +220,12 @@ const CompleteForm = () => {
                 </Stack>
                 {isRadioChecked && (
                   <>
-                    {selectedOptions?.length !== 0 && (
+                    {form.values.employeeIdFormat.length !== 0 && (
                       <Text
                         size="14px"
                         c="565656"
                         mt={"10px"}
-                      >{`The employee ID will look like: ${selectedOptions
+                      >{`The employee ID will look like: ${form.values.employeeIdFormat
                         .map((option) => optionCodeMap[option])
                         .join("")}`}</Text>
                     )}

@@ -6,12 +6,7 @@ import { IconCalendarBolt } from "@tabler/icons-react";
 const SearchFields = () => {
   return (
     <form style={{ marginTop: "1rem" }}>
-      <Grid
-        gutter="xl"
-        px={40}
-        justify="space-between"
-        className={classes.formWrap}
-      >
+      <Grid justify="flex-start" className={classes.formWrap}>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
           <TextInput
             size="md"
@@ -39,6 +34,7 @@ const SearchFields = () => {
               error: classes.error,
               placeholder: classes.placeholder,
             }}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -54,6 +50,7 @@ const SearchFields = () => {
               error: classes.error,
               placeholder: classes.placeholder,
             }}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -69,6 +66,7 @@ const SearchFields = () => {
               error: classes.error,
               placeholder: classes.placeholder,
             }}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -84,6 +82,7 @@ const SearchFields = () => {
               error: classes.error,
               placeholder: classes.placeholder,
             }}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -99,6 +98,7 @@ const SearchFields = () => {
               error: classes.error,
               placeholder: classes.placeholder,
             }}
+            allowDeselect={false}
           />
         </GridCol>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
@@ -117,35 +117,8 @@ const SearchFields = () => {
             rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
           />
         </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <DateInput
-            size="md"
-            required
-            label="Date of Application"
-            placeholder="To"
-            style={{ width: "100%" }}
-            classNames={{
-              label: classes.label,
-              error: classes.error,
-              placeholder: classes.placeholder,
-            }}
-            rightSectionWidth={70}
-            rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
-          />
-        </GridCol>
       </Grid>
       <Group justify="flex-end" mt={"3rem"}>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          required
-          variant="outline"
-          color="#3377FF"
-          px={"40px"}
-          type="submit"
-        >
-          Reset
-        </Button>
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}
           size="md"

@@ -33,18 +33,6 @@ const LeaveNav = ({ tabTitle }) => {
         >
           Leave List
         </Button>
-        <Button
-          component="a"
-          href="/dashboard/leave/assign-leave"
-          w="125px"
-          variant="filled"
-          className={classes.btnLink}
-          data-active={
-            "/dashboard/leave/assign-leave" === pathname || undefined
-          }
-        >
-          Assign Leave
-        </Button>
         <Menu>
           <MenuTarget>
             <Button

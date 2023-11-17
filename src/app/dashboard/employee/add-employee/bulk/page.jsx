@@ -26,11 +26,7 @@ const page = () => {
         margin: "0px",
       }}
     >
-      <CardSection
-        pt="25px"
-        pb="55px"
-        style={{ borderBottom: "1px solid #DDDDDD" }}
-      >
+      <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
         <EmployeeNav tabTitle={"data import"} />
       </CardSection>
       <Box
@@ -135,7 +131,7 @@ const page = () => {
           color="#3377FF"
           style={{ borderColor: "#3377FF" }}
           tt="capitalize"
-          px="50px"
+          px="30px"
           w={{ lg: "auto", md: "auto", sm: "auto" }}
           className={classes.btn}
         >
@@ -146,7 +142,7 @@ const page = () => {
           size="md"
           color="#3377FF"
           tt="capitalize"
-          px="50px"
+          px="30px"
           w={{ lg: "auto", md: "auto", sm: "auto" }}
           className={classes.btn}
           type="submit"

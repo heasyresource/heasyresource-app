@@ -3,29 +3,22 @@ import {
   ActionIcon,
   Box,
   Button,
-  Checkbox,
   Flex,
-  Grid,
-  GridCol,
-  Group,
   Image,
-  Loader,
-  Modal,
-  Select,
   Stack,
   Text,
-  TextInput,
-  Textarea,
 } from "@mantine/core";
-import classes from "./employeeLayout.module.css";
-import { DateInput } from "@mantine/dates";
+
 import { IconEdit } from "@tabler/icons-react";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   calculateDateDifference,
   formatMonthYear,
 } from "@/utils/publicFunctions";
+import dynamic from "next/dynamic";
 
+const AddWorkModal = dynamic(() => import("./AddWorkModal"), { ssr: false });
+const EditWorkModal = dynamic(() => import("./EditWorkModal"), { ssr: false });
 const WorkExprience = ({
   openExp,
   workExp,
@@ -56,6 +49,7 @@ const WorkExprience = ({
     });
     openEditExp();
   };
+
   return (
     <>
       <Box>
@@ -89,8 +83,18 @@ const WorkExprience = ({
             {workExp?.map((item) => (
               <Box key={item.companyName}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
-                  <Box style={{ width: "45px", height: "45px" }}>
-                    <Image src={"/assets/images/workExprience.png"} />
+                  <Box
+                    style={{
+                      width: "100%",
+                      maxWidth: "45px",
+                      maxHeight: "45px",
+                      height: "100%",
+                    }}
+                  >
+                    <Image
+                      src={"/assets/images/workExprience.png"}
+                      alt="work"
+                    />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>
@@ -134,7 +138,7 @@ const WorkExprience = ({
                     )} ${calculateDateDifference(
                       item.startDate,
                       item.endDate
-                    )} ${item.isPresent === 1 && "· present"}`}</Text>
+                    )} ${item.isPresent === 1 ? "· present" : ""}`}</Text>
                     <Text
                       style={{
                         fontSize: "14px",
@@ -160,357 +164,21 @@ const WorkExprience = ({
           </Stack>
         )}
       </Box>
-      <Modal
-        title="Add Work Experience"
-        size="xl"
-        closeOnClickOutside={false}
-        centered
-        opened={openedExp}
-        onClose={closeExp}
-        overlayProps={{
-          backgroundOpacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <form
-          onSubmit={experienceForm?.onSubmit((values) =>
-            handleExpSubmit(values)
-          )}
-        >
-          <Grid
-            style={{
-              margin: "20px 0",
-              maxHeight: "400px",
-              overflowY: "scroll",
-            }}
-            gutter="lg"
-          >
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Company Name"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("companyName")}
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Position"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("position")}
-                disabled={loading}
-              />
-            </GridCol>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-              <Select
-                data={employmentType}
-                size="md"
-                withAsterisk
-                label="Emplyment Type"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("employmentTypeId")}
-                disabled={loading}
-                allowDeselect={false}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-              <Select
-                size="md"
-                withAsterisk
-                label="Work Mode"
-                style={{ textAlign: "start", width: "100%" }}
-                data={["On-Site", "Hybrid", "Remote"]}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("workMode")}
-                disabled={loading}
-                allowDeselect={false}
-              />
-            </Grid.Col>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Company Location"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("location")}
-                disabled={loading}
-                placeholder="Lagos, Nigeria"
-              />
-            </GridCol>
-
-            <GridCol
-              span={12}
-              style={{ display: "flex", alignItems: "flex-end" }}
-            >
-              <Checkbox
-                defaultChecked
-                color="#3377FF"
-                {...experienceForm?.getInputProps("isPresent")}
-                label="I currently work here"
-              />
-            </GridCol>
-            <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
-              <DateInput
-                size="md"
-                clearable
-                withAsterisk
-                label="Start Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("startDate")}
-                disabled={loading}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
-              <DateInput
-                clearable
-                size="md"
-                withAsterisk
-                label="End Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("endDate")}
-                disabled={loading || experienceForm.values.isPresent}
-              />
-            </Grid.Col>
-            <Grid.Col span={12}>
-              <Textarea
-                size="md"
-                label="Comment"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("description")}
-              />
-            </Grid.Col>
-          </Grid>
-
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
-            <Button
-              variant="outline"
-              size="md"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              onClick={closeExp}
-              disabled={loading}
-            >
-              cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="md"
-              color="#3377FF"
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              type="submit"
-              style={{
-                backgroundColor: "#3377FF",
-              }}
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader color="white" type="dots" size="md" />
-              ) : (
-                "save"
-              )}
-            </Button>
-          </Group>
-        </form>
-      </Modal>
-      <Modal
-        title="Edit Work Experience"
-        size="xl"
-        closeOnClickOutside={false}
-        centered
-        opened={openedEditExp}
-        onClose={closeEditExp}
-        overlayProps={{
-          backgroundOpacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <form
-          onSubmit={experienceForm?.onSubmit((values) => handleEditExp(values))}
-        >
-          <Grid
-            style={{
-              margin: "20px 0",
-              maxHeight: "400px",
-              overflowY: "scroll",
-            }}
-            gutter="lg"
-          >
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Company Name"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("companyName")}
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Position"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("position")}
-                disabled={loading}
-              />
-            </GridCol>
-            <Grid.Col span={{ lg: 6, md: 6, sm: 12 }}>
-              <Select
-                data={employmentType}
-                size="md"
-                withAsterisk
-                allowDeselect={false}
-                label="Employment Type"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("employmentTypeId")}
-                disabled={loading}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 6, md: 6, sm: 12 }}>
-              <Select
-                size="md"
-                withAsterisk
-                label="Work Mode"
-                style={{ textAlign: "start", width: "100%" }}
-                data={["On-Site", "Hybrid", "Remote"]}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("workMode")}
-                disabled={loading}
-                allowDeselect={false}
-              />
-            </Grid.Col>
-            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Company Location"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("location")}
-                disabled={loading}
-                placeholder="Lagos, Nigeria"
-              />
-            </GridCol>
-
-            <GridCol
-              span={12}
-              style={{ display: "flex", alignItems: "flex-end" }}
-            >
-              <Checkbox
-                defaultChecked={experienceForm.values.isPresent}
-                color="#3377FF"
-                {...experienceForm?.getInputProps("isPresent")}
-                label="I currently work here"
-              />
-            </GridCol>
-            <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
-              <DateInput
-                size="md"
-                clearable
-                withAsterisk
-                label="Start Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("startDate")}
-                disabled={loading}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ lg: 6, md: 12, sm: 12 }}>
-              <DateInput
-                clearable
-                size="md"
-                withAsterisk
-                label="End Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("endDate")}
-                disabled={loading || experienceForm.values.isPresent}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={12}>
-              <Textarea
-                size="md"
-                label="Comment"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...experienceForm?.getInputProps("description")}
-                minRows={2}
-                autosize
-              />
-            </Grid.Col>
-          </Grid>
-
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
-            <Button
-              variant="outline"
-              size="md"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              onClick={closeEditExp}
-              disabled={loading}
-            >
-              cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="md"
-              color="#3377FF"
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              type="submit"
-              style={{
-                backgroundColor: "#3377FF",
-              }}
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader color="white" type="dots" size="md" />
-              ) : (
-                "update"
-              )}
-            </Button>
-          </Group>
-        </form>
-      </Modal>
+      <AddWorkModal
+        openedExp={openedExp}
+        handleExpSubmit={handleExpSubmit}
+        loading={loading}
+        employmentType={employmentType}
+        closeExp={closeExp}
+      />
+      <EditWorkModal
+        openedEditExp={openedEditExp}
+        closeEditExp={closeEditExp}
+        loading={loading}
+        employmentType={employmentType}
+        handleEditExp={handleEditExp}
+        experienceForm={experienceForm}
+      />
     </>
   );
 };

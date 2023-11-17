@@ -69,19 +69,18 @@ export const calculateDateDifference = (start, end) => {
   let resultString;
 
   if (yearsDifference > 0) {
-    resultString = ` ·${yearsDifference} ${
+    resultString = ` · ${yearsDifference} ${
       yearsDifference === 1 ? "year" : "years"
     }`;
   } else if (monthsDifference > 0) {
-    resultString = ` ·${monthsDifference} ${
+    resultString = ` · ${monthsDifference} ${
       monthsDifference === 1 ? "month" : "months"
     }`;
   } else {
-    resultString = ` ·${daysDifference} ${
+    resultString = ` · ${daysDifference} ${
       daysDifference === 1 ? "day" : "days"
     }`;
   }
-
   return resultString;
 };
 export const formatMonthYear = (dateStr1, dateStr2) => {
@@ -441,7 +440,7 @@ export const hiringList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "2",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",
@@ -449,7 +448,7 @@ export const hiringList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "3",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",
@@ -459,7 +458,7 @@ export const hiringList = [
 ];
 export const CompanyList = [
   {
-    id: "1",
+    id: "",
     companyName: "TechNova Solutions",
     companySize: "51-200",
     industry: "Technology",
@@ -514,7 +513,7 @@ export const VacancyList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "2",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",
@@ -522,7 +521,7 @@ export const VacancyList = [
     status: "Shortlisted",
   },
   {
-    id: "1",
+    id: "3",
     vacancy: "Product Designer",
     candidate: "Blessing Obi",
     hiringManager: "Dayo Adegbite",

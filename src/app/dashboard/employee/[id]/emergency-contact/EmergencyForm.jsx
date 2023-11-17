@@ -1,6 +1,4 @@
 "use client";
-import React from "react";
-import classes from "./employeeLayout.module.css";
 import {
   Box,
   Button,
@@ -13,14 +11,12 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { useRouter } from "next/navigation";
+import React from "react";
+import classes from "../../employee.module.css";
+import useEmergency from "@/hooks/useEmergency";
 
-const EmergencyContact = ({
-  emergencyForm,
-  handleEmergencySubmit,
-  loading,
-}) => {
-  const router = useRouter();
+const EmergencyForm = () => {
+  const { form, loading, handleSubmit, router } = useEmergency();
   return (
     <Box>
       <Text
@@ -31,9 +27,7 @@ const EmergencyContact = ({
       </Text>
       <form
         style={{ marginTop: "2rem" }}
-        onSubmit={emergencyForm?.onSubmit((values) =>
-          handleEmergencySubmit(values)
-        )}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
       >
         <Stack className={classes.individualWrap}>
           <Grid gutter={"lg"}>
@@ -45,7 +39,7 @@ const EmergencyContact = ({
                 placeholder="John"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...emergencyForm?.getInputProps("firstName")}
+                {...form.getInputProps("firstName")}
                 disabled={loading}
               />
             </GridCol>
@@ -57,7 +51,7 @@ const EmergencyContact = ({
                 placeholder="Smith"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...emergencyForm?.getInputProps("lastName")}
+                {...form.getInputProps("lastName")}
                 disabled={loading}
               />
             </GridCol>
@@ -74,10 +68,11 @@ const EmergencyContact = ({
                 ]}
                 withAsterisk
                 size="md"
-                {...emergencyForm?.getInputProps("relationship")}
+                {...form.getInputProps("relationship")}
                 disabled={loading}
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
+                allowDeselect={false}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -88,7 +83,7 @@ const EmergencyContact = ({
                 style={{ textAlign: "start", width: "100%" }}
                 disabled={loading}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...emergencyForm?.getInputProps("homeAddress")}
+                {...form.getInputProps("homeAddress")}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -98,11 +93,11 @@ const EmergencyContact = ({
                 size="md"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...emergencyForm?.getInputProps("phoneNumber")}
+                {...form.getInputProps("phoneNumber")}
                 leftSection={"+234"}
                 leftSectionWidth={50}
                 disabled={loading}
-                maxLength={"11"}
+                maxLength={11}
                 type="tel"
               />
             </GridCol>
@@ -114,7 +109,7 @@ const EmergencyContact = ({
                 size="md"
                 style={{ textAlign: "start", width: "100%" }}
                 classNames={{ label: classes.label, error: classes.error }}
-                {...emergencyForm?.getInputProps("email")}
+                {...form.getInputProps("email")}
                 disabled={loading}
               />
             </GridCol>
@@ -131,7 +126,7 @@ const EmergencyContact = ({
               color="#3377FF"
               style={{ borderColor: "#3377FF" }}
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               disabled={loading}
@@ -144,7 +139,7 @@ const EmergencyContact = ({
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               type="submit"
@@ -166,4 +161,4 @@ const EmergencyContact = ({
   );
 };
 
-export default EmergencyContact;
+export default EmergencyForm;

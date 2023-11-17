@@ -98,7 +98,6 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
               classNames={{ label: classes.label, error: classes.error }}
               {...form?.getInputProps("gender")}
               disabled={loading}
-              color="#3377FF"
             >
               <Group mt="xs">
                 <Radio
@@ -106,12 +105,14 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
                   disabled={loading}
                   label="Male"
                   labelPosition="left"
+                  color="#3377FF"
                 />
                 <Radio
                   value="Female"
                   disabled={loading}
                   label="Female"
                   labelPosition="left"
+                  color="#3377FF"
                 />
               </Group>
             </Radio.Group>

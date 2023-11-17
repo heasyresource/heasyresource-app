@@ -18,7 +18,7 @@ const useSearch = () => {
   const { data: session } = useSession();
   const [employees, setEmployees] = useState(null);
   const [pagination, setPagination] = useState(null);
-  const [gettingData, setGettingData] = useState(false);
+  const [gettingData, setGettingData] = useState(true);
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const form = useForm({
@@ -108,6 +108,7 @@ const useSearch = () => {
   };
   useEffect(() => {
     getEmployees();
+    //eslint-disable-next-line
   }, []);
 
   return {

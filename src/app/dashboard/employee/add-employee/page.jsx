@@ -12,13 +12,12 @@ const AddEmployee = () => {
         backgroundColor: "#ffff",
         borderRadius: "15px",
         borderBottom: "1px solid #DDDDDD",
-        minHeight: "390px",
+        minHeight: "280px",
         margin: "0px",
       }}
     >
       <CardSection
-        pt="25px"
-        pb="55px"
+        py="25px"
         style={{ borderBottom: "1px solid #DDDDDD" }}
         className={classes.cardSection}
       >

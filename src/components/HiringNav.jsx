@@ -1,12 +1,11 @@
-'use client'
-import { Button, Group, Menu, MenuDivider, MenuDropdown, MenuItem, MenuTarget, Space, Text } from '@mantine/core';
-import { usePathname } from 'next/navigation'
-import classes from "./HiringLayout/HiringLayout.module.css"
-import React from 'react'
-import { IconChevronDown } from '@tabler/icons-react';
+"use client";
+import { Button, Group, Text } from "@mantine/core";
+import { usePathname } from "next/navigation";
+import classes from "./HiringLayout/HiringLayout.module.css";
+import React from "react";
 
-const HiringNav = ({tabTitle}) => {
-    const pathname = usePathname();
+const HiringNav = ({ tabTitle }) => {
+  const pathname = usePathname();
   return (
     <Group justify="space-between" mx="40px">
       <Text fz="24px" fw="700" tt={"capitalize"}>
@@ -22,13 +21,12 @@ const HiringNav = ({tabTitle}) => {
             "/dashboard/hiring/add-candidate" === pathname ||
             "/dashboard/hiring/application-phase" === pathname ||
             "/dashboard/hiring/shortlist" === pathname ||
-
-             undefined
+            undefined
           }
           className={classes.btnLink}
           variant="filled"
         >
-          Candidates
+          Applicants
         </Button>
         <Button
           component="a"
@@ -39,14 +37,14 @@ const HiringNav = ({tabTitle}) => {
           data-active={
             "/dashboard/hiring/vacancies" === pathname ||
             "/dashboard/hiring/add-vacancy" === pathname ||
-             undefined
+            undefined
           }
         >
           Vacancies
         </Button>
       </Group>
     </Group>
-  )
-}
+  );
+};
 
-export default HiringNav
+export default HiringNav;

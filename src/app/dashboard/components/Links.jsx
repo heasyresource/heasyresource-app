@@ -32,8 +32,14 @@ const data = [
     link: "/dashboard/compensation",
     label: "Compensation",
     icon: IconUserDollar,
+    subLink: true,
   },
-  { link: "/dashboard/settings", label: "Settings", icon: IconSettings },
+  {
+    link: "/dashboard/settings",
+    label: "Settings",
+    icon: IconSettings,
+    subLink: true,
+  },
 ];
 
 const Links = () => {

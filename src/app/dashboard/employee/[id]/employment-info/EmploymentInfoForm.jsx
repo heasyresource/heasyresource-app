@@ -1,5 +1,5 @@
-import React from "react";
-import classes from "./employeeLayout.module.css";
+"use client";
+import useEmploymentInfo from "@/hooks/useEmploymentInfo";
 import {
   Box,
   Button,
@@ -13,16 +13,12 @@ import {
   TextInput,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import { useRouter } from "next/navigation";
-
-const EmployeeInfo = ({
-  employmentInfoForm,
-  handleInfoSubmit,
-  departments,
-  employmentType,
-  loading,
-}) => {
-  const router = useRouter();
+import React from "react";
+import classes from "../../employee.module.css";
+const EmploymentInfoForm = () => {
+  const currentDate = new Date();
+  const { form, handleSubmit, departments, employmentTypes, loading, router } =
+    useEmploymentInfo();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
@@ -30,9 +26,7 @@ const EmployeeInfo = ({
       </Text>
       <form
         style={{ height: "100%", marginTop: "2rem" }}
-        onSubmit={employmentInfoForm?.onSubmit((values) =>
-          handleInfoSubmit(values)
-        )}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
       >
         <Stack style={{ gap: "3rem" }}>
           <Box>
@@ -52,11 +46,11 @@ const EmployeeInfo = ({
                   label="Position"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...employmentInfoForm?.getInputProps("position")}
+                  {...form.getInputProps("position")}
                   disabled={loading}
                 />
               </GridCol>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <Select
                   size="md"
                   withAsterisk
@@ -64,23 +58,25 @@ const EmployeeInfo = ({
                   style={{ textAlign: "start", width: "100%" }}
                   data={departments}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...employmentInfoForm?.getInputProps("departmentId")}
+                  {...form.getInputProps("departmentId")}
                   disabled={loading}
+                  allowDeselect={false}
                 />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <Select
                   size="md"
                   withAsterisk
                   label="Employement Type"
                   style={{ textAlign: "start", width: "100%" }}
-                  data={employmentType}
+                  data={employmentTypes}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...employmentInfoForm?.getInputProps("employmentTypeId")}
+                  {...form.getInputProps("employmentTypeId")}
                   disabled={loading}
+                  allowDeselect={false}
                 />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <Select
                   size="md"
                   withAsterisk
@@ -88,11 +84,12 @@ const EmployeeInfo = ({
                   style={{ textAlign: "start", width: "100%" }}
                   data={["On-Site", "Hybrid", "Remote"]}
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...employmentInfoForm?.getInputProps("workMode")}
+                  {...form.getInputProps("workMode")}
                   disabled={loading}
+                  allowDeselect={false}
                 />
-              </Grid.Col>
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              </GridCol>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <Select
                   disabled
                   size="md"
@@ -101,21 +98,22 @@ const EmployeeInfo = ({
                   style={{ textAlign: "start", width: "100%" }}
                   data={["Pending", "Rejected", "Hired"]}
                   classNames={{ label: classes.label, error: classes.error }}
+                  allowDeselect={false}
                 />
-              </Grid.Col>
+              </GridCol>
 
-              <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
+              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <DateInput
                   size="md"
-                  clearable
                   withAsterisk
                   style={{ textAlign: "start", width: "100%" }}
                   label="Joined Date"
                   classNames={{ label: classes.label, error: classes.error }}
-                  {...employmentInfoForm?.getInputProps("resumptionDate")}
+                  {...form.getInputProps("resumptionDate")}
                   disabled={loading}
+                  maxDate={currentDate}
                 />
-              </Grid.Col>
+              </GridCol>
             </Grid>
           </Box>
           <Box>
@@ -158,7 +156,7 @@ const EmployeeInfo = ({
               color="#3377FF"
               style={{ borderColor: "#3377FF" }}
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               disabled={loading}
@@ -171,7 +169,7 @@ const EmployeeInfo = ({
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
+              px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
               className={classes.btn}
               type="submit"
@@ -193,4 +191,4 @@ const EmployeeInfo = ({
   );
 };
 
-export default EmployeeInfo;
+export default EmploymentInfoForm;

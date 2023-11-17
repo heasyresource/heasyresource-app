@@ -53,14 +53,11 @@
 }
 .btnWrap {
   @media (max-width: 768px) {
+    justify-content: space-between !important;
     margin-top: 2rem !important;
   }
 }
-.btn {
-  @media (max-width: 500px) {
-    width: 100%;
-  }
-}
+
 .error {
   font-size: 12px;
 }
@@ -115,5 +112,11 @@
       margin-top: var(--mantine-spacing-md);
       margin-left: 0;
     }
+  }
+}
+.mx {
+  margin: 0 40px;
+  @media (max-width: 768px) {
+    margin: 0 30px;
   }
 }

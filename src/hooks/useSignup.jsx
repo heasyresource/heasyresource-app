@@ -140,10 +140,10 @@ const useSignup = () => {
       console.log(err);
       notifications.show({
         color: "red",
-        title: "Registration unsuccessful",
+        title: "Registration Failed",
         message: err.errors[0].message,
         styles: errorStyles,
-        autoClose: 15000,
+        autoClose: 7000,
       });
     }
   };

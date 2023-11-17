@@ -51,7 +51,10 @@ const UserButton = forwardRef(
             {name}
           </Text>
 
-          <Text style={{ color: "#696969" }} size="xs">
+          <Text
+            style={{ color: "#696969", textTransform: "uppercase" }}
+            size="xs"
+          >
             {position}
           </Text>
         </Box>
@@ -68,7 +71,7 @@ const UserButton = forwardRef(
   )
 );
 
-export default function Profile() {
+export default function Profile({ position }) {
   const { data: session } = useSession();
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
@@ -81,7 +84,7 @@ export default function Profile() {
             name={
               session && `${session.user.firstName} ${session.user.lastName}`
             }
-            position={session && `${session.user.role.name}`}
+            position={position || ""}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>

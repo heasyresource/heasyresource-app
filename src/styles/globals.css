@@ -89,9 +89,11 @@ body {
   justify-content: center;
   align-items: center;
 }
-.mantine-DatePicker-levelsGroup,
-.mantine-DateInput-levelsGroup {
+.mantine-DatePicker-levelsGroup {
   max-width: 20rem;
+}
+.mantine-DateInput-levelsGroup {
+  max-width: 15rem;
 }
 .mantine-DatePicker-month,
 .mantine-DatePicker-monthsList,
@@ -144,12 +146,12 @@ body {
     display: none;
   }
 }
-.mantine-FileInput-wrapper[data-with-right-section="true"],
+/* .mantine-FileInput-wrapper[data-with-right-section="true"],
 .mantine-FileInput-input {
   @media (max-width: 500px) {
     padding-left: 15px !important;
   }
-}
+} */
 .mantine-datatable-table {
   background: none;
   border-collapse: separate !important;
@@ -210,6 +212,17 @@ body .mantine-Textarea-wrapper textarea {
   @media (max-width: 500px) {
     margin-top: 1.25rem !important;
   }
+}
+.mantine-RichTextEditor-toolbar {
+  position: relative !important;
+  top: auto !important;
+}
+.mantine-RichTextEditor-content {
+  min-height: 7rem;
+}
+.mantine-RichTextEditor-typographyStylesProvider {
+  margin: 0;
+  padding: 0;
 }
 .add-image {
   @media (max-width: 768px) {

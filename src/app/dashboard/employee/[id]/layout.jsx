@@ -1,10 +1,10 @@
+import { EmployeeNav } from "@/components";
 import { Card, CardSection } from "@mantine/core";
 import React from "react";
-import SlugCheck from "./slugCheck";
-import { EmployeeNav } from "@/components";
-import classes from "../../employee.module.css";
+import classes from "../employee.module.css";
+import LayoutWrap from "./LayoutWrap";
 
-const page = () => {
+const layout = ({ children }) => {
   return (
     <Card
       style={{
@@ -17,17 +17,14 @@ const page = () => {
     >
       <CardSection
         className={classes.cardSection}
-        pt="25px"
-        pb={"48px"}
-        px={"25px"}
+        py="25px"
         style={{ borderBottom: "1px solid #DDDDDD" }}
       >
         <EmployeeNav tabTitle={"employee details"} />
       </CardSection>
-
-      <SlugCheck />
+      <LayoutWrap>{children}</LayoutWrap>
     </Card>
   );
 };
 
-export default page;
+export default layout;

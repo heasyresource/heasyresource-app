@@ -26,6 +26,7 @@ const AddLeaveType = ({
   openAdd,
   loading,
 }) => {
+  const currentDate = new Date();
   return (
     <>
       <Flex
@@ -105,6 +106,7 @@ const AddLeaveType = ({
                     }}
                     {...form?.getInputProps("date")}
                     disabled={loading}
+                    minDate={currentDate}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -120,6 +122,7 @@ const AddLeaveType = ({
                     {...form?.getInputProps("availability")}
                     disabled={loading}
                     data={["All employees"]}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -135,6 +138,7 @@ const AddLeaveType = ({
                     {...form?.getInputProps("isFullDay")}
                     data={["Full Day", "Half Day"]}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
@@ -150,6 +154,7 @@ const AddLeaveType = ({
                     {...form?.getInputProps("isPaid")}
                     data={["Paid", "Unpaid"]}
                     disabled={loading}
+                    allowDeselect={false}
                   />
                 </GridCol>
               </Grid>

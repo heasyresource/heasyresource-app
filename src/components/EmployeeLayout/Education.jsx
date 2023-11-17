@@ -4,23 +4,17 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
-  GridCol,
-  Group,
   Image,
-  Loader,
-  Modal,
   Stack,
   Text,
-  TextInput,
-  Textarea,
 } from "@mantine/core";
 import React from "react";
-import classes from "./employeeLayout.module.css";
-import { DateInput } from "@mantine/dates";
 import { IconEdit } from "@tabler/icons-react";
 import { formatMonthYear } from "@/utils/publicFunctions";
+import dynamic from "next/dynamic";
 
+const AddEduModal = dynamic(() => import("./AddEduModal"), { ssr: false });
+const EditEduModal = dynamic(() => import("./EditEduModal"), { ssr: false });
 const Education = ({
   educationForm,
   handleEduSubmit,
@@ -82,8 +76,18 @@ const Education = ({
             {educations?.map((item) => (
               <Box key={item.institution}>
                 <Flex justify={"flex-start"} align={"flex-start"} gap={"10px"}>
-                  <Box style={{ width: "45px", height: "45px" }}>
-                    <Image src={"/assets/images/education.png"} />
+                  <Box
+                    style={{
+                      width: "100%",
+                      maxWidth: "45px",
+                      maxHeight: "45px",
+                      height: "100%",
+                    }}
+                  >
+                    <Image
+                      src={"/assets/images/education.png"}
+                      alt="education"
+                    />
                   </Box>
                   <Box>
                     <Flex justify={"flex-start"} align={"flex-start"}>
@@ -147,304 +151,20 @@ const Education = ({
           </Stack>
         )}
       </Box>
-      <Modal
-        title="Add Education"
-        size="xl"
-        closeOnClickOutside={false}
-        centered
-        opened={openedEdu}
-        onClose={closeEdu}
-        overlayProps={{
-          backgroundOpacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <form
-          onSubmit={educationForm?.onSubmit((values) =>
-            handleEduSubmit(values)
-          )}
-        >
-          <Grid
-            style={{
-              margin: "20px 0",
-              overflowY: "scroll",
-              maxHeight: "400px",
-            }}
-            gutter="xl"
-          >
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Institute Name"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("institution")}
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Field of Study"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("fieldOfStudy")}
-                placeholder="Computer Science"
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Degree"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("degree")}
-                placeholder="Bachelor Of Science"
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Grade"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("grade")}
-                placeholder="3.6/4.0"
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <DateInput
-                size="md"
-                clearable
-                withAsterisk
-                label="Start Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("startDate")}
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <DateInput
-                size="md"
-                clearable
-                withAsterisk
-                label="End Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("endDate")}
-                disabled={loading}
-              />
-            </GridCol>
-            <Grid.Col span={12}>
-              <Textarea
-                size="md"
-                label="Comment"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("description")}
-                disabled={loading}
-              />
-            </Grid.Col>
-          </Grid>
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
-            <Button
-              variant="outline"
-              size="md"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              onClick={closeEdu}
-              disabled={loading}
-            >
-              cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="md"
-              color="#3377FF"
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              type="submit"
-              style={{
-                backgroundColor: "#3377FF",
-              }}
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader color="white" type="dots" size="md" />
-              ) : (
-                "save"
-              )}
-            </Button>
-          </Group>
-        </form>
-      </Modal>
-      <Modal
-        title="Edit Education"
-        size="xl"
-        closeOnClickOutside={false}
-        centered
-        opened={openedEditEdu}
-        onClose={closeEditEdu}
-        overlayProps={{
-          backgroundOpacity: 0.55,
-          blur: 3,
-        }}
-      >
-        <form
-          onSubmit={educationForm?.onSubmit((values) => handleEditEdu(values))}
-        >
-          <Grid
-            style={{
-              margin: "20px 0",
-              maxHeight: "400px",
-              overflowY: "scroll",
-            }}
-            gutter="xl"
-          >
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Institute Name"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("institution")}
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Field of Study"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("fieldOfStudy")}
-                placeholder="Computer Science"
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Degree"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("degree")}
-                placeholder="Bachelor Of Science"
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <TextInput
-                size="md"
-                withAsterisk
-                label="Grade"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("grade")}
-                placeholder="3.6/4.0"
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <DateInput
-                size="md"
-                clearable
-                withAsterisk
-                label="Start Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("startDate")}
-                disabled={loading}
-              />
-            </GridCol>
-            <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-              <DateInput
-                size="md"
-                clearable
-                withAsterisk
-                label="End Date"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("endDate")}
-                disabled={loading}
-              />
-            </GridCol>
-            <Grid.Col span={12}>
-              <Textarea
-                size="md"
-                label="Comment"
-                style={{ textAlign: "start", width: "100%" }}
-                classNames={{ label: classes.label, error: classes.error }}
-                {...educationForm?.getInputProps("description")}
-                disabled={loading}
-              />
-            </Grid.Col>
-          </Grid>
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
-            <Button
-              variant="outline"
-              size="md"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              onClick={closeEditEdu}
-              disabled={loading}
-            >
-              cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="md"
-              color="#3377FF"
-              tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
-              type="submit"
-              style={{
-                backgroundColor: "#3377FF",
-              }}
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader color="white" type="dots" size="md" />
-              ) : (
-                "update"
-              )}
-            </Button>
-          </Group>
-        </form>
-      </Modal>
+      <AddEduModal
+        handleEduSubmit={handleEduSubmit}
+        educationForm={educationForm}
+        loading={loading}
+        closeEdu={closeEdu}
+        openedEdu={openedEdu}
+      />
+      <EditEduModal
+        closeEditEdu={closeEditEdu}
+        openedEditEdu={openedEditEdu}
+        educationForm={educationForm}
+        loading={loading}
+        handleEditEdu={handleEditEdu}
+      />
     </>
   );
 };

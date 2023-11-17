@@ -88,7 +88,7 @@ const SignUpForm = () => {
             <Box>
               <TextInput
                 size="md"
-                placeholder="Pepsi"
+                placeholder="heasyresource"
                 type="text"
                 {...companyInfoForm.getInputProps("companyName")}
                 withAsterisk
@@ -100,7 +100,7 @@ const SignUpForm = () => {
             <Box>
               <TextInput
                 size="md"
-                placeholder="pepsi@example.com"
+                placeholder="company@example.com"
                 type="email"
                 withAsterisk
                 {...companyInfoForm.getInputProps("companyEmail")}
@@ -127,7 +127,7 @@ const SignUpForm = () => {
                 data={fields}
                 searchable
                 nothingFoundMessage="Nothing found..."
-                placeholder="Information Technology"
+                placeholder="Choose industry"
                 {...companyInfoForm.getInputProps("industryId")}
                 disabled={loadingCompanyInfo}
                 label="Field/Industry"
@@ -141,7 +141,7 @@ const SignUpForm = () => {
                 leftSection={"+234"}
                 leftSectionWidth={50}
                 type="tel"
-                maxLength={"11"}
+                maxLength={11}
                 withAsterisk
                 {...companyInfoForm.getInputProps("companyPhoneNumber")}
                 disabled={loadingCompanyInfo}
