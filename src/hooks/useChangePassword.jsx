@@ -1,6 +1,5 @@
 "use client";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { obfuscateToken } from "@/utils/encryptToken";
 import { errorStyles } from "@/utils/notificationTheme";
 import { getSubdomain } from "@/utils/publicFunctions";
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
@@ -81,15 +80,15 @@ const useChangePassword = () => {
       setLoading(true);
     } catch (err) {
       setLoading(false);
-        notifications.show({
-          color: "red",
-          title: "Failed",
-          message: err.message,
-          styles: errorStyles,
-          autoClose: 7000,
-        });
-
-  }};
+      notifications.show({
+        color: "red",
+        title: "Failed",
+        message: err.message,
+        styles: errorStyles,
+        autoClose: 7000,
+      });
+    }
+  };
   return {
     loading,
     form,

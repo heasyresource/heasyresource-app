@@ -51,9 +51,9 @@ export default function ChangePasswordForm() {
   return (
     <>
       <Text c="dimmed" fz="md" ta="left" mt={"15px"}>
-        Set a New Password for Login Access{" "}
-        <br style={{ display: isMobile ? "none" : "block" }} /> and access all
-        features
+        Change your default password{" "}
+        {/* <br style={{ display: isMobile ? "none" : "block" }} /> and access all
+        features */}
       </Text>
       <form
         className="mt-[2rem]"
