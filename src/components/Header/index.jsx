@@ -44,12 +44,6 @@ const data = [
     subLink: true,
   },
   {
-    link: "/dashboard/performance",
-    label: "Performance",
-    icon: IconGraph,
-    subLink: true,
-  },
-  {
     link: "/dashboard/leave",
     label: "Leave",
     icon: IconCalendarBolt,
