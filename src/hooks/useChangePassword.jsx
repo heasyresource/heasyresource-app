@@ -25,6 +25,7 @@ const useChangePassword = () => {
       newPassword: "",
     },
     validate: {
+      currentPassword: (value) => value.length >= 8 ? null : "Password should be 8 characters",
       newPassword: (value) =>
         value.length >= 8 ? null : "Password should be 8 characters",
     },
@@ -83,6 +84,13 @@ const useChangePassword = () => {
       openModal();
       setLoading(true);
     } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          console.log(field, message, "message");
+          form.setFieldError(field, message);
+        });
+      }
       setLoading(false);
       notifications.show({
         color: "red",
