@@ -60,6 +60,7 @@ export default function ChangePasswordForm() {
         <Stack gap="1rem" mt={"2rem"}>
           <PasswordInput
             classNames={{ label: classes.label, error: classes.error }}
+            required
             label="Current Password"
             size="md"
             disabled={loading}
