@@ -28,7 +28,7 @@ import {
   IconBrandTelegram,
   IconBrandDiscordFilled
 } from "@tabler/icons-react";
-import classes from "./dashboard.module.cssomo";
+import classes from "./dashboard.module.css";
 import Link from "next/link";
 import PaymentTable from "./components/PaymentTable";
 
