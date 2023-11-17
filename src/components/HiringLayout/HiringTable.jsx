@@ -125,9 +125,9 @@ const HiringTable = ({
     <>
       <Modal
         opened={noTransitionOpened}
+        withCloseButton={false}
         onClose={() => setNoTransitionOpened(false)}
         centered
-        title="Please consider this"
         classNames={{
           content: classes.content,
         }}
@@ -252,7 +252,7 @@ const HiringTable = ({
                 disabled={loading}
                 size="md"
                 withAsterisk
-                type="number"
+                type="tel"
                 label="Phone Number"
                 style={{ width: "100%" }}
                 placeholder="700 000 0000"
@@ -263,6 +263,7 @@ const HiringTable = ({
                 }}
                 leftSectionWidth={50}
                 leftSection={"+234"}
+                maxLength={11}
               />
             </GridCol>
             <GridCol span={{ lg: 4, md: 6, sm: 12 }}>

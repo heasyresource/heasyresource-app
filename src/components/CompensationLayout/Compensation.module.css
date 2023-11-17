@@ -53,12 +53,8 @@
 }
 .btnWrap {
   @media (max-width: 768px) {
+    justify-content: space-between;
     margin-top: 2rem !important;
-  }
-}
-.btn {
-  @media (max-width: 500px) {
-    width: 100%;
   }
 }
 .error {
@@ -88,7 +84,7 @@
   }
 
   .controlBtn {
-  justify-content: space-evenly;
+    justify-content: space-evenly;
   }
 }
 
@@ -97,8 +93,6 @@
     flex: 1;
   }
 }
-
-
 
 /* display: flex;
 flex-direction: column;

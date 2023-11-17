@@ -96,7 +96,7 @@ const useSetting = () => {
       categoryForm.reset();
       closeAdd();
       setIsChanged(response);
-      setLoading(true);
+      setLoading(false);
     } catch (err) {
       if (err.errors) {
         err.errors.forEach((error) => {
@@ -110,7 +110,7 @@ const useSetting = () => {
         styles: errorStyles,
         autoClose: 7000,
       });
-      setLoading(true);
+      setLoading(false);
     }
   };
   const handleEditCategory = async (data) => {

@@ -233,7 +233,7 @@ const useAddApplicant = () => {
         color: "red",
         message: "Something went wrong, please try again",
         styles: errorStyles,
-        autoClose: 15000,
+        autoClose: 7000,
       });
     }
   };
@@ -255,7 +255,7 @@ const useAddApplicant = () => {
         color: "red",
         message: "Something went wrong, please try again",
         styles: errorStyles,
-        autoClose: 15000,
+        autoClose: 7000,
       });
     }
   };
@@ -288,7 +288,7 @@ const useAddApplicant = () => {
 
           message: "Something went wrong, please try again",
           styles: errorStyles,
-          autoClose: 15000,
+          autoClose: 7000,
         });
       }
     }
@@ -313,7 +313,7 @@ const useAddApplicant = () => {
 
           message: "Something went wrong, please try again",
           styles: errorStyles,
-          autoClose: 15000,
+          autoClose: 7000,
         });
       }
     }

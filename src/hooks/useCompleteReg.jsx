@@ -71,6 +71,8 @@ const useCompleteReg = () => {
     modals.open({
       radius: "md",
       centered: true,
+      withCloseButton: false,
+      closeOnClickOutside: false,
       children: (
         <Stack py={"3rem"} gap={"15px"} justify="center" align="center">
           <ActionIcon variant="transparent" size="xl">
@@ -91,7 +93,7 @@ const useCompleteReg = () => {
           <Text
             style={{ fontSize: "16px", color: "#1E1E1E", textAlign: "center" }}
           >
-            Congratulations!, your request has been processed.
+            Congratulations!, your submission will be processed within 24 hours.
           </Text>
           <Group mt="1rem" justify="center" align="center">
             <Button

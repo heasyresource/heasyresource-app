@@ -11,6 +11,7 @@ const useDashboard = () => {
   const router = useRouter();
   const [logo, setLogo] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [companyRep, setCompanyRep] = useState("");
   const headerSettings = {
     headers: {
       Authorization: `Bearer ${session?.user.token}`,
@@ -27,27 +28,23 @@ const useDashboard = () => {
         const results = response?.results;
         setLogo(results.logoUrl);
         setCompanyName(results.name);
-        // if (results.isActive !== 1) {
-        //   router.push("/complete-registration");
-        // }
       } catch (err) {
         console.log(err);
       }
     };
-    // const getEmployee = async () => {
-    //   try {
-    //     const response = await apiClient.get(
-    //       `/employees/${session.user.company.id}/employee/${session.user.id}`,
-    //       headerSettings
-    //     );
-
-    //     console.log(response, "owner");
-    //   } catch (err) {
-    //     console.log(err, "Error getting employee");
-    //   }
-    // };
+    const getEmployee = async () => {
+      try {
+        const response = await apiClient.get(
+          `/employees/${session.user.company.id}/employee/${session.user.id}`,
+          headerSettings
+        );
+        setCompanyRep(response.results.employmentInfo.position);
+      } catch (err) {
+        console.log(err, "Error getting employee");
+      }
+    };
     getCompany();
-    // getEmployee();
+    getEmployee();
 
     //eslint-disable-next-line
   }, []);
@@ -55,6 +52,7 @@ const useDashboard = () => {
   return {
     logo,
     companyName,
+    companyRep,
   };
 };
 

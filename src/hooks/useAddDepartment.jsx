@@ -163,7 +163,7 @@ const useAddDepartment = () => {
         color: "red",
         message: "Something went wrong, please try again.",
         styles: errorStyles,
-        autoClose: 2000,
+        autoClose: 7000,
       });
     }
   };

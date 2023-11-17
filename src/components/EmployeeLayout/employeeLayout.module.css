@@ -53,13 +53,10 @@
 .btnWrap {
   @media (max-width: 768px) {
     margin-top: 2rem !important;
+    justify-content: space-between !important;
   }
 }
-.btn {
-  @media (max-width: 500px) {
-    width: 100%;
-  }
-}
+
 .mx {
   margin: 0 40px;
   @media (max-width: 768px) {

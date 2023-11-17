@@ -5,118 +5,130 @@ import {
   GridCol,
   Group,
   Loader,
-  Radio,
-  Select,
-  Stack,
+  Modal,
   TextInput,
+  Textarea,
 } from "@mantine/core";
+import { DateInput } from "@mantine/dates";
 import React from "react";
 import classes from "./employeeLayout.module.css";
 
-const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
+const AddEduModal = ({
+  educationForm,
+  handleEduSubmit,
+  loading,
+  closeEdu,
+  openedEdu,
+}) => {
+  const currentDate = new Date();
   return (
-    <form onSubmit={form?.onSubmit((values) => handleSubmit(values))}>
-      <Stack className={classes.individualWrap}>
-        <Grid gutter={"lg"}>
+    <Modal
+      title="Add Education"
+      withCloseButton={false}
+      size="xl"
+      closeOnClickOutside={false}
+      centered
+      opened={openedEdu}
+      onClose={closeEdu}
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
+    >
+      <form
+        onSubmit={educationForm?.onSubmit((values) => handleEduSubmit(values))}
+      >
+        <Grid
+          style={{
+            margin: "20px 0",
+            overflowY: "scroll",
+            maxHeight: "400px",
+          }}
+          gutter="xl"
+        >
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              label="First Name"
+              size="md"
               withAsterisk
-              size="md"
-              placeholder="John"
+              label="Institute Name"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("firstName")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              label="Middle Name"
-              size="md"
-              placeholder="Smith"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("middleName")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <TextInput
-              label="Last Name"
-              withAsterisk
-              size="md"
-              placeholder="Corner"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("lastName")}
+              {...educationForm?.getInputProps("institution")}
               disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              label="Position"
-              withAsterisk
               size="md"
+              withAsterisk
+              label="Field of Study"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("position")}
-              disabled={loading}
-            />
-          </GridCol>
-          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-            <Select
-              data={fields}
-              searchable
-              label="Department"
-              withAsterisk
-              size="md"
-              style={{ textAlign: "start", width: "100%" }}
-              classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("departmentId")}
+              {...educationForm?.getInputProps("fieldOfStudy")}
+              placeholder="Computer Science"
               disabled={loading}
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
             <TextInput
-              label="Work Email"
-              type="email"
-              withAsterisk
               size="md"
+              withAsterisk
+              label="Degree"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("email")}
+              {...educationForm?.getInputProps("degree")}
+              placeholder="Bachelor Of Science"
               disabled={loading}
             />
           </GridCol>
-          <Grid.Col span={{ lg: 4, md: 6, sm: 12 }}>
-            <Radio.Group
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <TextInput
               size="md"
               withAsterisk
-              label="Gender"
+              label="Grade"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
-              {...form?.getInputProps("gender")}
+              {...educationForm?.getInputProps("grade")}
+              placeholder="3.6/4.0"
               disabled={loading}
-            >
-              <Group mt="xs">
-                <Radio
-                  value="Male"
-                  disabled={loading}
-                  label="Male"
-                  labelPosition="left"
-                  color="#3377FF"
-                />
-                <Radio
-                  value="Female"
-                  disabled={loading}
-                  label="Female"
-                  labelPosition="left"
-                  color="#3377FF"
-                />
-              </Group>
-            </Radio.Group>
-          </Grid.Col>
+            />
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <DateInput
+              size="md"
+              withAsterisk
+              label="Start Date"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...educationForm?.getInputProps("startDate")}
+              disabled={loading}
+              maxDate={currentDate}
+            />
+          </GridCol>
+          <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
+            <DateInput
+              size="md"
+              withAsterisk
+              label="End Date"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...educationForm?.getInputProps("endDate")}
+              disabled={loading}
+              minDate={educationForm?.values.endDate || ""}
+            />
+          </GridCol>
+          <GridCol span={12}>
+            <Textarea
+              size="md"
+              label="Comment"
+              style={{ textAlign: "start", width: "100%" }}
+              classNames={{ label: classes.label, error: classes.error }}
+              {...educationForm?.getInputProps("description")}
+              disabled={loading}
+              minRows={2}
+              autosize
+            />
+          </GridCol>
         </Grid>
         <Group
           justify="flex-end"
@@ -133,7 +145,11 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             className={classes.btn}
-            onClick={() => form?.reset()}
+            onClick={() => {
+              closeEdu();
+              educationForm?.reset();
+            }}
+            disabled={loading}
           >
             cancel
           </Button>
@@ -149,13 +165,14 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
             style={{
               backgroundColor: "#3377FF",
             }}
+            disabled={loading}
           >
             {loading ? <Loader color="white" type="dots" size="md" /> : "save"}
           </Button>
         </Group>
-      </Stack>
-    </form>
+      </form>
+    </Modal>
   );
 };
 
-export default EmployeeIndividual;
+export default AddEduModal;
