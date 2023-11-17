@@ -25,14 +25,6 @@ const useChangePassword = () => {
       currentPassword: "",
       newPassword: "",
     },
-    // validate: {
-    //   newPassword: (value, values) =>
-    //     !value.length
-    //       ? "New Password is required"
-    //       : value !== values.password
-    //       ? "Password did not match"
-    //       : null,
-    // },
   });
   const handleRouteChange = () => {
     modals.closeAll();
@@ -75,36 +67,8 @@ const useChangePassword = () => {
       ),
     });
 
-  // const handleResend = async (data) => {
-  //   try {
-  //     const value = {
-  //       email: data.email,
-  //     };
-  //     const res = await apiClient.post("/password/forgot", value, {
-  //       headers: { "x-subdomain-name": subdomain },
-  //     });
-  //     if (res.statusCode === 200) {
-  //       sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
-  //       router.push("/verification");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   const handleFormSubmit = async (data) => {
     setLoading(true);
-    console.log({data});
-    // const resetStore =
-    //   sessionStorage.getItem("resetPasswordCode") &&
-    //   obfuscateToken(false, sessionStorage.getItem("resetPasswordCode") ?? "");
-    // const parsedData = JSON.parse(resetStore);
-    // const modifiedValues = {
-    //   newPassword: data.password,
-    //   ...parsedData,
-    // };
-
-    console.log({session});
-    
 
     try {
       await apiClient.put("/password/change", data, {
@@ -117,31 +81,6 @@ const useChangePassword = () => {
       setLoading(true);
     } catch (err) {
       setLoading(false);
-      if (err.message === "Reset password code expired.") {
-        notifications.show({
-          color: "red",
-          title: "Failed",
-          message: "Check for a new code!",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
-        sessionStorage.setItem(
-          "verificationType",
-          obfuscateToken(true, "forgotPassword")
-        );
-        router.push("/verification");
-        handleResend(modifiedValues);
-      } else if (err.message === "Invalid reset password code.") {
-        notifications.show({
-          color: "red",
-          title: "Failed",
-          message: "Check for a new code!",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
-        router.push("/verification");
-        handleResend(modifiedValues);
-      } else {
         notifications.show({
           color: "red",
           title: "Failed",
@@ -149,9 +88,8 @@ const useChangePassword = () => {
           styles: errorStyles,
           autoClose: 7000,
         });
-      }
-    }
-  };
+
+  }};
   return {
     loading,
     form,

@@ -51,7 +51,7 @@ export default function ChangePasswordForm() {
   return (
     <>
       <Text c="dimmed" fz="md" ta="left" mt={"15px"}>
-        Create a new password for your account so you can login{" "}
+        Set a New Password for Login Access{" "}
         <br style={{ display: isMobile ? "none" : "block" }} /> and access all
         features
       </Text>
