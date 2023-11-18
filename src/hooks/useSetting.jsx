@@ -84,7 +84,7 @@ const useSetting = () => {
   const handleSubmit = async (data) => {
     setLoading(true);
     try {
-      await handleUpload(logo);
+      await handleUpload(data);
     } catch (err) {
       if (err.errors) {
         err.errors.forEach((error) => {
@@ -292,6 +292,7 @@ const useSetting = () => {
   useEffect(() => {
     getMetadata();
     getCompany();
+
     //eslint-disable-next-line
   }, []);
 

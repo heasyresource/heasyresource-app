@@ -5,8 +5,8 @@ import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useQualification = () => {
@@ -21,6 +21,7 @@ const useQualification = () => {
     useDisclosure(false);
   const param = useParams();
   const { id } = param;
+  const router = useRouter();
   const subdomain = getSubdomain();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
@@ -112,6 +113,10 @@ const useQualification = () => {
       "x-subdomain-name": subdomain,
     },
   };
+  const handleSignOut = async () => {
+    const result = await signOut({ redirect: false, callbackUrl: "/signin" });
+    router.push(result.url);
+  };
   const handleExpSubmit = async (data) => {
     setLoading(true);
     const modifiedValues = {
@@ -124,7 +129,7 @@ const useQualification = () => {
     }
     try {
       const response = await apiClient.post(
-        `/employees/${id}/work-experiences`,
+        `/employees/${id || session.user.id}/work-experiences`,
         modifiedValues,
         headerSettings
       );
@@ -168,7 +173,7 @@ const useQualification = () => {
     };
     try {
       const response = await apiClient.post(
-        `/employees/${id}/educations`,
+        `/employees/${id || session.user.id}/educations`,
         modifiedValues,
         headerSettings
       );
@@ -215,7 +220,7 @@ const useQualification = () => {
     };
     try {
       const response = await apiClient.post(
-        `/employees/${id}/license-or-certifications`,
+        `/employees/${id || session.user.id}/license-or-certifications`,
         modifiedValues,
         headerSettings
       );
@@ -262,7 +267,7 @@ const useQualification = () => {
     }
     try {
       const response = await apiClient.put(
-        `/employees/${id}/work-experiences/${expId}`,
+        `/employees/${id || session.user.id}/work-experiences/${expId}`,
         modifiedValues,
         headerSettings
       );
@@ -307,7 +312,7 @@ const useQualification = () => {
     };
     try {
       const response = await apiClient.put(
-        `/employees/${id}/educations/${expId}`,
+        `/employees/${id || session.user.id}/educations/${expId}`,
         modifiedValues,
         headerSettings
       );
@@ -355,7 +360,9 @@ const useQualification = () => {
     };
     try {
       const response = await apiClient.put(
-        `/employees/${id}/license-or-certifications/${expId}`,
+        `/employees/${
+          id || session.user.id
+        }/license-or-certifications/${expId}`,
         modifiedValues,
         headerSettings
       );
@@ -394,7 +401,9 @@ const useQualification = () => {
   const getEmployee = async () => {
     try {
       const response = await apiClient.get(
-        `/employees/${session.user.company.id}/employee/${id}`,
+        `/employees/${session.user.company.id}/employee/${
+          id || session.user.id
+        }`,
         headerSettings
       );
       const results = response.results;
@@ -402,7 +411,13 @@ const useQualification = () => {
       setWorkExp(results.workExperiences);
       setEducations(results.educations);
       setLicenses(results.licenseOrCertifications);
-    } catch (err) {}
+    } catch (err) {
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
+    }
   };
   const getMetadata = async () => {
     try {
@@ -438,7 +453,6 @@ const useQualification = () => {
     handleExpSubmit,
     handleLicenseSubmit,
     workExp,
-    educationForm,
     licenses,
     loading,
     openedExp,

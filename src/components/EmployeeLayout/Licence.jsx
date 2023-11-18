@@ -18,7 +18,7 @@ import React from "react";
 import classes from "./employeeLayout.module.css";
 import { DateInput } from "@mantine/dates";
 import { IconEdit, IconLink } from "@tabler/icons-react";
-import { formatMonthYear } from "@/utils/publicFunctions";
+import { addHttps, formatMonthYear } from "@/utils/publicFunctions";
 import dynamic from "next/dynamic";
 
 const AddLicenseModal = dynamic(() => import("./AddLicenceModal"), {
@@ -147,7 +147,7 @@ const Licence = ({
                       <Button
                         component="a"
                         target="_blank"
-                        href={item.credentialUrl}
+                        href={addHttps(item.credentialUrl)}
                         size="sm"
                         mt={"5px"}
                         variant="outline"

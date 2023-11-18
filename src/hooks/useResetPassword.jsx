@@ -20,10 +20,12 @@ const useResetPassword = () => {
   const isMobile = useMediaQuery("(max-width: 500px)");
   const form = useForm({
     initialValues: {
-      password: "",
+      newPassword: "",
       confirmPassword: "",
     },
     validate: {
+      newPassword: (value) =>
+        value.length >= 8 ? null : "Include at least 8 characters",
       confirmPassword: (value, values) =>
         !value.length
           ? "Confirm Password is required"
@@ -96,7 +98,7 @@ const useResetPassword = () => {
       obfuscateToken(false, sessionStorage.getItem("resetPasswordCode") ?? "");
     const parsedData = JSON.parse(resetStore);
     const modifiedValues = {
-      newPassword: data.password,
+      newPassword: data.newPassword,
       ...parsedData,
     };
 
@@ -133,10 +135,16 @@ const useResetPassword = () => {
         router.push("/verification");
         handleResend(modifiedValues);
       } else {
+        if (err.errors) {
+          err.errors.forEach((error) => {
+            const { field, message } = error;
+            console.log(field, message, "message");
+            form.setFieldError(field, message);
+          });
+        }
         notifications.show({
           color: "red",
-          title: "Failed",
-          message: err.message,
+          message: "Something went wrong, please try again",
           styles: errorStyles,
           autoClose: 7000,
         });

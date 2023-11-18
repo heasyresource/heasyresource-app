@@ -4,7 +4,7 @@ import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { getSubdomain, normalizePhoneNumber } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -49,6 +49,10 @@ const useContact = () => {
       "x-subdomain-name": subdomain,
     },
   };
+  const handleSignOut = async () => {
+    const result = await signOut({ redirect: false, callbackUrl: "/signin" });
+    router.push(result.url);
+  };
   const handleSubmit = async (data) => {
     setLoading(true);
     const normalizedHomeNumber = normalizePhoneNumber(data.homePhoneNumber);
@@ -66,7 +70,7 @@ const useContact = () => {
         mobilePhoneNumber: normalizedMobileNumber,
       };
       const response = await apiClient.put(
-        `/employees/${id}/contact-details`,
+        `/employees/${id || session.user.id}/contact-details`,
         modifiedValues,
         headerSettings
       );
@@ -102,11 +106,13 @@ const useContact = () => {
   const getEmployee = async () => {
     try {
       const response = await apiClient.get(
-        `/employees/${session.user.company.id}/employee/${id}`,
+        `/employees/${session.user.company.id}/employee/${
+          id || session.user.id
+        }`,
         headerSettings
       );
       const results = response.results;
-
+      form.setFieldValue("workEmail", results.email);
       form.setValues({
         street:
           results.contactDetail.street === null
@@ -130,7 +136,13 @@ const useContact = () => {
         stateId: results.contactDetail.state.id,
         lgaId: results.contactDetail.lga.id,
       });
-    } catch (err) {}
+    } catch (err) {
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
+    }
   };
   const getMetadata = async () => {
     try {

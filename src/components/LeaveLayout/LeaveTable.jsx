@@ -25,6 +25,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
+import { convertStringDate } from "@/utils/publicFunctions";
 
 const LeaveTable = ({
   leaves,
@@ -53,6 +54,7 @@ const LeaveTable = ({
 
     return Math.round(daysDifference);
   };
+
   const openReject = (data) => {
     setItemID(data.id);
     open();
@@ -88,7 +90,7 @@ const LeaveTable = ({
               noWrap: true,
               render: ({ createdAt }) => (
                 <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                  {getDate(createdAt)}
+                  {convertStringDate(createdAt)}
                 </Text>
               ),
             },
@@ -194,13 +196,12 @@ const LeaveTable = ({
                       </ActionIcon>
                     </MenuTarget>
                     <MenuDropdown>
-                      <MenuItem fz="xs">
-                        <Link
-                          href={`/dashboard/employee/${leaves.userId}/personal-detail`}
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Employee Details
-                        </Link>
+                      <MenuItem
+                        fz="xs"
+                        component="a"
+                        href={`/dashboard/employee/${leaves?.userId}/personal-detail`}
+                      >
+                        Employee Detailss
                       </MenuItem>
 
                       <MenuItem fz="xs">Leave Details</MenuItem>

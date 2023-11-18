@@ -4,7 +4,7 @@ import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -34,7 +34,7 @@ const useEmploymentInfo = () => {
         value.length === 0 ? "Joined Date is required" : null,
       employmentTypeId: (value) =>
         !value.length ? "Employment Type is required" : null,
-      workMode: (value) => (!value.length ? "WOrk Mode is required" : null),
+      workMode: (value) => (!value.length ? "Work Mode is required" : null),
     },
   });
   const headerSettings = {
@@ -42,6 +42,10 @@ const useEmploymentInfo = () => {
       Authorization: `Bearer ${session?.user.token}`,
       "x-subdomain-name": subdomain,
     },
+  };
+  const handleSignOut = async () => {
+    const result = await signOut({ redirect: false, callbackUrl: "/signin" });
+    router.push(result.url);
   };
   const handleSubmit = async (data) => {
     setLoading(true);
@@ -51,7 +55,7 @@ const useEmploymentInfo = () => {
         resumptionDate: convertDateFormat(data.resumptionDate),
       };
       const response = await apiClient.put(
-        `/employees/${id}/employment-infos`,
+        `/employees/${id || session.user.id}/employment-infos`,
         modifiedValues,
         headerSettings
       );
@@ -113,12 +117,13 @@ const useEmploymentInfo = () => {
   const getEmployee = async () => {
     try {
       const response = await apiClient.get(
-        `/employees/${session.user.company.id}/employee/${id}`,
+        `/employees/${session.user.company.id}/employee/${
+          id || session.user.id
+        }`,
         headerSettings
       );
       const results = response.results;
-      setFirstName(results.firstName);
-      setLastName(results.lastName);
+
       form.setValues({
         position: results.employmentInfo?.position,
         workMode: results.employmentInfo?.workMode,
@@ -135,7 +140,13 @@ const useEmploymentInfo = () => {
             ? ""
             : results.employmentInfo?.department?.id,
       });
-    } catch (err) {}
+    } catch (err) {
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
+    }
   };
   useEffect(() => {
     if (isChanged !== null) {

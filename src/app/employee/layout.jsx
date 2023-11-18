@@ -4,16 +4,34 @@ import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
 import classes from "./dashboard.module.css";
 import { IconBell, IconMessageDots } from "@tabler/icons-react";
-import { useState } from "react";
-import { Header } from "@/components";
+import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import Main from "./components/Main";
-import { useDashboard } from "@/hooks";
 import EmployeeProfile from "./components/EmployeeProfile";
+import Header from "./components/Header";
+import { obfuscateToken } from "@/utils/encryptToken";
 const Layout = ({ children }) => {
-  const { logo, companyName } = useDashboard();
+  const [companyName, setCompanyName] = useState("");
+  const [logo, setLogo] = useState("");
+  const [companyLogo, setCompanyLogo] = useState("");
+  const [position, setPosition] = useState("");
   const [opened, { toggle }] = useDisclosure();
   const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const isDataStored = !!sessionStorage.getItem("employeeInfo");
+    if (isDataStored) {
+      const storeData = obfuscateToken(
+        false,
+        sessionStorage.getItem("employeeInfo")
+      );
+      const parsedData = JSON.parse(storeData);
+
+      setLogo(parsedData.logoUrl);
+      setCompanyName(parsedData.name);
+      setPosition(parsedData.position);
+      setCompanyLogo(parsedData.companyLogo);
+    }
+  }, []);
 
   return (
     <AppShell
@@ -33,7 +51,7 @@ const Layout = ({ children }) => {
       >
         <Group justify="flex-end" gap="20" style={{ flexWrap: "nowrap" }}>
           <Group style={{ flexWrap: "nowrap" }}>
-            <Image src={logo || ""} style={{ width: "30px" }} alt="" />
+            <Image src={companyLogo || ""} style={{ width: "30px" }} alt="" />
 
             <Text
               fw={500}
@@ -59,11 +77,11 @@ const Layout = ({ children }) => {
           >
             <IconMessageDots color="black" />
           </ActionIcon>
-          <EmployeeProfile />
+          <EmployeeProfile position={position} logo={logo} />
         </Group>
       </AppShell.Header>
       <AppShell.Header className={classes.mobileHeader}>
-        <Header companyName={companyName} logo={logo} />
+        <Header />
       </AppShell.Header>
       <NavBar />
       <Main>{children}</Main>

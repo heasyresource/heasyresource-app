@@ -48,7 +48,7 @@ export default async function RootLayout({ children }) {
         <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
           <Notifications position="top-right" zIndex={1000} />
           <ModalsProvider>
-            <NextTopLoader color="#3377FF" />
+            <NextTopLoader color="#3377FF" showSpinner={false} />
 
             <ProviderWrap session={session}>{children}</ProviderWrap>
           </ModalsProvider>

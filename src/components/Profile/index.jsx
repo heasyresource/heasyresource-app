@@ -84,7 +84,7 @@ export default function Profile({ position }) {
             name={
               session && `${session.user.firstName} ${session.user.lastName}`
             }
-            position={position || ""}
+            position={position || session?.user.role.name}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>

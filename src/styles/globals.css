@@ -224,6 +224,10 @@ body .mantine-Textarea-wrapper textarea {
   margin: 0;
   padding: 0;
 }
+.mantine-Modal-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
 .add-image {
   @media (max-width: 768px) {
     width: 150px;

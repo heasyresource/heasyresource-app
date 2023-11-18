@@ -75,7 +75,7 @@ export default function NewPasswordForm() {
                   size="md"
                   required
                   label="Enter New Password"
-                  {...form.getInputProps("password")}
+                  {...form.getInputProps("newPassword")}
                   disabled={loading}
                   classNames={{
                     label: classes.label,

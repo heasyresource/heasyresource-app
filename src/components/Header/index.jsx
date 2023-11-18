@@ -103,7 +103,7 @@ const Header = ({ companyName, logo }) => {
             <IconAlignLeft style={{ color: "#3377FF" }} />
           </ActionIcon>
           <Group justify="flex-end">
-            <ActionIcon variant="transparent" size={"lg"}>
+            {/* <ActionIcon variant="transparent" size={"lg"}>
               <Indicator
                 offset={5}
                 position="top-end"
@@ -113,7 +113,7 @@ const Header = ({ companyName, logo }) => {
               >
                 <IconBell color="#3F3F3F" />
               </Indicator>
-            </ActionIcon>
+            </ActionIcon> */}
             <EmployeeProfile />
           </Group>
         </Flex>

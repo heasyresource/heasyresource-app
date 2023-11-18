@@ -5,8 +5,8 @@ const useSignOut = () => {
   const router = useRouter();
 
   const handleSignOut = async () => {
-    const result = await signOut({ redirect: true, callbackUrl: "/signin" });
-    // router.push(result.url);
+    const result = await signOut({ redirect: false, callbackUrl: "/signin" });
+    router.push(result.url);
   };
 
   return {

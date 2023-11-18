@@ -87,7 +87,7 @@
   background-color: var(--mantine-color-body);
   transition: box-shadow 150ms ease;
   box-shadow: 15px;
-  @media (max-width: 500px) {
+  @media (max-width: 765px) {
     display: none;
   }
 
