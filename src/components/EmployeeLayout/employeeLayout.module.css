@@ -51,9 +51,23 @@
   font-size: 12px;
 }
 .btnWrap {
-  @media (max-width: 768px) {
-    margin-top: 2rem !important;
-    justify-content: space-between !important;
+  margin-top: calc(var(--mantine-spacing-xl) * 2);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    margin-top: var(--mantine-spacing-xl);
+  }
+}
+
+.btn {
+  height: rem(54px);
+  padding-left: rem(38px);
+  padding-right: rem(38px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: rem(54px);
+    padding-left: rem(18px);
+    padding-right: rem(18px);
+    flex: 1;
   }
 }
 

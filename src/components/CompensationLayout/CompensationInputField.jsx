@@ -10,7 +10,7 @@ const CompensationInputField = () => {
     <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <Grid
         gutter="xl"
-        px={40}
+        px={{base: 0, sm: 40}}
         justify="space-between"
         className={classes.formWrap}
       >
