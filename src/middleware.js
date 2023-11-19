@@ -13,10 +13,10 @@ import { apiClient } from "./lib/interceptor/apiClient";
 export default async function middleware(req) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
-
+  const defaultSubdomain = ['www', 'heasyresource']
   const subdomain = getSubdomain(req.headers.get("host"));
   console.log({subdomain});
-  if (subdomain && subdomain  !== 'heasyresource') {
+  if (subdomain && !defaultSubdomain.includes(subdomain)) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
 
