@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 export const requirements = [
   { re: /\d/, label: "Includes number" },
   { re: /[a-z]/, label: "Includes lowercase letter" },
@@ -18,7 +20,7 @@ export const getStrength = (string) => {
 };
 
 export const normalizePhoneNumber = (phoneNumber) => {
-  if (phoneNumber.startsWith("0")) {
+  if (phoneNumber?.startsWith("0")) {
     phoneNumber = phoneNumber.replace(/^0+/, "");
   }
   return "+234" + phoneNumber;
@@ -612,3 +614,8 @@ export const departmentType = [
     deptCode: "Eng",
   },
 ];
+
+
+export const purifyText = (html) => {
+  return DOMPurify.sanitize(html);
+}
