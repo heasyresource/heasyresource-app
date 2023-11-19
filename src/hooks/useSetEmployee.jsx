@@ -111,6 +111,8 @@ const useSetEmployee = () => {
     if (isChanged !== null) {
       getEmployee();
     }
+
+    //eslint-disable-next-line
   }, [isChanged]);
 
   useEffect(() => {
