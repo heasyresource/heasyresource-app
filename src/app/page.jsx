@@ -1,5 +1,4 @@
 "use client";
-import Navbar from "@/components/Navbar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import {
@@ -94,7 +93,7 @@ export default function HomePage() {
                 </h1>
                 <p className="home_description">
                   At Heasy Resource, we believe that our people are our greatest
-                  asset. We're dedicated to nurturing talent, fostering growth,
+                  asset. We are dedicated to nurturing talent, fostering growth,
                   and building a workplace that thrives on innovation,
                   diversity, and inclusivity.
                 </p>
@@ -103,13 +102,13 @@ export default function HomePage() {
                     Get Started
                   </a>
                   <a href="#" className="btn btn_outline">
-                    Let's Talk<i className="fa-solid fa-envelope"></i>
+                    Let&apos;s Talk<i className="fa-solid fa-envelope"></i>
                   </a>
                 </div>
               </div>
             </div>
             <div style={{ flex: ".5", width: "50%" }} className="hero-img">
-              <img
+              <Image
                 src="/assets/images/home.png"
                 alt=""
                 style={{ width: "100%" }}
@@ -125,52 +124,52 @@ export default function HomePage() {
               We are Trusted by <span>4,000+</span> Organizations
             </h3>
             <div className="trust_brand">
-              <img
+              <Image
                 src="/assets/images/log_1.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_2.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_4.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_9.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_6.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_3.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_8.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_5.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_10.png"
                 alt=""
                 className="trust_brand_img"
               />
-              <img
+              <Image
                 src="/assets/images/log_7.png"
                 alt=""
                 className="trust_brand_img"
@@ -191,7 +190,7 @@ export default function HomePage() {
               flexDirection: "column",
             }}
           >
-            <img
+            <Image
               src="/assets/images/progress.png"
               alt=""
               className="progress_img"
@@ -216,7 +215,7 @@ export default function HomePage() {
                   aspects of HR management
                 </p>
               </div>
-              <img
+              <Image
                 src="/assets/images/Vector_Dots.png"
                 alt=""
                 className="section_header_image"
@@ -351,7 +350,7 @@ export default function HomePage() {
         <section className="payroll section">
           <Container size={"xl"}>
             <div className="section_header section_header_right">
-              <img
+              <Image
                 src="/assets/images/Vector_Dots.png"
                 alt=""
                 className="section_header_image"
@@ -364,7 +363,7 @@ export default function HomePage() {
                 </h2>
               </div>
             </div>
-            <img
+            <Image
               src="/assets/images/payroll_image.png"
               alt=""
               className="payroll_img"
@@ -382,7 +381,7 @@ export default function HomePage() {
                   Select and Build The Talent Suite for Your Strategy.
                 </h2>
               </div>
-              <img
+              <Image
                 src="/assets/images/Vector_Dots.png"
                 alt=""
                 className="section_header_image"
@@ -514,7 +513,7 @@ export default function HomePage() {
         <section className="testimonial section">
           <div className="container">
             <div className="section_header section_header_right">
-              <img
+              <Image
                 src="/assets/images/Vector_Dots.png"
                 alt=""
                 className="section_header_image"
@@ -536,14 +535,14 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      "I've been with Heasy Resource for over five years now,
-                      and I can genuinely say that the HR department is second
-                      to none. From the moment I joined, I felt welcomed,
+                      Ive been with Heasy Resource for over five years now, and
+                      I can genuinely say that the HR department is second to
+                      none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <img src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test.png" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Abijuwon Faruk
@@ -558,14 +557,14 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      "I've been with Heasy Resource for over five years now,
-                      and I can genuinely say that the HR department is second
-                      to none. From the moment I joined, I felt welcomed,
+                      Ive been with Heasy Resource for over five years now, and
+                      I can genuinely say that the HR department is second to
+                      none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <img src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test.png" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Abdulzobur Abdulazeez
@@ -580,14 +579,14 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      "I've been with Heasy Resource for over five years now,
-                      and I can genuinely say that the HR department is second
-                      to none. From the moment I joined, I felt welcomed,
+                      Ive been with Heasy Resource for over five years now, and
+                      I can genuinely say that the HR department is second to
+                      none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <img src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test.png" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Usman Salami
@@ -602,14 +601,14 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      "I've been with Heasy Resource for over five years now,
-                      and I can genuinely say that the HR department is second
-                      to none. From the moment I joined, I felt welcomed,
+                      Ive been with Heasy Resource for over five years now, and
+                      I can genuinely say that the HR department is second to
+                      none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <img src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test.png" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Abijuwon Faruk
@@ -624,14 +623,14 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      "I've been with Heasy Resource for over five years now,
-                      and I can genuinely say that the HR department is second
-                      to none. From the moment I joined, I felt welcomed,
+                      Ive been with Heasy Resource for over five years now, and
+                      I can genuinely say that the HR department is second to
+                      none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <img src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test.png" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Abdulzobur Abdulazeez
@@ -646,14 +645,14 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      "I've been with Heasy Resource for over five years now,
-                      and I can genuinely say that the HR department is second
-                      to none. From the moment I joined, I felt welcomed,
+                      Ive been with Heasy Resource for over five years now, and
+                      I can genuinely say that the HR department is second to
+                      none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <img src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test.png" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Usman Salami
@@ -680,14 +679,14 @@ export default function HomePage() {
                 <h4 className="section_head">Contact us</h4>
                 <h2 className="section_title">Get in touch with us.</h2>
               </div>
-              <img
+              <Image
                 src="/assets/images/Vector_Dots.png"
                 alt=""
                 className="section_header_image"
               />
             </div>
             <div className="contact_wrapper">
-              <img
+              <Image
                 src="/assets/images/call.png"
                 alt=""
                 className="contact_img"
@@ -715,7 +714,7 @@ export default function HomePage() {
         <div className="container">
           <ul className="footer_container">
             <li className="footer_brand">
-              <img
+              <Image
                 src="/assets/svgs/HRlogo.svg"
                 alt=""
                 className="footer_brand_logo"
