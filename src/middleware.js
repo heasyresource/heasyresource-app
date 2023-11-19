@@ -8,23 +8,23 @@ import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import { getSubdomain } from "./utils/publicFunctions";
-import { apiClient } from "./lib/interceptor/apiClient";
 
-export default async function middleware(req) {
+export default async function middleware(req, res) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
-  const defaultSubdomain = ['www', 'heasyresource']
+  const defaultSubdomain = ["www", "heasyresource"];
   const subdomain = getSubdomain(req.headers.get("host"));
-  console.log({subdomain});
+
   if (subdomain && !defaultSubdomain.includes(subdomain)) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
 
-    const currentPath = req.headers.get("host");
-    console.log({currentPath}, req.nextUrl.host, getSubdomainData.results);
-    if (getSubdomainData.results === null) {
+    if (getSubdomainData.results === null || getSubdomainData.results?.isActive === 0) {
       return NextResponse.redirect(new URL("/404", req.url));
-      console.log({ subdomain }, { getSubdomainData });
+    }
+
+    if (getSubdomainData.results !== null && req.nextUrl.pathname === "/") {
+      return NextResponse.redirect(new URL("/signin", req.url));
     }
   }
 
