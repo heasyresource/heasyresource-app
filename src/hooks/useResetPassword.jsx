@@ -29,7 +29,7 @@ const useResetPassword = () => {
       confirmPassword: (value, values) =>
         !value.length
           ? "Confirm Password is required"
-          : value !== values.password
+          : value !== values.newPassword
           ? "Password did not match"
           : null,
     },
@@ -144,7 +144,7 @@ const useResetPassword = () => {
         }
         notifications.show({
           color: "red",
-          message: "Something went wrong, please try again",
+          message: err.message,
           styles: errorStyles,
           autoClose: 7000,
         });
