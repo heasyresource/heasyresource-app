@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import useUploadImage from "./useUploadImage";
+import { normalizePhoneNumber } from "@/utils/publicFunctions";
 
 const useSetting = () => {
   const { handleUpload, response, loading: imgLoading } = useUploadImage();
@@ -29,21 +30,22 @@ const useSetting = () => {
   const [isChanged, setIsChanged] = useState(null);
   const [loading, setLoading] = useState(false);
   const [categoryId, setCategoryId] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const [gettingInfo, setGettingInfo] = useState(true);
 
   const [logoUrl, setLogoUrl] = useState("");
   const form = useForm({
     initialValues: {
       name: "",
-      email: "",
-      website: "",
+      companyEmail: "",
+      companyWebsite: "",
       industryId: "",
-      phoneNumber: "",
+      companyPhoneNumber: "",
       address: "",
       companySizeId: "",
       countryId: "",
       emailDomain: "",
       subdomain: "",
+      autoGenerateEmployeeId: "",
     },
     validate: {
       address: (val) => (val.length < 1 ? "Company Address is required" : null),
@@ -56,15 +58,19 @@ const useSetting = () => {
             )
           ? null
           : "Enter valid email domain",
+      companyEmail: (val) =>
+        /^\S+@\S+$/.test(val) ? null : "Enter a valid email",
       subdomain: (val) => (!val.length ? "Sub domain is required" : null),
       companySizeId: (val) => (!val.length ? "Select company size" : null),
       countryId: (val) => (!val.length ? "Select country" : null),
-      website: (val) =>
+      companyWebsite: (val) =>
         /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]+)\/?$/.test(
           val
         )
           ? null
           : "Enter a valid url",
+      companyPhoneNumber: (val) =>
+        val.length < 10 ? "Enter a valid phone number" : null,
     },
   });
   const categoryForm = useForm({
@@ -81,10 +87,36 @@ const useSetting = () => {
       "x-subdomain-name": subdomain,
     },
   };
-  const handleSubmit = async (data) => {
+
+  const handleSubmit = async (values) => {
     setLoading(true);
     try {
-      await handleUpload(data);
+      if (logoUrl.includes("https") || logoUrl.includes("http")) {
+        const normalizedPhoneNumber = normalizePhoneNumber(
+          values.companyPhoneNumber
+        );
+        const resp = await apiClient.put(
+          `/companies/${session.user.companyId}`,
+          {
+            ...values,
+            logoUrl: logoUrl,
+            companyPhoneNumber: normalizedPhoneNumber,
+          },
+          headerSettings
+        );
+        notifications.show({
+          color: "white",
+          title: "Success",
+          message: "Company updated successfully!",
+          styles: successStyles,
+          autoClose: 7000,
+        });
+
+        setIsChanged(resp);
+        setLoading(false);
+      } else {
+        await handleUpload(logoUrl);
+      }
     } catch (err) {
       if (err.errors) {
         err.errors.forEach((error) => {
@@ -99,6 +131,34 @@ const useSetting = () => {
         autoClose: 7000,
       });
       setLoading(false);
+    }
+  };
+
+  const handleEditCompany = async (data) => {
+    try {
+      const resp = await apiClient.put(
+        `/companies/${session.user.companyId}`,
+        data,
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Company updated successfully!",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+
+      setIsChanged(resp);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          form.setFieldError(field, message);
+        });
+      }
     }
   };
   const handleCategoryAdd = async (data) => {
@@ -188,6 +248,13 @@ const useSetting = () => {
       });
       setIsChanged(response);
     } catch (err) {
+      if (err.errors) {
+        err.errors.forEach((error) => {
+          const { field, message } = error;
+          console.log(field, message, "message");
+          form.setFieldError(field, message);
+        });
+      }
       notifications.show({
         color: "red",
         message: "Something went wrong, please try again!",
@@ -219,17 +286,20 @@ const useSetting = () => {
       setLogoUrl(results.logoUrl);
       form.setValues({
         name: results.name,
-        email: results.email,
+        companyEmail: results.email,
         subdomain: results.subdomain,
         emailDomain: results.emailDomain !== null ? results.emailDomain : "",
         address: results.address,
         industryId: results.industry.id,
         countryId: results.country.id,
         companySizeId: results.companySize.id,
-        phoneNumber: results.phoneNumber.replace(/\+234/g, ""),
-        website: results.website,
+        companyPhoneNumber: results.phoneNumber.replace(/\+234/g, ""),
+        companyWebsite: results.website,
+        autoGenerateEmployeeId: results.autoGenerateEmployeeId,
       });
+      setGettingInfo(false);
     } catch (err) {
+      setGettingInfo(false);
       if (err.statusCode >= 400) {
         notifications.show({
           color: "red",
@@ -279,6 +349,20 @@ const useSetting = () => {
     }
   };
   useEffect(() => {
+    if (response?.status === 200 || response?.status === 201) {
+      const normalizedPhoneNumber = normalizePhoneNumber(
+        form.values.companyPhoneNumber
+      );
+      const modifiedValue = {
+        ...form.values,
+        logoUrl: response?.data.secure_url,
+        companyPhoneNumber: normalizedPhoneNumber,
+      };
+      handleEditCompany(modifiedValue);
+    }
+    //eslint-disable-next-line
+  }, [response]);
+  useEffect(() => {
     getJobCategories();
     //eslint-disable-next-line
   }, [searchParams.get("page")]);
@@ -320,6 +404,7 @@ const useSetting = () => {
     setCategoryId,
     setLogoUrl,
     handleSubmit,
+    gettingInfo,
   };
 };
 

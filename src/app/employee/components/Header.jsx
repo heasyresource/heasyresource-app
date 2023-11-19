@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import {
-  IconCalendarFilled,
   IconHome,
   IconSettings,
   IconUserDollar,
@@ -99,17 +98,6 @@ const Header = () => {
             <IconAlignLeft style={{ color: "#3377FF" }} />
           </ActionIcon>
           <Group justify="flex-end">
-            {/* <ActionIcon variant="transparent" size={"lg"}>
-              <Indicator
-                offset={5}
-                position="top-end"
-                inline
-                processing
-                size={6}
-              >
-                <IconBell color="#3F3F3F" />
-              </Indicator>
-            </ActionIcon> */}
             <EmployeeProfile logo={logo} />
           </Group>
         </Flex>

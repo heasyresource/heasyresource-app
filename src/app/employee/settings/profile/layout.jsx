@@ -18,10 +18,6 @@ const profileLinks = [
     label: "Contact Details",
   },
   {
-    link: "/employee/settings/profile/employment-info",
-    label: "Employment Info",
-  },
-  {
     link: "/employee/settings/profile/qualifications",
     label: "Qualifications",
   },
@@ -30,11 +26,6 @@ const ProfileRoot = ({ children }) => {
   const { handleSubmit, uploading, employeeInfo, gettingInfo } =
     useSetEmployee();
   const pathname = usePathname();
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [position, setPosition] = useState("");
-  // const [logo, setLogo] = useState("");
-  // const [loading, setLoading] = useState(false);
 
   const profileItems = profileLinks.map((item, index) => (
     <Link
@@ -48,22 +39,6 @@ const ProfileRoot = ({ children }) => {
     </Link>
   ));
 
-  // useEffect(() => {
-  //   const isDataStored = !!sessionStorage.getItem("employeeInfo");
-  //   if (isDataStored) {
-  //     const storeData = obfuscateToken(
-  //       false,
-  //       sessionStorage.getItem("employeeInfo")
-  //     );
-  //     const parsedData = JSON.parse(storeData);
-  //     setLogo(parsedData.logoUrl);
-  //     setName(parsedData.employeeName);
-  //     setPosition(parsedData.position);
-  //     setEmail(parsedData.email);
-  //     setLoading(false);
-  //   }
-  //   setLoading(false);
-  // }, []);
   return (
     <>
       {gettingInfo ? (

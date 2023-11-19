@@ -8,6 +8,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Image,
   Loader,
   Modal,
   Select,
@@ -120,7 +121,7 @@ export default function HolidayTypeTable({
 
   return (
     <>
-      {holidays?.length !== 0 && (
+      {holidays?.length !== 0 ? (
         <DataTable
           style={{ background: "none", marginTop: "3rem" }}
           minHeight={"250px"}
@@ -194,6 +195,25 @@ export default function HolidayTypeTable({
           page={pagination?.currentPage}
           onPageChange={(page) => paginate(page)}
         />
+      ) : (
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            margin: "6rem 0",
+          }}
+        >
+          <Stack justify="center" align="center">
+            <Box style={{ width: "10rem", height: "auto" }}>
+              <Image src={"/assets/svgs/empty.svg"} alt="empty" />
+            </Box>
+            <Text style={{ fontSize: "16px", color: "#616161" }}>
+              No holiday found!
+            </Text>
+          </Stack>
+        </Box>
       )}
       <Modal
         closeOnClickOutside={false}

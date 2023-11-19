@@ -3,6 +3,7 @@ import { Button, Group, Text } from "@mantine/core";
 import React from "react";
 import classes from "../dashboard.module.css";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const SettingNav = () => {
   const pathname = usePathname();
@@ -12,30 +13,32 @@ const SettingNav = () => {
         Setting
       </Text>
       <Group>
-        <Button
-          w="125px"
-          component="a"
-          href="/employee/settings/profile"
-          data-active={
-            "/employee/settings/profile" === pathname ||
-            pathname.includes("/employee/settings/profile") ||
-            undefined
-          }
-          className={classes.btnLink}
-          variant="filled"
-        >
-          Profile
-        </Button>
-        <Button
-          component="a"
-          href="/employee/settings/security"
-          w="125px"
-          variant="filled"
-          className={classes.btnLink}
-          data-active={"/employee/settings/security" === pathname || undefined}
-        >
-          Password
-        </Button>
+        <Link href="/employee/settings/profile">
+          <Button
+            w="125px"
+            data-active={
+              "/employee/settings/profile" === pathname ||
+              pathname.includes("/employee/settings/profile") ||
+              undefined
+            }
+            className={classes.btnLink}
+            variant="filled"
+          >
+            Profile
+          </Button>
+        </Link>
+        <Link href="/employee/settings/security">
+          <Button
+            w="125px"
+            variant="filled"
+            className={classes.btnLink}
+            data-active={
+              "/employee/settings/security" === pathname || undefined
+            }
+          >
+            Password
+          </Button>
+        </Link>
       </Group>
     </Group>
   );

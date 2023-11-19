@@ -28,7 +28,7 @@ import { useSession } from "next-auth/react";
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
     <UnstyledButton ref={ref} {...others}>
-      <Group gap={"10px"} style={{ flexWrap: "nowrap" }}>
+      <Group style={{ flexWrap: "nowrap" }}>
         <div
           style={{
             border: "2px #3377FF solid",
@@ -49,10 +49,6 @@ const UserButton = forwardRef(
         <Box className={classes.profileText}>
           <Text style={{ color: "#2A004C" }} size="sm" fw={500}>
             {name}
-          </Text>
-
-          <Text style={{ color: "#696969" }} size="xs">
-            {position}
           </Text>
         </Box>
 
@@ -81,7 +77,6 @@ export default function EmployeeProfile({ position, logo }) {
             name={
               session && `${session.user.firstName} ${session.user.lastName}`
             }
-            position={position || session?.user.role.name}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>

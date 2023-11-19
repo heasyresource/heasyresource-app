@@ -2,10 +2,16 @@ import { Button, Grid, GridCol, Group, Select, TextInput } from "@mantine/core";
 import classes from "../dashboard.module.css";
 import React from "react";
 
-const InputField = ({ loading, form, handleSubmit }) => {
+const InputField = ({
+  loading,
+  form,
+  handleSubmit,
+  departments,
+  getEmployees,
+}) => {
   return (
     <form
-      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      onSubmit={form.onSubmit(() => getEmployees())}
       style={{ marginTop: "1rem" }}
     >
       <Grid justify="space-between" className={classes.formWrap}>
@@ -45,8 +51,8 @@ const InputField = ({ loading, form, handleSubmit }) => {
             label="Employee Status"
             placeholder="Working"
             style={{ width: "100%" }}
-            {...form.getInputProps("employeeStatus")}
-            data={[]}
+            {...form.getInputProps("status")}
+            data={["Rejected", "Employed", "Pending"]}
             classNames={{
               label: classes.label,
               error: classes.error,
@@ -62,8 +68,8 @@ const InputField = ({ loading, form, handleSubmit }) => {
             placeholder="Software Development"
             style={{ width: "100%" }}
             disabled={loading}
-            {...form.getInputProps("employeeDepartment")}
-            data={[]}
+            {...form.getInputProps("departmentId")}
+            data={departments}
             classNames={{
               label: classes.label,
               error: classes.error,
@@ -76,11 +82,20 @@ const InputField = ({ loading, form, handleSubmit }) => {
         <Button
           style={{ fontSize: "16px", textTransform: "capitalize" }}
           size="md"
+          variant="outline"
+          color="#3377FF"
+          px={"40px"}
+          onClick={() => form?.reset()}
+        >
+          Reset
+        </Button>
+        <Button
+          style={{ fontSize: "16px", textTransform: "capitalize" }}
+          size="md"
           variant="filled"
           color="#3377FF"
           px={"40px"}
           type="submit"
-          disabled={loading}
         >
           search
         </Button>

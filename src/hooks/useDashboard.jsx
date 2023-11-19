@@ -15,6 +15,7 @@ const useDashboard = () => {
   const [companyName, setCompanyName] = useState("");
   const [companyRep, setCompanyRep] = useState("");
   const [loading, setLoading] = useState(true);
+  const [leaves, setLeaves] = useState([]);
   const [companyEmployee, setCompanyEmployee] = useState({
     name: "",
     email: "",
@@ -42,6 +43,17 @@ const useDashboard = () => {
         const results = response?.results;
         setLogo(results.logoUrl);
         setCompanyName(results.name);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const getLeaves = async () => {
+      try {
+        const response = await apiClient.get(
+          `/employee/leaves/me?paginate=false`,
+          headerSettings
+        );
+        setLeaves(response.results.data);
       } catch (err) {
         console.log(err);
       }
@@ -88,6 +100,9 @@ const useDashboard = () => {
     if (!pathname.startsWith("/employee")) {
       getCompany();
     }
+    if (pathname.startsWith("/employee")) {
+      getLeaves();
+    }
     getEmployee();
 
     //eslint-disable-next-line
@@ -99,6 +114,7 @@ const useDashboard = () => {
     companyRep,
     companyEmployee,
     loading,
+    leaves,
   };
 };
 

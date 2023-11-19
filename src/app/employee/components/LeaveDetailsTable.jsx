@@ -241,7 +241,7 @@ const LeaveDetailsTable = ({
             },
             {
               accessor: "createdAt",
-
+              title: "Number of days",
               textAlign: "center",
               textTransform: "capitalize",
               noWrap: true,

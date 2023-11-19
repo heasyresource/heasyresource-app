@@ -546,7 +546,7 @@ const HiringTable = ({
               <Image src={"/assets/svgs/empty.svg"} alt="empty" />
             </Box>
             <Text style={{ fontSize: "16px", color: "#616161" }}>
-              No leaves yet!
+              No applicant found!
             </Text>
           </Stack>
         </Box>

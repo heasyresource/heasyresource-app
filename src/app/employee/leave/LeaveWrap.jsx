@@ -20,7 +20,7 @@ const LeaveWrap = () => {
     handleSubmit,
     types,
   } = useEmloyeeLeave();
-  console.log(leaves, "leaves");
+
   return (
     <Box>
       <div className={classes.inner}>

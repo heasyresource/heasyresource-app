@@ -49,7 +49,8 @@ const Licence = ({
       credentialUrl: data.credentialUrl !== null ? data.credentialUrl : "",
       credentialId: data.credentialId !== null ? data.credentialId : "",
       issueDate: new Date(data.issueDate),
-      expirationDate: new Date(data.expirationDate),
+      expirationDate:
+        data.expirationDate !== null ? new Date(data.expirationDate) : "",
     });
     openEditLcs();
   };

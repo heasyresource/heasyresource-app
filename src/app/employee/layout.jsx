@@ -61,7 +61,7 @@ const Layout = ({ children }) => {
               {companyName}
             </Text>
           </Group>
-          <ActionIcon
+          {/* <ActionIcon
             color="rgba(126, 166, 244, 0.22)"
             variant="filled"
             size={"lg"}
@@ -76,8 +76,8 @@ const Layout = ({ children }) => {
             radius={"lg"}
           >
             <IconMessageDots color="black" />
-          </ActionIcon>
-          <EmployeeProfile position={position} logo={logo} />
+          </ActionIcon> */}
+          <EmployeeProfile logo={logo} />
         </Group>
       </AppShell.Header>
       <AppShell.Header className={classes.mobileHeader}>

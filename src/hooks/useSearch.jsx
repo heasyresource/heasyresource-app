@@ -20,13 +20,14 @@ const useSearch = () => {
   const [pagination, setPagination] = useState(null);
   const [gettingData, setGettingData] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [departments, setDepartments] = useState(null);
   const isMobile = useMediaQuery("(max-width: 500px)");
   const form = useForm({
     initialValues: {
       employeeName: "",
       employeeId: "",
-      employeeStatus: "",
-      employeeDepartment: "",
+      status: "",
+      departmentId: "",
     },
   });
 
@@ -36,49 +37,7 @@ const useSearch = () => {
       "x-subdomain-name": subdomain,
     },
   };
-  const openModal = () =>
-    modals.open({
-      radius: "md",
-      centered: true,
-      children: (
-        <Stack
-          gap={"20px"}
-          justify={"center"}
-          align={"center"}
-          pb={15}
-          pt="2rem"
-          px={isMobile ? 0 : 46}
-        >
-          <Box>
-            <IconUserPlus
-              style={{ color: "#3377FF", width: "50px", height: "50px" }}
-            />
-          </Box>
-          <Box ta={"center"}>
-            <Title order={isMobile ? 4 : 3} c="#000000">
-              No Employee Found
-            </Title>
-            <Text c="#1E1E1E" size="13px" mt="5px">
-              Start adding new employees, either individually or in bulk
-            </Text>
-          </Box>
-          <Button fullWidth tt="capitalize" bg="#3377FF" size="md">
-            add employees
-          </Button>
-        </Stack>
-      ),
-    });
-  const handleSubmit = async (data) => {
-    openModal();
-    setLoading(true);
-    try {
-      console.log(data, "values");
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      console.log(err, "values error");
-    }
-  };
+
   const paginate = (page) => {
     const params = new URLSearchParams(searchParams);
     if (page) {
@@ -88,15 +47,31 @@ const useSearch = () => {
     }
     replace(`${pathname}?${params.toString()}`);
   };
+
   const getEmployees = async (params = "") => {
     setGettingData(true);
     if (searchParams.get("page")) {
       params = searchParams.get("page");
     }
+    const qParams = {
+      page: params || "1",
+    };
+    if (!!form.values.departmentId?.length) {
+      qParams.departmentId = form.values.departmentId;
+    }
+    if (!!form.values.employeeId?.length) {
+      qParams.employeeId = form.values.employeeId;
+    }
+    if (!!form.values.employeeName?.length) {
+      qParams.search = form.values.employeeName;
+    }
+    if (!!form.values.status?.length) {
+      qParams.status = form.values.status;
+    }
     try {
       const response = await apiClient.get(
-        `/employees/${session?.user.company.id}?page=${params || "1"}`,
-        headerSettings
+        `/employees/${session?.user.company.id}`,
+        { params: qParams, ...headerSettings }
       );
       setEmployees(response?.results?.data);
       setPagination(response?.results?.meta);
@@ -106,19 +81,37 @@ const useSearch = () => {
       console.log(err, "Error getting employees");
     }
   };
+  const getDepartments = async () => {
+    try {
+      const response = await apiClient.get(
+        `/departments?paginate=false`,
+        headerSettings
+      );
+      const department = response.results.map((option) => ({
+        value: option.id,
+        label: option.name,
+      }));
+      setDepartments(department);
+    } catch (err) {}
+  };
   useEffect(() => {
     getEmployees();
+    //eslint-disable-next-line
+  }, [searchParams.get("page")]);
+  useEffect(() => {
+    getDepartments();
     //eslint-disable-next-line
   }, []);
 
   return {
     form,
-    handleSubmit,
     loading,
     paginate,
     employees,
     gettingData,
     pagination,
+    departments,
+    getEmployees,
   };
 };
 

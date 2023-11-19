@@ -3,6 +3,7 @@ import { Button, Group, Text } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import classes from "./HiringLayout/HiringLayout.module.css";
 import React from "react";
+import Link from "next/link";
 
 const HiringNav = ({ tabTitle }) => {
   const pathname = usePathname();
@@ -12,36 +13,36 @@ const HiringNav = ({ tabTitle }) => {
         {tabTitle}
       </Text>
       <Group>
-        <Button
-          w="125px"
-          component="a"
-          href="/dashboard/hiring"
-          data-active={
-            "/dashboard/hiring" === pathname ||
-            "/dashboard/hiring/add-candidate" === pathname ||
-            "/dashboard/hiring/application-phase" === pathname ||
-            "/dashboard/hiring/shortlist" === pathname ||
-            undefined
-          }
-          className={classes.btnLink}
-          variant="filled"
-        >
-          Applicants
-        </Button>
-        <Button
-          component="a"
-          href="/dashboard/hiring/vacancies"
-          w="125px"
-          variant="filled"
-          className={classes.btnLink}
-          data-active={
-            "/dashboard/hiring/vacancies" === pathname ||
-            "/dashboard/hiring/add-vacancy" === pathname ||
-            undefined
-          }
-        >
-          Vacancies
-        </Button>
+        <Link href="/dashboard/hiring">
+          <Button
+            w="125px"
+            data-active={
+              "/dashboard/hiring" === pathname ||
+              "/dashboard/hiring/add-candidate" === pathname ||
+              "/dashboard/hiring/application-phase" === pathname ||
+              "/dashboard/hiring/shortlist" === pathname ||
+              undefined
+            }
+            className={classes.btnLink}
+            variant="filled"
+          >
+            Applicants
+          </Button>
+        </Link>
+        <Link href="/dashboard/hiring/vacancies">
+          <Button
+            w="125px"
+            variant="filled"
+            className={classes.btnLink}
+            data-active={
+              "/dashboard/hiring/vacancies" === pathname ||
+              "/dashboard/hiring/add-vacancy" === pathname ||
+              undefined
+            }
+          >
+            Vacancies
+          </Button>
+        </Link>
       </Group>
     </Group>
   );

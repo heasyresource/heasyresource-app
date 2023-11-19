@@ -48,6 +48,7 @@ const useAddApplicant = () => {
   const [applicantId, setApplicantId] = useState("");
   const [status, seStatus] = useState("");
   const [vacancy, setVacancy] = useState(null);
+  const [jobTitle, setJobTitle] = useState(null);
 
   const form = useForm({
     initialValues: {
@@ -71,6 +72,13 @@ const useAddApplicant = () => {
       stateId: (val) => (!val.length ? "State is required" : null),
       countryId: (val) => (!val.length ? "Country is required" : null),
       resumeUrl: (val) => (val === null ? "Resume  is required" : null),
+    },
+  });
+  const filterForm = useForm({
+    initialValues: {
+      search: "",
+      status: "",
+      vacancyId: "",
     },
   });
   const reasonForm = useForm({
@@ -298,11 +306,23 @@ const useAddApplicant = () => {
     if (searchParams.get("page")) {
       params = searchParams.get("page");
     }
+    const qParams = {
+      page: params || "1",
+    };
+    if (!!filterForm.values.search?.length) {
+      qParams.search = filterForm.values.search;
+    }
+    if (!!filterForm.values.status?.length) {
+      qParams.status = filterForm.values.status;
+    }
+    if (!!filterForm.values?.vacancyId) {
+      qParams.vacancyId = filterForm.values.vacancyId;
+    }
     try {
-      const response = await apiClient.get(
-        `/applicants?page=${params || "1"}`,
-        headerSettings
-      );
+      const response = await apiClient.get(`/applicants`, {
+        params: qParams,
+        ...headerSettings,
+      });
       setApplicants(response.results.data);
       setApplicantsPagination(response.results.meta);
       setGettingApplicants(false);
@@ -360,10 +380,35 @@ const useAddApplicant = () => {
   }, [searchParams.get("page")]);
 
   useEffect(() => {
+    const getApplicants = async () => {
+      try {
+        const response = await apiClient.get(
+          `/vacancies?paginate=false`,
+          headerSettings
+        );
+        console.log(response, "response");
+        const types = response.results.map((option) => ({
+          value: option.id,
+          label: option.name,
+        }));
+        setJobTitle(types);
+      } catch (err) {
+        setGettingApplicants(false);
+        if (err.statusCode >= 400) {
+          notifications.show({
+            color: "red",
+
+            message: "Something went wrong, please try again",
+            styles: errorStyles,
+            autoClose: 7000,
+          });
+        }
+      }
+    };
     getSingleApplicant();
 
     getMetadata();
-
+    getApplicants();
     //eslint-disable-next-line
   }, []);
 
@@ -392,6 +437,9 @@ const useAddApplicant = () => {
     openReject,
     closeReject,
     vacancy,
+    jobTitle,
+    filterForm,
+    getApplicants,
   };
 };
 

@@ -82,6 +82,14 @@ const useHiring = () => {
         !val.length ? "Number of Position is required" : null,
     },
   });
+  const filterForm = useForm({
+    initialValues: {
+      search: "",
+      workMode: "",
+      employmentTypeId: "",
+      jobCategoryId: "",
+    },
+  });
   const headerSettings = {
     headers: {
       Authorization: `Bearer ${session?.user.token}`,
@@ -216,11 +224,26 @@ const useHiring = () => {
     if (searchParams.get("page")) {
       params = searchParams.get("page");
     }
+    const qParams = {
+      page: params || "1",
+    };
+    if (!!filterForm.values.search?.length) {
+      qParams.search = filterForm.values.search;
+    }
+    if (!!filterForm.values.workMode?.length) {
+      qParams.workMode = filterForm.values.workMode;
+    }
+    if (!!filterForm.values?.employmentTypeId) {
+      qParams.employmentTypeId = filterForm.values.employmentTypeId;
+    }
+    if (!!filterForm.values?.jobCategoryId) {
+      qParams.jobCategoryId = filterForm.values.jobCategoryId;
+    }
     try {
-      const response = await apiClient.get(
-        `/vacancies?page=${params || "1"}`,
-        headerSettings
-      );
+      const response = await apiClient.get(`/vacancies`, {
+        params: qParams,
+        ...headerSettings,
+      });
       setVacancies(response.results.data);
       setVacancyPagination(response.results.meta);
       setGettingVacancies(false);
@@ -281,6 +304,8 @@ const useHiring = () => {
     closeAdd,
     openAdd,
     openedAdd,
+    getVacancy,
+    filterForm,
   };
 };
 

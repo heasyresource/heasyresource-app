@@ -170,7 +170,6 @@ const EditWorkModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             onClick={() => {
               closeEditExp();
               experienceForm?.reset();
@@ -186,7 +185,6 @@ const EditWorkModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             type="submit"
             style={{
               backgroundColor: "#3377FF",

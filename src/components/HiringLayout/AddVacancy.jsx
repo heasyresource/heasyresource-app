@@ -46,7 +46,6 @@ const AddVacancy = () => {
                 size="md"
                 required
                 label="Vacancy Name"
-                placeholder="Marketing"
                 style={{ width: "100%" }}
                 classNames={{
                   label: classes.label,

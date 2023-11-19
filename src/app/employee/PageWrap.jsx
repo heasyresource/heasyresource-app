@@ -15,6 +15,7 @@ import {
   SimpleGrid,
   Space,
   Text,
+  Button,
 } from "@mantine/core";
 import Messages from "@/components/Messages";
 import Notifications from "@/components/Notifications";
@@ -26,24 +27,50 @@ import Link from "next/link";
 import PaymentTable from "./components/PaymentTable";
 import { useDashboard } from "@/hooks";
 import Loading from "@/components/Loading";
+import { convertStringDate } from "@/utils/publicFunctions";
 
 const PageWrap = ({ session }) => {
-  const { companyEmployee, loading } = useDashboard();
+  const { companyEmployee, loading, leaves } = useDashboard();
 
   const currentDate = new Date();
+  const getNewestApprovedLeave = (list) => {
+    const approvedLeaveRequests = list.filter(
+      (request) => request.status === "Approved"
+    );
+
+    const newestApprovedLeave = approvedLeaveRequests?.reduce(
+      (latestLeave, currentLeave) => {
+        const latestTimestamp = new Date(latestLeave.updatedAt).getTime();
+        const currentTimestamp = new Date(currentLeave.updatedAt).getTime();
+
+        return latestTimestamp > currentTimestamp ? latestLeave : currentLeave;
+      },
+      approvedLeaveRequests[0]
+    );
+
+    return newestApprovedLeave;
+  };
+  const getDaysDifference = (start, end) => {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+
+    const timeDifference = date2 - date1;
+
+    const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    return Math.round(daysDifference);
+  };
+  const newestApprovedLeave = getNewestApprovedLeave(leaves);
+
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
         <Box style={{ height: "50%", borderRadius: "15px" }}>
-          <Grid justify="space-around" align="stretch">
-            <GridCol
-              bg="#"
-              span={{ lg: 8.5, md: 12, sm: 12 }}
-              style={{ minHeight: "80px" }}
-            >
-              <Container p="0px">
+          <Grid justify="flex-start" align="stretch">
+            <GridCol bg="#" span={12} style={{ minHeight: "80px" }}>
+              <Box p="0px">
                 <div>
                   <Text c="#9C9C9C" fz="20px">
                     Hi {session && session?.user?.firstName},
@@ -53,7 +80,7 @@ const PageWrap = ({ session }) => {
                     Welcome to your Dashboard
                   </Text>
                 </div>
-                <Container p={0} mt="39">
+                <Box p={0} mt="39">
                   <Grid gutter={"xl"}>
                     <GridCol
                       style={{ borderRadius: "15px" }}
@@ -74,7 +101,7 @@ const PageWrap = ({ session }) => {
                             <Badge
                               tt={"capitalize"}
                               variant="light"
-                              color="blue"
+                              color="#3377FF"
                             >
                               {companyEmployee.position}
                             </Badge>
@@ -117,7 +144,7 @@ const PageWrap = ({ session }) => {
                           </Text>
                           <Space h={10} />
                           <Text c={"#2D2D2D"} fz={"15px"}>
-                            19th of December, 2024
+                            {convertStringDate(newestApprovedLeave?.startDate)}
                           </Text>
                         </Card>
                       </Paper>
@@ -133,7 +160,17 @@ const PageWrap = ({ session }) => {
                         <Text c={"#808080"}>Leave Days Available</Text>
                         <Space h={20} />
                         <Text c={"#2D2D2D"} fz={15} fw={700}>
-                          28 Days
+                          {`${getDaysDifference(
+                            newestApprovedLeave?.startDate,
+                            newestApprovedLeave?.endDate
+                          )} ${
+                            getDaysDifference(
+                              newestApprovedLeave?.startDate,
+                              newestApprovedLeave?.endDate
+                            ) > 1
+                              ? "days"
+                              : "day"
+                          }`}
                         </Text>
                       </Paper>
                     </GridCol>
@@ -143,29 +180,25 @@ const PageWrap = ({ session }) => {
                       </Paper>
                     </GridCol>
                     <GridCol span={{ base: 12, xs: 12 }}>
-                      <Paper
-                        bg={"#ffff"}
-                        style={{ borderRadius: "15px" }}
-                        py={20}
-                        h={280}
-                      >
-                        <Group px={20} pb={15} justify="space-between">
-                          <Text>Payment History</Text>
-                          <Link
-                            className={classes.detailsLink}
-                            href={"/employee/compensation"}
-                          >
-                            more details
-                          </Link>
-                        </Group>
-                        <PaymentTable />
-                      </Paper>
+                      <Group mb="10px" justify="space-between">
+                        <Text>Payment History</Text>
+
+                        <Link
+                          className={classes.detailsLink}
+                          href={"/employee/compensation"}
+                        >
+                          <Button size="sm" color="#3377FF" bg="#3377FF">
+                            View all
+                          </Button>
+                        </Link>
+                      </Group>
+                      <PaymentTable />
                     </GridCol>
                   </Grid>
-                </Container>
-              </Container>
+                </Box>
+              </Box>
             </GridCol>
-            <GridCol pr="xs" span={{ lg: 3.5, md: 12, sm: 12 }}>
+            {/* <GridCol pr="xs" span={{ lg: 3.5, md: 12, sm: 12 }}>
               <Space h="45px" />
               <SimpleGrid style={{ borderRadius: "15px" }} bg="#ffff" cols={1}>
                 <ScrollArea scrollbarSize={4} type="never">
@@ -177,7 +210,7 @@ const PageWrap = ({ session }) => {
                   </ScrollArea>
                 </div>
               </SimpleGrid>
-            </GridCol>
+            </GridCol> */}
           </Grid>
         </Box>
       )}
