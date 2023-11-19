@@ -25,9 +25,18 @@ const useChangePassword = () => {
       newPassword: "",
     },
     validate: {
-      currentPassword: (value) => value.length >= 8 ? null : "Password should be 8 characters",
+      currentPassword: (value) =>
+        !value.length
+          ? "Enter your current password"
+          : value.length >= 8
+          ? null
+          : "Password should be atleast 8 characters",
       newPassword: (value) =>
-        value.length >= 8 ? null : "Password should be 8 characters",
+        !value.length
+          ? "Enter your new password"
+          : value.length >= 8
+          ? null
+          : "Password should be atleast 8 characters",
     },
   });
   const handleRouteChange = () => {
@@ -38,6 +47,7 @@ const useChangePassword = () => {
     modals.open({
       radius: "md",
       centered: true,
+      withCloseButton: false,
       children: (
         <Stack
           gap={"20px"}

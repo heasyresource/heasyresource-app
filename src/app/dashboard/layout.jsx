@@ -43,22 +43,7 @@ const Layout = ({ children }) => {
               {companyName}
             </Text>
           </Group>
-          <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconBell color="black" />
-          </ActionIcon>
-          <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconMessageDots color="black" />
-          </ActionIcon>
+
           <Profile position={companyRep} />
         </Group>
       </AppShell.Header>

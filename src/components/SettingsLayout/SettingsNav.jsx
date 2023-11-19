@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import classes from "./Settings.module.css";
 import { IconChevronDown } from "@tabler/icons-react";
+import Link from "next/link";
 
 const SettingsNav = ({ tabTitle }) => {
   const pathname = usePathname();
@@ -21,37 +22,24 @@ const SettingsNav = ({ tabTitle }) => {
         {tabTitle}
       </Text>
       <Group>
-        <Menu position="bottom-end" width={150}>
-          <MenuTarget>
-            <Button
-              w="auto"
-              variant="filled"
-              color="#EBEBEB"
-              style={{
-                color: "#424242",
-                fontSize: "13px",
-                fontWeight: 700,
-              }}
-              className={classes.btnLink}
-              rightSection={<IconChevronDown size="1.3rem" color="#3377FF" />}
-              data-active={"/dashboard/settings" === pathname || undefined}
-            >
-              Company Information
-            </Button>
-          </MenuTarget>
-          <MenuDropdown>
-            <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              data-active={"/dashboard/settings" === pathname || undefined}
-              href="/dashboard/settings"
-            >
-              General Information
-            </MenuItem>
-          </MenuDropdown>
-        </Menu>
-        <Menu position="bottom-end" width={150}>
+        <Link href="/dashboard/settings">
+          <Button
+            w="auto"
+            variant="filled"
+            color="#EBEBEB"
+            style={{
+              color: "#424242",
+              fontSize: "13px",
+              fontWeight: 700,
+            }}
+            className={classes.btnLink}
+            data-active={"/dashboard/settings" === pathname || undefined}
+          >
+            Company Information
+          </Button>
+        </Link>
+
+        <Menu position="bottom-end" width={150} withArrow>
           <MenuTarget>
             <Button
               w="auto"
@@ -66,107 +54,25 @@ const SettingsNav = ({ tabTitle }) => {
               rightSection={<IconChevronDown size="1.3rem" color="#3377FF" />}
               data-active={
                 "/dashboard/settings/job-categories" === pathname || undefined
-              }
-            >
-              Employment
-            </Button>
-          </MenuTarget>
-          <MenuDropdown>
-            <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              data-active={
-                "/dashboard/settings/job-categories" === pathname || undefined
-              }
-              href="/dashboard/settings/job-categories"
-            >
-              Job Categories
-            </MenuItem>
-            {/* <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              // leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
-              // data-active={
-              //   "/dashboard/compensation/deductions" === pathname || undefined
-              // }
-              // href="/dashboard/compensation/deductions"
-            >
-              Employment Status
-            </MenuItem>
-            <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              // leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
-              // data-active={
-              //   "/dashboard/compensation/deductions" === pathname || undefined
-              // }
-              // href="/dashboard/compensation/deductions"
-            >
-              Job Titles
-            </MenuItem> */}
-          </MenuDropdown>
-        </Menu>
-        <Menu position="bottom-end" width={150}>
-          <MenuTarget>
-            <Button
-              w="auto"
-              variant="filled"
-              color="#EBEBEB"
-              style={{
-                color: "#424242",
-                fontSize: "13px",
-                fontWeight: 700,
-              }}
-              className={classes.btnLink}
-              rightSection={<IconChevronDown size="1.3rem" color="#3377FF" />}
-              data-active={
-                "/dashboard/compensation/earnings" === pathname || undefined
               }
             >
               Configuration
             </Button>
           </MenuTarget>
-          {/* <MenuDropdown>
-            <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              leftSection={<IconZoomMoney size="1rem" color="#3377FF" />}
-              data-active={
-                "/dashboard/settings/job-titles" === pathname || undefined
-              }
-              href="/dashboard/settings/job-titles"
-            >
-              Job Titles
+          <MenuDropdown>
+            <MenuItem fz="xs">
+              <Link
+                style={{ textDecoration: "none" }}
+                className={classes.activeConfig}
+                href="/dashboard/settings/job-categories"
+                data-active={
+                  "/dashboard/settings/job-categories" === pathname || undefined
+                }
+              >
+                Job Categories
+              </Link>
             </MenuItem>
-            <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
-              data-active={
-                "/dashboard/compensation/deductions" === pathname || undefined
-              }
-              href="/dashboard/compensation/deductions"
-            >
-              Employment Status
-            </MenuItem>
-            <MenuItem
-              fz="xs"
-              component="a"
-              className={classes.activeConfig}
-              leftSection={<IconWalletOff size="1rem" color="#3377FF" />}
-              data-active={
-                "/dashboard/compensation/deductions" === pathname || undefined
-              }
-              href="/dashboard/compensation/deductions"
-            >
-              Job Categories
-            </MenuItem>
-          </MenuDropdown> */}
+          </MenuDropdown>
         </Menu>
       </Group>
     </Group>

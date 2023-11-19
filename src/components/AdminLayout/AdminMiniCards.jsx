@@ -35,11 +35,11 @@ const data = [
 
 // Define your custom Card component
 function AdminMiniCards({ height }) {
-  const cards = data.map((item) => (
-    <GridCol key={item.title} span={{ lg: 'content', md: 3, sm: 6 }}>
+  const cards = data.map((item, index) => (
+    <GridCol key={item.title + index} span={{ lg: "content", md: 3, sm: 6 }}>
       <Card
         className={classes.card}
-        style={{ width: "250px", height: '120px', borderRadius: "15px" }}
+        style={{ width: "250px", height: "120px", borderRadius: "15px" }}
         px="28"
         py="20"
         bg="var(--mantine-color-body)"

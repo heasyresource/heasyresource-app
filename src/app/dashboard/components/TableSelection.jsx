@@ -8,9 +8,11 @@ import {
   MenuItem,
   MenuTarget,
   MenuDropdown,
+  Box,
+  Stack,
+  Image,
 } from "@mantine/core";
 import { DataTable } from "mantine-datatable";
-import Link from "next/link";
 import { IconDotsVertical } from "@tabler/icons-react";
 
 export function TableSelection({
@@ -21,7 +23,7 @@ export function TableSelection({
 }) {
   return (
     <>
-      {employees?.length !== 0 && (
+      {employees?.length !== 0 ? (
         <DataTable
           style={{ background: "none", marginTop: "3rem" }}
           minHeight={"250px"}
@@ -100,21 +102,17 @@ export function TableSelection({
                       </ActionIcon>
                     </MenuTarget>
                     <MenuDropdown>
-                      <MenuItem>
-                        <Link
-                          style={{ textDecoration: "none", color: "inherit" }}
-                          href={`/dashboard/employee/${employees.id}/personal-detail`}
-                        >
-                          Employee Details
-                        </Link>
+                      <MenuItem
+                        component="a"
+                        href={`/dashboard/employee/${employees.id}/personal-detail`}
+                      >
+                        Employee Details
                       </MenuItem>
-                      <MenuItem>
-                        <Link
-                          style={{ textDecoration: "none", color: "inherit" }}
-                          href={`/dashboard/leave/${employees.id}?firstName=${employees.firstName}&lastName=${employees.lastName}`}
-                        >
-                          Assign Leave
-                        </Link>
+                      <MenuItem
+                        component="a"
+                        href={`/dashboard/leave/${employees.id}?firstName=${employees.firstName}&lastName=${employees.lastName}`}
+                      >
+                        Assign Leave
                       </MenuItem>
                     </MenuDropdown>
                   </Menu>
@@ -127,6 +125,25 @@ export function TableSelection({
           page={pagination?.currentPage}
           onPageChange={(page) => paginate(page)}
         />
+      ) : (
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            margin: "6rem 0",
+          }}
+        >
+          <Stack justify="center" align="center">
+            <Box style={{ width: "10rem", height: "auto" }}>
+              <Image src={"/assets/svgs/empty.svg"} alt="empty" />
+            </Box>
+            <Text style={{ fontSize: "16px", color: "#616161" }}>
+              No Employee yet!
+            </Text>
+          </Stack>
+        </Box>
       )}
     </>
   );

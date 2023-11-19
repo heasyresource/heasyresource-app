@@ -20,7 +20,6 @@ const PayrollInputField = () => {
             size="md"
             label="Select Employee"
             required
-            placeholder="Marketing"
             style={{ width: "100%" }}
             data={[]}
             {...form.getInputProps("employeeName")}

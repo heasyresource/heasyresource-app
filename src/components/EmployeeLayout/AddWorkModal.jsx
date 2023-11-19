@@ -143,7 +143,7 @@ const AddWorkModal = ({
               {...experienceForm?.getInputProps("endDate")}
               disabled={
                 loading ||
-                experienceForm?.values.isPresent ||
+                experienceForm?.values?.isPresent ||
                 experienceForm?.values.startDate?.length === 0
               }
               minDate={experienceForm?.values.startDate}
@@ -177,7 +177,6 @@ const AddWorkModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             onClick={() => {
               closeExp();
               experienceForm?.reset();
@@ -193,7 +192,6 @@ const AddWorkModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             type="submit"
             style={{
               backgroundColor: "#3377FF",

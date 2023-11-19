@@ -16,6 +16,7 @@ const useSingleEmployee = () => {
   const [lastName, setLastName] = useState("");
   const [position, setPosition] = useState("");
   const [logoUrl, setLogoUrl] = useState(null);
+  const [gettingInfo, setGettingInfo] = useState(true);
 
   const headerSettings = {
     headers: {
@@ -35,6 +36,7 @@ const useSingleEmployee = () => {
       setLastName(results.lastName);
       setPosition(results.employmentInfo.position);
       setLogoUrl(results.logoUrl);
+      setGettingInfo(false);
     } catch (err) {}
   };
 
@@ -48,6 +50,7 @@ const useSingleEmployee = () => {
     lastName,
     position,
     id,
+    gettingInfo,
     logoUrl,
   };
 };

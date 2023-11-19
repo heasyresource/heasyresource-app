@@ -28,7 +28,7 @@ import { useSession } from "next-auth/react";
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
     <UnstyledButton ref={ref} {...others}>
-      <Group gap={"10px"} style={{ flexWrap: "nowrap" }}>
+      <Group style={{ flexWrap: "nowrap" }}>
         <div
           style={{
             border: "2px #3377FF solid",
@@ -50,10 +50,6 @@ const UserButton = forwardRef(
           <Text style={{ color: "#2A004C" }} size="sm" fw={500}>
             {name}
           </Text>
-
-          <Text style={{ color: "#696969" }} size="xs">
-            {position}
-          </Text>
         </Box>
 
         {icon || (
@@ -68,7 +64,7 @@ const UserButton = forwardRef(
   )
 );
 
-export default function EmployeeProfile() {
+export default function EmployeeProfile({ position, logo }) {
   const { data: session } = useSession();
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
@@ -77,21 +73,18 @@ export default function EmployeeProfile() {
       <Menu position="bottom-end" offset={10}>
         <Menu.Target>
           <UserButton
-            image={"/assets/images/avata2.png"}
+            image={logo || "/assets/images/avata2.png"}
             name={
               session && `${session.user.firstName} ${session.user.lastName}`
             }
-            position={session && `${session.user.role.name}`}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>
           <Menu.Item
             component="a"
-            href="/employee/profile"
+            href="/employee/settings"
             className={classes.menuLink}
-            data-active={
-              "/employee/profile"
-            }
+            data-active={"/employee/settings"}
             leftSection={
               <IconUser
                 style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
@@ -101,6 +94,8 @@ export default function EmployeeProfile() {
             Profile
           </Menu.Item>
           <Menu.Item
+            component="a"
+            href="/employee/settings"
             leftSection={
               <IconSettingsQuestion
                 style={{ width: rem(14), height: rem(14), color: "#3377FF" }}

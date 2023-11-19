@@ -105,66 +105,68 @@ const DepartmentsTable = ({
 
   return (
     <>
-      <DataTable
-        style={{ background: "none", marginTop: "3rem" }}
-        minHeight={"250px"}
-        fetching={getttingDatas}
-        loaderType="dots"
-        loaderColor="#3377FF"
-        withRowBorders={false}
-        records={departments}
-        columns={[
-          {
-            accessor: "index",
-            title: "S/N",
-            textAlign: "center",
-            width: 70,
-            render: (record) => departments.indexOf(record) + 1,
-          },
-          {
-            accessor: "name",
-            title: "Department Name",
-            noWrap: true,
-          },
-          {
-            accessor: "code",
-            title: "Department Code",
-            noWrap: true,
-          },
-          {
-            accessor: "",
-            title: "Actions",
-            width: "135px",
-            textAlign: "center",
-            render: (departments) => (
-              <Flex justify="center" align="center">
-                <ActionIcon
-                  variant="transparent"
-                  onClick={() => handleOpen(departments)}
-                >
-                  <IconEdit
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-                <ActionIcon
-                  variant="transparent"
-                  onClick={() => openModal(departments)}
-                >
-                  <IconTrash
-                    style={{ width: "70%", height: "70%", color: "#FF7A00" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-              </Flex>
-            ),
-          },
-        ]}
-        totalRecords={pagination?.total}
-        recordsPerPage={pagination?.perPage}
-        page={pagination?.currentPage}
-        onPageChange={(page) => paginate(page)}
-      />
+      {departments?.length !== 0 && (
+        <DataTable
+          style={{ background: "none", marginTop: "3rem" }}
+          minHeight={"250px"}
+          fetching={getttingDatas}
+          loaderType="dots"
+          loaderColor="#3377FF"
+          withRowBorders={false}
+          records={departments}
+          columns={[
+            {
+              accessor: "index",
+              title: "S/N",
+              textAlign: "center",
+              width: 70,
+              render: (record) => departments.indexOf(record) + 1,
+            },
+            {
+              accessor: "name",
+              title: "Department Name",
+              noWrap: true,
+            },
+            {
+              accessor: "code",
+              title: "Department Code",
+              noWrap: true,
+            },
+            {
+              accessor: "",
+              title: "Actions",
+              width: "135px",
+              textAlign: "center",
+              render: (departments) => (
+                <Flex justify="center" align="center">
+                  <ActionIcon
+                    variant="transparent"
+                    onClick={() => handleOpen(departments)}
+                  >
+                    <IconEdit
+                      style={{ width: "70%", height: "70%" }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+                  <ActionIcon
+                    variant="transparent"
+                    onClick={() => openModal(departments)}
+                  >
+                    <IconTrash
+                      style={{ width: "70%", height: "70%", color: "#FF7A00" }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+                </Flex>
+              ),
+            },
+          ]}
+          totalRecords={pagination?.total}
+          recordsPerPage={pagination?.perPage}
+          page={pagination?.currentPage}
+          onPageChange={(page) => paginate(page)}
+        />
+      )}
 
       <Modal
         closeOnClickOutside={false}

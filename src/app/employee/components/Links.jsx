@@ -26,12 +26,11 @@ const data = [
     subLink: true,
   },
   {
-    link: "/employee/calendar",
-    label: "Calendar",
-    icon: IconCalendarFilled,
+    link: "/employee/settings",
+    label: "Settings",
+    icon: IconSettings,
     subLink: true,
   },
-  { link: "/employee/settings", label: "Settings", icon: IconSettings },
 ];
 
 const Links = () => {

@@ -27,7 +27,6 @@ import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import EmployeeProfile from "@/app/employee/components/EmployeeProfile";
-import Profile from "../Profile";
 
 const data = [
   { link: "/dashboard", label: "Dashboard", icon: IconHome },
@@ -41,6 +40,12 @@ const data = [
     link: "/dashboard/hiring",
     label: "Hiring",
     icon: IconBriefcase2,
+    subLink: true,
+  },
+  {
+    link: "/dashboard/performance",
+    label: "Performance",
+    icon: IconGraph,
     subLink: true,
   },
   {
@@ -98,7 +103,7 @@ const Header = ({ companyName, logo }) => {
             <IconAlignLeft style={{ color: "#3377FF" }} />
           </ActionIcon>
           <Group justify="flex-end">
-            <ActionIcon variant="transparent" size={"lg"}>
+            {/* <ActionIcon variant="transparent" size={"lg"}>
               <Indicator
                 offset={5}
                 position="top-end"
@@ -108,8 +113,8 @@ const Header = ({ companyName, logo }) => {
               >
                 <IconBell color="#3F3F3F" />
               </Indicator>
-            </ActionIcon>
-            <Profile />
+            </ActionIcon> */}
+            <EmployeeProfile />
           </Group>
         </Flex>
       </header>
@@ -121,28 +126,27 @@ const Header = ({ companyName, logo }) => {
         zIndex={1000000}
         withCloseButton={false}
       >
-        <Flex align={'center'} direction={"row"} my="lg">
+        <Stack justify="flex-start" my="lg">
           <Image
             src="/assets/svgs/HRlogo.svg"
-            style={{ height: "27px" }}
+            style={{ width: "120px" }}
             alt="logo"
           />
-          <Divider color="#d3d3d35e" mx={10} size="sm" orientation="vertical" />
-          <Flex gap={5} align={'center'} direction={'column'}>
+          <Group>
             <Image
               src={logo || ""}
-              style={{ width: "54px" }}
+              style={{ width: "30px" }}
               alt="Company Logo"
             />
-            {/* <Text
+            <Text
               fw={500}
-              c="#ced4da"
-              style={{ wordWrap: "break-word", fontSize: "12px", textTransform: "capitalize" }}
+              c="#616161"
+              style={{ fontSize: "13px", textTransform: "capitalize" }}
             >
               {companyName}
-            </Text> */}
-          </Flex>
-        </Flex>
+            </Text>
+          </Group>
+        </Stack>
         <Divider mt="4rem" />
         <Stack mt={"1rem"} pr={"20px"}>
           {links}

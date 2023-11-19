@@ -4,7 +4,7 @@ import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -55,6 +55,10 @@ const usePersonal = () => {
       "x-subdomain-name": subdomain,
     },
   };
+  const handleSignOut = async () => {
+    const result = await signOut({ redirect: false, callbackUrl: "/signin" });
+    router.push(result.url);
+  };
   const handleSubmit = async (data) => {
     setLoading(true);
 
@@ -64,7 +68,7 @@ const usePersonal = () => {
         dateOfBirth: convertDateFormat(data.dateOfBirth),
       };
       const response = await apiClient.put(
-        `/employees/${id}/personal-details`,
+        `/employees/${id || session.user.id}/personal-details`,
         modifiedValues,
         headerSettings
       );
@@ -98,7 +102,9 @@ const usePersonal = () => {
   const getEmployee = async () => {
     try {
       const response = await apiClient.get(
-        `/employees/${session.user.company.id}/employee/${id}`,
+        `/employees/${session.user.company.id}/employee/${
+          id || session.user.id
+        }`,
         headerSettings
       );
       const results = response.results;
@@ -127,13 +133,19 @@ const usePersonal = () => {
           autoClose: 7000,
         });
       }
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
     }
   };
   useEffect(() => {
     if (isChanged !== null) {
       getEmployee();
     }
-    //esliint-disable-next-line
+
+    //eslint-disable-next-line
   }, [isChanged]);
 
   useEffect(() => {

@@ -7,7 +7,6 @@ import SettingWrap from "./settingWrap";
 import { AddComImg } from "@/components";
 import { useCompleteReg } from "@/hooks";
 
-
 const Settings = () => {
   return (
     <>
@@ -24,7 +23,7 @@ const Settings = () => {
           <SettingsNav tabTitle={"Settings"} />
         </CardSection>
         <Text ta={{ base: "center", md: "left" }} py={30} fz={24} fw={700}>
-          General Information
+          Company Information
         </Text>
       </Card>
       <Space h={24} />

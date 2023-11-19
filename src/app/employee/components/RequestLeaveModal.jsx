@@ -1,34 +1,45 @@
 "use client";
 import {
-  ActionIcon,
   Box,
   Button,
-  FileInput,
-  Flex,
   Grid,
   GridCol,
   Group,
+  Loader,
   Modal,
   Select,
   Stack,
-  Switch,
   Text,
-  TextInput,
   Textarea,
 } from "@mantine/core";
-import React, { useState } from "react";
+import React from "react";
 import classes from "../leave/leave.module.css";
-import { IconCalendar, IconEdit } from "@tabler/icons-react";
-import { useAssignLeave } from "@/hooks";
-import { useDisclosure } from "@mantine/hooks";
+import { IconCalendar } from "@tabler/icons-react";
+import { DateInput } from "@mantine/dates";
 
-const RequestLeaveModal = ({ isOpen, onClose }) => {
-  const [value, setValue] = useState([]);
-  const { form, handleSubmit } = useAssignLeave();
-
+const RequestLeaveModal = ({
+  opened,
+  close,
+  form,
+  handleSubmit,
+  loading,
+  types,
+}) => {
+  const currentDate = new Date();
   return (
-    <Modal opened={isOpen} onClose={onClose} size="50%" radius={15} shadow="sm">
-      <Box px={30} pt={30}>
+    <Modal
+      size="lg"
+      centered
+      closeOnClickOutside={false}
+      withCloseButton={false}
+      opened={opened}
+      onClose={close}
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
+    >
+      <Box>
         <Text
           tt={"capitalize"}
           style={{
@@ -38,28 +49,33 @@ const RequestLeaveModal = ({ isOpen, onClose }) => {
         >
           Request Leave
         </Text>
-        <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <form onSubmit={form?.onSubmit((values) => handleSubmit(values))}>
           <Stack gap={"2rem"}>
             <Grid gutter="xl" className={classes.formWrap}>
-              <GridCol span={{ lg: 12, md: 12, sm: 12 }}>
-                <TextInput
+              <GridCol span={12}>
+                <Select
+                  data={types}
                   size="md"
-                  required
+                  withAsterisk
                   label="Leave Type"
-                  placeholder="Marketing"
                   style={{ width: "100%" }}
                   classNames={{
                     label: classes.label,
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}
+                  {...form?.getInputProps("leaveTypeId")}
+                  allowDeselect={false}
+                  disabled={loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-                <TextInput
+                <DateInput
+                  withAsterisk
                   size="md"
-                  required
+                  minDate={currentDate}
                   label="Start Date"
+                  {...form?.getInputProps("startDate")}
                   style={{ width: "100%" }}
                   rightSection={<IconCalendar color="#3377ff" />}
                   classNames={{
@@ -67,13 +83,16 @@ const RequestLeaveModal = ({ isOpen, onClose }) => {
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}
+                  disabled={loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
-                <TextInput
+                <DateInput
+                  withAsterisk
                   size="md"
-                  required
+                  {...form?.getInputProps("endDate")}
                   label="End Date"
+                  minDate={form?.values.startDate || ""}
                   style={{ width: "100%" }}
                   rightSection={<IconCalendar color="#3377ff" />}
                   classNames={{
@@ -81,19 +100,20 @@ const RequestLeaveModal = ({ isOpen, onClose }) => {
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}
+                  disabled={loading}
                 />
               </GridCol>
-              <GridCol span={{ lg: 12, md: 12, sm: 12 }}>
+              <GridCol span={12}>
                 <Textarea
                   size="md"
-                  placeholder="Note"
-                  required
-                  label="Frequency"
+                  {...form?.getInputProps("comment")}
+                  label="Comment"
                   classNames={{
                     label: classes.label,
                     error: classes.error,
                     placeholder: classes.placeholder,
                   }}
+                  disabled={loading}
                 />
               </GridCol>
             </Grid>
@@ -109,9 +129,14 @@ const RequestLeaveModal = ({ isOpen, onClose }) => {
                 color="#3377FF"
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
-                px="50px"
+                px="30px"
                 w={{ lg: "auto", md: "auto", sm: "auto" }}
                 className={classes.btn}
+                disabled={loading}
+                onClick={() => {
+                  close();
+                  form?.reset();
+                }}
               >
                 back
               </Button>
@@ -120,15 +145,20 @@ const RequestLeaveModal = ({ isOpen, onClose }) => {
                 size="md"
                 color="#3377FF"
                 tt="capitalize"
-                px="50px"
+                px="30px"
                 w={{ lg: "auto", md: "auto", sm: "auto" }}
                 className={classes.btn}
                 type="submit"
                 style={{
                   backgroundColor: "#3377FF",
                 }}
+                disabled={loading}
               >
-                continue
+                {loading ? (
+                  <Loader color="white" type="dots" size={"md"} />
+                ) : (
+                  "submit"
+                )}
               </Button>
             </Group>
           </Stack>

@@ -114,7 +114,7 @@ const AddEduModal = ({
               classNames={{ label: classes.label, error: classes.error }}
               {...educationForm?.getInputProps("endDate")}
               disabled={loading}
-              minDate={educationForm?.values.endDate || ""}
+              minDate={educationForm?.values.startDate || ""}
             />
           </GridCol>
           <GridCol span={12}>
@@ -144,7 +144,6 @@ const AddEduModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             onClick={() => {
               closeEdu();
               educationForm?.reset();
@@ -160,7 +159,6 @@ const AddEduModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             type="submit"
             style={{
               backgroundColor: "#3377FF",

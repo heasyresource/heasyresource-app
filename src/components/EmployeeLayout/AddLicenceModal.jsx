@@ -129,7 +129,6 @@ const AddLicenceModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             onClick={() => {
               closeLcs();
               licenseForm?.reset();
@@ -145,7 +144,6 @@ const AddLicenceModal = ({
             tt="capitalize"
             px="50px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             type="submit"
             style={{
               backgroundColor: "#3377FF",

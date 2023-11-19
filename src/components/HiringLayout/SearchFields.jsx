@@ -7,12 +7,11 @@ const SearchFields = () => {
   return (
     <form style={{ marginTop: "1rem" }}>
       <Grid justify="flex-start" className={classes.formWrap}>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
+        <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
           <TextInput
             size="md"
-            required
-            label="Candidate Name"
-            placeholder="Elizabeth Okoli"
+            label="Applicant Name"
+            placeholder=""
             style={{ width: "100%" }}
             classNames={{
               label: classes.label,
@@ -21,14 +20,12 @@ const SearchFields = () => {
             }}
           />
         </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
+        <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
           <Select
             size="md"
-            required
-            label="Employment Type"
+            label="Employment Status"
             style={{ width: "100%" }}
-            placeholder="Account Assistant"
-            data={["Account Assistant"]}
+            data={["Pending", "Rejected", "Approved"]}
             classNames={{
               label: classes.label,
               error: classes.error,
@@ -37,13 +34,11 @@ const SearchFields = () => {
             allowDeselect={false}
           />
         </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
+        <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
           <Select
             size="md"
-            required
-            label="Vacancy"
+            label="Job Title"
             style={{ width: "100%" }}
-            placeholder="Junior Account Assistant"
             data={["Junior Account Assistant"]}
             classNames={{
               label: classes.label,
@@ -51,70 +46,6 @@ const SearchFields = () => {
               placeholder: classes.placeholder,
             }}
             allowDeselect={false}
-          />
-        </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <Select
-            size="md"
-            required
-            label="Status"
-            style={{ width: "100%" }}
-            placeholder="Accepted"
-            data={["Accepted", "Rejected"]}
-            classNames={{
-              label: classes.label,
-              error: classes.error,
-              placeholder: classes.placeholder,
-            }}
-            allowDeselect={false}
-          />
-        </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <Select
-            size="md"
-            required
-            label="Hiring Manager"
-            style={{ width: "100%" }}
-            placeholder="Fatimah Ahmed"
-            data={["Fatimah Ahmed"]}
-            classNames={{
-              label: classes.label,
-              error: classes.error,
-              placeholder: classes.placeholder,
-            }}
-            allowDeselect={false}
-          />
-        </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <Select
-            size="md"
-            required
-            label="Method of Application"
-            style={{ width: "100%" }}
-            placeholder="Manual"
-            data={["Manual", "Referral"]}
-            classNames={{
-              label: classes.label,
-              error: classes.error,
-              placeholder: classes.placeholder,
-            }}
-            allowDeselect={false}
-          />
-        </GridCol>
-        <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
-          <DateInput
-            size="md"
-            required
-            label="Date of Application"
-            placeholder="From"
-            style={{ width: "100%" }}
-            classNames={{
-              label: classes.label,
-              error: classes.error,
-              placeholder: classes.placeholder,
-            }}
-            rightSectionWidth={70}
-            rightSection={<IconCalendarBolt style={{ color: "#7ea6f4" }} />}
           />
         </GridCol>
       </Grid>

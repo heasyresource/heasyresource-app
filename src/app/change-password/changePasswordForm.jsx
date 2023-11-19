@@ -29,13 +29,8 @@ const PasswordRequirement = ({ meets, label }) => {
   );
 };
 export default function ChangePasswordForm() {
-  const {
-    form,
-    handleFormSubmit,
-    setPopoverOpened,
-    popoverOpened,
-    loading,
-  } = useChangePassword();
+  const { form, handleFormSubmit, setPopoverOpened, popoverOpened, loading } =
+    useChangePassword();
 
   const checks = requirements.map((requirement, index) => (
     <PasswordRequirement

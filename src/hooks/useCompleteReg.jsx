@@ -93,7 +93,7 @@ const useCompleteReg = () => {
           <Text
             style={{ fontSize: "16px", color: "#1E1E1E", textAlign: "center" }}
           >
-            Congratulations!, your submission will be processed within 24 hours.
+            Congratulations! your submission will be processed within 24 hours.
           </Text>
           <Group mt="1rem" justify="center" align="center">
             <Button

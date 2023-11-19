@@ -13,6 +13,8 @@ import {
   MenuTarget,
   MenuDropdown,
   MenuItem,
+  Box,
+  Image,
 } from "@mantine/core";
 import { IconEye, IconTrash, IconCheck, IconX } from "@tabler/icons-react";
 import AddVacancyModal from "./AddVacancyModal";
@@ -174,7 +176,7 @@ const VacancyTable = ({
       >
         add +
       </Button>
-      {vacancies?.length !== 0 && (
+      {vacancies?.length !== 0 ? (
         <DataTable
           style={{ background: "none", marginTop: "1rem" }}
           minHeight={"250px"}
@@ -315,6 +317,25 @@ const VacancyTable = ({
           page={vacancyPagination?.currentPage}
           onPageChange={(page) => paginate(page)}
         />
+      ) : (
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            margin: "6rem 0",
+          }}
+        >
+          <Stack justify="center" align="center">
+            <Box style={{ width: "10rem", height: "auto" }}>
+              <Image src={"/assets/svgs/empty.svg"} alt="empty" />
+            </Box>
+            <Text style={{ fontSize: "16px", color: "#616161" }}>
+              No vacancy yet!
+            </Text>
+          </Stack>
+        </Box>
       )}
     </>
   );

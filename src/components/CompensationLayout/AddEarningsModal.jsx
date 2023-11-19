@@ -53,7 +53,6 @@ const AddEarningsModal = ({ isOpen, onClose }) => {
                   size="md"
                   required
                   label="Name"
-                  placeholder="Marketing"
                   style={{ width: "100%" }}
                   classNames={{
                     label: classes.label,

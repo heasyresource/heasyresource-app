@@ -44,7 +44,6 @@ const AddCandidate = () => {
                 size="md"
                 withAsterisk
                 label="First Name"
-                placeholder="Marketing"
                 style={{ width: "100%" }}
                 classNames={{
                   label: classes.label,

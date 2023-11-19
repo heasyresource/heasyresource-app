@@ -27,6 +27,7 @@ const useAddLeaveType = () => {
   const [gettingData, setGettingData] = useState(true);
   const [itemID, setItemID] = useState("");
   const [leavePagination, setLeavePagination] = useState(null);
+  const [types, setTypes] = useState(null);
   const form = useForm({
     initialValues: {
       name: "",
@@ -46,6 +47,12 @@ const useAddLeaveType = () => {
     },
     validate: {
       reasonForRejection: (val) => (!val.length ? "Field is required" : null),
+    },
+  });
+  const filterForm = useForm({
+    initialValues: {
+      status: "",
+      leaveTypeId: "",
     },
   });
 
@@ -251,17 +258,41 @@ const useAddLeaveType = () => {
     if (searchParams.get("page")) {
       params = searchParams.get("page");
     }
+    const qParams = {
+      page: params || "1",
+    };
+    if (!!filterForm.values?.status) {
+      qParams.status = filterForm.values.status;
+    }
+    if (!!filterForm.values?.leaveTypeId) {
+      qParams.leveTypeId = filterForm.values.leaveTypeId;
+    }
     try {
-      const response = await apiClient.get(
-        `/employee/leaves?page=${params || "1"}`,
-        headerSettings
-      );
+      const response = await apiClient.get(`/employee/leaves`, {
+        params: qParams,
+        ...headerSettings,
+      });
       setEmployeeLeave(response.results.data);
       setLeavePagination(response.results.meta);
       setGettingData(false);
     } catch (err) {
       setGettingData(false);
       console.log("");
+    }
+  };
+  const getFilterOption = async () => {
+    try {
+      const response = await apiClient.get(
+        `/leave-types?paginate=false`,
+        headerSettings
+      );
+      const type = response.results.map((t) => ({
+        value: t.id,
+        label: t.name,
+      }));
+      setTypes(type);
+    } catch (err) {
+      setGettingLeaveType(false);
     }
   };
   useEffect(() => {
@@ -276,7 +307,15 @@ const useAddLeaveType = () => {
     }
     //eslint-disable-next-line
   }, [isChanged]);
+  useEffect(() => {
+    getFilterOption();
+    //eslint-disable-next-line
+  }, []);
+
   return {
+    getEmployeeLeaves,
+    filterForm,
+    types,
     form,
     gettingLeaveType,
     gettingData,

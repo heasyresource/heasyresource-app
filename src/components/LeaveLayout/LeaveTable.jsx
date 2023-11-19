@@ -16,6 +16,8 @@ import {
   Textarea,
   Modal,
   Badge,
+  Box,
+  Image,
 } from "@mantine/core";
 import {
   IconCheck,
@@ -25,6 +27,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
+import { convertStringDate } from "@/utils/publicFunctions";
 
 const LeaveTable = ({
   leaves,
@@ -53,6 +56,7 @@ const LeaveTable = ({
 
     return Math.round(daysDifference);
   };
+
   const openReject = (data) => {
     setItemID(data.id);
     open();
@@ -63,7 +67,7 @@ const LeaveTable = ({
   };
   return (
     <>
-      {leaves?.length !== 0 && (
+      {leaves?.length !== 0 ? (
         <DataTable
           style={{ background: "none", marginTop: "3rem" }}
           minHeight={"250px"}
@@ -88,7 +92,7 @@ const LeaveTable = ({
               noWrap: true,
               render: ({ createdAt }) => (
                 <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                  {getDate(createdAt)}
+                  {convertStringDate(createdAt)}
                 </Text>
               ),
             },
@@ -194,13 +198,12 @@ const LeaveTable = ({
                       </ActionIcon>
                     </MenuTarget>
                     <MenuDropdown>
-                      <MenuItem fz="xs">
-                        <Link
-                          href={`/dashboard/employee/${leaves.userId}/personal-detail`}
-                          style={{ textDecoration: "none", color: "inherit" }}
-                        >
-                          Employee Details
-                        </Link>
+                      <MenuItem
+                        fz="xs"
+                        component="a"
+                        href={`/dashboard/employee/${leaves?.userId}/personal-detail`}
+                      >
+                        Employee Detailss
                       </MenuItem>
 
                       <MenuItem fz="xs">Leave Details</MenuItem>
@@ -215,6 +218,25 @@ const LeaveTable = ({
           page={pagination?.currentPage}
           onPageChange={(page) => paginate(page)}
         />
+      ) : (
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            margin: "6rem 0",
+          }}
+        >
+          <Stack justify="center" align="center">
+            <Box style={{ width: "10rem", height: "auto" }}>
+              <Image src={"/assets/svgs/empty.svg"} alt="empty" />
+            </Box>
+            <Text style={{ fontSize: "16px", color: "#616161" }}>
+              No leaves yet!
+            </Text>
+          </Stack>
+        </Box>
       )}
 
       <Modal

@@ -3,7 +3,18 @@ import HiringTable from "@/components/HiringLayout/HiringTable";
 import SearchFields from "@/components/HiringLayout/SearchFields";
 import HiringNav from "@/components/HiringNav";
 import useAddApplicant from "@/hooks/useAddApplicant";
-import { Card, CardSection } from "@mantine/core";
+import classes from "../dashboard.module.css";
+import {
+  Box,
+  Button,
+  Card,
+  CardSection,
+  Grid,
+  GridCol,
+  Group,
+  Select,
+  TextInput,
+} from "@mantine/core";
 import React from "react";
 
 const HiringWrap = () => {
@@ -22,7 +33,17 @@ const HiringWrap = () => {
     loading,
     states,
     countries,
+    filterForm,
+    jobTitle,
+    getApplicants,
   } = useAddApplicant();
+  const handleReset = () => {
+    filterForm.setValues({
+      search: "",
+      status: null,
+    });
+    getApplicants();
+  };
   return (
     <>
       <Card
@@ -37,7 +58,65 @@ const HiringWrap = () => {
         <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
           <HiringNav tabTitle="Hiring" />
         </CardSection>
-        <SearchFields />
+        <Box style={{ marginTop: "1rem" }}>
+          <Grid justify="flex-start">
+            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+              <TextInput
+                size="md"
+                label="Applicant Name"
+                placeholder=""
+                style={{ width: "100%" }}
+                {...filterForm.getInputProps("search")}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+              <Select
+                size="md"
+                label="Status"
+                style={{ width: "100%" }}
+                data={["Pending", "Rejected", "Shortlisted"]}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+                allowDeselect={false}
+                {...filterForm.getInputProps("status")}
+              />
+            </GridCol>
+          </Grid>
+          <Group justify="flex-end" mt={"3rem"}>
+            <Button
+              style={{ fontSize: "16px", textTransform: "capitalize" }}
+              size="md"
+              variant="outline"
+              color="#3377FF"
+              px={"40px"}
+              onClick={() => {
+                handleReset();
+              }}
+            >
+              reset
+            </Button>
+            <Button
+              style={{ fontSize: "16px", textTransform: "capitalize" }}
+              size="md"
+              variant="filled"
+              color="#3377FF"
+              px={"40px"}
+              onClick={() => {
+                getApplicants();
+              }}
+            >
+              search
+            </Button>
+          </Group>
+        </Box>
       </Card>
       <HiringTable
         form={form}

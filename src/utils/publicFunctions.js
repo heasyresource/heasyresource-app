@@ -112,6 +112,12 @@ export const formatMonthYear = (dateStr1, dateStr2) => {
     return `${formattedDate1} - ${formattedDate2}`;
   }
 };
+export const addHttps = (link) => {
+  if (!link.startsWith("http://") && !link.startsWith("https://")) {
+    return "https://" + link;
+  }
+  return link;
+};
 export const employeeCompensationList = [
   {
     grossSalary: "N906,345",
@@ -387,7 +393,7 @@ export const LeaveDetailsList = [
     startDate: "Mon., 12th Jan. 2023",
     endDate: "Mon., 12th Jan. 2023",
   },
-]
+];
 export const leaveList = [
   {
     id: "1",

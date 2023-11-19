@@ -170,6 +170,7 @@ const WorkExprience = ({
         loading={loading}
         employmentType={employmentType}
         closeExp={closeExp}
+        experienceForm={experienceForm}
       />
       <EditWorkModal
         openedEditExp={openedEditExp}

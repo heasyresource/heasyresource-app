@@ -125,8 +125,6 @@ const EditLicenseModal = ({
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
             px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             onClick={() => {
               closeEditLcs();
               licenseForm?.reset();
@@ -141,8 +139,6 @@ const EditLicenseModal = ({
             color="#3377FF"
             tt="capitalize"
             px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             type="submit"
             style={{
               backgroundColor: "#3377FF",

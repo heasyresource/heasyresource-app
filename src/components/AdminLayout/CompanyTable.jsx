@@ -1,160 +1,198 @@
 "use client";
 
-import { CompanyList } from "@/utils/publicFunctions";
+import { CompanyList, addHttps } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import classes from "../../components/AdminLayout/admin.module.css";
-import { Badge} from "@mantine/core";
+import { Badge, Text, rem } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
+import { IconLink } from "@tabler/icons-react";
 
 const PAGE_SIZE = 10;
-const CompanyTable = () => {
+const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
   const pathname = usePathname();
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [records, setRecords] = useState(CompanyList.slice(0, PAGE_SIZE));
 
-  useEffect(() => {
-    const from = (page - 1) * PAGE_SIZE;
-    const to = from + PAGE_SIZE;
-    setRecords(CompanyList.slice(from, to));
-  }, [page]);
-
   return (
     <>
-      <DataTable
-        style={{ background: "none", marginTop: "1rem" }}
-        height={"auto"}
-        withRowBorders={false}
-        records={records}
-        columns={[
-          {
-            accessor: "index",
-            title: "S/N",
-            textAlign: "center",
+      {companies?.length !== 0 && (
+        <DataTable
+          style={{ background: "none", marginTop: "1rem" }}
+          minHeight={"250px"}
+          fetching={gettingData}
+          loaderType="dots"
+          loaderColor="#3377FF"
+          withRowBorders={false}
+          records={companies}
+          columns={[
+            {
+              accessor: "index",
+              title: "S/N",
+              textAlign: "center",
 
-            render: (record) => records.indexOf(record) + 1,
-          },
-          {
-            accessor: "companyName",
-            textAlign: "center",
-            textTransform: "capitalize",
-            noWrap: true,
-          },
-          {
-            accessor: "companySize",
-            textAlign: "center",
-            textTransform: "capitalize",
-            noWrap: true,
-          },
-          {
-            accessor: "industry",
-            textAlign: "center",
-            textTransform: "capitalize",
-            noWrap: true,
-          },
-          {
-            accessor: "websiteURL",
-            textAlign: "center",
-            textTransform: "capitalize",
-            noWrap: true,
-          },
-          {
-            accessor: "location",
-            textAlign: "center",
-            textTransform: "capitalize",
-            noWrap: true,
-          },
-          {
-            accessor: "status",
-            textAlign: "center",
-            textTransform: "capitalize",
-            noWrap: true,
-            cellsClassName: ({ status }) => {
-              return clsx({
-                [classes.active]: status === "active",
-                [classes.underReview]: status === "under review",
-                [classes.pending]: status === "pending",
-                [classes.suspended]: status === "suspended",
-                [classes.onHold]: status === "on hold",
-              });
+              render: (record) => companies.indexOf(record) + 1,
             },
-          },
-          {
-            accessor: "moreDetails",
-            render: () => (
-              <Badge
-                radius="xs"
-                variant="light"
-                color="#3377FF"
-                size="md"
-                component="a"
-                href="/admin/company-general-info"
-                style={{
-                  color: "#3377FF",
-                  textTransform: "capitalize",
-                  cursor: "pointer",
-                }}
-                // onClick={() => router.push("/admin/company-general-info")}
-              >
-                more details
-              </Badge>
-            ),
-          },
-          //   {
-          //     accessor: "actions",
-          //     title: "Actions",
-          //     width: "135px",
-          //     textAlign: "center",
-          //     render: () => (
-          //       <Flex justify="center" align="center">
-          //         <ActionIcon
-          //           variant="transparent"
-          //           // color="#84ADFF"
-          //           radius="lg"
-          //           component="a"
-          //           href="/dashboard/hiring/application-phase"
-          //         >
-          //           <IconEye
-          //             style={{ width: "70%", height: "70%" }}
-          //             stroke={1.5}
-          //           />
-          //         </ActionIcon>
-          //         <ActionIcon
-          //           variant="transparent"
-          //           color="#FF7A00"
-          //           onClick={() => setNoTransitionOpened(true)}
-          //           radius="lg"
-          //           style={{ marginLeft: "10px" }}
-          //         >
-          //           <IconTrash
-          //             style={{ width: "70%", height: "70%" }}
-          //             stroke={1.5}
-          //           />
-          //         </ActionIcon>
-          //         <ActionIcon
-          //           variant="transparent"
-          //             color="#43D72B"
-          //           onClick={() => setNoTransitionOpened1(true)}
-          //           radius="lg"
-          //           style={{ marginLeft: "10px" }}
-          //         >
-          //           <IconDownload
-          //             style={{ width: "70%", height: "70%" }}
-          //             stroke={1.5}
-          //           />
-          //         </ActionIcon>
-          //       </Flex>
-          //     ),
-          //   },
-        ]}
-        totalRecords={CompanyList.length}
-        recordsPerPage={PAGE_SIZE}
-        page={page}
-        onPageChange={(p) => setPage(p)}
-      />
+            {
+              accessor: "name",
+              title: "Company Name",
+              textTransform: "capitalize",
+              noWrap: true,
+            },
+            {
+              accessor: "companySize",
+              title: "Company Size",
+
+              noWrap: true,
+              render: ({ companySize }) => (
+                <Text style={{ fontSize: "15px" }}>
+                  {companySize !== null ? companySize.size : "N/A"}
+                </Text>
+              ),
+            },
+            {
+              accessor: "industry",
+
+              textTransform: "capitalize",
+              noWrap: true,
+              render: ({ industry }) => (
+                <Text style={{ fontSize: "15px" }}>
+                  {industry !== null ? industry.name : "N/A"}
+                </Text>
+              ),
+            },
+            {
+              accessor: "website",
+
+              textTransform: "capitalize",
+              noWrap: true,
+              render: ({ website }) => (
+                <Badge
+                  radius="xs"
+                  variant="light"
+                  color="#3377FF"
+                  size="md"
+                  component="a"
+                  href={addHttps(website)}
+                  target="_blank"
+                  rightSection={
+                    <IconLink style={{ width: rem(12), height: rem(12) }} />
+                  }
+                  style={{
+                    color: "#3377FF",
+                    textTransform: "capitalize",
+                    cursor: "pointer",
+                  }}
+                >
+                  website
+                </Badge>
+              ),
+            },
+            {
+              accessor: "address",
+
+              textTransform: "capitalize",
+              noWrap: true,
+              render: ({ address }) => (
+                <Text style={{ fontSize: "15px" }}>
+                  {address !== null ? address : "N/A"}
+                </Text>
+              ),
+            },
+            {
+              accessor: "status",
+
+              textTransform: "capitalize",
+              noWrap: true,
+              render: ({ status }) => (
+                <>
+                  {status === "Approved" && (
+                    <Badge color="#14cf14">{status}</Badge>
+                  )}
+                  {status === "Pending" && <Badge color="grey">{status}</Badge>}
+                  {status === "Rejected" && <Badge color="red">{status}</Badge>}
+                  {status === "Suspended" && (
+                    <Badge color="#ffb242">{status}</Badge>
+                  )}
+                </>
+              ),
+            },
+            {
+              accessor: "moreDetails",
+              render: ({ id }) => (
+                <Badge
+                  radius="xs"
+                  variant="light"
+                  color="#3377FF"
+                  size="md"
+                  component="a"
+                  href={`admin/${id}`}
+                  style={{
+                    color: "#3377FF",
+                    textTransform: "capitalize",
+                    cursor: "pointer",
+                  }}
+                >
+                  more details
+                </Badge>
+              ),
+            },
+            //   {
+            //     accessor: "actions",
+            //     title: "Actions",
+            //     width: "135px",
+            //     textAlign: "center",
+            //     render: () => (
+            //       <Flex justify="center" align="center">
+            //         <ActionIcon
+            //           variant="transparent"
+            //           // color="#84ADFF"
+            //           radius="lg"
+            //           component="a"
+            //           href="/dashboard/hiring/application-phase"
+            //         >
+            //           <IconEye
+            //             style={{ width: "70%", height: "70%" }}
+            //             stroke={1.5}
+            //           />
+            //         </ActionIcon>
+            //         <ActionIcon
+            //           variant="transparent"
+            //           color="#FF7A00"
+            //           onClick={() => setNoTransitionOpened(true)}
+            //           radius="lg"
+            //           style={{ marginLeft: "10px" }}
+            //         >
+            //           <IconTrash
+            //             style={{ width: "70%", height: "70%" }}
+            //             stroke={1.5}
+            //           />
+            //         </ActionIcon>
+            //         <ActionIcon
+            //           variant="transparent"
+            //             color="#43D72B"
+            //           onClick={() => setNoTransitionOpened1(true)}
+            //           radius="lg"
+            //           style={{ marginLeft: "10px" }}
+            //         >
+            //           <IconDownload
+            //             style={{ width: "70%", height: "70%" }}
+            //             stroke={1.5}
+            //           />
+            //         </ActionIcon>
+            //       </Flex>
+            //     ),
+            //   },
+          ]}
+          totalRecords={pagination?.total}
+          recordsPerPage={pagination?.perPage}
+          page={pagination?.currentPage}
+          onPageChange={(page) => paginate(page)}
+        />
+      )}
     </>
   );
 };

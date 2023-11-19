@@ -68,7 +68,6 @@ const EditVancancyModal = ({
               size="md"
               withAsterisk
               label="Job Title"
-              placeholder="Marketing"
               style={{ width: "100%" }}
               classNames={{
                 label: classes.label,

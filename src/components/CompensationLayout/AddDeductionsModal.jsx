@@ -48,7 +48,6 @@ const AddDeductionsModal = ({ isOpen, onClose }) => {
                   size="md"
                   required
                   label="Name"
-                //   placeholder="Marketing"
                   style={{ width: "100%" }}
                   classNames={{
                     label: classes.label,
@@ -63,7 +62,7 @@ const AddDeductionsModal = ({ isOpen, onClose }) => {
                   required
                   label="Unit Amount"
                   style={{ width: "100%" }}
-                //   placeholder="2.8%"
+                  //   placeholder="2.8%"
                   data={["Gbemisola Adebiyi"]}
                   classNames={{
                     label: classes.label,

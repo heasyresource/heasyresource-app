@@ -117,7 +117,6 @@ export default function DepartmentTable({
               required
               data-autofocus
               label="Department Name"
-              placeholder="Marketing"
               {...departmentForm.getInputProps("name")}
             />
             <TextInput

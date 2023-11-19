@@ -20,6 +20,8 @@ import {
   Select,
   Loader,
   FileInput,
+  Box,
+  Image,
 } from "@mantine/core";
 import {
   IconTrash,
@@ -28,9 +30,7 @@ import {
   IconFile,
   IconEye,
 } from "@tabler/icons-react";
-import { IconEdit } from "@tabler/icons-react";
 import { modals } from "@mantine/modals";
-import { IconDotsVertical } from "@tabler/icons-react";
 import { IconArrowUp } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -45,7 +45,6 @@ const HiringTable = ({
   closeEdit,
   openedEdit,
   form,
-  setApplicantId,
   loading,
   states,
   countries,
@@ -418,7 +417,7 @@ const HiringTable = ({
         </form>
       </Modal>
 
-      {applicants?.length !== 0 && (
+      {applicants?.length !== 0 ? (
         <DataTable
           style={{ background: "none", marginTop: "1rem" }}
           minHeight={"250px"}
@@ -532,6 +531,25 @@ const HiringTable = ({
           page={applicantsPagination?.currentPage}
           onPageChange={(page) => paginate(page)}
         />
+      ) : (
+        <Box
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            margin: "6rem 0",
+          }}
+        >
+          <Stack justify="center" align="center">
+            <Box style={{ width: "10rem", height: "auto" }}>
+              <Image src={"/assets/svgs/empty.svg"} alt="empty" />
+            </Box>
+            <Text style={{ fontSize: "16px", color: "#616161" }}>
+              No applicant found!
+            </Text>
+          </Stack>
+        </Box>
       )}
     </>
   );
