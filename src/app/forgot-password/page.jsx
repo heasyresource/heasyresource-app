@@ -15,7 +15,8 @@ export default async function ForgotPassword() {
   const subdomain = getSubdomain(domain);
   const defaultSubdomain = ['www', 'heasyresource']
   let companyLogo = null;
-  if (subdomain && !defaultSubdomain.includes(subdomain)) {
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+  if (subdomain && hasSubdomain) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
     companyLogo = getSubdomainData.results.logoUrl
@@ -63,10 +64,10 @@ export default async function ForgotPassword() {
             </Link>
           </Text>
         </Box>
-        <Text ta={'center'} mt={50} size="sm" fw={'500'} c={"#8692A6"}>POWERED BY <a href="https://heasyresource.com/" style={{
+        {subdomain && hasSubdomain ? <Text ta={'center'} mt={50} size="sm" fw={'500'} c={"#8692A6"}>POWERED BY <a href="https://heasyresource.com/" style={{
           color: "#3377FF",
           textDecoration: "none",
-        }}>HEASYRESOURCE.COM</a></Text>
+        }}>HEASYRESOURCE.COM</a></Text> : ''}
       </Container>
     </Box>
   );

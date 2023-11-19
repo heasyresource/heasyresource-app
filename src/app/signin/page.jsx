@@ -16,14 +16,15 @@ const SignIn = async () => {
   const subdomain = getSubdomain(domain);
   const defaultSubdomain = ['www', 'heasyresource']
   let companyLogo = null;
-  if (subdomain && !defaultSubdomain.includes(subdomain)) {
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+  if (subdomain && hasSubdomain) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
     companyLogo = getSubdomainData.results.logoUrl
   }
   return (
     <Box className={classes.wrapper}>
-      {subdomain ? '' : <Box className={classes.wrapper_img}>
+      {subdomain && hasSubdomain ? '' : <Box className={classes.wrapper_img}>
         <Box className={classes.wrapper_imgOverlay} />
         <Box className={classes.logo_wrapper}>
           <Image src="/assets/images/HRlogo.png" alt="hr-logo" />
@@ -45,7 +46,7 @@ const SignIn = async () => {
             </Text>
           </Stack>
           <SignInForm></SignInForm>
-          {subdomain ? <Text ta={'center'} size="sm" fw={'500'} c={"#8692A6"}>POWERED BY <a href="https://heasyresource.com/" style={{
+          {subdomain && hasSubdomain ? <Text ta={'center'} size="sm" fw={'500'} c={"#8692A6"}>POWERED BY <a href="https://heasyresource.com/" style={{
             color: "#3377FF",
             textDecoration: "none",
           }}>HEASYRESOURCE.COM</a></Text> : <Flex justify="center" align="center" mt={".5rem"}>
