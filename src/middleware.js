@@ -13,27 +13,16 @@ import { apiClient } from "./lib/interceptor/apiClient";
 export default async function middleware(req) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
-  // console.log(token, "server", req.headers.get("host"));
-
-  console.log("COmo", req.headers.get("host"), req.nextUrl.host);
 
   const subdomain = getSubdomain(req.headers.get("host"));
   console.log(subdomain);
   if (subdomain) {
-    // const getSubdomain = await apiClient.get(`/companies/subdomain/${subdomain}`)
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
 
-    // console.log("fff", req.nextUrl.pathname, req.headers.get("host"));
-
     const currentPath = req.headers.get("host");
-    // console.log('KKK',{req});
-    // if (getSubdomainData.results === null &&  req.nextUrl.pathname !== '/') {
-      console.log({currentPath}, req.nextUrl.host);
     if (getSubdomainData.results === null && currentPath !== req.nextUrl.host) {
-      return NextResponse.redirect(new URL(process.env.NEXTAUTH_URL,req.url));
-      // return NextResponse.redirect(new URL('/',req.url));
-
+      return NextResponse.redirect(new URL("/404", req.url));
       console.log({ subdomain }, { getSubdomainData });
     }
   }
