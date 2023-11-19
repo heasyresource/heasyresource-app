@@ -16,7 +16,7 @@ export default async function middleware(req) {
 
   const subdomain = getSubdomain(req.headers.get("host"));
   console.log({subdomain});
-  if (subdomain) {
+  if (subdomain && subdomain  !== 'heasyresource') {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
 
