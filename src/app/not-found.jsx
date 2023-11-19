@@ -6,7 +6,7 @@ export default function NotFound() {
   const headersList = headers()
   const domain = headersList.get('host')
   const subdomain = getSubdomain(domain);
-  const link = subdomain ? process.env.NEXTAUTH_URL : '/';
+  const link = subdomain && subdomain !== 'heasyresource' ? process.env.NEXTAUTH_URL : '/';
   return (
     <div>
       <h2>Not Found</h2>
