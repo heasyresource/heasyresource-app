@@ -15,12 +15,13 @@ export default async function middleware(req) {
   const isAuthenticated = !!token;
 
   const subdomain = getSubdomain(req.headers.get("host"));
-  console.log(subdomain);
+  console.log({subdomain});
   if (subdomain) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
 
     const currentPath = req.headers.get("host");
+    console.log({currentPath}, req.nextUrl.host, getSubdomainData.results);
     if (getSubdomainData.results === null && currentPath !== req.nextUrl.host) {
       return NextResponse.redirect(new URL("/404", req.url));
       console.log({ subdomain }, { getSubdomainData });
