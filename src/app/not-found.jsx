@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { headers } from 'next/headers'
 import { getSubdomain } from '@/utils/publicFunctions';
+import Link from 'next/link'
 
 export default async function NotFound() {
   const headersList = headers()
@@ -11,17 +11,17 @@ export default async function NotFound() {
   if (subdomain && !defaultSubdomain.includes(subdomain)) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
-    if (getSubdomainData.results !== null && getSubdomainData.results?.isActive === 1) {
-      link = `http://${domain}`
-    } else {
+    
+    if (!(getSubdomainData.results !== null && getSubdomainData.results?.isActive === 1)) {
       link = process.env.NEXTAUTH_URL
-    }
+    };
   }
+
   return (
     <div>
       <h2>Not Found</h2>
       <p>Could not find requested resource</p>
-      <Link href={link}>Return Home</Link>
+      <a href={link}>Return Home</a>
     </div>
   )
 }

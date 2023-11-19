@@ -72,21 +72,6 @@ const SignInForm = () => {
             "sign in"
           )}
         </Button>
-        <Flex justify="center" align="center" mt={".5rem"}>
-          <Text fw={700} c={"#494949"} size="sm">
-            Don&apos;t have an account?{" "}
-            <Link
-              href="/signup"
-              style={{
-                color: "#3377FF",
-                textDecoration: "none",
-                textTransform: "capitalize",
-              }}
-            >
-              Sign Up
-            </Link>
-          </Text>
-        </Flex>
       </Stack>
     </form>
   );

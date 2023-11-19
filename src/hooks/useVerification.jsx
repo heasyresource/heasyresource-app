@@ -120,10 +120,10 @@ const useVerification = () => {
           email: email,
           resetPasswordCode: data.verificationCode,
         };
-        obfuscateToken(
+        sessionStorage.setItem("resetPasswordCode", obfuscateToken(
           true,
-          sessionStorage.setItem("resetPasswordCode", JSON.stringify(values))
-        );
+          JSON.stringify(values)
+        ))
         router.push("/new-password");
       }
     } catch (err) {
