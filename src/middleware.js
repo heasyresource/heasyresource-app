@@ -23,7 +23,7 @@ export default async function middleware(req, res) {
       return NextResponse.redirect(new URL("/404", req.url));
     }
 
-    if (getSubdomainData.results !== null && req.nextUrl.pathname === "/") {
+    if (getSubdomainData.results !== null && (req.nextUrl.pathname === "/" || req.nextUrl.pathname === "/signup")) {
       return NextResponse.redirect(new URL("/signin", req.url));
     }
   }

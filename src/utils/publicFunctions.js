@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 export const requirements = [
   { re: /\d/, label: "Includes number" },
   { re: /[a-z]/, label: "Includes lowercase letter" },
@@ -620,8 +618,3 @@ export const departmentType = [
     deptCode: "Eng",
   },
 ];
-
-
-export const purifyText = (html) => {
-  return DOMPurify.sanitize(html);
-}

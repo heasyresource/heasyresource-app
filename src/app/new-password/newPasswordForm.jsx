@@ -42,10 +42,10 @@ export default function NewPasswordForm() {
     <PasswordRequirement
       key={requirement.label}
       label={requirement.label}
-      meets={requirement.re.test(form.values.password)}
+      meets={requirement.re.test(form.values.newPassword)}
     />
   ));
-  const strength = getStrength(form.values.password);
+  const strength = getStrength(form.values.newPassword);
   const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
 
   return (
@@ -93,7 +93,7 @@ export default function NewPasswordForm() {
               />
               <PasswordRequirement
                 label="Includes at least 8 characters"
-                meets={form.values.password.length > 7}
+                meets={form.values.newPassword.length > 7}
               />
               {checks}
             </Popover.Dropdown>

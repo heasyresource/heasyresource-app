@@ -25,13 +25,12 @@ import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { getSubdomain, purifyText } from "@/utils/publicFunctions";
+import { getSubdomain } from "@/utils/publicFunctions";
 
 export default function JobDetails() {
   const subdomain = getSubdomain();
   const [jobData, setJobData] = useState([]);
   const { slug } = useParams();
-  const description = purifyText(jobData.description);
 
   useEffect(() => {
     const fetchJobDetail = async () => {
@@ -139,8 +138,7 @@ export default function JobDetails() {
                 <Grid mt={40}>
                   <GridCol span={12}>
                     <Card px={0} shadow="sm" radius="md">
-                      {/* {jobData.description} */}
-                      <div dangerouslySetInnerHTML={{ __html: description }} />
+                      <div dangerouslySetInnerHTML={{ __html: jobData.description }} />
                     </Card>
                   </GridCol>
                 </Grid>
