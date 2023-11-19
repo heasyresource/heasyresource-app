@@ -20,7 +20,8 @@ export default async function NewPassword() {
   const subdomain = getSubdomain(domain);
   const defaultSubdomain = ['www', 'heasyresource']
   let companyLogo = null;
-  if (subdomain && !defaultSubdomain.includes(subdomain)) {
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+  if (subdomain && hasSubdomain) {
     const getSubdomain = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`);
     const getSubdomainData = await getSubdomain.json();
     companyLogo = getSubdomainData.results.logoUrl
@@ -37,18 +38,18 @@ export default async function NewPassword() {
     >
       <Box>
         <Center>
-        {companyLogo ? <Image src={companyLogo} alt="company-logo" h={100} w={100} /> : <Logo />}
+          {companyLogo ? <Image src={companyLogo} alt="company-logo" h={100} w={100} /> : <Logo />}
         </Center>
         <Title ta="left" order={2} mt={"50px"} c="#000000">
           New Password
         </Title>
-       
+
         <NewPasswordForm></NewPasswordForm>
 
-        <Text ta={'center'} mt={50} size="sm" fw={'500'} c={"#8692A6"}>POWERED BY <a href="https://heasyresource.com/" style={{
+        {subdomain && hasSubdomain ? <Text ta={'center'} mt={50} size="sm" fw={'500'} c={"#8692A6"}>POWERED BY <a href="https://heasyresource.com/" style={{
           color: "#3377FF",
           textDecoration: "none",
-        }}>HEASYRESOURCE.COM</a></Text>
+        }}>HEASYRESOURCE.COM</a></Text> : ''}
       </Box>
     </Container>
   );
