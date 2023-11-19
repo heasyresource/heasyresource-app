@@ -22,7 +22,7 @@ export default async function middleware(req) {
 
     const currentPath = req.headers.get("host");
     console.log({currentPath}, req.nextUrl.host, getSubdomainData.results);
-    if (getSubdomainData.results === null && currentPath !== req.nextUrl.host) {
+    if (getSubdomainData.results === null) {
       return NextResponse.redirect(new URL("/404", req.url));
       console.log({ subdomain }, { getSubdomainData });
     }
