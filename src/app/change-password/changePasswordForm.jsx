@@ -35,7 +35,6 @@ export default function ChangePasswordForm() {
     setPopoverOpened,
     popoverOpened,
     loading,
-    isMobile,
   } = useChangePassword();
 
   const checks = requirements.map((requirement, index) => (
