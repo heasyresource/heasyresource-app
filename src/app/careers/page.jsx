@@ -15,30 +15,34 @@ import classes from "../../components/JobListingsLayout/JobListings.module.css";
 import Logo from "../../components/JobListingsLayout/jobLogo.svg";
 import NextImage from "next/image";
 import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
-
-const jobdata = ["", "", "", "", ""];
-
-const jobBadge = ["Front-end", "Back-end", "Database"];
-
-const jobBadges = jobBadge.map((item, i) => (
-  <Badge
-    key={i}
-    color="#F4F4F4"
-    radius="sm"
-    px={9}
-    py={6}
-    tt={"capitalize"}
-    classNames={{
-      label: classes.label,
-    }}
-  >
-    {item}
-  </Badge>
-));
+import { useEffect, useState } from "react";
+import { apiClient } from "@/lib/interceptor/apiClient";
+import { getSubdomain } from "@/utils/publicFunctions";
 
 export default function JobListings() {
+  const subdomain = getSubdomain();
+  const [jobsData, setJobsData] = useState([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await apiClient.get("/vacancies/published/all", {
+          headers: {
+            "x-subdomain-name": subdomain,
+          },
+        });
+
+        const jobsData = response.results;
+        setJobsData(jobsData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchJobs();
+  }, []);
+
   return (
-    <Container size={"100%"} bg={"#F8F9FA"} m={0}>
+    <Container size={"100%"} h={'100%'} p={0}  bg={"#F8F9FA"} m={0}>
       <div className={classes.inner}>
         <div className={classes.content}>
           <Center maw={"100%"}>
@@ -60,36 +64,43 @@ export default function JobListings() {
           </Center>
           <Container size={"95%"} py={66}>
             <Stack gap={"xl"}>
-              {jobdata.map((item, i) => (
+              {jobsData.map((jobData, index) => (
                 <UnstyledButton
-                  key={i}
+                  key={index}
                   className={classes.job}
                   component="a"
-                  href="/job-listings/job-details"
+                  href={`/careers/${jobData.slug}`}
                 >
                   <Card bg={"#ffff"} shadow="sm" padding="lg" radius="md">
-                    <Group justify="space-between" py={20}>
+                    <Group justify="space-between" py={10}>
                       <Flex direction={"column"}>
                         <div style={{ display: "flex", gap: "10px" }}>
-                          {jobBadges}
+                          <Badge
+                            color="#F4F4F4"
+                            radius="sm"
+                            px={9}
+                            py={6}
+                            tt={"capitalize"}
+                            classNames={{
+                              label: classes.label,
+                            }}
+                          >
+                            {jobData.jobCategory.name}
+                          </Badge>
                         </div>
-                        <Text fz={32} pt={20} fw={500}>
-                          FullStack Developer
-                        </Text>
-                        <Text c={"#727272"} fz={13}>
-                          A Full Stack Developer is a versatile professional
-                          proficient in both front-end
+                        <Text fz={25} pt={20} fw={500}>
+                          {jobData.title}
                         </Text>
                       </Flex>
                       <Group>
-                        <Group wrap="nowrap" gap={10} mt={3}>
+                        <Group wrap="nowrap" gap={5} mt={3}>
                           <IconMapPin
                             stroke={1.5}
                             size="1rem"
                             className={classes.icon}
                           />
                           <Text fz="16px" c="#454444">
-                            Jibowu, Lagos
+                            {jobData.location} ({jobData.workMode})
                           </Text>
                         </Group>
 
@@ -100,7 +111,7 @@ export default function JobListings() {
                             className={classes.icon}
                           />
                           <Text fz="16px" c="#454444">
-                            Full Time
+                            {jobData.employmentType.name}
                           </Text>
                         </Group>
                       </Group>
