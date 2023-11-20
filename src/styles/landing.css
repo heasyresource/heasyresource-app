@@ -41,8 +41,8 @@ h3 {
 /* ================== VARIABLES  =========== */
 :root {
   /* --------- color ----------------- */
-  --brand-color: #3568d4;
-  --brand-color-alternate: #3377ff;
+  --brand-color: #3377ff;
+  --brand-color-alternate: #3568d4;
   --light-brand-color: #d6e4ff;
   --second-brand-color: #ff7a00;
   --light-second-brand-color: #ffe4cc;
@@ -342,7 +342,7 @@ h3 {
   width: 80%;
 }
 .progress_title {
-  width: 740px;
+  width: 800px;
   text-align: center;
 }
 .progress_title span {
@@ -495,9 +495,10 @@ h3 {
   font-size: var(--paragraph-font-size);
 }
 .price_description {
+  font-weight: 700;
   font-size: 15px;
   color: var(--dark-grey-color);
-  margin: 10px 0 24px;
+  margin: 24px 0 10px;
 }
 .price_attribute {
   color: var(--light-grey-color);
@@ -535,7 +536,11 @@ h3 {
   background: var(--brand-color);
 }
 .testimonial_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 314px;
+  height: 390px;
   padding: 33px;
   background: var(--brand-color);
   border-radius: var(--radius);
@@ -608,6 +613,14 @@ h3 {
 }
 .contact_img {
   width: 40%;
+}
+.hoverBg:hover {
+  background-color: #3568d4 !important;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition)
 }
 .contact_form {
   width: 40%;

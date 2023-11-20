@@ -193,19 +193,6 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
             </Box>
           </Box>
         </GridCol>
-        {/* <GridCol pr="xs" span={{ lg: 3.5, md: 12, sm: 12 }}>
-              <Space h="45px" />
-              <SimpleGrid style={{ borderRadius: "15px" }} bg="#ffff" cols={1}>
-                <ScrollArea scrollbarSize={4} type="never">
-                  <Notifications />
-                </ScrollArea>
-                <div style={{ borderTop: "3px solid #EFEFEF" }}>
-                  <ScrollArea scrollbarSize={4} type="never">
-                    <Messages />
-                  </ScrollArea>
-                </div>
-              </SimpleGrid>
-            </GridCol> */}
       </Grid>
     </Box>
   );

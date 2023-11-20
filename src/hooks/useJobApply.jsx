@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "@mantine/form";
 import useUploadDoc from "./useUploadDoc";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { useSession } from "next-auth/react";
 import { getSubdomain, normalizePhoneNumber } from "@/utils/publicFunctions";
 import { useParams, useRouter } from "next/navigation";
 import { successStyles } from "@/utils/notificationTheme";
@@ -10,9 +9,8 @@ import { notifications } from "@mantine/notifications";
 
 const useJobApply = () => {
   const router = useRouter();
-  const { data: session } = useSession();
   const subdomain = getSubdomain();
-  const { handleUpload, response, error } = useUploadDoc();
+  const { handleUpload, response } = useUploadDoc();
   const [loading, setLoading] = useState(false);
   const [jobData, setJobData] = useState([]);
   const [countries, setCountries] = useState(null);
@@ -56,15 +54,11 @@ const useJobApply = () => {
   };
   const handleContinue = async (data) => {
     try {
-      const resp = await apiClient.post(
-        `/vacancies/${jobData?.id}/apply`,
-        data,
-        {
-          headers: {
-            "x-subdomain-name": subdomain,
-          },
-        }
-      );
+      await apiClient.post(`/vacancies/${jobData?.id}/apply`, data, {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
+      });
       notifications.show({
         color: "white",
         title: "Success",
@@ -109,8 +103,6 @@ const useJobApply = () => {
       };
       handleContinue(modifiedValues);
     }
-
-    //eslint-disable-next-line
   }, [response]);
   useEffect(() => {
     const fetchJobDetail = async () => {
@@ -129,8 +121,6 @@ const useJobApply = () => {
     };
     getMetadata();
     fetchJobDetail();
-
-    //eslint-disable-next-line
   }, []);
 
   return {

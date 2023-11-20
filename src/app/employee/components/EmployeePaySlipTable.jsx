@@ -8,10 +8,10 @@ import { usePathname } from "next/navigation";
 
 const PAGE_SIZE = 10;
 const EmployeePaySlipTable = ({ openEditModal }) => {
-  const pathname = usePathname();
-  const router = useRouter();
   const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(employeePaySlipList.slice(0, PAGE_SIZE));
+  const [records, setRecords] = useState(
+    employeePaySlipList.slice(0, PAGE_SIZE)
+  );
 
   useEffect(() => {
     const from = (page - 1) * PAGE_SIZE;
@@ -28,17 +28,9 @@ const EmployeePaySlipTable = ({ openEditModal }) => {
         withRowBorders={false}
         records={records}
         columns={[
-          // {
-          //   accessor: "index",
-          //   title: "S/N",
-          //   textAlign: "center",
-
-          //   render: (record) => records.indexOf(record) + 1,
-          // },
           {
             accessor: "name",
             textAlign: "start",
-            // marginLeft: "40px",
             textTransform: "capitalize",
             noWrap: true,
           },

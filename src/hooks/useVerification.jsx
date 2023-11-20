@@ -37,8 +37,6 @@ const useVerification = () => {
       ...payload,
       callbackUrl: "/complete-registration",
     });
-
-    // router.push(result.url);
   };
   const openModal = (payload) =>
     modals.open({

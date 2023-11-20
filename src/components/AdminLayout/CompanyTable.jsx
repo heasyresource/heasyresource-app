@@ -1,22 +1,11 @@
 "use client";
 
-import { CompanyList, addHttps } from "@/utils/publicFunctions";
+import { addHttps } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import classes from "../../components/AdminLayout/admin.module.css";
-import { Avatar, Badge, Flex, Text, rem } from "@mantine/core";
-import { usePathname } from "next/navigation";
-import { clsx } from "clsx";
+import { Badge, Text, rem } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
 
-const PAGE_SIZE = 10;
 const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(CompanyList.slice(0, PAGE_SIZE));
-
   return (
     <>
       {companies?.length !== 0 && (

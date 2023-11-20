@@ -5,17 +5,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LayoutWrap from "./LayouWrap";
 
-const profileLinks = [
-  { link: "/employee/settings/profile", label: "Personal Details" },
-  {
-    link: "/employee/settings/profile/contact-details",
-    label: "Contact Details",
-  },
-  {
-    link: "/employee/settings/profile/qualifications",
-    label: "Qualifications",
-  },
-];
 const ProfileRoot = async ({ children }) => {
   let employeeInfo = null;
   const session = await getServerSession(authOptions);

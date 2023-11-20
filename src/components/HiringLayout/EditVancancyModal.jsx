@@ -9,7 +9,6 @@ import {
   Switch,
   Text,
   TextInput,
-  Textarea,
 } from "@mantine/core";
 import React, { useEffect } from "react";
 import classes from "./HiringLayout.module.css";

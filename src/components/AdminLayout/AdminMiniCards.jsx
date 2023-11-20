@@ -2,7 +2,6 @@
 import React from "react";
 import { Card, GridCol, Group, Text } from "@mantine/core";
 import classes from "./admin.module.css";
-import { IconBriefcase, IconUsers, IconWallet } from "@tabler/icons-react";
 import { IconBuildingSkyscraper } from "@tabler/icons-react";
 
 const data = [

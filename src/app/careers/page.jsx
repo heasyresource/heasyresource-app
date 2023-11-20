@@ -1,5 +1,4 @@
 import {
-  Image,
   Container,
   Center,
   Text,
@@ -15,6 +14,7 @@ import classes from "../../components/JobListingsLayout/JobListings.module.css";
 import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
 
 import { getSubdomain } from "@/utils/publicFunctions";
+import Image from "next/image";
 
 import { headers } from "next/headers";
 

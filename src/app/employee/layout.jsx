@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import LayoutWrap from "./LayoutWrap";
-import { NextResponse } from "next/server";
 const Layout = async ({ children }) => {
   let employeeInfo = null;
   const session = await getServerSession(authOptions);

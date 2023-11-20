@@ -286,7 +286,6 @@ const CompanyWrap = () => {
                   </Group>
                   <Space h={46} />
 
-                  {/* <CompanyProfile /> */}
                   <form>
                     <Grid gutter={"lg"} justify="flex-start" mt={"lg"}>
                       <GridCol span={{ lg: 4, md: 6, sm: 12 }}>

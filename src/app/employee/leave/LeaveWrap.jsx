@@ -1,7 +1,6 @@
 "use client";
-import { Box, Grid, Space } from "@mantine/core";
+import { Box } from "@mantine/core";
 import React from "react";
-import LeaveMiniCards from "../components/LeaveMiniCards";
 import LeaveDetailsTable from "../components/LeaveDetailsTable";
 import classes from "../leave/leave.module.css";
 import useEmloyeeLeave from "@/hooks/useEmloyeeLeave";
@@ -25,10 +24,6 @@ const LeaveWrap = () => {
     <Box>
       <div className={classes.inner}>
         <div className={classes.content}>
-          {/* <Grid justify="space-between" py={"2rem"} gutter={"lg"}>
-            <LeaveMiniCards />
-          </Grid>
-          <Space h={40} /> */}
           <LeaveDetailsTable
             form={form}
             loading={loading}
