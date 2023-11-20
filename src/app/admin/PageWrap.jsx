@@ -13,10 +13,10 @@ const PageWrap = () => {
     <Box style={{ backgroundColor: "#f8f9fa" }}>
       <div className={classes.inner}>
         <div className={classes.content}>
-          <Group justify="space-between">
+          <Group justify="space-between" align="flex-start">
             <Box>
               <Text c="#9C9C9C" fz="20px">
-                Hi Elizabeth,
+                Welcome back,
               </Text>
               <Space h="2px" />
               <Text fz={{ lg: "32px", md: "30px", sm: "25px" }} fw={700}>

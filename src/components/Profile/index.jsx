@@ -24,6 +24,7 @@ import classes from "./profile.module.css";
 import { useSignOut } from "@/hooks";
 import { useDisclosure } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
@@ -71,41 +72,55 @@ const UserButton = forwardRef(
   )
 );
 
-export default function Profile({ position }) {
+export default function Profile({ position, name }) {
   const { data: session } = useSession();
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
-      <Menu position="bottom-end" offset={10}>
+      <Menu position="bottom-end" offset={10} withArrow>
         <Menu.Target>
           <UserButton
             image={"/assets/images/avata2.png"}
             name={
               session && `${session.user.firstName} ${session.user.lastName}`
             }
-            position={position || session?.user.role.name}
+            position={position && position}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>
-          <Menu.Item
-            leftSection={
-              <IconUser
-                style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
-              />
-            }
-          >
-            Profile
-          </Menu.Item>
-          <Menu.Item
-            leftSection={
-              <IconSettingsQuestion
-                style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
-              />
-            }
-          >
-            Settings
-          </Menu.Item>
+          {session.user.role.name === "CompanyAdmin" && (
+            <Menu.Item
+              leftSection={
+                <IconUser
+                  style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
+                />
+              }
+            >
+              Profile
+            </Menu.Item>
+          )}
+          {session.user.role.name === "CompanyAdmin" && (
+            <Link
+              href={"/dashboard/settings"}
+              style={{ width: "100%", textDecoration: "none" }}
+            >
+              <Menu.Item
+                leftSection={
+                  <IconSettingsQuestion
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                      color: "#3377FF",
+                    }}
+                  />
+                }
+              >
+                Settings
+              </Menu.Item>
+            </Link>
+          )}
+
           <Menu.Item
             onClick={open}
             c={"#FF0000"}

@@ -9,7 +9,7 @@ import { successStyles } from "@/utils/notificationTheme";
 import { notifications } from "@mantine/notifications";
 
 const useJobApply = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { data: session } = useSession();
   const subdomain = getSubdomain();
   const { handleUpload, response, error } = useUploadDoc();
@@ -18,8 +18,9 @@ const useJobApply = () => {
   const [countries, setCountries] = useState(null);
   const [states, setStates] = useState(null);
   const { slug } = useParams();
+  const [gettingData, setGettingData] = useState(true);
 
-   const form = useForm({
+  const form = useForm({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -55,11 +56,15 @@ const useJobApply = () => {
   };
   const handleContinue = async (data) => {
     try {
-      const resp = await apiClient.post(`/vacancies/${jobData?.id}/apply`, data, {
-        headers: {
-          "x-subdomain-name": subdomain,
-        },
-      });
+      const resp = await apiClient.post(
+        `/vacancies/${jobData?.id}/apply`,
+        data,
+        {
+          headers: {
+            "x-subdomain-name": subdomain,
+          },
+        }
+      );
       notifications.show({
         color: "white",
         title: "Success",
@@ -68,7 +73,7 @@ const useJobApply = () => {
         autoClose: 7000,
       });
       setLoading(false);
-      router.push("/careers")
+      router.push("/careers");
     } catch (err) {
       setLoading(false);
       if (err.errors) {
@@ -77,7 +82,6 @@ const useJobApply = () => {
 
           form.setFieldError(field, message);
         });
-        console.log(err, "Error submitting data");
       }
     }
   };
@@ -105,6 +109,8 @@ const useJobApply = () => {
       };
       handleContinue(modifiedValues);
     }
+
+    //eslint-disable-next-line
   }, [response]);
   useEffect(() => {
     const fetchJobDetail = async () => {
@@ -116,16 +122,27 @@ const useJobApply = () => {
         });
         const jobDetail = response.result;
         setJobData(jobDetail);
-      
+        setGettingData(false);
       } catch (error) {
-        console.error({ error });
+        setGettingData(false);
       }
     };
     getMetadata();
     fetchJobDetail();
+
+    //eslint-disable-next-line
   }, []);
 
-  return { form, handleSubmit, jobData, loading, router, countries, states };
+  return {
+    gettingData,
+    form,
+    handleSubmit,
+    jobData,
+    loading,
+    router,
+    countries,
+    states,
+  };
 };
 
 export default useJobApply;

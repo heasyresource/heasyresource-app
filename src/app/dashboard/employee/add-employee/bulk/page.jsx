@@ -115,7 +115,7 @@ const page = () => {
               textTransform: "capitalize",
             }}
           >
-            File format must be in .csv or .xls extensions
+            File format must be in .doc or .pdf extensions
           </Text>
         </Box>
       </Box>

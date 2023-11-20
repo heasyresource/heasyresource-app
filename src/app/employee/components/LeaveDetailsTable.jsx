@@ -327,7 +327,7 @@ const LeaveDetailsTable = ({
               <Image src={"/assets/svgs/empty.svg"} alt="empty" />
             </Box>
             <Text style={{ fontSize: "16px", color: "#616161" }}>
-              No leaves yet!
+              No leaves found!
             </Text>
           </Stack>
         </Box>

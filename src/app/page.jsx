@@ -11,7 +11,6 @@ import {
   Group,
   Image,
   Stack,
-  Text,
 } from "@mantine/core";
 import Link from "next/link";
 import "../styles/landing.css";
@@ -63,7 +62,11 @@ export default function HomePage() {
             padding: "20px",
           }}
         >
-          <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} />
+          <Image
+            src={"/assets/svgs/HRlogo.svg"}
+            style={{ width: "12rem" }}
+            alt="hr-logo"
+          />
           <Group gap={5} visibleFrom="xs">
             {items}
           </Group>

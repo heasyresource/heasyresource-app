@@ -1,8 +1,8 @@
 import React from "react";
 import ContactForm from "./ContactForm";
 
-const ContactDetails = () => {
-  return <ContactForm />;
+const ContactDetails = async () => {
+  return <ContactForm employeeInfo={employeeInfo} />;
 };
 
 export default ContactDetails;

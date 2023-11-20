@@ -1,20 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useUploadImage } from ".";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { getSubdomain } from "@/utils/publicFunctions";
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { notifications } from "@mantine/notifications";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
-const useSetEmployee = () => {
+const useProfileNav = () => {
   const { data: session } = useSession();
   const param = useParams();
   const { id } = param;
   const subdomain = getSubdomain();
   const [uploading, setUploading] = useState(false);
-  const [employeeInfo, setEmployeeInfo] = useState(null);
   const { handleUpload, response, loading, error } = useUploadImage();
 
   const headerSettings = {
@@ -36,7 +35,7 @@ const useSetEmployee = () => {
   const handleComplete = async () => {
     try {
       await apiClient.put(
-        `/employees/${session.user.id}/set-profile-picture`,
+        `/employees/${id}/set-profile-picture`,
         {
           url: response?.data.secure_url,
         },
@@ -73,4 +72,4 @@ const useSetEmployee = () => {
   };
 };
 
-export default useSetEmployee;
+export default useProfileNav;

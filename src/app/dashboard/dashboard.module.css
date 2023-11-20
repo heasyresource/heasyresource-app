@@ -123,3 +123,8 @@
     width: 100%;
   }
 }
+.card {
+  @media (max-width: 500px) {
+    width: 100% !important;
+  }
+}

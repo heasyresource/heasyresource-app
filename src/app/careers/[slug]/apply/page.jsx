@@ -1,57 +1,27 @@
-"use client";
-import {
-  Image,
-  Container,
-  Center,
-  Text,
-  Flex,
-  Card,
-  Group,
-  Badge,
-  CardSection,
-  GridCol,
-  Grid,
-  Space,
-  Button,
-  TextInput,
-
-  Box,
-  FileInput,
-  ActionIcon,
-} from "@mantine/core";
+import { Image, Container, Center, Text, Flex } from "@mantine/core";
 import classes from "../../../../components/JobListingsLayout/JobListings.module.css";
-import Logo from "../../../../components/JobListingsLayout/jobLogo.svg";
-import NextImage from "next/image";
-import { IconArrowUp, IconBriefcase2, IconMapPin } from "@tabler/icons-react";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { apiClient } from "@/lib/interceptor/apiClient";
-import { getSubdomain } from "@/utils/publicFunctions";
-import useJobApply from "@/hooks/useJobApply";
+
 import PageWrap from "./PageWrap";
+import { getSubdomain } from "@/utils/publicFunctions";
+import { headers } from "next/headers";
 
-export default function JobApply() {
-  const { form, handleSubmit } = useJobApply();
-  // const subdomain = getSubdomain();
-  // const [jobData, setJobData] = useState([]);
-  // const { slug } = useParams();
-
-  // useEffect(() => {
-  //   const fetchJobDetail = async () => {
-  //     try {
-  //       const response = await apiClient.get(`vacancies/slug/${slug}`, {
-  //         headers: {
-  //           "x-subdomain-name": subdomain,
-  //         },
-  //       });
-  //       const jobDetail = response.result;
-  //       setJobData(jobDetail);
-  //     } catch (error) {
-  //       console.error({ error });
-  //     }
-  //   };
-  //   fetchJobDetail();
-  // }, []);
+export default async function JobApply() {
+  let companyInfo = null;
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (subdomain) {
+    const getCompany = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`,
+      {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getCompanyData = await getCompany.json();
+    companyInfo = getCompanyData.results;
+  }
 
   return (
     <Container size={"100%"} bg={"#F8F9FA"} m={0}>
@@ -60,10 +30,9 @@ export default function JobApply() {
           <Center maw={"100%"}>
             <Flex direction={"column"} align={"center"}>
               <Image
-                component={NextImage}
                 my={30}
                 w={80}
-                src={Logo}
+                src={companyInfo && companyInfo.logoUrl}
                 alt="Company Logo"
               />
               <Text fw={700} fz={30}>
@@ -74,7 +43,7 @@ export default function JobApply() {
               </Text>
             </Flex>
           </Center>
- <PageWrap></PageWrap>
+          <PageWrap></PageWrap>
         </div>
       </div>
     </Container>

@@ -31,7 +31,7 @@ const useVerification = () => {
   const handleRouteChange = async (payload) => {
     setRouteLoading(true);
     modals.closeAll();
-    console.log({ payload });
+
     const result = await signIn("user-token", {
       redirect: true,
       ...payload,
@@ -100,7 +100,7 @@ const useVerification = () => {
             token: JSON.stringify(token),
             user: JSON.stringify(user),
           };
-          console.log({ payload });
+
           setLoading(false);
           openModal(payload);
         }
@@ -120,10 +120,10 @@ const useVerification = () => {
           email: email,
           resetPasswordCode: data.verificationCode,
         };
-        sessionStorage.setItem("resetPasswordCode", obfuscateToken(
-          true,
-          JSON.stringify(values)
-        ))
+        sessionStorage.setItem(
+          "resetPasswordCode",
+          obfuscateToken(true, JSON.stringify(values))
+        );
         router.push("/new-password");
       }
     } catch (err) {

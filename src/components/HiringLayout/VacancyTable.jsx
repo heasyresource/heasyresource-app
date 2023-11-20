@@ -332,7 +332,7 @@ const VacancyTable = ({
               <Image src={"/assets/svgs/empty.svg"} alt="empty" />
             </Box>
             <Text style={{ fontSize: "16px", color: "#616161" }}>
-              No vacancy yet!
+              No vacancy found!
             </Text>
           </Stack>
         </Box>

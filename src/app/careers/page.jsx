@@ -1,4 +1,3 @@
-"use client";
 import {
   Image,
   Container,
@@ -12,46 +11,52 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import classes from "../../components/JobListingsLayout/JobListings.module.css";
-import Logo from "../../components/JobListingsLayout/jobLogo.svg";
-import NextImage from "next/image";
+
 import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
-import { apiClient } from "@/lib/interceptor/apiClient";
+
 import { getSubdomain } from "@/utils/publicFunctions";
 
-export default function JobListings() {
-  const subdomain = getSubdomain();
-  const [jobsData, setJobsData] = useState([]);
+import { headers } from "next/headers";
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await apiClient.get("/vacancies/published/all", {
-          headers: {
-            "x-subdomain-name": subdomain,
-          },
-        });
-
-        const jobsData = response.results;
-        setJobsData(jobsData);
-      } catch (error) {
-        console.error(error);
+export default async function JobListings() {
+  let jobsData = null;
+  let companyInfo = null;
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (subdomain) {
+    const getVacancies = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/vacancies/published/all`,
+      {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
       }
-    };
-    fetchJobs();
-  }, []);
+    );
+    const getCompany = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`,
+      {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getCompanyData = await getCompany.json();
+    companyInfo = getCompanyData.results;
+    const getVacanciesData = await getVacancies.json();
+    jobsData = getVacanciesData.results;
+  }
 
   return (
-    <Container size={"100%"} h={'100%'} p={0}  bg={"#F8F9FA"} m={0}>
+    <Container size={"100%"} h={"100%"} p={0} bg={"#F8F9FA"} m={0}>
       <div className={classes.inner}>
         <div className={classes.content}>
           <Center maw={"100%"}>
             <Flex direction={"column"} align={"center"}>
               <Image
-                component={NextImage}
-                my={30}
                 w={80}
-                src={Logo}
+                my={30}
+                src={companyInfo && companyInfo.logoUrl}
                 alt="Company Logo"
               />
               <Text fw={700} fz={30}>
@@ -64,61 +69,62 @@ export default function JobListings() {
           </Center>
           <Container size={"95%"} py={66}>
             <Stack gap={"xl"}>
-              {jobsData.map((jobData, index) => (
-                <UnstyledButton
-                  key={index}
-                  className={classes.job}
-                  component="a"
-                  href={`/careers/${jobData.slug}`}
-                >
-                  <Card bg={"#ffff"} shadow="sm" padding="lg" radius="md">
-                    <Group justify="space-between" py={10}>
-                      <Flex direction={"column"}>
-                        <div style={{ display: "flex", gap: "10px" }}>
-                          <Badge
-                            color="#F4F4F4"
-                            radius="sm"
-                            px={9}
-                            py={6}
-                            tt={"capitalize"}
-                            classNames={{
-                              label: classes.label,
-                            }}
-                          >
-                            {jobData.jobCategory.name}
-                          </Badge>
-                        </div>
-                        <Text fz={25} pt={20} fw={500}>
-                          {jobData.title}
-                        </Text>
-                      </Flex>
-                      <Group>
-                        <Group wrap="nowrap" gap={5} mt={3}>
-                          <IconMapPin
-                            stroke={1.5}
-                            size="1rem"
-                            className={classes.icon}
-                          />
-                          <Text fz="16px" c="#454444">
-                            {jobData.location} ({jobData.workMode})
+              {jobsData &&
+                jobsData.map((jobData, index) => (
+                  <UnstyledButton
+                    key={index}
+                    className={classes.job}
+                    component="a"
+                    href={`/careers/${jobData.slug}`}
+                  >
+                    <Card bg={"#ffff"} shadow="sm" padding="lg" radius="md">
+                      <Group justify="space-between" py={10}>
+                        <Flex direction={"column"}>
+                          <div style={{ display: "flex", gap: "10px" }}>
+                            <Badge
+                              color="#F4F4F4"
+                              radius="sm"
+                              px={9}
+                              py={6}
+                              tt={"capitalize"}
+                              classNames={{
+                                label: classes.label,
+                              }}
+                            >
+                              {jobData.jobCategory.name}
+                            </Badge>
+                          </div>
+                          <Text fz={25} pt={20} fw={500}>
+                            {jobData.title}
                           </Text>
-                        </Group>
+                        </Flex>
+                        <Group>
+                          <Group wrap="nowrap" gap={5} mt={3}>
+                            <IconMapPin
+                              stroke={1.5}
+                              size="1rem"
+                              className={classes.icon}
+                            />
+                            <Text fz="16px" c="#454444">
+                              {jobData.location} ({jobData.workMode})
+                            </Text>
+                          </Group>
 
-                        <Group wrap="nowrap" gap={10} mt={5}>
-                          <IconBriefcase2
-                            stroke={1.5}
-                            size="1rem"
-                            className={classes.icon}
-                          />
-                          <Text fz="16px" c="#454444">
-                            {jobData.employmentType.name}
-                          </Text>
+                          <Group wrap="nowrap" gap={10} mt={5}>
+                            <IconBriefcase2
+                              stroke={1.5}
+                              size="1rem"
+                              className={classes.icon}
+                            />
+                            <Text fz="16px" c="#454444">
+                              {jobData.employmentType.name}
+                            </Text>
+                          </Group>
                         </Group>
                       </Group>
-                    </Group>
-                  </Card>
-                </UnstyledButton>
-              ))}
+                    </Card>
+                  </UnstyledButton>
+                ))}
             </Stack>
           </Container>
         </div>

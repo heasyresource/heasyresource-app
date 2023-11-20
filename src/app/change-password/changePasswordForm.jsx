@@ -65,6 +65,7 @@ export default function ChangePasswordForm() {
             position="bottom"
             width="target"
             transition="pop"
+            closeOnClickOutside={false}
           >
             <Popover.Target>
               <div

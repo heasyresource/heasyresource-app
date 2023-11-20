@@ -203,7 +203,7 @@ const LeaveTable = ({
                         component="a"
                         href={`/dashboard/employee/${leaves?.userId}/personal-detail`}
                       >
-                        Employee Detailss
+                        Employee Details
                       </MenuItem>
 
                       <MenuItem fz="xs">Leave Details</MenuItem>
@@ -233,7 +233,7 @@ const LeaveTable = ({
               <Image src={"/assets/svgs/empty.svg"} alt="empty" />
             </Box>
             <Text style={{ fontSize: "16px", color: "#616161" }}>
-              No leaves yet!
+              No leaves found!
             </Text>
           </Stack>
         </Box>

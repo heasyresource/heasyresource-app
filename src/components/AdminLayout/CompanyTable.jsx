@@ -5,7 +5,7 @@ import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import classes from "../../components/AdminLayout/admin.module.css";
-import { Badge, Text, rem } from "@mantine/core";
+import { Avatar, Badge, Flex, Text, rem } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { IconLink } from "@tabler/icons-react";
@@ -35,6 +35,21 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
               textAlign: "center",
 
               render: (record) => companies.indexOf(record) + 1,
+            },
+            {
+              accessor: "avatar",
+              title: "",
+              textAlign: "center",
+              width: "80px",
+              render: ({ logoUrl }) => (
+                <Flex justify="center" align="center">
+                  <Avatar
+                    size={26}
+                    src={logoUrl || "/assets/images/cmpLogo.png"}
+                    radius={26}
+                  />
+                </Flex>
+              ),
             },
             {
               accessor: "name",
@@ -140,52 +155,6 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
                 </Badge>
               ),
             },
-            //   {
-            //     accessor: "actions",
-            //     title: "Actions",
-            //     width: "135px",
-            //     textAlign: "center",
-            //     render: () => (
-            //       <Flex justify="center" align="center">
-            //         <ActionIcon
-            //           variant="transparent"
-            //           // color="#84ADFF"
-            //           radius="lg"
-            //           component="a"
-            //           href="/dashboard/hiring/application-phase"
-            //         >
-            //           <IconEye
-            //             style={{ width: "70%", height: "70%" }}
-            //             stroke={1.5}
-            //           />
-            //         </ActionIcon>
-            //         <ActionIcon
-            //           variant="transparent"
-            //           color="#FF7A00"
-            //           onClick={() => setNoTransitionOpened(true)}
-            //           radius="lg"
-            //           style={{ marginLeft: "10px" }}
-            //         >
-            //           <IconTrash
-            //             style={{ width: "70%", height: "70%" }}
-            //             stroke={1.5}
-            //           />
-            //         </ActionIcon>
-            //         <ActionIcon
-            //           variant="transparent"
-            //             color="#43D72B"
-            //           onClick={() => setNoTransitionOpened1(true)}
-            //           radius="lg"
-            //           style={{ marginLeft: "10px" }}
-            //         >
-            //           <IconDownload
-            //             style={{ width: "70%", height: "70%" }}
-            //             stroke={1.5}
-            //           />
-            //         </ActionIcon>
-            //       </Flex>
-            //     ),
-            //   },
           ]}
           totalRecords={pagination?.total}
           recordsPerPage={pagination?.perPage}

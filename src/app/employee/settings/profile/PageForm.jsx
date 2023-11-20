@@ -141,12 +141,7 @@ const PersonalForm = () => {
           </GridCol>
         </Grid>
 
-        <Group
-          justify="flex-end"
-          className={classes.btnWrap}
-          align="center"
-          mt={"6rem"}
-        >
+        <Group justify="flex-end" align="center" mt={"6rem"}>
           <Button
             variant="outline"
             size="md"

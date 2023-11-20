@@ -38,7 +38,7 @@ export default function LeaveTypeTable({
 }) {
   const handleOpen = (data) => {
     setItemID(data?.id);
-    console.log(data, "data edit");
+
     form?.setValues({
       name: data?.name,
       availability: data?.availability,
@@ -231,7 +231,7 @@ export default function LeaveTypeTable({
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
                   <Select
-                    label="Avalability"
+                    label="Availability"
                     withAsterisk
                     size="md"
                     classNames={{

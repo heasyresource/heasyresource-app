@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   IconHome,
   IconSettings,
@@ -22,11 +22,8 @@ import {
 import classes from "../dashboard.module.css";
 import { useDisclosure } from "@mantine/hooks";
 import EmployeeProfile from "./EmployeeProfile";
-import { obfuscateToken } from "@/utils/encryptToken";
 
-const Header = () => {
-  const [logo, setLogo] = useState("");
-  const [companyName, setCompanyName] = useState("");
+const Header = ({ companyName, companyLogo, logoUrl }) => {
   const pathname = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -68,20 +65,6 @@ const Header = () => {
       <span>{item.label}</span>
     </Link>
   ));
-  useEffect(() => {
-    const isDataStored = !!sessionStorage.getItem("employeeInfo");
-
-    if (isDataStored) {
-      const storeData = obfuscateToken(
-        false,
-        sessionStorage.getItem("employeeInfo")
-      );
-      const parsedData = JSON.parse(storeData);
-
-      setLogo(parsedData.logoUrl);
-      setCompanyName(parsedData.name);
-    }
-  }, []);
 
   return (
     <>
@@ -98,7 +81,7 @@ const Header = () => {
             <IconAlignLeft style={{ color: "#3377FF" }} />
           </ActionIcon>
           <Group justify="flex-end">
-            <EmployeeProfile logo={logo} />
+            <EmployeeProfile logo={logoUrl} />
           </Group>
         </Flex>
       </header>
@@ -118,7 +101,7 @@ const Header = () => {
           />
           <Group>
             <Image
-              src={logo || ""}
+              src={companyLogo}
               style={{ width: "30px" }}
               alt="Company Logo"
             />

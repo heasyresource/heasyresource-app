@@ -93,7 +93,7 @@ const AddLeaveType = ({
                 </GridCol>
                 <GridCol span={{ lg: 6, md: 12, sm: 12 }}>
                   <Select
-                    label="Avalability"
+                    label="Availability"
                     withAsterisk
                     size="md"
                     classNames={{

@@ -1,60 +1,47 @@
-"use client";
-import { Group, AppShell, Text, ActionIcon, Box, Image } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import cx from "clsx";
-import classes from "./dashboard.module.css";
-import { IconBell, IconMessageDots } from "@tabler/icons-react";
-import { useState } from "react";
-import { Header } from "@/components";
-import NavBar from "./components/NavBar";
-import Main from "./components/Main";
-import Profile from "@/components/Profile";
-import { useDashboard } from "@/hooks";
-const Layout = ({ children }) => {
-  const { logo, companyName, companyRep } = useDashboard();
-  const [opened, { toggle }] = useDisclosure();
-  const [scrolled, setScrolled] = useState(false);
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { headers } from "next/headers";
+import { getSubdomain } from "@/utils/publicFunctions";
+import LayoutWrap from "./LayoutWrap";
+const Layout = async ({ children }) => {
+  let companyInfo = null;
+  let companyRep = null;
+  const session = await getServerSession(authOptions);
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (subdomain && session) {
+    const getCompany = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/${session?.user.company.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user.token}`,
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getCompanyRep = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/employees/${session.user.company.id}/employee/${session.user.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user.token}`,
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getCompanyData = await getCompany.json();
+    companyInfo = getCompanyData.results;
+    const getCompanyRepData = await getCompanyRep.json();
+    companyRep = getCompanyRepData.results;
+  }
 
   return (
-    <AppShell
-      layout="alt"
-      padding="lg"
-      header={{ height: 80 }}
-      navbar={{
-        width: "245",
-        breakpoint: "sm",
-        collapsed: { mobile: !opened },
-      }}
+    <LayoutWrap
+      companyRep={companyRep && companyRep}
+      companyInfo={companyInfo && companyInfo}
     >
-      <AppShell.Header
-        style={{ backgroundColor: "#F8F9FA", padding: "20px" }}
-        className={cx(classes.appShellHeader, { [classes.scrolled]: scrolled })}
-        withBorder={false}
-      >
-        <Group justify="flex-end" gap="20" style={{ flexWrap: "nowrap" }}>
-          <Group style={{ flexWrap: "nowrap" }}>
-            <Image src={logo || ""} style={{ width: "30px" }} alt="" />
-
-            <Text
-              fw={500}
-              c="#616161"
-              style={{ whiteSpace: "nowrap", textTransform: "capitalize" }}
-            >
-              {companyName}
-            </Text>
-          </Group>
-
-          <Profile position={companyRep} />
-        </Group>
-      </AppShell.Header>
-      <AppShell.Header className={classes.mobileHeader}>
-        <Header companyName={companyName} logo={logo} />
-      </AppShell.Header>
-
-      <NavBar />
-
-      <Main>{children}</Main>
-    </AppShell>
+      {children}
+    </LayoutWrap>
   );
 };
 

@@ -34,17 +34,6 @@
   border-color: #3377ff;
 }
 
-.container {
-  margin: 20px;
-  border-radius: 15px;
-  /* height: 100dvh; */
-  overflow: auto;
-}
-
-.containerContent {
-  padding: 25px;
-}
-
 .control {
   @media (max-width: 760px) {
     flex: 1;

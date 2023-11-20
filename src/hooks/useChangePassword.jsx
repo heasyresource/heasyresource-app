@@ -41,7 +41,7 @@ const useChangePassword = () => {
   });
   const handleRouteChange = () => {
     modals.closeAll();
-    router.push("/signin");
+    router.push("/employee");
   };
   const openModal = () =>
     modals.open({
@@ -97,7 +97,7 @@ const useChangePassword = () => {
       if (err.errors) {
         err.errors.forEach((error) => {
           const { field, message } = error;
-          console.log(field, message, "message");
+
           form.setFieldError(field, message);
         });
       }

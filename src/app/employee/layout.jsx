@@ -1,92 +1,30 @@
-"use client";
-import { Group, AppShell, Text, ActionIcon, Box, Image } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import cx from "clsx";
-import classes from "./dashboard.module.css";
-import { IconBell, IconMessageDots } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
-import NavBar from "./components/NavBar";
-import Main from "./components/Main";
-import EmployeeProfile from "./components/EmployeeProfile";
-import Header from "./components/Header";
-import { obfuscateToken } from "@/utils/encryptToken";
-const Layout = ({ children }) => {
-  const [companyName, setCompanyName] = useState("");
-  const [logo, setLogo] = useState("");
-  const [companyLogo, setCompanyLogo] = useState("");
-  const [position, setPosition] = useState("");
-  const [opened, { toggle }] = useDisclosure();
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const isDataStored = !!sessionStorage.getItem("employeeInfo");
-    if (isDataStored) {
-      const storeData = obfuscateToken(
-        false,
-        sessionStorage.getItem("employeeInfo")
-      );
-      const parsedData = JSON.parse(storeData);
+import { getSubdomain } from "@/utils/publicFunctions";
+import { headers } from "next/headers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import LayoutWrap from "./LayoutWrap";
+import { NextResponse } from "next/server";
+const Layout = async ({ children }) => {
+  let employeeInfo = null;
+  const session = await getServerSession(authOptions);
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (subdomain && session) {
+    const getEmployee = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/employees/${session.user.company.id}/employee/${session.user.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user.token}`,
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getEmployeeData = await getEmployee.json();
+    employeeInfo = getEmployeeData.results;
+  }
 
-      setLogo(parsedData.logoUrl);
-      setCompanyName(parsedData.name);
-      setPosition(parsedData.position);
-      setCompanyLogo(parsedData.companyLogo);
-    }
-  }, []);
-
-  return (
-    <AppShell
-      layout="alt"
-      padding="lg"
-      header={{ height: 80 }}
-      navbar={{
-        width: "245",
-        breakpoint: "sm",
-        collapsed: { mobile: !opened },
-      }}
-    >
-      <AppShell.Header
-        style={{ backgroundColor: "#F8F9FA", padding: "20px" }}
-        className={cx(classes.appShellHeader, { [classes.scrolled]: scrolled })}
-        withBorder={false}
-      >
-        <Group justify="flex-end" gap="20" style={{ flexWrap: "nowrap" }}>
-          <Group style={{ flexWrap: "nowrap" }}>
-            <Image src={companyLogo || ""} style={{ width: "30px" }} alt="" />
-
-            <Text
-              fw={500}
-              c="#616161"
-              style={{ whiteSpace: "nowrap", textTransform: "capitalize" }}
-            >
-              {companyName}
-            </Text>
-          </Group>
-          {/* <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconBell color="black" />
-          </ActionIcon>
-          <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconMessageDots color="black" />
-          </ActionIcon> */}
-          <EmployeeProfile logo={logo} />
-        </Group>
-      </AppShell.Header>
-      <AppShell.Header className={classes.mobileHeader}>
-        <Header />
-      </AppShell.Header>
-      <NavBar />
-      <Main>{children}</Main>
-    </AppShell>
-  );
+  return <LayoutWrap employeeInfo={employeeInfo}>{children}</LayoutWrap>;
 };
 
 export default Layout;

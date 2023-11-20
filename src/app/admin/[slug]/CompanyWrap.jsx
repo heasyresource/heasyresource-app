@@ -1,6 +1,4 @@
 "use client";
-import CompanyProfile from "@/components/AdminLayout/CompanyProfile";
-import Profile from "@/components/Profile";
 import useAdmin from "@/hooks/useAdmin";
 import {
   Avatar,
@@ -87,12 +85,11 @@ const CompanyWrap = () => {
                       {companyInfo.name}
                     </Text>
                   </Group>
-                  <Profile />
                 </Group>
               </div>
             </div>
-            <Space h={50} />
-            <Container px={53} size="100%">
+            <Space h={30} />
+            <Container size="100%">
               <Text px={20} fz={24} fw={700}>
                 General Information
               </Text>
@@ -119,7 +116,7 @@ const CompanyWrap = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text c="dimmed" size="xs" lh={1} mb={17}>
+                        <Text c="dimmed" size="sm" lh={1} mb={17}>
                           Company Name
                         </Text>
                         <Text fw={500} size="1.1rem" lh={1}>
@@ -135,7 +132,7 @@ const CompanyWrap = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text c="dimmed" size="xs" lh={1} mb={17}>
+                        <Text c="dimmed" size="sm" lh={1} mb={17}>
                           Company Size
                         </Text>
                         <Text fw={500} size="1.1rem" lh={1}>
@@ -151,7 +148,7 @@ const CompanyWrap = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text c="dimmed" size="xs" lh={1} mb={17}>
+                        <Text c="dimmed" size="sm" lh={1} mb={17}>
                           Industry
                         </Text>
                         <Text fw={500} size="1.1rem" lh={1}>
@@ -167,7 +164,7 @@ const CompanyWrap = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Text c="dimmed" size="xs" lh={1} mb={17}>
+                        <Text c="dimmed" size="sm" lh={1} mb={17}>
                           Location
                         </Text>
                         <Text fw={500} size="1.1rem" lh={1}>
@@ -178,7 +175,7 @@ const CompanyWrap = () => {
 
                     <GridCol span={{ xs: 12, sm: 12, md: 6, lg: "content" }}>
                       {companyInfo.status === "Pending" ? (
-                        <div className={classes.generalInfoButton}>
+                        <Group justify="flex-start" align="center" gap={"20px"}>
                           <Button
                             variant="filled"
                             size="sm"
@@ -204,9 +201,9 @@ const CompanyWrap = () => {
                           >
                             Reject
                           </Button>
-                        </div>
+                        </Group>
                       ) : companyInfo.status === "Approved" ? (
-                        <div className={classes.generalInfoButton}>
+                        <Group justify="flex-start" align="center" gap={"20px"}>
                           <Badge size="lg" color="#14cf14" variant="light">
                             {companyInfo.status}
                           </Badge>
@@ -222,9 +219,9 @@ const CompanyWrap = () => {
                           >
                             Suspend
                           </Button>
-                        </div>
+                        </Group>
                       ) : companyInfo.status === "Suspended" ? (
-                        <div className={classes.generalInfoButton}>
+                        <Group justify="flex-start" align="center" gap={"20px"}>
                           <Badge size="lg" color="#ffb242" variant="light">
                             {companyInfo.status}
                           </Badge>
@@ -241,9 +238,9 @@ const CompanyWrap = () => {
                           >
                             unsuspend
                           </Button>
-                        </div>
+                        </Group>
                       ) : (
-                        <div className={classes.generalInfoButton}>
+                        <Group justify="flex-start" align="center" gap={"20px"}>
                           <Badge size="lg" color="red" variant="light">
                             {companyInfo.status}
                           </Badge>
@@ -260,7 +257,7 @@ const CompanyWrap = () => {
                           >
                             Approve
                           </Button>
-                        </div>
+                        </Group>
                       )}
                     </GridCol>
                   </Grid>
@@ -339,7 +336,7 @@ const CompanyWrap = () => {
                           size="md"
                           withAsterisk
                           label="Company Email"
-                          // {...form.getInputProps("email")}
+                          {...form.getInputProps("email")}
                           style={{ width: "100%" }}
                           classNames={{
                             label: classes.label,
