@@ -1,5 +1,5 @@
 import { useForm } from "@mantine/form";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
@@ -92,17 +92,11 @@ const useAssignLeave = () => {
         label: l.name,
       }));
       setLeaveTypes(modifiedOptions);
-    } catch (err) {
-      // notifications.show({
-      //   color: "red",
-      //   message: "Something went wrong, please try again.",
-      //   styles: errorStyles,
-      //   autoClose: 7000,
-      // });
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     getLeaveTypes();
+
     //eslint-disable-next-line
   }, []);
 

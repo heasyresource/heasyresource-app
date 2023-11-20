@@ -235,9 +235,7 @@ const CompleteForm = () => {
                       maxDropdownHeight={150}
                       className={styles.multiSelect}
                       placeholder="Pick value"
-                      // value={selectedOptions}
                       data={allOptions}
-                      // onChange={handleMultiSelectChange}
                       {...form.getInputProps("employeeIdFormat")}
                       clearable
                       classNames={{

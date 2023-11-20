@@ -1,14 +1,11 @@
 "use client";
 import Loading from "@/components/Loading";
-import { obfuscateToken } from "@/utils/encryptToken";
 import { Badge, Box, Group, Space, Text } from "@mantine/core";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "../profile.module.css";
 import Link from "next/link";
-import AddEmployeeImg from "../../components/AddEmployeeImg";
 import SettingImg from "../../components/SettingImg";
-import useSetting from "@/hooks/useSetting";
 import useSetEmployee from "@/hooks/useSetEmployee";
 
 const profileLinks = [
@@ -46,7 +43,6 @@ const ProfileRoot = ({ children }) => {
       ) : (
         <>
           <Group my={"auto"} align="center" justify="flex-start" mt="lg">
-            {/* <AddEmployeeImg logo={logo} /> */}
             <SettingImg
               uploading={uploading}
               logo={employeeInfo?.logo}

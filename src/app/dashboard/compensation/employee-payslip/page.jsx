@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ActionIcon,
   Avatar,
   Badge,
   Button,
@@ -9,7 +8,6 @@ import {
   CardSection,
   Group,
   Text,
-  UnstyledButton,
 } from "@mantine/core";
 import classes from "../../../../components/CompensationLayout/Compensation.module.css";
 import React, { useState } from "react";
@@ -26,7 +24,6 @@ const EmployeeSlip = () => {
           borderRadius: "15px",
           borderBottom: "1px solid #DDDDDD",
           paddingBottom: "45px",
-          //   minHeight: "390px",
           margin: "0px",
         }}
       >

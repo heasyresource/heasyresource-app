@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {
-  ActionIcon,
   Badge,
   Box,
   Card,
@@ -11,14 +10,10 @@ import {
   GridCol,
   Group,
   Paper,
-  ScrollArea,
-  SimpleGrid,
   Space,
   Text,
   Button,
 } from "@mantine/core";
-import Messages from "@/components/Messages";
-import Notifications from "@/components/Notifications";
 import { DatePicker } from "@mantine/dates";
 import AddEmployeeImg from "./components/AddEmployeeImg";
 
@@ -198,19 +193,6 @@ const PageWrap = ({ session }) => {
                 </Box>
               </Box>
             </GridCol>
-            {/* <GridCol pr="xs" span={{ lg: 3.5, md: 12, sm: 12 }}>
-              <Space h="45px" />
-              <SimpleGrid style={{ borderRadius: "15px" }} bg="#ffff" cols={1}>
-                <ScrollArea scrollbarSize={4} type="never">
-                  <Notifications />
-                </ScrollArea>
-                <div style={{ borderTop: "3px solid #EFEFEF" }}>
-                  <ScrollArea scrollbarSize={4} type="never">
-                    <Messages />
-                  </ScrollArea>
-                </div>
-              </SimpleGrid>
-            </GridCol> */}
           </Grid>
         </Box>
       )}

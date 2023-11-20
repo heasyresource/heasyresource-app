@@ -42,7 +42,6 @@ const AddEarnings = () => {
           backgroundColor: "#ffff",
           borderRadius: "15px",
           borderBottom: "1px solid #DDDDDD",
-          //   minHeight: "390px",
           margin: "0px",
         }}
       >

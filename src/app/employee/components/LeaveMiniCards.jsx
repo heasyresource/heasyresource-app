@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, Grid, GridCol, Group, Text } from "@mantine/core";
+import { Card, GridCol, Group, Text } from "@mantine/core";
 import classes from "../leave/leave.module.css";
 
 const data = [
@@ -32,7 +32,6 @@ function LeaveMiniCards({ height }) {
         mah={155}
         px="28"
         h={'100%'}
-        // py="auto"
         bg="var(--mantine-color-body)"
       >
         <Text style={{ color: "#7EA6F4" }} fz="sm" fw={700}>

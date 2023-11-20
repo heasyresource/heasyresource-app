@@ -1,5 +1,4 @@
 "use client";
-import CompanyProfile from "@/components/AdminLayout/CompanyProfile";
 import Profile from "@/components/Profile";
 import useAdmin from "@/hooks/useAdmin";
 import {
@@ -289,7 +288,6 @@ const CompanyWrap = () => {
                   </Group>
                   <Space h={46} />
 
-                  {/* <CompanyProfile /> */}
                   <form>
                     <Grid gutter={"lg"} justify="flex-start" mt={"lg"}>
                       <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -339,7 +337,6 @@ const CompanyWrap = () => {
                           size="md"
                           withAsterisk
                           label="Company Email"
-                          // {...form.getInputProps("email")}
                           style={{ width: "100%" }}
                           classNames={{
                             label: classes.label,
