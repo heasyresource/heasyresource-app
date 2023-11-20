@@ -76,7 +76,7 @@ export default function HomePage() {
             padding: "20px",
           }}
         >
-          <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} />
+          <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} alt="heasyresource-logo" />
           <Group gap={15} visibleFrom="xs">
             {items}
           </Group>
@@ -209,7 +209,7 @@ export default function HomePage() {
               className="progress_img"
             />
             <h2 className="progress_title">
-              <span>Seamlessly</span> guide your <span>team's growth</span> with
+              <span>Seamlessly</span> guide your <span>team&apos;s growth</span> with
               Heasy Resource HR, where progress management integrates for
               optimal HR efficiency.
             </h2>

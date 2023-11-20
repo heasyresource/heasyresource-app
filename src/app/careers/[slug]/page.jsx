@@ -48,7 +48,7 @@ export default function JobDetails() {
       }
     };
     fetchJobDetail();
-  }, []);
+  }, [slug,subdomain]);
 
   return (
     <Container size={"100%"} bg={"#F8F9FA"} m={0}>

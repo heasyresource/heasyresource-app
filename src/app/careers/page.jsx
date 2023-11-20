@@ -43,7 +43,7 @@ export default function JobListings() {
       }
     };
     fetchJobs();
-  }, []);
+  });
 
   return (
     <Container size={"100%"} h={"100%"} p={0} bg={"#F8F9FA"} m={0}>
