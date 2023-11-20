@@ -140,7 +140,7 @@ export function TableSelection({
               <Image src={"/assets/svgs/empty.svg"} alt="empty" />
             </Box>
             <Text style={{ fontSize: "16px", color: "#616161" }}>
-              No Employee yet!
+              No Employee found!
             </Text>
           </Stack>
         </Box>

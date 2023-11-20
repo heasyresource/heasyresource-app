@@ -31,9 +31,7 @@ const useForgotPassword = () => {
         sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
         router.push("/verification");
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const handleSubmit = async (data) => {
     setLoading(true);

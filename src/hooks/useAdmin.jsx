@@ -202,7 +202,6 @@ const useAdmin = () => {
         setCompanies(response.results.data);
         setPagination(response.results.meta);
         setGettingData(false);
-        console.log(response, "companies");
       }
     } catch (err) {
       setGettingData(false);
@@ -212,6 +211,11 @@ const useAdmin = () => {
         styles: errorStyles,
         autoClose: 7000,
       });
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
     }
   };
   const getSingleCompany = async () => {
@@ -230,6 +234,7 @@ const useAdmin = () => {
           industry: results.industry !== null ? results.industry.name : "N/A",
           status: results.status,
         });
+
         form.setValues({
           name: results.name,
           email: results.email,
@@ -246,6 +251,11 @@ const useAdmin = () => {
         setGettingInfo(false);
       }
     } catch (err) {
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
       setGettingInfo(true);
       notifications.show({
         color: "red",
@@ -255,6 +265,7 @@ const useAdmin = () => {
       });
     }
   };
+
   const getMetadata = async () => {
     try {
       const response = await apiClient.get("/metadata");
@@ -288,6 +299,11 @@ const useAdmin = () => {
     }
     //eslint-disable-next-line
   }, [isChanged]);
+  useEffect(() => {
+    getCompanies();
+
+    //eslint-disable-next-line
+  }, [searchParams.get("page")]);
 
   useEffect(() => {
     getCompanies();

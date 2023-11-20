@@ -36,7 +36,7 @@ const useAddHolidayType = () => {
     validate: {
       name: (value) => (!value.length ? "Leave Type Name is required" : null),
       availability: (value) =>
-        !value.length ? "Avalability is required" : null,
+        !value.length ? "Availability is required" : null,
       isFullDay: (value) => (!value.length ? "Field is required" : null),
       date: (value) => (value?.length === 0 ? "Date is required" : null),
       isPaid: (value) => (!value.length ? "Field is required" : null),

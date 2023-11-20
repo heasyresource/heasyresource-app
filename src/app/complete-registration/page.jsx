@@ -1,16 +1,35 @@
-import { Paper } from "@mantine/core";
-import styles from "./completeRegistration.module.css";
-
 import CompleteForm from "./CompleteForm";
+import { getServerSession } from "next-auth";
+import { headers } from "next/headers";
+import { getSubdomain } from "@/utils/publicFunctions";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { Box } from "@mantine/core";
 
-export default function CompleteRegistration() {
+export default async function CompleteRegistration() {
+  let companyInfo = null;
+  const session = await getServerSession(authOptions);
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (!subdomain && session) {
+    const getCompany = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/${session?.user.company.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user.token}`,
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+
+    const getCompanyData = await getCompany.json();
+    companyInfo = getCompanyData.results;
+  }
   return (
-    <div
-      style={{ height: "100%", backgroundColor: "#F8F9FA", padding: "2rem 0" }}
-    >
-      <Paper shadow="xs" className={styles.container}>
-        <CompleteForm></CompleteForm>
-      </Paper>
+    <div style={{ backgroundColor: "#F8F9FA", padding: "1rem 0" }}>
+      <Box mx={"20px"} style={{ overflow: "auto" }}>
+        <CompleteForm companyInfo={companyInfo && companyInfo}></CompleteForm>
+      </Box>
     </div>
   );
 }

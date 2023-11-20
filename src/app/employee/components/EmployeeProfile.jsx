@@ -50,6 +50,12 @@ const UserButton = forwardRef(
           <Text style={{ color: "#2A004C" }} size="sm" fw={500}>
             {name}
           </Text>
+          <Text
+            style={{ color: "#696969", textTransform: "uppercase" }}
+            size="xs"
+          >
+            {position}
+          </Text>
         </Box>
 
         {icon || (
@@ -64,8 +70,7 @@ const UserButton = forwardRef(
   )
 );
 
-export default function EmployeeProfile({ position, logo }) {
-  const { data: session } = useSession();
+export default function EmployeeProfile({ position, logo, name }) {
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -74,9 +79,8 @@ export default function EmployeeProfile({ position, logo }) {
         <Menu.Target>
           <UserButton
             image={logo || "/assets/images/avata2.png"}
-            name={
-              session && `${session.user.firstName} ${session.user.lastName}`
-            }
+            name={name}
+            position={position}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>

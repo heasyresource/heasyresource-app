@@ -3,12 +3,14 @@ import { apiClient } from "@/lib/interceptor/apiClient";
 import { errorStyles, successStyles } from "@/utils/notificationTheme";
 import { convertDateFormat, getSubdomain } from "@/utils/publicFunctions";
 import { useForm } from "@mantine/form";
+import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { signOut, useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const useEmploymentInfo = () => {
+  const [opened, { open, close }] = useDisclosure(false);
   const param = useParams();
   const { id } = param;
   const router = useRouter();
@@ -18,6 +20,7 @@ const useEmploymentInfo = () => {
   const [isChanged, setIsChanged] = useState(null);
   const [departments, setDepartments] = useState(null);
   const [employmentTypes, setEmploymentTypes] = useState(null);
+  const [terminate, setTerminate] = useState(false);
   const form = useForm({
     initialValues: {
       position: "",
@@ -25,6 +28,7 @@ const useEmploymentInfo = () => {
       departmentId: "",
       employmentTypeId: "",
       workMode: "",
+      status: "",
     },
     validate: {
       position: (value) => (!value.length ? "Position is required" : null),
@@ -55,7 +59,7 @@ const useEmploymentInfo = () => {
         resumptionDate: convertDateFormat(data.resumptionDate),
       };
       const response = await apiClient.put(
-        `/employees/${id || session.user.id}/employment-infos`,
+        `/employees/${id}/employment-infos`,
         modifiedValues,
         headerSettings
       );
@@ -78,15 +82,42 @@ const useEmploymentInfo = () => {
           form.setFieldError(field, message);
         });
       }
-      if (err.statusCode === 500) {
-        notifications.show({
-          color: "white",
-          title: "Failed",
-          message: "Something went wrong, please try again.",
-          styles: errorStyles,
-          autoClose: 7000,
-        });
-      }
+
+      notifications.show({
+        color: "white",
+        title: "Failed",
+        message: "Something went wrong, please try again.",
+        styles: errorStyles,
+        autoClose: 7000,
+      });
+    }
+  };
+  const handleTerminate = async () => {
+    setTerminate(true);
+    try {
+      const response = await apiClient.put(
+        `/employees/${id}/employment-status`,
+        { status: "Terminated" },
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Employee terminated successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      close();
+      setTerminate(false);
+      setIsChanged(response);
+    } catch (err) {
+      setTerminate(false);
+      notifications.show({
+        color: "white",
+        message: "Something went wrong, please try again.",
+        styles: errorStyles,
+        autoClose: 7000,
+      });
     }
   };
   const getMetadata = async () => {
@@ -98,9 +129,7 @@ const useEmploymentInfo = () => {
         label: option.name,
       }));
       setEmploymentTypes(type);
-    } catch (err) {
-      console.log(err, "Error getting the metadata");
-    }
+    } catch (err) {}
   };
   const getDepartments = async () => {
     try {
@@ -110,9 +139,7 @@ const useEmploymentInfo = () => {
         label: option.name,
       }));
       setDepartments(department);
-    } catch (err) {
-      console.log(err, "Error getting the department field");
-    }
+    } catch (err) {}
   };
   const getEmployee = async () => {
     try {
@@ -139,6 +166,7 @@ const useEmploymentInfo = () => {
           results.employmentInfo?.department?.id === null
             ? ""
             : results.employmentInfo?.department?.id,
+        status: results.employmentInfo?.status,
       });
     } catch (err) {
       if (
@@ -162,7 +190,19 @@ const useEmploymentInfo = () => {
     //eslint-disable-next-line
   }, []);
 
-  return { form, handleSubmit, loading, employmentTypes, departments, router };
+  return {
+    form,
+    handleSubmit,
+    loading,
+    employmentTypes,
+    departments,
+    router,
+    handleTerminate,
+    terminate,
+    open,
+    close,
+    opened,
+  };
 };
 
 export default useEmploymentInfo;

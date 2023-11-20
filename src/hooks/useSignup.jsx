@@ -94,7 +94,7 @@ const useSignup = () => {
       if (err.errors) {
         err.errors.forEach((error) => {
           const { field, message } = error;
-          console.log(field, message, "message");
+
           companyInfoForm.setFieldError(field, message);
         });
       }
@@ -132,12 +132,12 @@ const useSignup = () => {
       if (err.errors) {
         err.errors.forEach((error) => {
           const { field, message } = error;
-          console.log(field, message, "message");
+
           companyInfoForm.setFieldError(field, message);
         });
       }
       setLoadingCompanyRep(false);
-      console.log(err);
+
       notifications.show({
         color: "red",
         title: "Registration Failed",
@@ -160,9 +160,7 @@ const useSignup = () => {
           label: option.name,
         }));
         setFields(modifiedOptions);
-      } catch (err) {
-        console.log(err, "Error getting the metadata");
-      }
+      } catch (err) {}
     };
     getMetadata();
   }, []);

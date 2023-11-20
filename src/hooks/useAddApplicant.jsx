@@ -137,7 +137,7 @@ const useAddApplicant = () => {
           if (err.errors) {
             err.errors.forEach((error) => {
               const { field, message } = error;
-              console.log(field, message, "message");
+
               form.setFieldError(field, message);
             });
           }
@@ -189,7 +189,7 @@ const useAddApplicant = () => {
           if (err.errors) {
             err.errors.forEach((error) => {
               const { field, message } = error;
-              console.log(field, message, "message");
+
               form.setFieldError(field, message);
             });
           }
@@ -361,9 +361,7 @@ const useAddApplicant = () => {
           resumeUrl: result.resumeUrl,
         });
       }
-    } catch (err) {
-      console.log(err, "error getting applicant");
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -386,7 +384,7 @@ const useAddApplicant = () => {
           `/vacancies?paginate=false`,
           headerSettings
         );
-        console.log(response, "response");
+
         const types = response.results.map((option) => ({
           value: option.id,
           label: option.name,

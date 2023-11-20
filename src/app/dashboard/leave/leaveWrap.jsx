@@ -55,7 +55,7 @@ const LeaveWrap = () => {
             <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
               <Select
                 {...filterForm.getInputProps("status")}
-                data={["Pending", "Rejected", "Hired"]}
+                data={["Pending", "Rejected", "Approved"]}
                 size="md"
                 label="Status"
                 style={{ width: "100%" }}

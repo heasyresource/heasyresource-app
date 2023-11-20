@@ -31,7 +31,7 @@ const useVerification = () => {
   const handleRouteChange = async (payload) => {
     setRouteLoading(true);
     modals.closeAll();
-    console.log({ payload });
+
     const result = await signIn("user-token", {
       redirect: true,
       ...payload,
@@ -98,7 +98,7 @@ const useVerification = () => {
             token: JSON.stringify(token),
             user: JSON.stringify(user),
           };
-          console.log({ payload });
+
           setLoading(false);
           openModal(payload);
         }

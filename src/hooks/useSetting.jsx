@@ -251,7 +251,7 @@ const useSetting = () => {
       if (err.errors) {
         err.errors.forEach((error) => {
           const { field, message } = error;
-          console.log(field, message, "message");
+
           form.setFieldError(field, message);
         });
       }
@@ -325,7 +325,7 @@ const useSetting = () => {
         value: option.id,
         label: option.name,
       }));
-      console.log(country, "hook");
+
       setFields(industry);
       setCompanySize(size);
       setCountries(country);

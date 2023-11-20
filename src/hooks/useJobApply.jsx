@@ -2,24 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "@mantine/form";
 import useUploadDoc from "./useUploadDoc";
 import { apiClient } from "@/lib/interceptor/apiClient";
-import { useSession } from "next-auth/react";
 import { getSubdomain, normalizePhoneNumber } from "@/utils/publicFunctions";
 import { useParams, useRouter } from "next/navigation";
 import { successStyles } from "@/utils/notificationTheme";
 import { notifications } from "@mantine/notifications";
 
 const useJobApply = () => {
-  const router = useRouter()
-  const { data: session } = useSession();
+  const router = useRouter();
   const subdomain = getSubdomain();
-  const { handleUpload, response, error } = useUploadDoc();
+  const { handleUpload, response } = useUploadDoc();
   const [loading, setLoading] = useState(false);
   const [jobData, setJobData] = useState([]);
   const [countries, setCountries] = useState(null);
   const [states, setStates] = useState(null);
   const { slug } = useParams();
+  const [gettingData, setGettingData] = useState(true);
 
-   const form = useForm({
+  const form = useForm({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -55,7 +54,7 @@ const useJobApply = () => {
   };
   const handleContinue = async (data) => {
     try {
-      const resp = await apiClient.post(`/vacancies/${jobData?.id}/apply`, data, {
+      await apiClient.post(`/vacancies/${jobData?.id}/apply`, data, {
         headers: {
           "x-subdomain-name": subdomain,
         },
@@ -68,7 +67,7 @@ const useJobApply = () => {
         autoClose: 7000,
       });
       setLoading(false);
-      router.push("/careers")
+      router.push("/careers");
     } catch (err) {
       setLoading(false);
       if (err.errors) {
@@ -77,7 +76,6 @@ const useJobApply = () => {
 
           form.setFieldError(field, message);
         });
-        console.log(err, "Error submitting data");
       }
     }
   };
@@ -105,7 +103,9 @@ const useJobApply = () => {
       };
       handleContinue(modifiedValues);
     }
-  });
+
+    //eslint-disable-next-line
+  }, [response]);
   useEffect(() => {
     const fetchJobDetail = async () => {
       try {
@@ -116,16 +116,27 @@ const useJobApply = () => {
         });
         const jobDetail = response.result;
         setJobData(jobDetail);
-      
+        setGettingData(false);
       } catch (error) {
-        console.error({ error });
+        setGettingData(false);
       }
     };
     getMetadata();
     fetchJobDetail();
-  }, [slug, subdomain]);
 
-  return { form, handleSubmit, jobData, loading, router, countries, states };
+    //eslint-disable-next-line
+  }, []);
+
+  return {
+    gettingData,
+    form,
+    handleSubmit,
+    jobData,
+    loading,
+    router,
+    countries,
+    states,
+  };
 };
 
 export default useJobApply;

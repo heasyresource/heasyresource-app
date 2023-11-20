@@ -1,12 +1,28 @@
-"use client";
 import { Image, Container, Center, Text, Flex } from "@mantine/core";
 import classes from "../../../../components/JobListingsLayout/JobListings.module.css";
-import Logo from "../../../../components/JobListingsLayout/jobLogo.svg";
-import NextImage from "next/image";
-import useJobApply from "@/hooks/useJobApply";
-import PageWrap from "./PageWrap";
 
-export default function JobApply() {
+import PageWrap from "./PageWrap";
+import { getSubdomain } from "@/utils/publicFunctions";
+import { headers } from "next/headers";
+
+export default async function JobApply() {
+  let companyInfo = null;
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (subdomain) {
+    const getCompany = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`,
+      {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getCompanyData = await getCompany.json();
+    companyInfo = getCompanyData.results;
+  }
+
   return (
     <Container size={"100%"} bg={"#F8F9FA"} m={0}>
       <div className={classes.inner}>
@@ -14,10 +30,9 @@ export default function JobApply() {
           <Center maw={"100%"}>
             <Flex direction={"column"} align={"center"}>
               <Image
-                component={NextImage}
                 my={30}
                 w={80}
-                src={Logo}
+                src={companyInfo && companyInfo.logoUrl}
                 alt="Company Logo"
               />
               <Text fw={700} fz={30}>

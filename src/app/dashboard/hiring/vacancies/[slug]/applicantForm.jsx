@@ -172,7 +172,7 @@ const ApplicantForm = () => {
               <FileInput
                 required
                 disabled={loading}
-                label="Select File"
+                label="CV/Resume"
                 withAsterisk
                 placeholder="No file selected"
                 variant="filled"

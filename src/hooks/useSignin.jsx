@@ -35,9 +35,7 @@ const useSignin = () => {
         sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
         router.push("/verification");
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   // Form Submit Function
   const handleSignInSubmit = async (data) => {
@@ -47,7 +45,7 @@ const useSignin = () => {
       ...data,
       callbackUrl: "/dashboard",
     });
-    console.log({ result });
+
     if (result.status === 200) {
       notifications.show({
         color: "white",

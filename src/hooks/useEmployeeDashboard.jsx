@@ -29,7 +29,7 @@ const useEmployeeDashboard = () => {
         `/employees/${session.user.company.id}/employee/${session.user.id}`,
         headerSettings
       );
-      console.log(response, "response");
+
       setEmployee({
         position: response.results.employmentInfo.position,
       });

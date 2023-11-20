@@ -333,7 +333,7 @@ const HiringTable = ({
             <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
               <FileInput
                 required
-                label="Select File"
+                label="CV/Resume"
                 disabled={loading}
                 withAsterisk
                 placeholder="No file selected"

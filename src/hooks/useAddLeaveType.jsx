@@ -277,7 +277,6 @@ const useAddLeaveType = () => {
       setGettingData(false);
     } catch (err) {
       setGettingData(false);
-      console.log("");
     }
   };
   const getFilterOption = async () => {

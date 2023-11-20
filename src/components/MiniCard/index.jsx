@@ -33,7 +33,7 @@ function MiniCard({ height }) {
     <GridCol key={item.title} span={{ lg: 3, md: 3, sm: 6 }}>
       <Card
         className={classes.card}
-        style={{ width: "179px", height, borderRadius: "15px" }}
+        style={{ width: "100%", height, borderRadius: "15px" }}
         px="28"
         py="20"
         padding="xl"

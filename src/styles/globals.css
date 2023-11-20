@@ -89,9 +89,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-.mantine-DatePicker-levelsGroup {
-  max-width: 20rem;
-}
+
 .mantine-DateInput-levelsGroup {
   max-width: 15rem;
 }
@@ -120,6 +118,9 @@ body {
 .mantine-DatePicker-day[data-outside="true"],
 .mantine-DateInput-day[data-outside="true"] {
   color: #909296;
+}
+.mantine-DateInput-day[data-disabled="true"] {
+  color: #d3d3d3;
 }
 .mantine-DatePicker-day[data-selected="true"],
 .mantine-DateInput-day[data-selected="true"] {

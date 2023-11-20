@@ -93,7 +93,7 @@ const useCompleteReg = () => {
           <Text
             style={{ fontSize: "16px", color: "#1E1E1E", textAlign: "center" }}
           >
-            Congratulations! your submission will be processed within 24 hours.
+            Congratulations! you will get a mail when your company is approved.
           </Text>
           <Group mt="1rem" justify="center" align="center">
             <Button
@@ -126,7 +126,6 @@ const useCompleteReg = () => {
       }
     } catch (err) {
       setUploading(false);
-      console.log(err, "Error submitting");
     }
   };
   const handleCompletion = async (values) => {
@@ -155,7 +154,6 @@ const useCompleteReg = () => {
         openModal();
       }
       setUploading(false);
-      console.log(result, "complete registration");
     } catch (err) {
       setUploading(false);
       notifications.show({
@@ -207,9 +205,7 @@ const useCompleteReg = () => {
         },
       });
       setDepartmentTable(response?.results.data);
-    } catch (err) {
-      console.log(err, "Error getting department");
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     const getMetadata = async () => {
@@ -230,9 +226,7 @@ const useCompleteReg = () => {
         setCmpSize(modifiedOptions);
         setCountries(modifiedOptions2);
         setFields(modifiedOptions3);
-      } catch (err) {
-        console.log(err, "Error getting the metadata");
-      }
+      } catch (err) {}
     };
     const getCompany = async () => {
       try {
@@ -245,21 +239,27 @@ const useCompleteReg = () => {
           }
         );
         const results = response?.results;
-        if (results.subdomain !== null) {
-          // setIsSubmitted(true);
-          setLogo(results.logoUrl);
-          setIsRadioChecked(results.autoGenerateEmployeeId === 1);
-          getDepartments(results.subdomain);
-          form.setValues({
-            address: results.address,
-            emailDomain: results.emailDomain || "",
-            subdomain: results.subdomain,
-            autoGenerateEmployeeId:
-              results.autoGenerateEmployeeId === 1 ? "true" : "false",
-            countryId: results.country.id,
-            companySizeId: results.companySize.id,
-            employeeIdFormat: results.employeeIdFormat,
-          });
+
+        setLogo(results.logoUrl);
+        setIsRadioChecked(results.autoGenerateEmployeeId === 1);
+        getDepartments(results.subdomain);
+        form.setValues({
+          address: results.address,
+          emailDomain: results.emailDomain || "",
+          subdomain: results.subdomain,
+          autoGenerateEmployeeId:
+            results.autoGenerateEmployeeId === 1 ? "true" : "false",
+          countryId: results.country.id,
+          companySizeId: results.companySize.id,
+          employeeIdFormat: results.employeeIdFormat,
+        });
+        if (
+          results.isCompletedRegistration !== 1 ||
+          results.status === "Pending"
+        ) {
+          setIsSubmitted(true);
+        } else {
+          setIsSubmitted(false);
         }
       } catch (err) {}
     };

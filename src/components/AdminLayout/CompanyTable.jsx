@@ -2,7 +2,7 @@
 
 import { addHttps } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
-import { Badge, Text, rem } from "@mantine/core";
+import { Avatar, Badge, Flex, Text, rem } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
 
 const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
@@ -24,6 +24,21 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
               textAlign: "center",
 
               render: (record) => companies.indexOf(record) + 1,
+            },
+            {
+              accessor: "avatar",
+              title: "",
+              textAlign: "center",
+              width: "80px",
+              render: ({ logoUrl }) => (
+                <Flex justify="center" align="center">
+                  <Avatar
+                    size={26}
+                    src={logoUrl || "/assets/images/cmpLogo.png"}
+                    radius={26}
+                  />
+                </Flex>
+              ),
             },
             {
               accessor: "name",

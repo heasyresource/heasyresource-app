@@ -4,7 +4,6 @@ import "swiper/css";
 import {
   Box,
   Burger,
-  Button,
   Container,
   Drawer,
   Grid,
@@ -12,7 +11,6 @@ import {
   Group,
   Image,
   Stack,
-  Text,
 } from "@mantine/core";
 import Link from "next/link";
 import "../styles/landing.css";
@@ -76,7 +74,11 @@ export default function HomePage() {
           }}
         >
           <a href="/">
-            <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} alt="heasyresource-logo" />
+            <Image
+              src={"/assets/svgs/HRlogo.svg"}
+              style={{ width: "12rem" }}
+              alt="heasyresource-logo"
+            />
           </a>
           <Group gap={15} visibleFrom="xs">
             {items}
@@ -210,8 +212,8 @@ export default function HomePage() {
               className="progress_img"
             />
             <h2 className="progress_title">
-              <span>Seamlessly</span> guide your <span>team&apos;s growth</span> with
-              Heasy Resource HR, where progress management integrates for
+              <span>Seamlessly</span> guide your <span>team&apos;s growth</span>{" "}
+              with Heasy Resource HR, where progress management integrates for
               optimal HR efficiency.
             </h2>
           </Container>

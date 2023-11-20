@@ -16,7 +16,7 @@ import {
 } from "@mantine/core";
 import React, { useState } from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
-import { IconArrowUp } from "@tabler/icons-react";
+import { IconArrowUp, IconCloudDown } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
@@ -183,7 +183,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
               <FileInput
                 required
                 disabled={loading || !isEdit}
-                label="Select File"
+                label="CV/Resume"
                 withAsterisk
                 placeholder="No file selected"
                 variant="filled"
@@ -217,6 +217,24 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                   error: classes.error,
                 }}
               />
+            </GridCol>
+            <GridCol span={12}>
+              <Button
+                component="a"
+                target="_blank"
+                href={form?.values.resumeUrl}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                color="#3377FF"
+                size="md"
+                leftSection={<IconCloudDown />}
+                style={{
+                  backgroundColor: "#3377FF",
+                }}
+              >
+                Download resume
+              </Button>
             </GridCol>
           </Grid>
           <Group

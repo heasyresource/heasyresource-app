@@ -71,7 +71,7 @@ const VacancyWrap = () => {
             <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                label="Hiring Manager"
+                label="Job Title"
                 {...filterForm.getInputProps("search")}
                 style={{ width: "100%" }}
                 classNames={{

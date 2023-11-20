@@ -16,7 +16,6 @@ const useUploadDoc = () => {
         formData
       )
       .then((res) => {
-        console.log(res, "upload file");
         setResponse(res);
         setLoading(false);
       })

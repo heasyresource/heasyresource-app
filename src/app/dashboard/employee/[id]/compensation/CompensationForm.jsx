@@ -5,6 +5,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Loader,
   Select,
   Stack,
   Text,
@@ -12,14 +13,19 @@ import {
 } from "@mantine/core";
 import React from "react";
 import classes from "../../employee.module.css";
+import useCompensation from "@/hooks/useCompensation";
 
 const CompensationForm = () => {
+  const { form, handleSubmit, loading, router } = useCompensation();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
         Compensation
       </Text>
-      <form style={{ height: "100%", marginTop: "2rem" }}>
+      <form
+        style={{ height: "100%", marginTop: "2rem" }}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      >
         <Stack style={{ gap: "3rem" }}>
           <Box>
             <Text
@@ -27,7 +33,7 @@ const CompensationForm = () => {
               tt="capitalize"
               style={{ fontWeight: 500, fontSize: "18px", textAlign: "start" }}
             >
-              add salary component
+              add basic salary component
             </Text>
 
             <Grid style={{ marginTop: "20px" }} gutter="xl">
@@ -35,9 +41,12 @@ const CompensationForm = () => {
                 <TextInput
                   size="md"
                   withAsterisk
-                  label="Salary Component Title"
+                  type="number"
+                  label="Gross Salary"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
+                  {...form.getInputProps("grossSalary")}
+                  disabled={loading}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -47,7 +56,10 @@ const CompensationForm = () => {
                   label="Pay Frequency"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  data={[""]}
+                  data={["Monthly", "Weekly"]}
+                  {...form.getInputProps("frequency")}
+                  disabled={loading}
+                  allowDeselect={false}
                 />
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -57,36 +69,15 @@ const CompensationForm = () => {
                   label="Currency"
                   style={{ textAlign: "start", width: "100%" }}
                   classNames={{ label: classes.label, error: classes.error }}
-                  data={[""]}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Amount"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
-                />
-              </GridCol>
-              <GridCol span={{ lg: 8, md: 6, sm: 12 }}>
-                <TextInput
-                  size="md"
-                  withAsterisk
-                  label="Comment"
-                  style={{ textAlign: "start", width: "100%" }}
-                  classNames={{ label: classes.label, error: classes.error }}
+                  data={["NGN"]}
+                  allowDeselect={false}
+                  {...form.getInputProps("currency")}
                 />
               </GridCol>
             </Grid>
           </Box>
 
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
+          <Group justify="flex-end" align="center" mt={"auto"}>
             <Button
               variant="outline"
               size="md"
@@ -95,7 +86,8 @@ const CompensationForm = () => {
               tt="capitalize"
               px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
+              onClick={() => router.back()}
+              disabled={loading}
             >
               cancel
             </Button>
@@ -106,13 +98,17 @@ const CompensationForm = () => {
               tt="capitalize"
               px="30px"
               w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
               type="submit"
               style={{
                 backgroundColor: "#3377FF",
               }}
+              disabled={loading}
             >
-              save
+              {loading ? (
+                <Loader type="dots" color="white" size={"md"} />
+              ) : (
+                "save"
+              )}
             </Button>
           </Group>
         </Stack>

@@ -6,6 +6,8 @@ import classes from "./profileNav.module.css";
 import { Badge, Box, Divider, Stack, Text } from "@mantine/core";
 import { AddImage } from "..";
 import { obfuscateToken } from "@/utils/encryptToken";
+import SingleEmployeeUpload from "@/app/employee/components/SingleEmployeeUpload";
+import useProfileNav from "@/hooks/useProfileNav";
 
 const data = [
   { link: "/personal-detail", label: "personal Details" },
@@ -16,6 +18,7 @@ const data = [
   { link: "/compensation", label: "compensation" },
 ];
 const ProfileNav = ({ position, firstName, lastName, id, logoUrl }) => {
+  const { handleSubmit, uploading } = useProfileNav();
   const pathname = usePathname();
   const links = data.map((item) => (
     <Link
@@ -42,7 +45,12 @@ const ProfileNav = ({ position, firstName, lastName, id, logoUrl }) => {
             gap="10px"
             className={classes.navbarContent}
           >
-            <AddImage logoUrl={logoUrl} />
+            <SingleEmployeeUpload
+              uploading={uploading}
+              handleSubmit={handleSubmit}
+              logo={logoUrl}
+            />
+
             <Text
               tt="capitalize"
               ta="center"

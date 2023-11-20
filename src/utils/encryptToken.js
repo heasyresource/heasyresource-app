@@ -8,7 +8,6 @@ export const obfuscateToken = (mode, value) => {
         const decodingValue = atob(value);
         return decodingValue;
       } catch (error) {
-        console.error("Failed to decode the value:", error);
         return value;
       }
     }

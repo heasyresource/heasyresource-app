@@ -15,7 +15,7 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const SettingImg = ({ logo, uploading, handleSubmit }) => {
+const SingleEmployeeUpload = ({ logo, uploading, handleSubmit }) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -181,4 +181,4 @@ const SettingImg = ({ logo, uploading, handleSubmit }) => {
   );
 };
 
-export default SettingImg;
+export default SingleEmployeeUpload;

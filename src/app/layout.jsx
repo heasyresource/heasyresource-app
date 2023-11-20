@@ -20,7 +20,8 @@ export const metadata = {
     template: "%s | HeasyResource",
     default: "HeasyResource",
   },
-  description: "Hr Manangement System",
+  description:
+    "HeasyResource is an advanced HR management system that will revolutionize the way you handle your HR processes.",
 };
 
 export default async function RootLayout({ children }) {

@@ -78,7 +78,6 @@ const useSearch = () => {
       setGettingData(false);
     } catch (err) {
       setGettingData(false);
-      console.log(err, "Error getting employees");
     }
   };
   const getDepartments = async () => {

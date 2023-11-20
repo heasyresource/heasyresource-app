@@ -165,9 +165,7 @@ const useContact = () => {
       setCountries(country);
       setLgas(lga);
       setStates(state);
-    } catch (err) {
-      console.log(err, "Error getting the metadata");
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     if (form.values.stateId?.length !== 0) {

@@ -1,4 +1,3 @@
-"use client";
 import {
   Container,
   Center,
@@ -11,39 +10,42 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import classes from "../../components/JobListingsLayout/JobListings.module.css";
-import Logo from "../../components/JobListingsLayout/jobLogo.svg";
-import NextImage from "next/image";
-import {
-  IconBriefcase2,
-  IconBriefcaseOff,
-  IconMapPin,
-} from "@tabler/icons-react";
-import { useEffect, useState } from "react";
-import { apiClient } from "@/lib/interceptor/apiClient";
+
+import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
+
 import { getSubdomain } from "@/utils/publicFunctions";
 import Image from "next/image";
 
-export default function JobListings() {
-  const subdomain = getSubdomain();
-  const [jobsData, setJobsData] = useState([]);
+import { headers } from "next/headers";
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await apiClient.get("/vacancies/published/all", {
-          headers: {
-            "x-subdomain-name": subdomain,
-          },
-        });
-
-        const jobsData = response.results;
-        setJobsData(jobsData);
-      } catch (error) {
-        console.error(error);
+export default async function JobListings() {
+  let jobsData = null;
+  let companyInfo = null;
+  const headersList = headers();
+  const domain = headersList.get("host");
+  const subdomain = getSubdomain(domain);
+  if (subdomain) {
+    const getVacancies = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/vacancies/published/all`,
+      {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
       }
-    };
-    fetchJobs();
-  });
+    );
+    const getCompany = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`,
+      {
+        headers: {
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getCompanyData = await getCompany.json();
+    companyInfo = getCompanyData.results;
+    const getVacanciesData = await getVacancies.json();
+    jobsData = getVacanciesData.results;
+  }
 
   return (
     <Container size={"100%"} h={"100%"} p={0} bg={"#F8F9FA"} m={0}>
@@ -52,10 +54,9 @@ export default function JobListings() {
           <Center maw={"100%"}>
             <Flex direction={"column"} align={"center"}>
               <Image
-                component={NextImage}
-                my={30}
                 w={80}
-                src={Logo}
+                my={30}
+                src={companyInfo && companyInfo.logoUrl}
                 alt="Company Logo"
               />
               <Text fw={700} fz={30}>
@@ -66,10 +67,10 @@ export default function JobListings() {
               </Text>
             </Flex>
           </Center>
-          <Container size={"95%"} py={40}>
-            {jobsData.length >= 1 && (
-              <Stack gap={"xl"}>
-                {jobsData.map((jobData, index) => (
+          <Container size={"95%"} py={66}>
+            <Stack gap={"xl"}>
+              {jobsData &&
+                jobsData.map((jobData, index) => (
                   <UnstyledButton
                     key={index}
                     className={classes.job}
@@ -124,37 +125,7 @@ export default function JobListings() {
                     </Card>
                   </UnstyledButton>
                 ))}
-              </Stack>
-            )}
-
-            {jobsData.length === 0 && (
-              <>
-                <Group justify="center">
-                  <IconBriefcaseOff
-                    style={{
-                      color: "#EBEBEB",
-                    }}
-                    className={classes.notFound}
-                  />
-                </Group>
-                <Text fz={{ base: 20, sm: 32 }} ta={"center"} c={"#4D4D4D"}>
-                  Thank you for interest. Unfortunately, we are not hiring at
-                  this time.
-                </Text>
-                <Text
-                  pt={10}
-                  px={10}
-                  w={{ base: "100%", sm: "50%" }}
-                  fz={{ base: 15, sm: 20 }}
-                  ta={"center"}
-                  style={{ margin: "0px auto" }}
-                  c={"dimmed"}
-                >
-                  Please check back as we will most certainly be looking for
-                  great people to join our team in the future.
-                </Text>
-              </>
-            )}
+            </Stack>
           </Container>
         </div>
       </div>
