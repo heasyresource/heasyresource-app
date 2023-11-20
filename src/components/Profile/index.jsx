@@ -89,7 +89,7 @@ export default function Profile({ position, name }) {
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>
-          {session.user.role.name === "CompanyAdmin" && (
+          {session?.user.role.name === "CompanyAdmin" && (
             <Menu.Item
               leftSection={
                 <IconUser
@@ -100,7 +100,7 @@ export default function Profile({ position, name }) {
               Profile
             </Menu.Item>
           )}
-          {session.user.role.name === "CompanyAdmin" && (
+          {session?.user.role.name === "CompanyAdmin" && (
             <Link
               href={"/dashboard/settings"}
               style={{ width: "100%", textDecoration: "none" }}
