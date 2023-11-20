@@ -1,0 +1,95 @@
+.layout {
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+.individualWrap {
+  gap: 4rem;
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+}
+.btnLink {
+  background-color: #ebebeb;
+  color: #424242;
+  font-size: 13px;
+  font-weight: 600;
+
+  &[data-active] {
+    &,
+    &:hover {
+      background-color: #e7f7ff;
+    }
+  }
+}
+.activeConfig {
+  color: #424242;
+  &[data-active] {
+    &,
+    &:hover {
+      color: #3377ff;
+    }
+  }
+}
+.inputWrap {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem !important;
+  }
+}
+.formStack {
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+
+.placeholder {
+  font-size: 8px;
+}
+
+.label {
+  font-size: small;
+  color: #515151;
+}
+
+.wrapper {
+  background-color: #f1faff;
+}
+
+.editLabel {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+.content {
+  border-radius: 15px;
+}
+
+.input {
+  font-size: large;
+  font-weight: 500;
+}
+
+.section {
+  color: #424242;
+}
+
+.switchLabel {
+  font-size: 13px;
+  padding-bottom: 10px;
+  font-weight: 500;
+}
+.error {
+  font-size: 12px;
+}
+.btnWrap {
+  @media (max-width: 768px) {
+    margin-top: 2rem !important;
+    justify-content: space-between !important;
+  }
+}

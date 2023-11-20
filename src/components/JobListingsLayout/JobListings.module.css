@@ -1,0 +1,58 @@
+.inner {
+  background-color: #f8f9fa;
+}
+
+.content {
+  padding-top: 40px;
+}
+
+.label {
+  color: black;
+  font-size: 10px;
+}
+
+.icon {
+  color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+}
+
+.job {
+  @mixin hover {
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-8)
+    );
+  }
+}
+
+.controls {
+  margin-top: calc(var(--mantine-spacing-xl) * 2);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    margin-top: var(--mantine-spacing-xl);
+  }
+}
+
+.control {
+  height: rem(54px);
+  padding-left: rem(38px);
+  padding-right: rem(38px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: rem(54px);
+    padding-left: rem(18px);
+    padding-right: rem(18px);
+    flex: 1;
+  }
+}
+
+.notFound {
+  height: 200px;
+  width: 200px;
+}
+
+@media (max-width: 640px) {
+  .notFound {
+    height: 100px;
+    width: 100px;
+  }
+}

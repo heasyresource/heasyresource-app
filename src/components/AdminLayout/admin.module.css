@@ -1,0 +1,124 @@
+.container {
+  background-color: #f8f9fa;
+}
+
+.infoContainer {
+  /* height: 100%; */
+  padding: 0px !important;
+  background-color: #f8f9fa;
+}
+
+.generalInfo {
+  background-color: #ffff;
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+
+.generalInfoButton {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 5px;
+  }
+}
+
+.companyProfile {
+  background-color: #ffff;
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+
+.formWrap {
+  margin-top: 2rem;
+  @media (max-width: 768px) {
+    margin: 0px;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.label {
+  font-size: small;
+  color: #4d4d4d;
+}
+
+.error {
+  font-size: 12px;
+}
+
+.placeholder {
+  font-size: 8px;
+}
+
+.infoWrapper {
+  height: 2px;
+}
+
+.headerContent {
+  background-color: #ffff;
+}
+
+.input {
+  color: #111111;
+  font-size: 24px;
+}
+
+.active {
+  color: #27e408;
+  text-transform: capitalize;
+}
+
+.underReview {
+  color: #e5d311;
+  text-transform: capitalize;
+}
+
+.pending {
+  color: #aeaeae;
+  text-transform: capitalize;
+}
+
+.suspended {
+  color: #ff0000;
+  text-transform: capitalize;
+}
+
+.onHold {
+  color: #ff7a00;
+  text-transform: capitalize;
+}
+
+.card {
+  margin: 0px auto;
+
+  @media (max-width: 780px) {
+    width: 80% !important;
+  }
+
+  @media (max-width: 500px) {
+    width: 100% !important;
+    margin: 0px;
+  }
+}
+
+.content {
+  max-width: 100%;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  @media (max-width: 768px) {
+    /* Assuming $mantine-breakpoint-md is 768px */
+    max-width: 100%;
+    margin-right: 0;
+  }
+}
+
+.infoContent {
+  max-width: 100%;
+  @media (max-width: 768px) {
+    /* Assuming $mantine-breakpoint-md is 768px */
+    max-width: 100%;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,79 @@
+.layout {
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+.individualWrap {
+  gap: 4rem;
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+}
+.btnLink {
+  background-color: #ebebeb;
+  color: #424242;
+  font-size: 13px;
+  font-weight: 600;
+
+  &[data-active] {
+    &,
+    &:hover {
+      background-color: #e7f7ff;
+    }
+  }
+}
+.activeConfig {
+  color: #424242;
+  &[data-active] {
+    &,
+    &:hover {
+      color: #3377ff;
+    }
+  }
+}
+.inputWrap {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem !important;
+  }
+}
+.formStack {
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+.label {
+  font-size: small;
+}
+.error {
+  font-size: 12px;
+}
+.btnWrap {
+  margin-top: calc(var(--mantine-spacing-xl) * 2);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    margin-top: var(--mantine-spacing-xl);
+  }
+}
+
+.btn {
+  height: rem(54px);
+  padding-left: rem(38px);
+  padding-right: rem(38px);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: rem(54px);
+    padding-left: rem(18px);
+    padding-right: rem(18px);
+    flex: 1;
+  }
+}
+
+.mx {
+  margin: 0 40px;
+  @media (max-width: 768px) {
+    margin: 0 30px;
+  }
+}

@@ -1,0 +1,244 @@
+@import url("https://fonts.cdnfonts.com/css/satoshi");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+::-webkit-scrollbar {
+  width: 0;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Satoshi", sans-serif;
+}
+.mantine-TextInput-input:focus-within,
+.mantine-TextInput-input:focus,
+.mantine-Select-input:focus-within,
+.mantine-Select-input:focus,
+.mantine-PasswordInput-input:focus-within,
+.mantine-PasswordInput-input:focus,
+.mantine-PinInput-input:focus,
+.mantine-PinInput-input:focus {
+  --_input-bd: #3377ff !important;
+}
+.mantine-DatePicker-calendarHeader,
+.mantine-DateInput-calendarHeader {
+  display: flex;
+  width: 100%;
+  height: 2.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.mantine-DatePicker-calendarHeaderControl,
+.mantine-DateInput-calendarHeaderControl {
+  width: 2.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+  top: 10px;
+}
+.mantine-DatePicker-calendarHeaderControl svg[data-direction="previous"],
+.mantine-DateInput-calendarHeaderControl svg[data-direction="previous"] {
+  rotate: 90deg;
+}
+.mantine-DatePicker-calendarHeaderControl[data-direction="previous"],
+.mantine-DateInput-calendarHeaderControl[data-direction="previous"] {
+  right: 20px;
+}
+.mantine-DatePicker-calendarHeaderControl[data-direction="next"],
+.mantine-DateInput-calendarHeaderControl[data-direction="next"] {
+  right: 0;
+}
+.mantine-DatePicker-calendarHeaderControl svg[data-direction="next"],
+.mantine-DateInput-calendarHeaderControl svg[data-direction="next"] {
+  right: 0;
+  rotate: 270deg;
+}
+.mantine-DatePicker-calendarHeaderControl svg,
+.mantine-DateInput-calendarHeaderControl svg,
+.mantine-DatePicker-weekday,
+.mantine-DateInput-weekday {
+  color: #3377ff;
+}
+.mantine-DatePicker-day,
+.mantine-DatePicker-month,
+.mantine-DatePicker-weekday {
+  font-size: 14px !important;
+}
+.mantine-DatePicker-calendarHeaderLevel,
+.mantine-DateInput-calendarHeaderLevel {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mantine-DateInput-levelsGroup {
+  max-width: 15rem;
+}
+.mantine-DatePicker-month,
+.mantine-DatePicker-monthsList,
+.mantine-DatePicker-yearsList,
+.mantine-DateInput-month,
+.mantine-DateInput-monthsList,
+.mantine-DateInput-yearsList {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.mantine-DatePicker-day,
+.mantine-DatePicker-monthsListControl,
+.mantine-DatePicker-yearsListControl,
+.mantine-DateInput-day,
+.mantine-DateInput-monthsListControl,
+.mantine-DateInput-yearsListControl {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 31px;
+}
+.mantine-DatePicker-day[data-outside="true"],
+.mantine-DateInput-day[data-outside="true"] {
+  color: #909296;
+}
+.mantine-DateInput-day[data-disabled="true"] {
+  color: #d3d3d3;
+}
+.mantine-DatePicker-day[data-selected="true"],
+.mantine-DateInput-day[data-selected="true"] {
+  background-color: #3377ff !important;
+  color: #fff !important;
+}
+.mantine-DatePicker-day[data-first-in-range="true"] {
+  border-radius: 10px 0px 0px 10px !important;
+}
+.mantine-DatePicker-day[data-last-in-range="true"] {
+  border-radius: 0px 10px 10px 0px !important;
+}
+.mantine-DatePicker-day[data-in-range="true"] {
+  background-color: #3377ff24;
+}
+.mantine-DatePicker-day[data-weekend="true"],
+.mantine-DateInput-day[data-weekend="true"] {
+  color: #fa5252;
+}
+
+.mantine-FileInput-wrapper[data-with-right-section="true"]
+  div[data-position="left"] {
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+/* .mantine-FileInput-wrapper[data-with-right-section="true"],
+.mantine-FileInput-input {
+  @media (max-width: 500px) {
+    padding-left: 15px !important;
+  }
+} */
+.mantine-datatable-table {
+  background: none;
+  border-collapse: separate !important;
+  border-spacing: 0 15px;
+}
+.mantine-Table-tr {
+  background-color: #fff !important;
+  height: 60px !important;
+}
+.mantine-datatable-header th {
+  border-bottom: none;
+}
+.mantine-datatable-table td {
+  font-size: 15px !important;
+}
+.mantine-datatable-pagination-pages-control[data-active="true"] {
+  background-color: #3377ff !important;
+}
+.mantine-datatable-scroll-area-thumb {
+  background-color: #3377ff !important;
+}
+.mantine-datatable-header
+  .mantine-Table-tr:first-child
+  .mantine-Table-th:first-child {
+  border-top-left-radius: 50px;
+
+  border-bottom-left-radius: 50px;
+}
+.mantine-datatable-header
+  .mantine-Table-tr:last-child
+  .mantine-Table-th:last-child {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.mantine-Table-tr .mantine-Table-td:first-child {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.mantine-Table-tr .mantine-Table-td:last-child {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+/* .mantine-Textarea-wrapper {
+  height: 200px;
+} */
+body .mantine-Textarea-wrapper textarea {
+  height: 100% !important;
+}
+.mantine-Textarea-input {
+  height: 100% !important;
+}
+.mantine-InputPlaceholder-placeholder {
+  font-size: 14px;
+  white-space: nowrap;
+}
+.mantine-Stepper-steps {
+  margin-top: 2rem !important;
+  @media (max-width: 500px) {
+    margin-top: 1.25rem !important;
+  }
+}
+.mantine-RichTextEditor-toolbar {
+  position: relative !important;
+  top: auto !important;
+}
+.mantine-RichTextEditor-content {
+  min-height: 7rem;
+}
+.mantine-RichTextEditor-typographyStylesProvider {
+  margin: 0;
+  padding: 0;
+}
+.mantine-Modal-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+.add-image {
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+}
+.add-icon {
+  right: 20px;
+  bottom: 0;
+  @media (max-width: 768px) {
+    right: 10px;
+  }
+}

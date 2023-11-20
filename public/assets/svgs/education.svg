@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" id="school-accent-4-on-dark">
+  <path fill="#38434f" d="M0 0h128v128H0z"/>
+  <circle cx="40" cy="88" r="24" fill="#788fa5"/>
+  <circle cx="72" cy="56" r="40" fill="#9db3c8"/>
+  <path fill="none" d="M0 0h128v128H0z"/>
+  <path d="M40 64a24.12 24.12 0 00-6.94 1A40 40 0 0063 94.94 24 24 0 0040 64z" fill="#56687a"/>
+</svg>

@@ -1,0 +1,84 @@
+.flexWrap {
+  @media (max-width: 768px) {
+    display: none;
+    flex-wrap: nowrap;
+  }
+}
+.cardType:hover {
+  box-shadow: 1px 1px 2px 0px #3377ff;
+}
+.employeeIndividual {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+  }
+}
+
+.btnWrap {
+  margin-top: 4rem !important;
+  @media (max-width: 768px) {
+    justify-content: space-between;
+    margin-top: 2rem !important;
+  }
+}
+
+.layout {
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+.individualWrap {
+  gap: 4rem;
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+}
+.btnLink {
+  background-color: #ebebeb;
+  color: #424242;
+  font-size: 13px;
+  font-weight: 600;
+
+  &[data-active] {
+    &,
+    &:hover {
+      background-color: #e7f7ff;
+    }
+  }
+}
+.activeConfig {
+  color: #424242;
+  &[data-active] {
+    &,
+    &:hover {
+      color: #3377ff;
+    }
+  }
+}
+.inputWrap {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem !important;
+  }
+}
+.formStack {
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+}
+.label {
+  font-size: small;
+}
+.error {
+  font-size: 12px;
+}
+
+.mx {
+  margin: 0 40px;
+  @media (max-width: 768px) {
+    margin: 0 30px;
+  }
+}
