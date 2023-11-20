@@ -32,7 +32,6 @@ function CompensationMiniCards({ height }) {
         mah={155}
         px="28"
         h={'100%'}
-        // py="auto"
         bg="var(--mantine-color-body)"
       >
         <Text style={{ color: "#7EA6F4" }} fz="sm" fw={700}>

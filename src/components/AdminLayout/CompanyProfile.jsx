@@ -21,7 +21,6 @@ const CompanyProfile = () => {
               style={{ width: "100%" }}
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -36,7 +35,6 @@ const CompanyProfile = () => {
               placeholder="Amope"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -51,7 +49,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -65,7 +62,6 @@ const CompanyProfile = () => {
               style={{ width: "100%" }}
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -80,7 +76,6 @@ const CompanyProfile = () => {
               placeholder="Amope"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -95,7 +90,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -110,7 +104,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -124,7 +117,6 @@ const CompanyProfile = () => {
               style={{ width: "100%" }}
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -139,7 +131,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -154,7 +145,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -169,7 +159,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}
@@ -184,7 +173,6 @@ const CompanyProfile = () => {
               placeholder="Adeshewa"
               classNames={{
                 label: classes.label,
-                //   input: classes.input,
                 error: classes.error,
                 placeholder: classes.placeholder,
               }}

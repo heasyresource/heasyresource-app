@@ -1,22 +1,11 @@
 "use client";
 
-import { CompanyList, addHttps } from "@/utils/publicFunctions";
+import { addHttps } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import classes from "../../components/AdminLayout/admin.module.css";
 import { Badge, Text, rem } from "@mantine/core";
-import { usePathname } from "next/navigation";
-import { clsx } from "clsx";
 import { IconLink } from "@tabler/icons-react";
 
-const PAGE_SIZE = 10;
 const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [records, setRecords] = useState(CompanyList.slice(0, PAGE_SIZE));
-
   return (
     <>
       {companies?.length !== 0 && (
@@ -140,52 +129,6 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
                 </Badge>
               ),
             },
-            //   {
-            //     accessor: "actions",
-            //     title: "Actions",
-            //     width: "135px",
-            //     textAlign: "center",
-            //     render: () => (
-            //       <Flex justify="center" align="center">
-            //         <ActionIcon
-            //           variant="transparent"
-            //           // color="#84ADFF"
-            //           radius="lg"
-            //           component="a"
-            //           href="/dashboard/hiring/application-phase"
-            //         >
-            //           <IconEye
-            //             style={{ width: "70%", height: "70%" }}
-            //             stroke={1.5}
-            //           />
-            //         </ActionIcon>
-            //         <ActionIcon
-            //           variant="transparent"
-            //           color="#FF7A00"
-            //           onClick={() => setNoTransitionOpened(true)}
-            //           radius="lg"
-            //           style={{ marginLeft: "10px" }}
-            //         >
-            //           <IconTrash
-            //             style={{ width: "70%", height: "70%" }}
-            //             stroke={1.5}
-            //           />
-            //         </ActionIcon>
-            //         <ActionIcon
-            //           variant="transparent"
-            //             color="#43D72B"
-            //           onClick={() => setNoTransitionOpened1(true)}
-            //           radius="lg"
-            //           style={{ marginLeft: "10px" }}
-            //         >
-            //           <IconDownload
-            //             style={{ width: "70%", height: "70%" }}
-            //             stroke={1.5}
-            //           />
-            //         </ActionIcon>
-            //       </Flex>
-            //     ),
-            //   },
           ]}
           totalRecords={pagination?.total}
           recordsPerPage={pagination?.perPage}

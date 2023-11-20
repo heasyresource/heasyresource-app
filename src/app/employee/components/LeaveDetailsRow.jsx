@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, Grid, GridCol, Group, Text } from "@mantine/core";
+import { Card, GridCol, Group, Text } from "@mantine/core";
 import classes from "../leave/leave.module.css";
 
 const data = [
@@ -33,7 +33,6 @@ function LeaveDetailsRow({ height }) {
         style={{ minwidth: "250px" }}
         mah={155}
         h={"100%"}
-        // bg="var(--mantine-color-body)"
       >
         <Text style={{ color: "#7EA6F4" }} fz="sm" fw={700}>
           {item.title}

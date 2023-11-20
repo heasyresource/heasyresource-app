@@ -1,9 +1,8 @@
 "use client";
-import { Group, AppShell, Text, ActionIcon, Box, Image } from "@mantine/core";
+import { Group, AppShell, Text, Image } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import cx from "clsx";
 import classes from "./dashboard.module.css";
-import { IconBell, IconMessageDots } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import Main from "./components/Main";
@@ -61,22 +60,6 @@ const Layout = ({ children }) => {
               {companyName}
             </Text>
           </Group>
-          {/* <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconBell color="black" />
-          </ActionIcon>
-          <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconMessageDots color="black" />
-          </ActionIcon> */}
           <EmployeeProfile logo={logo} />
         </Group>
       </AppShell.Header>

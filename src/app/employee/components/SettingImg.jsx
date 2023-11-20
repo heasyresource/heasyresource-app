@@ -15,7 +15,7 @@ import { IconPlus, IconUpload } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 
-const SettingImg = ({ setLogo, logo, loading, uploading, handleSubmit }) => {
+const SettingImg = ({ logo, loading, uploading, handleSubmit }) => {
   const [imgs, setImgs] = useState([]);
   const [imgUrl, setImgUrl] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
@@ -147,7 +147,6 @@ const SettingImg = ({ setLogo, logo, loading, uploading, handleSubmit }) => {
                           setImgUrl(image.dataURL);
                           close();
                           handleSubmit(imgs);
-                          //   setLogo(imgs);
                         }}
                         style={{
                           backgroundColor: "#3377FF",

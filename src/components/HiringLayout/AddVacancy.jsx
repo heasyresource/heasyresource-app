@@ -1,9 +1,7 @@
 "use client";
 import {
-  ActionIcon,
   Box,
   Button,
-  FileInput,
   Flex,
   Grid,
   GridCol,
@@ -38,7 +36,6 @@ const AddVacancy = () => {
         <Stack gap={"1.5rem"}>
           <Grid
             gutter="lg"
-            // justify="space-between"
             className={classes.formWrap}
           >
             <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>

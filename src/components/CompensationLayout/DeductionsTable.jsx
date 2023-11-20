@@ -6,13 +6,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ActionIcon, Badge, Flex } from "@mantine/core";
 import { usePathname } from "next/navigation";
-import { clsx } from "clsx";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 const PAGE_SIZE = 10;
 const DeductionsTable = ({ openEditModal }) => {
-  const pathname = usePathname();
-  const router = useRouter();
   const [page, setPage] = useState(1);
   const [records, setRecords] = useState(DeductionsList.slice(0, PAGE_SIZE));
 
@@ -58,7 +55,6 @@ const DeductionsTable = ({ openEditModal }) => {
               <Flex justify="center" align="center">
                 <ActionIcon
                   variant="transparent"
-                  // color="#84ADFF"
                   onClick={openEditModal}
                   radius="lg"
                 >

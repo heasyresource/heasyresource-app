@@ -37,8 +37,6 @@ const useVerification = () => {
       ...payload,
       callbackUrl: "/complete-registration",
     });
-
-    // router.push(result.url);
   };
   const openModal = (payload) =>
     modals.open({
@@ -120,10 +118,10 @@ const useVerification = () => {
           email: email,
           resetPasswordCode: data.verificationCode,
         };
-        sessionStorage.setItem("resetPasswordCode", obfuscateToken(
-          true,
-          JSON.stringify(values)
-        ))
+        sessionStorage.setItem(
+          "resetPasswordCode",
+          obfuscateToken(true, JSON.stringify(values))
+        );
         router.push("/new-password");
       }
     } catch (err) {

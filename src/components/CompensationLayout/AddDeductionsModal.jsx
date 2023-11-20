@@ -6,19 +6,14 @@ import {
   GridCol,
   Group,
   Modal,
-  Select,
-  Stack,
-  Switch,
   Text,
   TextInput,
-  Textarea,
 } from "@mantine/core";
 import React, { useState } from "react";
 import classes from "../HiringLayout/HiringLayout.module.css";
 import { useAssignLeave } from "@/hooks";
 
 const AddDeductionsModal = ({ isOpen, onClose }) => {
-  const [value, setValue] = useState([]);
   const { form, handleSubmit } = useAssignLeave();
 
   return (
@@ -62,7 +57,6 @@ const AddDeductionsModal = ({ isOpen, onClose }) => {
                   required
                   label="Unit Amount"
                   style={{ width: "100%" }}
-                  //   placeholder="2.8%"
                   data={["Gbemisola Adebiyi"]}
                   classNames={{
                     label: classes.label,

@@ -5,7 +5,6 @@ export const config = {
 };
 
 import { getToken } from "next-auth/jwt";
-import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import { getSubdomain } from "./utils/publicFunctions";
 
@@ -58,10 +57,4 @@ export default async function middleware(req, res) {
   if (req.nextUrl.pathname.startsWith("/dashboard") && isAuthenticated && token.company.isActive === 0) {
     return NextResponse.redirect(new URL("/complete-registration", req.url));
   }
-
-  // return await withAuth(req, {
-  //   pages: {
-  //     signIn: "/signin",
-  //   },
-  // });
 }
