@@ -95,9 +95,7 @@ const useIndividual = () => {
         label: option.name,
       }));
       setFields(modifiedOptions);
-    } catch (err) {
-      console.log(err, "Error getting the department field");
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     if (response?.status === 200 || response?.status === 201) {

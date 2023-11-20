@@ -19,10 +19,7 @@ const useEmployeeCompensation = () => {
   });
   const handleSubmit = async (data) => {
     try {
-      console.log(data, "value");
-    } catch (err) {
-      console.log(err, "Error");
-    }
+    } catch (err) {}
   };
   return {
     handleSubmit,

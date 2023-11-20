@@ -87,9 +87,7 @@ const useResetPassword = () => {
         sessionStorage.setItem("mailAdress", obfuscateToken(true, data.email));
         router.push("/verification");
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const handleFormSubmit = async (data) => {
     setLoading(true);
@@ -138,7 +136,7 @@ const useResetPassword = () => {
         if (err.errors) {
           err.errors.forEach((error) => {
             const { field, message } = error;
-            console.log(field, message, "message");
+
             form.setFieldError(field, message);
           });
         }

@@ -216,9 +216,7 @@ const useHiring = () => {
         label: item.name,
       }));
       setCategories(category);
-    } catch (err) {
-      console.log(err, "error getting category");
-    }
+    } catch (err) {}
   };
   const getVacancy = async (params = "") => {
     if (searchParams.get("page")) {

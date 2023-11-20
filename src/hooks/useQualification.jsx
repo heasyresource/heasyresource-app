@@ -428,9 +428,7 @@ const useQualification = () => {
         label: option.name,
       }));
       setEmploymentTypes(type);
-    } catch (err) {
-      console.log(err, "Error getting the metadata");
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     if (isChanged !== null) {
