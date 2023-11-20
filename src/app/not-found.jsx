@@ -35,7 +35,7 @@ export default async function NotFound() {
           component={NextImage}
           my={30}
           className={styles.image}
-          src={"/assets/png/404.png"}
+          src={"/assets/images/404.png"}
           alt="not found image"
         />
       </div>
