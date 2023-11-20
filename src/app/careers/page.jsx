@@ -16,17 +16,12 @@ import NextImage from "next/image";
 import {
   IconBriefcase2,
   IconBriefcaseOff,
-  IconFileOff,
   IconMapPin,
-  IconMoodEmpty,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { getSubdomain } from "@/utils/publicFunctions";
-import { IconMoodEmptyFilled } from "@tabler/icons-react";
-import sadMood from "./mood-empty-filled.svg";
 import Image from "next/image";
-import { IconError404 } from "@tabler/icons-react";
 
 export default function JobListings() {
   const subdomain = getSubdomain();
