@@ -10,6 +10,7 @@ import {
   Grid,
   GridCol,
   Group,
+  Image,
   Paper,
   Space,
   Text,
@@ -83,10 +84,7 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
         </Text>
       </div>
       <Grid justify="space-around" align="stretch" gutter={"xl"}>
-        <GridCol
-          bg="#"
-          span={{ lg: leaves && leaves.length !== 0 ? 8 : 12, md: 12, sm: 12 }}
-        >
+        <GridCol bg="#" span={{ lg: 8, md: 12, sm: 12 }}>
           <Box p="0px">
             <Box mt="39">
               <Grid gutter={"lg"}>
@@ -290,31 +288,27 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
             )}
           </Box>
         </GridCol>
-        {leaves && leaves.length !== 0 && (
-          <GridCol span={{ lg: 4, md: 12, sm: 12 }}>
-            <Box
-              style={{
-                background: "#fff",
-                height: "100%",
-                padding: "15px 0",
-                borderRadius: "15px",
-              }}
-            >
-              <Group
-                justify={"space-between"}
-                align="center"
-                mb={"md"}
-                px={"sm"}
-              >
-                <Text style={{ fontSize: "18px", fontWeight: 500 }}>
-                  Pending Requests
-                </Text>
-                <Link href={"/dashboard/leave"}>
-                  <Button size="sm" variant="subtle" color="#3377FF">
-                    View all
-                  </Button>
-                </Link>
-              </Group>
+
+        <GridCol span={{ lg: 4, md: 12, sm: 12 }}>
+          <Box
+            style={{
+              background: "#fff",
+              height: "100%",
+              padding: "15px 0",
+              borderRadius: "15px",
+            }}
+          >
+            <Group justify={"space-between"} align="center" mb={"md"} px={"sm"}>
+              <Text style={{ fontSize: "18px", fontWeight: 500 }}>
+                Pending Requests
+              </Text>
+              <Link href={"/dashboard/leave"}>
+                <Button size="sm" variant="subtle" color="#3377FF">
+                  View all
+                </Button>
+              </Link>
+            </Group>
+            {leaves && leaves.length !== 0 ? (
               <DataTable
                 height={"100%"}
                 style={{ background: "none" }}
@@ -367,9 +361,27 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                   },
                 ]}
               />
-            </Box>
-          </GridCol>
-        )}
+            ) : (
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  height: "100%",
+                  marginTop: "100px",
+                  flexDirection: "column",
+                }}
+              >
+                <Image
+                  src={"/assets/svgs/empty.svg"}
+                  alt="empty"
+                  style={{ width: "100px" }}
+                />
+                <Text>No pending request yet</Text>
+              </Box>
+            )}
+          </Box>
+        </GridCol>
       </Grid>
     </Box>
   );
