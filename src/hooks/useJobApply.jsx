@@ -103,6 +103,8 @@ const useJobApply = () => {
       };
       handleContinue(modifiedValues);
     }
+
+    //eslint-disable-next-line
   }, [response]);
   useEffect(() => {
     const fetchJobDetail = async () => {
@@ -121,6 +123,8 @@ const useJobApply = () => {
     };
     getMetadata();
     fetchJobDetail();
+
+    //eslint-disable-next-line
   }, []);
 
   return {

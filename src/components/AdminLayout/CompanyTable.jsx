@@ -2,7 +2,7 @@
 
 import { addHttps } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
-import { Badge, Text, rem } from "@mantine/core";
+import { Avatar, Badge, Flex, Text, rem } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
 
 const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
