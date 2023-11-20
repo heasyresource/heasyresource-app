@@ -17,7 +17,6 @@ import {
 import Link from "next/link";
 import "../styles/landing.css";
 import { useDisclosure } from "@mantine/hooks";
-import SmoothScrollLink from "./SmoothScrollLink";
 
 const links = [
   { link: "#pricing", label: "Pricing" },
@@ -76,7 +75,9 @@ export default function HomePage() {
             padding: "20px",
           }}
         >
-          <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} alt="heasyresource-logo" />
+          <a href="/">
+            <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} alt="heasyresource-logo" />
+          </a>
           <Group gap={15} visibleFrom="xs">
             {items}
           </Group>
@@ -111,10 +112,10 @@ export default function HomePage() {
                   Resource.
                 </p>
                 <div className="home_btn">
-                  <a href="#" className="btn">
+                  <Link href="/signup" className="btn">
                     Get Started
-                  </a>
-                  <a href="/signup" className="btn btn_outline">
+                  </Link>
+                  <a href="#contact" className="btn btn_outline">
                     Let&apos;s Talk<i className="fa-solid fa-envelope"></i>
                   </a>
                 </div>

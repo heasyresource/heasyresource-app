@@ -3,7 +3,6 @@ import { getSubdomain } from "@/utils/publicFunctions";
 import styles from "./not-found.module.css";
 import Image from "next/image";
 import NextImage from "next/image";
-import notFound from "./undraw_Page_not_found_re_e9o6.png";
 import { Button } from "@mantine/core";
 
 export default async function NotFound() {
@@ -74,7 +73,7 @@ export default async function NotFound() {
           component={NextImage}
           my={30}
           className={styles.image}
-          src={notFound}
+          src={"/assets/png/404.png"}
           alt="not found image"
         />
       </div>
