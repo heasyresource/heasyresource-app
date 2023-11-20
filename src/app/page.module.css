@@ -1,7 +1,7 @@
 :root {
   /* --------- color ----------------- */
-  --brand-color: #3568d4;
-  --brand-color-alternate: #3377ff;
+  --brand-color: #3377ff;
+  --brand-color-alternate:  #3568d4;
   --light-brand-color: #d6e4ff;
   --second-brand-color: #ff7a00;
   --light-second-brand-color: #ffe4cc;
@@ -426,8 +426,9 @@
 }
 .price_description {
   font-size: var(--paragraph-font-size);
+  font-weight: 700;
   color: var(--dark-grey-color);
-  margin: 10px 0 24px;
+  margin: 10px 0 15px;
 }
 .price_attribute {
   color: var(--light-grey-color);

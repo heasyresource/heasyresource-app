@@ -1,15 +1,9 @@
 .inner {
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
 }
 
 .content {
-  /* max-width: rem(480px);
-    margin-right: calc(var(--mantine-spacing-xl) * 3);
-  
-    @media (max-width: $mantine-breakpoint-md) {
-      max-width: 100%;
-      margin-right: 0;
-    } */
+  padding-top: 40px;
 }
 
 .label {
@@ -48,5 +42,17 @@
     padding-left: rem(18px);
     padding-right: rem(18px);
     flex: 1;
+  }
+}
+
+.notFound {
+  height: 200px;
+  width: 200px;
+}
+
+@media (max-width: 640px) {
+  .notFound {
+    height: 100px;
+    width: 100px;
   }
 }

@@ -4,6 +4,7 @@ import "swiper/css";
 import {
   Box,
   Burger,
+  Button,
   Container,
   Drawer,
   Grid,
@@ -18,10 +19,18 @@ import "../styles/landing.css";
 import { useDisclosure } from "@mantine/hooks";
 
 const links = [
-  { link: "/", label: "Company" },
-  { link: "/", label: "Resources" },
-  { link: "/", label: "Pricing" },
-  { link: "/", label: "Contact" },
+  { link: "#pricing", label: "Pricing" },
+  { link: "#about-us", label: "About Us" },
+  { link: "#contact", label: "Contact" },
+  {
+    link: "/signup",
+    label: "Sign Up",
+    bg: "#3377ff",
+    borderRd: "6px",
+    textColor: "#ffff",
+    hoverClass: "hoverBg",
+    padding: "12px 30px",
+  },
 ];
 
 export default function HomePage() {
@@ -30,12 +39,15 @@ export default function HomePage() {
     <Link
       key={link.label}
       href={link.link}
-      className="px-[12px] py-[8px]"
+      className={`px-[12px] py-[8px] ${link.hoverClass}`}
       style={{
         textDecoration: "none",
-        color: "#A3A3A3",
+        color: link.textColor ? link.textColor : "#A3A3A3",
         padding: "8px 12px",
         fontSize: "15px",
+        backgroundColor: link.bg,
+        borderRadius: link.borderRd,
+        padding: link.padding,
       }}
     >
       {link.label}
@@ -63,8 +75,10 @@ export default function HomePage() {
             padding: "20px",
           }}
         >
-          <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} />
-          <Group gap={5} visibleFrom="xs">
+          <a href="/">
+            <Image src={"/assets/svgs/HRlogo.svg"} style={{ width: "12rem" }} alt="heasyresource-logo" />
+          </a>
+          <Group gap={15} visibleFrom="xs">
             {items}
           </Group>
 
@@ -88,20 +102,20 @@ export default function HomePage() {
             <div className="home_data">
               <div className="home_caption">
                 <h1 className="home_title">
-                  <span>Unlock</span> Your <span>Potential</span> with Heasy
-                  Resource HR
+                  <span>Streamline</span> Your <span>Workplace </span> Dynamics
+                  with Heasy Resource HR
                 </h1>
                 <p className="home_description">
-                  At Heasy Resource, we believe that our people are our greatest
-                  asset. We are dedicated to nurturing talent, fostering growth,
-                  and building a workplace that thrives on innovation,
-                  diversity, and inclusivity.
+                  Empower efficiency, foster growth, and create a dynamic
+                  workplace through our innovative HR management solution.
+                  Unlock the true potential of your workforce with Heasy
+                  Resource.
                 </p>
                 <div className="home_btn">
-                  <a href="#" className="btn">
+                  <Link href="/signup" className="btn">
                     Get Started
-                  </a>
-                  <a href="#" className="btn btn_outline">
+                  </Link>
+                  <a href="#contact" className="btn btn_outline">
                     Let&apos;s Talk<i className="fa-solid fa-envelope"></i>
                   </a>
                 </div>
@@ -196,14 +210,15 @@ export default function HomePage() {
               className="progress_img"
             />
             <h2 className="progress_title">
-              Your <span>Progress</span> Management is <span>Made Easy</span>{" "}
-              with Heasy Resource HR
+              <span>Seamlessly</span> guide your <span>team&apos;s growth</span> with
+              Heasy Resource HR, where progress management integrates for
+              optimal HR efficiency.
             </h2>
           </Container>
         </section>
 
         {/* <!-- ===================== WHY US SECTION ========= --> */}
-        <section className="whyus section">
+        <section className="whyus section" id="about-us">
           <Container size={"xl"}>
             <div className="section_header">
               <div className="section_title_wrapper">
@@ -391,117 +406,109 @@ export default function HomePage() {
             <Grid>
               <GridCol span={{ lg: 3, md: 4, sm: 12 }}>
                 <div className="price_card">
-                  <h4 className="price_type">Intro</h4>
+                  <h4 className="price_type">Small</h4>
                   <h3 className="price">
-                    $19<span>/Month</span>
+                    $19<span>/Year</span>
                   </h3>
-                  <p className="price_description">
-                    For most businesses that wants to optimize web queries
+                  <p className="price_description">Features</p>
+                  <p className="price_attribute">
+                    <span></span> Employee Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All limited links
+                    <span></span> Payroll
                   </p>
                   <p className="price_attribute">
-                    <span></span> Own analistic platform
+                    <span></span> Leave Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Hiring
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Analytics
                   </p>
-                  <p className="price_attribute">
-                    <span></span> All limited links
-                  </p>
-                  <a href="@" className="btn price_button">
-                    Choose Plan
+                  <a href="/signup" className="btn price_button">
+                    Get Started
                   </a>
                 </div>
               </GridCol>
               <GridCol span={{ lg: 3, md: 4, sm: 12 }}>
                 <div className="price_card">
-                  <h4 className="price_type">Base</h4>
+                  <h4 className="price_type">Medium</h4>
                   <h3 className="price">
-                    $39<span>/Month</span>
+                    $39<span>/Year</span>
                   </h3>
-                  <p className="price_description">
-                    For most businesses that wants to optimize web queries
+                  <p className="price_description">Features</p>
+                  <p className="price_attribute">
+                    <span></span>Employee Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All limited links
+                    <span></span> Payroll
                   </p>
                   <p className="price_attribute">
-                    <span></span> Own analistic platform
+                    <span></span> Leave Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Hiring
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Analytics
                   </p>
-                  <p className="price_attribute">
-                    <span></span> All limited links
-                  </p>
-                  <a href="@" className="btn price_button">
-                    Choose Plan
+                  <a href="/signup" className="btn price_button">
+                    Get Started
                   </a>
                 </div>
               </GridCol>
               <GridCol span={{ lg: 3, md: 4, sm: 12 }}>
                 <div className="price_card">
-                  <h4 className="price_type">Popular</h4>
+                  <h4 className="price_type">Large</h4>
                   <h3 className="price">
-                    $99<span>/Month</span>
+                    $99<span>/Year</span>
                   </h3>
-                  <p className="price_description">
-                    For most businesses that wants to optimize web queries
+                  <p className="price_description">Features</p>
+                  <p className="price_attribute">
+                    <span></span> Employee Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All limited links
+                    <span></span> Payroll
                   </p>
                   <p className="price_attribute">
-                    <span></span> Own analistic platform
+                    <span></span> Leave Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Hiring
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Analytics
                   </p>
-                  <p className="price_attribute">
-                    <span></span> All limited links
-                  </p>
-                  <a href="@" className="btn price_button">
-                    Choose Plan
+                  <a href="/signup" className="btn price_button">
+                    Get Started
                   </a>
                 </div>
               </GridCol>
               <GridCol span={{ lg: 3, md: 4, sm: 12 }}>
                 <div className="price_card">
-                  <h4 className="price_type">Unlimited</h4>
+                  <h4 className="price_type">Giant</h4>
                   <h3 className="price">
-                    $199<span>/Month</span>
+                    $199<span>/Year</span>
                   </h3>
-                  <p className="price_description">
-                    For most businesses that wants to optimize web queries
+                  <p className="price_description">Features</p>
+                  <p className="price_attribute">
+                    <span></span> Employee Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All limited links
+                    <span></span> Payroll
                   </p>
                   <p className="price_attribute">
-                    <span></span> Own analistic platform
+                    <span></span> Leave Management
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Hiring
                   </p>
                   <p className="price_attribute">
-                    <span></span> All Limited Links
+                    <span></span> Analytics
                   </p>
-                  <p className="price_attribute">
-                    <span></span> All limited links
-                  </p>
-                  <a href="@" className="btn price_button">
-                    Choose Plan
+                  <a href="/signup" className="btn price_button">
+                    Get Started
                   </a>
                 </div>
               </GridCol>
@@ -535,9 +542,9 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      Ive been with Heasy Resource for over five years now, and
-                      I can genuinely say that the HR department is second to
-                      none. From the moment I joined, I felt welcomed,
+                      I&apos;ve been with Heasy Resource for over five years
+                      now, and I can genuinely say that the HR department is
+                      second to none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
@@ -547,7 +554,7 @@ export default function HomePage() {
                       <h3 className="testifier_info">
                         Abijuwon Faruk
                         <br />
-                        <span>C.e.o Stack Overflow</span>
+                        <span>C.E.O Stack Overflow</span>
                       </h3>
                     </div>
                   </div>
@@ -557,19 +564,19 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      Ive been with Heasy Resource for over five years now, and
-                      I can genuinely say that the HR department is second to
-                      none. From the moment I joined, I felt welcomed,
-                      supported, and valued.
+                      In my five years with Heasy Resource, the HR department
+                      stands out as exceptional. Since day one, I&apos;ve felt a
+                      warm welcome, continuous support, and undeniable value in
+                      being part of this organization.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <Image src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test2.jpg" alt="" />
                       </div>
                       <h3 className="testifier_info">
-                        Abdulzobur Abdulazeez
+                        Kent Jones
                         <br />
-                        <span>C.e.o Cocacola</span>
+                        <span>C.E.O Cocacola</span>
                       </h3>
                     </div>
                   </div>
@@ -579,19 +586,19 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      Ive been with Heasy Resource for over five years now, and
-                      I can genuinely say that the HR department is second to
-                      none. From the moment I joined, I felt welcomed,
-                      supported, and valued.
+                      Heasy Resource&apos;s HR department is truly unparalleled.
+                      Throughout my five-year journey, I&apos;ve experienced a
+                      sense of belonging, unwavering support, and a genuine
+                      feeling of being valued from the very beginning.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <Image src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test3.jpg" alt="" />
                       </div>
                       <h3 className="testifier_info">
-                        Usman Salami
+                        Sheldon Cooper
                         <br />
-                        <span>C.e.o Beyond IT </span>
+                        <span>C.E.O Google </span>
                       </h3>
                     </div>
                   </div>
@@ -601,19 +608,20 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      Ive been with Heasy Resource for over five years now, and
-                      I can genuinely say that the HR department is second to
-                      none. From the moment I joined, I felt welcomed,
-                      supported, and valued.
+                      Having been a part of Heasy Resource for over five years,
+                      I can confidently attest to the unmatched excellence of
+                      the HR department. From the outset, I&apos;ve felt
+                      embraced, supported, and truly appreciated in this
+                      welcoming work environment.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <Image src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test4.jpg" alt="" />
                       </div>
                       <h3 className="testifier_info">
                         Abijuwon Faruk
                         <br />
-                        <span>C.e.o Stack Overflow</span>
+                        <span>C.E.O Stack Overflow</span>
                       </h3>
                     </div>
                   </div>
@@ -623,19 +631,19 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      Ive been with Heasy Resource for over five years now, and
-                      I can genuinely say that the HR department is second to
-                      none. From the moment I joined, I felt welcomed,
-                      supported, and valued.
+                      Five years strong with Heasy Resource, and I can attest
+                      that the HR department is incomparable. The warmth,
+                      support, and sense of value I&apos;ve experienced since
+                      day one have made my journey here truly remarkable.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <Image src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test5.jpg" alt="" />
                       </div>
                       <h3 className="testifier_info">
-                        Abdulzobur Abdulazeez
+                        Kent Barbara
                         <br />
-                        <span>C.e.o Cocacola</span>
+                        <span>C.E.O Apple</span>
                       </h3>
                     </div>
                   </div>
@@ -645,19 +653,19 @@ export default function HomePage() {
                 <div className="swiper-slide">
                   <div className="testimonial_card">
                     <p className="testimony">
-                      Ive been with Heasy Resource for over five years now, and
-                      I can genuinely say that the HR department is second to
-                      none. From the moment I joined, I felt welcomed,
+                      I&apos;ve been with Heasy Resource for over five years
+                      now, and I can genuinely say that the HR department is
+                      second to none. From the moment I joined, I felt welcomed,
                       supported, and valued.
                     </p>
                     <div className="testifier">
                       <div className="testifier_image">
-                        <Image src="/assets/images/test.png" alt="" />
+                        <Image src="/assets/images/test6.jpg" alt="" />
                       </div>
                       <h3 className="testifier_info">
-                        Usman Salami
+                        Zulfah Salami
                         <br />
-                        <span>C.e.o Beyond IT </span>
+                        <span>C.E.O Alibaba </span>
                       </h3>
                     </div>
                   </div>
@@ -725,59 +733,59 @@ export default function HomePage() {
               </p>
             </li>
             <li className="footer_item">
-              <h4 className="footer_item_title">Platform</h4>
-              <a href="" className="footer_link">
-                Career
+              <h4 className="footer_item_title">Features</h4>
+              <a href="#" className="footer_link">
+                Employee Management
               </a>
-              <a href="" className="footer_link">
-                Performance
-              </a>
-              <a href="" className="footer_link">
-                compensation
-              </a>
-              <a href="" className="footer_link">
-                Analistics
-              </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Payroll
+              </a>
+              <a href="#" className="footer_link">
+                Leave Management
+              </a>
+              <a href="#" className="footer_link">
+                Hiring
+              </a>
+              <a href="#" className="footer_link">
+                Analytics
               </a>
             </li>
             <li className="footer_item">
               <h4 className="footer_item_title">Company</h4>
-              <a href="" className="footer_link">
+              <a href="#about-us" className="footer_link">
                 About Us
               </a>
-              <a href="" className="footer_link">
+              <a href="#pricing" className="footer_link">
                 Pricing
               </a>
-              <a href="" className="footer_link">
+              <a href="#contact" className="footer_link">
                 Contact Us
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 FAQs
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Privacy Policy
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Security
               </a>
             </li>
             <li className="footer_item">
               <h4 className="footer_item_title">Social Media</h4>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Twitter
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Instagram
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Snapchat
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 Facebook
               </a>
-              <a href="" className="footer_link">
+              <a href="#" className="footer_link">
                 LinkedIn
               </a>
             </li>

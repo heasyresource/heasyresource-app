@@ -105,7 +105,7 @@ const useJobApply = () => {
       };
       handleContinue(modifiedValues);
     }
-  }, [response]);
+  });
   useEffect(() => {
     const fetchJobDetail = async () => {
       try {
@@ -123,7 +123,7 @@ const useJobApply = () => {
     };
     getMetadata();
     fetchJobDetail();
-  }, []);
+  }, [slug, subdomain]);
 
   return { form, handleSubmit, jobData, loading, router, countries, states };
 };
