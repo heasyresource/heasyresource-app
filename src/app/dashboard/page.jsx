@@ -15,7 +15,10 @@ const Dashboard = async () => {
   const headersList = headers();
   const domain = headersList.get("host");
   const subdomain = getSubdomain(domain);
-  if (subdomain && session) {
+  const defaultSubdomain = ["www", "heasyresource"];
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+
+  if (hasSubdomain && session) {
     const getLeaves = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/employee/leaves?status=Pending`,
       {
@@ -26,7 +29,10 @@ const Dashboard = async () => {
       }
     );
     const getLeavesData = await getLeaves.json();
-    leaves = getLeavesData.results.data;
+    console.log({getLeavesData});
+    if (getLeavesData.statusCode === 200) {
+      leaves = getLeavesData.results.data;
+    }
     const getAnalytics = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/analytics/companies/${session?.user.company.id}`,
       {
@@ -37,7 +43,9 @@ const Dashboard = async () => {
       }
     );
     const getAnalyticsData = await getAnalytics.json();
-    analytics = getAnalyticsData.results;
+    if (getAnalyticsData.statusCode === 200) {
+      analytics = getAnalyticsData.results;
+    }
 
     const getEmployees = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/employees/${session?.user.company.id}`,
@@ -49,7 +57,9 @@ const Dashboard = async () => {
       }
     );
     const getEmployeesData = await getEmployees.json();
-    employees = getEmployeesData.results.data;
+    if (getEmployeesData.statusCode === 200) {
+      employees = getEmployeesData.results.data;
+    }
   }
 
   const currentDate = new Date();

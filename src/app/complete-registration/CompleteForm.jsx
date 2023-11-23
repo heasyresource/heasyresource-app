@@ -241,7 +241,7 @@ const CompleteForm = ({ companyInfo }) => {
                       form.values.subdomain.length !== 0
                         ? form.values.subdomain
                         : "subdomain"
-                    }.heasyresource`}
+                    }.heasyresource.com`}
                   </Highlight>
                 </GridCol>
 

@@ -10,7 +10,10 @@ const Layout = async ({ children }) => {
   const headersList = headers();
   const domain = headersList.get("host");
   const subdomain = getSubdomain(domain);
-  if (subdomain && session) {
+  const defaultSubdomain = ["www", "heasyresource"];
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+
+  if (hasSubdomain && session) {
     const getCompany = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/${session?.user.company.id}`,
       {

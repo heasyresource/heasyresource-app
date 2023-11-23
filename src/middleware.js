@@ -26,13 +26,15 @@ export const config = {
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { getSubdomain } from "./utils/publicFunctions";
+import { withAuth } from "next-auth/middleware";
 
 export default async function middleware(req, res) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
   const defaultSubdomain = ["www", "heasyresource"];
   const subdomain = getSubdomain(req.headers.get("host"));
-  if (subdomain && !defaultSubdomain.includes(subdomain)) {
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+  if (hasSubdomain) {
     const getSubdomain = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`
     );
@@ -54,9 +56,9 @@ export default async function middleware(req, res) {
   }
   if (
     req.nextUrl.pathname.startsWith("/dashboard") &&
-    !subdomain &&
+    !hasSubdomain &&
     isAuthenticated &&
-    token.role === "CompanyAdmin"
+    token.role.name === "CompanyAdmin"
   ) {
     return NextResponse.redirect(new URL("/complete-registration", req.url));
   }
@@ -135,9 +137,9 @@ export default async function middleware(req, res) {
     return NextResponse.redirect(new URL("/employee", req.url));
   }
 
-  // return await withAuth(req, {
-  //   pages: {
-  //     signIn: "/signin",
-  //   },
-  // });
+  return await withAuth(req, {
+    pages: {
+      signIn: "/signin",
+    },
+  });
 }

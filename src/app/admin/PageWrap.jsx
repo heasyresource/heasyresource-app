@@ -46,7 +46,7 @@ const PageWrap = ({ analytics }) => {
                   <Text style={{ fontSize: "24px" }} fw={700}>
                     {analytics && analytics.allCompanyCount}
                   </Text>
-                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />,
+                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />
                 </Group>
               </Card>
             </GridCol>
@@ -69,7 +69,7 @@ const PageWrap = ({ analytics }) => {
                   <Text style={{ fontSize: "24px" }} fw={700}>
                     {analytics && analytics.activeCompanyCount}
                   </Text>
-                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />,
+                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />
                 </Group>
               </Card>
             </GridCol>
@@ -92,7 +92,7 @@ const PageWrap = ({ analytics }) => {
                   <Text style={{ fontSize: "24px" }} fw={700}>
                     {analytics && analytics.inActiveCompanyCount}
                   </Text>
-                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />,
+                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />
                 </Group>
               </Card>
             </GridCol>
@@ -115,7 +115,7 @@ const PageWrap = ({ analytics }) => {
                   <Text style={{ fontSize: "24px" }} fw={700}>
                     {analytics && analytics.rejectedCompanyCount}
                   </Text>
-                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />,
+                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />
                 </Group>
               </Card>
             </GridCol>
@@ -138,7 +138,7 @@ const PageWrap = ({ analytics }) => {
                   <Text style={{ fontSize: "24px" }} fw={700}>
                     {analytics && analytics.suspendedCompanyCount}
                   </Text>
-                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />,
+                  <IconBuildingSkyscraper style={{ color: "#7EA6F4" }} />
                 </Group>
               </Card>
             </GridCol>
