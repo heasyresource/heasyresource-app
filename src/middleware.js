@@ -26,7 +26,7 @@ export const config = {
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { getSubdomain } from "./utils/publicFunctions";
-import { withAuth } from "next-auth/middleware";
+// import { withAuth } from "next-auth/middleware";
 
 export default async function middleware(req, res) {
   const token = await getToken({ req });
