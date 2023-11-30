@@ -83,10 +83,10 @@ export function CompensationTable() {
           render: () => (
             <Flex justify="center" align="center">
               <ActionIcon
-               variant="transparent" 
-               radius="lg"
-               component="a"
-               href="/dashboard/compensation/employee-payslip"
+                variant="transparent"
+                radius="lg"
+                component="a"
+                href="/dashboard/compensation/employee-payslip"
               >
                 <IconWallet
                   style={{ width: "70%", height: "70%" }}
@@ -98,10 +98,7 @@ export function CompensationTable() {
                 radius="lg"
                 style={{ marginLeft: "10px" }}
               >
-                <IconPrinter style={{ width: "70%", height: "70%" }} stroke={1.5} />
-              </ActionIcon>
-              <ActionIcon variant="transparent"  radius="lg">
-                <IconTrash
+                <IconPrinter
                   style={{ width: "70%", height: "70%" }}
                   stroke={1.5}
                 />

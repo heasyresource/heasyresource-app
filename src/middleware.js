@@ -40,19 +40,20 @@ export default async function middleware(req, res) {
       `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`
     );
     const getSubdomainData = await getSubdomain.json();
+    if (getSubdomainData.statusCode === 200) {
+      if (
+        getSubdomainData.results === null ||
+        getSubdomainData.results?.isActive === 0
+      ) {
+        return NextResponse.redirect(new URL("/404", req.url));
+      }
 
-    if (
-      getSubdomainData.results === null ||
-      getSubdomainData.results?.isActive === 0
-    ) {
-      return NextResponse.redirect(new URL("/404", req.url));
-    }
-
-    if (
-      getSubdomainData.results !== null &&
-      (req.nextUrl.pathname === "/" || req.nextUrl.pathname === "/signup")
-    ) {
-      return NextResponse.redirect(new URL("/signin", req.url));
+      if (
+        getSubdomainData.results !== null &&
+        (req.nextUrl.pathname === "/" || req.nextUrl.pathname === "/signup")
+      ) {
+        return NextResponse.redirect(new URL("/signin", req.url));
+      }
     }
   }
   if (token) {

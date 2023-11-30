@@ -118,7 +118,7 @@ const EmployeeSlip = () => {
                 variant="transparent"
                 radius="lg"
                 rightSection={
-                  <IconTrash
+                  <IconPrinter
                     size={35}
                     style={{ color: "#84ADFF", width: "70%", height: "70%" }}
                     stroke={1.5}
@@ -132,41 +132,6 @@ const EmployeeSlip = () => {
         </Group>
       </Card>
       <PaySLipTable />
-      <Group justify="space-between" className={classes.controlBtn} my={"3rem"}>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          variant="filled"
-          className={classes.control}
-          color="#84ADFF"
-          px={"40px"}
-          type="submit"
-        >
-          print
-        </Button>
-        <Group>
-          <Button
-            style={{ fontSize: "16px", textTransform: "capitalize" }}
-            size="md"
-            variant="outline"
-            color="#3377FF"
-            px={"40px"}
-            type="submit"
-          >
-            cancel
-          </Button>
-          <Button
-            style={{ fontSize: "16px", textTransform: "capitalize" }}
-            size="md"
-            variant="filled"
-            color="#3377FF"
-            px={"40px"}
-            type="submit"
-          >
-            save
-          </Button>
-        </Group>
-      </Group>
     </>
   );
 };

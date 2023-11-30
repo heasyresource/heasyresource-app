@@ -194,38 +194,27 @@ export const CompensationList = [
 
 export const employeePaySlipList = [
   {
-    id: "1",
     name: "Base Salary",
     earnings: "#150,000",
     deductions: "-",
-    unitAmount: "#30,000",
+    unitAmount: "#150,000",
   },
   {
-    id: "2",
     name: "State Income Tax",
-    earnings: "#150,000",
-    deductions: "-",
+    earnings: "-",
+    deductions: "#15, 532",
     unitAmount: "#30,000",
   },
   {
-    id: "3",
     name: "Bonuses",
-    earnings: "#150,000",
+    earnings: "#30,000",
     deductions: "-",
     unitAmount: "#30,000",
   },
   {
-    id: "4",
     name: "Health Insurance Premiums",
-    earnings: "#150,000",
-    deductions: "-",
-    unitAmount: "#30,000",
-  },
-  {
-    id: "5",
-    name: "Health Insurance Premiums",
-    earnings: "#150,000",
-    deductions: "-",
+    earnings: "-",
+    deductions: "#30,000",
     unitAmount: "#30,000",
   },
 ];
