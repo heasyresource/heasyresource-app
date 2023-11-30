@@ -126,7 +126,7 @@ const PageWrap = () => {
               </Group>
             </CardSection>
             <Text fw={500} py={20} fz={19}>
-              Apply for the Position
+              Apply for this Position
             </Text>
             <Space h={20} />
             <form onSubmit={form.onSubmit((value) => handleSubmit(value))}>
@@ -242,7 +242,7 @@ const PageWrap = () => {
                     searchable
                   />
                 </GridCol>
-                <GridCol span={{ lg: 12, md: 6, sm: 12 }}>
+                <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
                   <Select
                     data={countries}
                     label="Country"

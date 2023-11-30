@@ -1,6 +1,5 @@
 "use client";
 
-import { hiringList } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

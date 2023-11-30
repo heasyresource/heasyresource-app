@@ -1,21 +1,10 @@
 "use client";
 
-import { DeductionsList } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import {
-  ActionIcon,
-  Badge,
-  Button,
-  Flex,
-  Group,
-  Stack,
-  Text,
-} from "@mantine/core";
-import { usePathname } from "next/navigation";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { IconTrashX } from "@tabler/icons-react";
+
+import { ActionIcon, Button, Flex, Group, Stack, Text } from "@mantine/core";
+
+import { IconEdit, IconTrash, IconTrashX } from "@tabler/icons-react";
 import { modals } from "@mantine/modals";
 import EditDeductionsModal from "./EditDeductionsModal";
 
