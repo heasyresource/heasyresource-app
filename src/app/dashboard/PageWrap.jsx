@@ -220,106 +220,6 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                 </GridCol>
               </Grid>
             </Box>
-            {employees && employees.length !== 0 && (
-              <Box mt="lg">
-                <Group justify={"space-between"} align="center">
-                  <Text style={{ fontSize: "18px", fontWeight: 500 }}>
-                    Employees
-                  </Text>
-                  <Link href={"/dashboard/employee"}>
-                    <Button
-                      aria-label="view-all"
-                      size="sm"
-                      variant="subtle"
-                      color="#3377FF"
-                    >
-                      View all
-                    </Button>
-                  </Link>
-                </Group>
-                <DataTable
-                  style={{ background: "none" }}
-                  minHeight={"auto"}
-                  withRowBorders={false}
-                  records={employees && employees}
-                  columns={[
-                    {
-                      accessor: "index",
-                      title: "S/N",
-                      textAlign: "center",
-                      render: (record) => employees.indexOf(record) + 1,
-                    },
-                    {
-                      accessor: "avatar",
-                      title: "",
-
-                      width: "80px",
-                      render: ({ logoUrl }) => (
-                        <Flex justify="center" align="center">
-                          <Avatar
-                            size={26}
-                            src={logoUrl || "/assets/images/avata2.png"}
-                            radius={26}
-                          />
-                        </Flex>
-                      ),
-                    },
-                    {
-                      accessor: "firstName",
-                      noWrap: true,
-                      render: ({ firstName }) => (
-                        <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                          {firstName}
-                        </Text>
-                      ),
-                    },
-                    {
-                      accessor: "lastName",
-                      noWrap: true,
-                      render: ({ lastName }) => (
-                        <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                          {lastName}
-                        </Text>
-                      ),
-                    },
-
-                    {
-                      accessor: "department",
-                      noWrap: true,
-                      render: ({ employmentInfo }) => (
-                        <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                          {employmentInfo.department.name}
-                        </Text>
-                      ),
-                    },
-                    {
-                      accessor: "moreDetails",
-
-                      render: (employees) => (
-                        <Link
-                          href={`/dashboard/employee/${employees.id}/personal-detail`}
-                        >
-                          <Badge
-                            radius="xs"
-                            variant="light"
-                            color="#3377FF"
-                            size="lg"
-                            style={{
-                              color: "#3377FF",
-
-                              textTransform: "capitalize",
-                              cursor: "pointer",
-                            }}
-                          >
-                            more details
-                          </Badge>
-                        </Link>
-                      ),
-                    },
-                  ]}
-                />
-              </Box>
-            )}
           </Box>
         </GridCol>
 
@@ -349,15 +249,15 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
             </Group>
             {leaves && leaves.length !== 0 ? (
               <DataTable
-                height={"100%"}
+                height={400}
                 style={{ background: "none" }}
-                withRowBorders={false}
+                withRowBorders
                 records={leaves && leaves}
                 columns={[
                   {
                     accessor: "user",
                     title: "Employee Name",
-
+                    width: "110px",
                     textTransform: "capitalize",
                     noWrap: true,
                     render: ({ user }) => (
@@ -386,9 +286,10 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
 
                   {
                     accessor: "status",
-
+                    textAlign: "center",
                     textTransform: "capitalize",
                     noWrap: true,
+                    width: "80px",
                     render: ({ status }) => (
                       <>
                         {status === "Approved" && (
@@ -428,6 +329,123 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
           </Box>
         </GridCol>
       </Grid>
+      {employees && employees.length !== 0 && (
+        <Box mt="lg">
+          <Group justify={"space-between"} align="center">
+            <Text style={{ fontSize: "18px", fontWeight: 500 }}>Employees</Text>
+            <Link href={"/dashboard/employee"}>
+              <Button
+                aria-label="view-all"
+                size="sm"
+                variant="subtle"
+                color="#3377FF"
+              >
+                View all
+              </Button>
+            </Link>
+          </Group>
+          <DataTable
+            style={{ background: "none" }}
+            minHeight={"auto"}
+            withRowBorders={false}
+            records={employees && employees}
+            columns={[
+              {
+                accessor: "index",
+                title: "S/N",
+                textAlign: "center",
+                render: (record) => employees.indexOf(record) + 1,
+              },
+              {
+                accessor: "avatar",
+                title: "",
+
+                width: "80px",
+                render: ({ logoUrl }) => (
+                  <Flex justify="center" align="center">
+                    <Avatar
+                      size={26}
+                      src={logoUrl || "/assets/images/avata2.png"}
+                      radius={26}
+                    />
+                  </Flex>
+                ),
+              },
+              {
+                accessor: "firstName",
+                noWrap: true,
+                render: ({ firstName }) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {firstName}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "lastName",
+                noWrap: true,
+                render: ({ lastName }) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {lastName}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "id",
+                title: "Employee ID",
+                noWrap: true,
+                render: (employees) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {employees.employmentInfo.employeeId}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "department",
+                noWrap: true,
+                render: (employees) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {employees.employmentInfo.department.name}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "position",
+                title: "Position",
+                noWrap: true,
+                render: (employees) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {employees.employmentInfo.position}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "moreDetails",
+
+                render: (employees) => (
+                  <Link
+                    href={`/dashboard/employee/${employees.id}/personal-detail`}
+                  >
+                    <Badge
+                      radius="xs"
+                      variant="light"
+                      color="#3377FF"
+                      size="lg"
+                      style={{
+                        color: "#3377FF",
+
+                        textTransform: "capitalize",
+                        cursor: "pointer",
+                      }}
+                    >
+                      more details
+                    </Badge>
+                  </Link>
+                ),
+              },
+            ]}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

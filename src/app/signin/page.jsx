@@ -32,7 +32,9 @@ const SignIn = async () => {
         <Box className={classes.wrapper_img}>
           <Box className={classes.wrapper_imgOverlay} />
           <Box className={classes.logo_wrapper}>
-            <Image src="/assets/images/HRlogo.png" alt="hr-logo" />
+            <Link href="/">
+              <Image src="/assets/images/HRlogo.png" alt="hr-logo" />
+            </Link>
           </Box>
         </Box>
       )}

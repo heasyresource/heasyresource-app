@@ -13,7 +13,6 @@ const useBulk = () => {
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
   const subdomain = getSubdomain();
-  const [isChanged, setIsChanged] = useState(null);
   const [hideFile, setHideFile] = useState(false);
   const [fields, setFields] = useState(null);
   const router = useRouter();
@@ -43,19 +42,15 @@ const useBulk = () => {
         formData,
         headerSettings
       );
-      if (response?.failedRecords) {
+      if (response?.failedRecords.length > 0) {
         notifications.show({
           color: "red",
           message: "Something went wrong, Please try again",
           styles: errorStyles,
           autoClose: 7000,
         });
-        setIsChanged(response);
+        setHideFile(true);
         retryForm.setFieldValue("employees", response?.failedRecords);
-        sessionStorage.setItem(
-          "employeesData",
-          obfuscateToken(true, JSON.stringify(response?.failedRecords))
-        );
       } else {
         notifications.show({
           color: "white",
@@ -64,7 +59,9 @@ const useBulk = () => {
           styles: successStyles,
           autoClose: 7000,
         });
-        router.push("/dashboard/employee");
+        retryForm.reset();
+        form.reset();
+        setHideFile(false);
       }
       setLoading(false);
     } catch (err) {
@@ -92,21 +89,18 @@ const useBulk = () => {
         { employees: convertedArray },
         headerSettings
       );
-      if (response?.failedRecords) {
+      if (response?.failedRecords.length > 0) {
         notifications.show({
           color: "red",
           message: "Something went wrong, Please try again",
           styles: errorStyles,
           autoClose: 7000,
         });
-        setIsChanged(response);
+        setHideFile(true);
         retryForm.setFieldValue("employees", response?.failedRecords);
-        sessionStorage.setItem(
-          "employeesData",
-          obfuscateToken(true, JSON.stringify(response?.failedRecords))
-        );
       } else {
-        sessionStorage.clear();
+        retryForm.reset();
+        form.reset();
         notifications.show({
           color: "white",
           title: "Success",
@@ -114,7 +108,7 @@ const useBulk = () => {
           styles: successStyles,
           autoClose: 7000,
         });
-        router.push("/dashboard/employee");
+        setHideFile(false);
       }
       setLoading(false);
     } catch (err) {
@@ -131,23 +125,10 @@ const useBulk = () => {
       setFields(modifiedOptions);
     } catch (err) {}
   };
-  useEffect(() => {
-    if (isChanged !== null) {
-      setHideFile(true);
-    }
-    //eslint-disable-next-line
-  }, [isChanged]);
 
   useEffect(() => {
     getDepartments();
-    const getDatas =
-      sessionStorage.getItem("employeesData") &&
-      obfuscateToken(false, sessionStorage.getItem("employeesData") ?? "");
-    if (getDatas) {
-      const modifyDatas = JSON.parse(getDatas);
-      retryForm.setFieldValue("employees", modifyDatas);
-      setHideFile(true);
-    }
+
     //eslint-disable-next-line
   }, []);
 

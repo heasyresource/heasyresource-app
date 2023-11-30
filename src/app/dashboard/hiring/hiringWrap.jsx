@@ -1,8 +1,7 @@
 "use client";
-import HiringTable from "@/components/HiringLayout/HiringTable";
+import React from "react";
+import VacancyTable from "@/components/HiringLayout/VacancyTable";
 import HiringNav from "@/components/HiringNav";
-import useAddApplicant from "@/hooks/useAddApplicant";
-import classes from "../dashboard.module.css";
 import {
   Box,
   Button,
@@ -14,34 +13,43 @@ import {
   Select,
   TextInput,
 } from "@mantine/core";
-import React from "react";
+import useHiring from "@/hooks/useHiring";
+import classes from "../dashboard.module.css";
 
-const HiringWrap = () => {
+const VacancyWrap = () => {
   const {
-    applicants,
-    applicantsPagination,
+    vacancies,
+    loading,
+    employmentType,
+    categories,
+    handleVacancySubmit,
+    vacancyForm,
     paginate,
-    gettingApplicants,
-    handleDelete,
-    handleEdit,
+    vacancyPagination,
+    gettingVacancies,
+    handleEditVacancy,
+    setVacancyId,
+    handleDeleteVacancy,
+    rteError,
+    editor,
     openEdit,
     closeEdit,
     openedEdit,
-    form,
-    setApplicantId,
-    loading,
-    states,
-    countries,
+    closeAdd,
+    openAdd,
+    openedAdd,
     filterForm,
-    jobTitle,
-    getApplicants,
-  } = useAddApplicant();
+    getVacancy,
+  } = useHiring();
   const handleReset = () => {
     filterForm.setValues({
       search: "",
-      status: null,
+      jobCategoryId: null,
+      workMode: null,
+      employmentTypeId: null,
     });
   };
+
   return (
     <>
       <Card
@@ -57,14 +65,13 @@ const HiringWrap = () => {
           <HiringNav tabTitle="Hiring" />
         </CardSection>
         <Box style={{ marginTop: "1rem" }}>
-          <Grid justify="flex-start">
-            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+          <Grid justify="space-between" className={classes.formWrap}>
+            <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
-                label="Applicant Name"
-                placeholder=""
-                style={{ width: "100%" }}
+                label="Job Title"
                 {...filterForm.getInputProps("search")}
+                style={{ width: "100%" }}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -72,19 +79,49 @@ const HiringWrap = () => {
                 }}
               />
             </GridCol>
-            <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+            <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
               <Select
                 size="md"
-                label="Status"
+                label="Employment Type"
+                data={employmentType}
                 style={{ width: "100%" }}
-                data={["Pending", "Rejected", "Shortlisted"]}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
                   placeholder: classes.placeholder,
                 }}
                 allowDeselect={false}
-                {...filterForm.getInputProps("status")}
+                {...filterForm.getInputProps("employmentTypeId")}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
+              <Select
+                size="md"
+                label="Work Mode"
+                data={["On-Site", "Hybrid", "Remote"]}
+                style={{ width: "100%" }}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+                allowDeselect={false}
+                {...filterForm.getInputProps("workMode")}
+              />
+            </GridCol>
+            <GridCol span={{ lg: 3, md: 6, sm: 12 }}>
+              <Select
+                size="md"
+                label="Job Category"
+                data={categories}
+                style={{ width: "100%" }}
+                classNames={{
+                  label: classes.label,
+                  error: classes.error,
+                  placeholder: classes.placeholder,
+                }}
+                allowDeselect={false}
+                {...filterForm.getInputProps("employmentTypeId")}
               />
             </GridCol>
           </Grid>
@@ -105,33 +142,36 @@ const HiringWrap = () => {
               variant="filled"
               color="#3377FF"
               px={"40px"}
-              onClick={() => {
-                getApplicants();
-              }}
+              onClick={() => getVacancy()}
             >
               search
             </Button>
           </Group>
         </Box>
       </Card>
-      <HiringTable
-        form={form}
-        applicants={applicants}
-        applicantsPagination={applicantsPagination}
+      <VacancyTable
+        rteError={rteError}
+        handleVacancySubmit={handleVacancySubmit}
+        vacancyForm={vacancyForm}
+        loading={loading}
+        employmentType={employmentType}
+        categories={categories}
+        vacancies={vacancies}
         paginate={paginate}
-        gettingApplicants={gettingApplicants}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
+        gettingVacancies={gettingVacancies}
+        vacancyPagination={vacancyPagination}
+        handleEditVacancy={handleEditVacancy}
+        setVacancyId={setVacancyId}
+        handleDeleteVacancy={handleDeleteVacancy}
+        editor={editor}
         openEdit={openEdit}
         closeEdit={closeEdit}
         openedEdit={openedEdit}
-        setApplicantId={setApplicantId}
-        loading={loading}
-        states={states}
-        countries={countries}
+        closeAdd={closeAdd}
+        openAdd={openAdd}
+        openedAdd={openedAdd}
       />
     </>
   );
 };
-
-export default HiringWrap;
+export default VacancyWrap;

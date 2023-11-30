@@ -95,7 +95,7 @@ export default function JobDetails() {
               </Flex>
             </Center>
             <Container size={{ base: "95%", sm: "80%" }} py={66}>
-              <Flex justify={"flex-end"} align={"center"} mb="md">
+              <Flex justify={"flex-start"} align={"center"} mb="md">
                 <Button
                   variant="transparent"
                   onClick={() => router.back()}

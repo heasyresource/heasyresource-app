@@ -16,8 +16,22 @@ const HiringNav = ({ tabTitle }) => {
         <Link href="/dashboard/hiring">
           <Button
             w="125px"
+            variant="filled"
+            className={classes.btnLink}
             data-active={
               "/dashboard/hiring" === pathname ||
+              "/dashboard/hiring/add-vacancy" === pathname ||
+              undefined
+            }
+          >
+            Vacancies
+          </Button>
+        </Link>
+        <Link href="/dashboard/hiring/applicants">
+          <Button
+            w="125px"
+            data-active={
+              "/dashboard/hiring/applicants" === pathname ||
               "/dashboard/hiring/add-candidate" === pathname ||
               "/dashboard/hiring/application-phase" === pathname ||
               "/dashboard/hiring/shortlist" === pathname ||
@@ -27,20 +41,6 @@ const HiringNav = ({ tabTitle }) => {
             variant="filled"
           >
             Applicants
-          </Button>
-        </Link>
-        <Link href="/dashboard/hiring/vacancies">
-          <Button
-            w="125px"
-            variant="filled"
-            className={classes.btnLink}
-            data-active={
-              "/dashboard/hiring/vacancies" === pathname ||
-              "/dashboard/hiring/add-vacancy" === pathname ||
-              undefined
-            }
-          >
-            Vacancies
           </Button>
         </Link>
       </Group>

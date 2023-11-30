@@ -111,7 +111,7 @@ const useAdmin = () => {
       notifications.show({
         color: "white",
         title: "Success",
-        message: "Company accepted successfully",
+        message: "Company approved successfully",
         styles: successStyles,
         autoClose: 7000,
       });

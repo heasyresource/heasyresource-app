@@ -62,28 +62,22 @@ const PageWrap = () => {
         </Text>
         <List type="ordered" mt="lg" withPadding>
           <ListItem style={{ fontSize: "15px" }}>
-            Column order must remain unchanged.
+            All fields are mandatory.
           </ListItem>
-          <ListItem style={{ fontSize: "15px" }}>
-            First Name and Last Name are mandatory.
-          </ListItem>
-          <ListItem style={{ fontSize: "15px" }}>
-            Dates must follow the YYYY-MM-DD format.
-          </ListItem>
+
           <ListItem style={{ fontSize: "15px" }}>
             If specifying gender, choose Male or Female.
           </ListItem>
           <ListItem style={{ fontSize: "15px" }}>
             Each import file should contain a maximum of 100 records
           </ListItem>
-          <ListItem style={{ fontSize: "15px" }}>
-            You may need to use multiple import files.
-          </ListItem>
+
           <ListItem style={{ fontSize: "15px" }}>
             Refer to the provided sample CSV file for guidance{" "}
             <a
-              href="#"
+              href="https://res.cloudinary.com/heasyresource/raw/upload/fl_attachment/i7ovqjkfy3udolr4psty.csv"
               download
+              target="_blank"
               style={{ textDecoration: "underline", color: "#3377FF" }}
             >
               download
@@ -103,6 +97,7 @@ const PageWrap = () => {
               accept=".csv"
               leftSectionWidth={140}
               {...form.getInputProps("employees")}
+              required
               disabled={loading}
               leftSectionPointerEvents="none"
               leftSection={
@@ -132,7 +127,6 @@ const PageWrap = () => {
                 style={{
                   fontSize: "14px",
                   color: "#565656",
-                  textTransform: "capitalize",
                 }}
               >
                 File must not be larger than 2mb
@@ -141,10 +135,9 @@ const PageWrap = () => {
                 style={{
                   fontSize: "14px",
                   color: "#565656",
-                  textTransform: "capitalize",
                 }}
               >
-                File format must be in .doc or .pdf extensions
+                File format must be in .csv extension
               </Text>
             </Box>
           </Box>
@@ -288,6 +281,11 @@ const PageWrap = () => {
                   )}
                   disabled={loading}
                 />
+                {item.validation.errors?.map((err, index) => (
+                  <Text key={index} style={{ fontSize: "small", color: "red" }}>
+                    {err.field === "departmentName" && err.message}
+                  </Text>
+                ))}
               </GridCol>
               <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
                 <TextInput
@@ -376,7 +374,7 @@ const PageWrap = () => {
               {loading ? (
                 <Loader type="dots" color="white" size={"md"} />
               ) : (
-                "upload"
+                "submit"
               )}
             </Button>
           </Group>

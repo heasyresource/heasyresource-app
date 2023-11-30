@@ -142,7 +142,7 @@ const Licence = ({
                         style={{
                           fontSize: "14px",
                         }}
-                      >{`CredentialID: ${item.credentialId}`}</Text>
+                      >{`Credential ID: ${item.credentialId}`}</Text>
                     )}
                     {item.credentialUrl !== null && (
                       <Button

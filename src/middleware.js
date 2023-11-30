@@ -83,6 +83,13 @@ export default async function middleware(req, res) {
       ) {
         return NextResponse.redirect(new URL("/employee", req.url));
       }
+      if (
+        req.nextUrl.pathname.startsWith("/employee") &&
+        isAuthenticated &&
+        employee.isDefaultPassword === 1
+      ) {
+        return NextResponse.redirect(new URL("/change-password", req.url));
+      }
     }
   }
   if (
@@ -152,13 +159,7 @@ export default async function middleware(req, res) {
   ) {
     return NextResponse.redirect(new URL("/complete-registration", req.url));
   }
-  if (
-    req.nextUrl.pathname.startsWith("/employee") &&
-    isAuthenticated &&
-    token.isDefaultPassword === 1
-  ) {
-    return NextResponse.redirect(new URL("/change-password", req.url));
-  }
+
   if (
     req.nextUrl.pathname.startsWith("/change-password") &&
     isAuthenticated &&
