@@ -24,6 +24,7 @@ const SettingsNav = ({ tabTitle }) => {
       <Group>
         <Link href="/dashboard/settings">
           <Button
+            aria-label="company-information"
             w="auto"
             variant="filled"
             color="#EBEBEB"
@@ -38,10 +39,31 @@ const SettingsNav = ({ tabTitle }) => {
             Company Information
           </Button>
         </Link>
-
+        <Link href="/dashboard/settings/profile">
+          <Button
+            aria-label="profile"
+            w="auto"
+            variant="filled"
+            color="#EBEBEB"
+            style={{
+              color: "#424242",
+              fontSize: "13px",
+              fontWeight: 700,
+            }}
+            className={classes.btnLink}
+            data-active={
+              "/dashboard/settings/profile" === pathname ||
+              pathname.includes("/dashboard/settings/profile") ||
+              undefined
+            }
+          >
+            Profile
+          </Button>
+        </Link>
         <Menu position="bottom-end" width={150} withArrow>
           <MenuTarget>
             <Button
+              aria-label="configuration"
               w="auto"
               variant="filled"
               color="#EBEBEB"
@@ -60,18 +82,16 @@ const SettingsNav = ({ tabTitle }) => {
             </Button>
           </MenuTarget>
           <MenuDropdown>
-            <MenuItem fz="xs">
-              <Link
-                style={{ textDecoration: "none" }}
-                className={classes.activeConfig}
-                href="/dashboard/settings/job-categories"
-                data-active={
-                  "/dashboard/settings/job-categories" === pathname || undefined
-                }
-              >
-                Job Categories
-              </Link>
-            </MenuItem>
+            <Link
+              style={{ textDecoration: "none" }}
+              className={classes.activeConfig}
+              href="/dashboard/settings/job-categories"
+              data-active={
+                "/dashboard/settings/job-categories" === pathname || undefined
+              }
+            >
+              <MenuItem fz="xs">Job categories</MenuItem>
+            </Link>
           </MenuDropdown>
         </Menu>
       </Group>

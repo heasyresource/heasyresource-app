@@ -175,12 +175,7 @@ const EmploymentInfoForm = () => {
                 </Grid>
               </Box>
             )}
-            <Group
-              justify="flex-end"
-              className={classes.btnWrap}
-              align="center"
-              mt={"auto"}
-            >
+            <Group justify="flex-end" align="center" mt={"auto"}>
               <Button
                 variant="outline"
                 size="md"
@@ -188,8 +183,6 @@ const EmploymentInfoForm = () => {
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
                 px="30px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
                 disabled={loading}
                 onClick={() => router.back()}
               >
@@ -201,8 +194,6 @@ const EmploymentInfoForm = () => {
                 color="#3377FF"
                 tt="capitalize"
                 px="30px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
                 type="submit"
                 style={{
                   backgroundColor: "#3377FF",

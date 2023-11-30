@@ -11,8 +11,10 @@ const ProfileRoot = async ({ children }) => {
   const headersList = headers();
   const domain = headersList.get("host");
   const subdomain = getSubdomain(domain);
+  const defaultSubdomain = ["www", "heasyresource"];
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
 
-  if (subdomain && session) {
+  if (hasSubdomain && session) {
     const getEmployee = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/employees/${session.user.company.id}/employee/${session.user.id}`,
       {

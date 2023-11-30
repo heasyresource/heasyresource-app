@@ -240,6 +240,7 @@ const SignUpForm = () => {
               position="bottom"
               width="target"
               transition="pop"
+              closeOnClickOutside
             >
               <Popover.Target>
                 <div

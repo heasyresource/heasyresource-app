@@ -34,10 +34,7 @@ const AddVacancy = () => {
       </Text>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <Stack gap={"1.5rem"}>
-          <Grid
-            gutter="lg"
-            className={classes.formWrap}
-          >
+          <Grid gutter="lg" className={classes.formWrap}>
             <GridCol span={{ lg: 4.5, md: 6, sm: 12 }}>
               <TextInput
                 size="md"
@@ -143,21 +140,14 @@ const AddVacancy = () => {
             </GridCol>
           </Grid>
 
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"auto"}
-          >
+          <Group justify="flex-end" align="center" mt={"auto"}>
             <Button
               variant="outline"
               size="md"
               color="#3377FF"
               style={{ borderColor: "#3377FF" }}
               tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
+              px="30px"
             >
               cancel
             </Button>
@@ -166,9 +156,7 @@ const AddVacancy = () => {
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
+              px="30px"
               type="submit"
               style={{
                 backgroundColor: "#3377FF",

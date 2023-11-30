@@ -13,7 +13,6 @@ const InputField = ({ loading, form, handleSubmit }) => {
           <TextInput
             size="md"
             label="Employee Name"
-            placeholder="Name"
             style={{ width: "100%" }}
             {...form.getInputProps("employeeName")}
             classNames={{
@@ -28,7 +27,6 @@ const InputField = ({ loading, form, handleSubmit }) => {
           <TextInput
             size="md"
             label="Employee ID"
-            placeholder="ID"
             style={{ width: "100%" }}
             {...form.getInputProps("employeeId")}
             classNames={{
@@ -43,10 +41,15 @@ const InputField = ({ loading, form, handleSubmit }) => {
           <Select
             size="md"
             label="Employee Status"
-            placeholder="Working"
             style={{ width: "100%" }}
             {...form.getInputProps("employeeStatus")}
-            data={[]}
+            data={[
+              "Resigned",
+              "Employed",
+              "Terminated",
+              "Suspended",
+              "Retired",
+            ]}
             classNames={{
               label: classes.label,
               error: classes.error,
@@ -59,7 +62,6 @@ const InputField = ({ loading, form, handleSubmit }) => {
           <Select
             size="md"
             label="Employee Department"
-            placeholder="Software Development"
             style={{ width: "100%" }}
             disabled={loading}
             {...form.getInputProps("employeeDepartment")}

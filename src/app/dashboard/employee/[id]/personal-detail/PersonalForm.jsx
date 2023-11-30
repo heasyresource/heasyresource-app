@@ -16,7 +16,7 @@ import { DateInput } from "@mantine/dates";
 import React from "react";
 import classes from "../../employee.module.css";
 
-const PersonalForm = () => {
+const PageWrap = () => {
   const { form, handleSubmit, loading, router } = usePersonal();
   const currentDate = new Date();
   return (
@@ -141,12 +141,7 @@ const PersonalForm = () => {
           </GridCol>
         </Grid>
 
-        <Group
-          justify="flex-end"
-          className={classes.btnWrap}
-          align="center"
-          mt={"6rem"}
-        >
+        <Group justify="flex-end" align="center" mt={"auto"}>
           <Button
             variant="outline"
             size="md"
@@ -154,8 +149,6 @@ const PersonalForm = () => {
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
             px="30px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             onClick={() => router.back()}
             disabled={loading}
           >
@@ -167,8 +160,6 @@ const PersonalForm = () => {
             color="#3377FF"
             tt="capitalize"
             px="30px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
             type="submit"
             disabled={loading}
             style={{
@@ -183,4 +174,4 @@ const PersonalForm = () => {
   );
 };
 
-export default PersonalForm;
+export default PageWrap;

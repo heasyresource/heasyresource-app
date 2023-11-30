@@ -111,7 +111,7 @@ const useAdmin = () => {
       notifications.show({
         color: "white",
         title: "Success",
-        message: "Company accepted successfully",
+        message: "Company approved successfully",
         styles: successStyles,
         autoClose: 7000,
       });
@@ -306,11 +306,15 @@ const useAdmin = () => {
   }, [searchParams.get("page")]);
 
   useEffect(() => {
-    getCompanies();
-    getSingleCompany();
     getMetadata();
     //eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    if (slug) {
+      getSingleCompany();
+    }
+    //eslint-disable-next-line
+  }, [slug]);
 
   return {
     companies,

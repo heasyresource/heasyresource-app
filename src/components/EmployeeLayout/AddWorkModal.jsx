@@ -76,7 +76,7 @@ const AddWorkModal = ({
               data={employmentType}
               size="md"
               withAsterisk
-              label="Emplyment Type"
+              label="Employment Type"
               style={{ textAlign: "start", width: "100%" }}
               classNames={{ label: classes.label, error: classes.error }}
               {...experienceForm?.getInputProps("employmentTypeId")}
@@ -159,6 +159,7 @@ const AddWorkModal = ({
               {...experienceForm?.getInputProps("description")}
               minRows={2}
               autosize
+              disabled={loading}
             />
           </GridCol>
         </Grid>
@@ -175,8 +176,7 @@ const AddWorkModal = ({
             color="#3377FF"
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
+            px="30px"
             onClick={() => {
               closeExp();
               experienceForm?.reset();
@@ -190,8 +190,7 @@ const AddWorkModal = ({
             size="md"
             color="#3377FF"
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
+            px="30px"
             type="submit"
             style={{
               backgroundColor: "#3377FF",

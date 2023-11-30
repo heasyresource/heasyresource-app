@@ -68,6 +68,7 @@ const useResetPassword = () => {
             tt="capitalize"
             bg="#3377FF"
             size="md"
+            aria-label="continue"
           >
             continue
           </Button>

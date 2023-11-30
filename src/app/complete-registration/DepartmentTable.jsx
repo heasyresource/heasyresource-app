@@ -95,6 +95,7 @@ export default function DepartmentTable({
           disabled={uploading || isSubmitted}
           onClick={open}
           variant="filled"
+          aria-label="add-department"
           tt={"capitalize"}
           style={{ backgroundColor: "#e7f7ff", color: "#000000" }}
         >
@@ -144,7 +145,7 @@ export default function DepartmentTable({
                 color="#3377FF"
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
+                aria-label="cancel"
                 onClick={close}
               >
                 cancel
@@ -157,6 +158,7 @@ export default function DepartmentTable({
                 style={{
                   backgroundColor: "#3377FF",
                 }}
+                aria-label="add"
               >
                 add
               </Button>

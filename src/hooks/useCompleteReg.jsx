@@ -102,6 +102,7 @@ const useCompleteReg = () => {
               style={{ backgroundColor: "#3377ff" }}
               tt="capitalize"
               onClick={() => modals.closeAll()}
+              aria-label="okay"
             >
               ok
             </Button>

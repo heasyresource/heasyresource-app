@@ -54,6 +54,7 @@ const RejectModal = ({ loading, handleReject, opened, close }) => {
             tt="capitalize"
             onClick={close}
             disabled={loading}
+            aria-label="cancel"
           >
             cancel
           </Button>
@@ -66,6 +67,7 @@ const RejectModal = ({ loading, handleReject, opened, close }) => {
               handleReject();
             }}
             disabled={loading}
+            aria-label="reject"
           >
             {loading ? (
               <Loader type="dots" size={"md"} color="white" />

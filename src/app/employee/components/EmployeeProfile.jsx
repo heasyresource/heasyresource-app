@@ -24,6 +24,7 @@ import classes from "../../../components/Profile/profile.module.css";
 import { useSignOut } from "@/hooks";
 import { useDisclosure } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
@@ -71,6 +72,7 @@ const UserButton = forwardRef(
 );
 
 export default function EmployeeProfile({ position, logo, name }) {
+  const { data: session } = useSession();
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -84,19 +86,46 @@ export default function EmployeeProfile({ position, logo, name }) {
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>
-          <Menu.Item
-            component="a"
-            href="/employee/settings"
-            className={classes.menuLink}
-            data-active={"/employee/settings"}
-            leftSection={
-              <IconUser
-                style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
-              />
-            }
-          >
-            Profile
-          </Menu.Item>
+          {session?.user.role.name === "CompanyAdmin" && (
+            <Link
+              href="/dashboard/settings/profile"
+              style={{ width: "100%", textDecoration: "none" }}
+            >
+              <Menu.Item
+                leftSection={
+                  <IconUser
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                      color: "#3377FF",
+                    }}
+                  />
+                }
+              >
+                Profile
+              </Menu.Item>
+            </Link>
+          )}
+          {session?.user.role.name === "Employee" && (
+            <Link
+              href="/employee/settings"
+              style={{ width: "100%", textDecoration: "none" }}
+            >
+              <Menu.Item
+                leftSection={
+                  <IconUser
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                      color: "#3377FF",
+                    }}
+                  />
+                }
+              >
+                Profile
+              </Menu.Item>
+            </Link>
+          )}
           <Menu.Item
             component="a"
             href="/employee/settings"

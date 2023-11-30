@@ -26,13 +26,16 @@ export const config = {
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { getSubdomain } from "./utils/publicFunctions";
+// import { withAuth } from "next-auth/middleware";
 
 export default async function middleware(req, res) {
   const token = await getToken({ req });
   const isAuthenticated = !!token;
   const defaultSubdomain = ["www", "heasyresource"];
   const subdomain = getSubdomain(req.headers.get("host"));
-  if (subdomain && !defaultSubdomain.includes(subdomain)) {
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+
+  if (subdomain && hasSubdomain) {
     const getSubdomain = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/subdomain/${subdomain}`
     );
@@ -52,11 +55,48 @@ export default async function middleware(req, res) {
       return NextResponse.redirect(new URL("/signin", req.url));
     }
   }
+  if (token) {
+    const getEmployee = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API}/employees/${token.companyId}/employee/${token.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+          "x-subdomain-name": subdomain,
+        },
+      }
+    );
+    const getEmployeeData = await getEmployee.json();
+    if (getEmployeeData.statusCode === 200) {
+      const employee = getEmployeeData.results;
+      if (
+        req.nextUrl.pathname.startsWith("/employee") &&
+        isAuthenticated &&
+        employee.isDefaultPassword === 1
+      ) {
+        return NextResponse.redirect(new URL("/change-password", req.url));
+      }
+      if (
+        req.nextUrl.pathname.startsWith("/change-password") &&
+        isAuthenticated &&
+        token.role.name === "Employee" &&
+        employee.isDefaultPassword === 0
+      ) {
+        return NextResponse.redirect(new URL("/employee", req.url));
+      }
+      if (
+        req.nextUrl.pathname.startsWith("/employee") &&
+        isAuthenticated &&
+        employee.isDefaultPassword === 1
+      ) {
+        return NextResponse.redirect(new URL("/change-password", req.url));
+      }
+    }
+  }
   if (
     req.nextUrl.pathname.startsWith("/dashboard") &&
-    !subdomain &&
+    !hasSubdomain &&
     isAuthenticated &&
-    token.role === "CompanyAdmin"
+    token.role.name === "CompanyAdmin"
   ) {
     return NextResponse.redirect(new URL("/complete-registration", req.url));
   }
@@ -119,13 +159,7 @@ export default async function middleware(req, res) {
   ) {
     return NextResponse.redirect(new URL("/complete-registration", req.url));
   }
-  if (
-    req.nextUrl.pathname.startsWith("/employee") &&
-    isAuthenticated &&
-    token.isDefaultPassword === 1
-  ) {
-    return NextResponse.redirect(new URL("/change-password", req.url));
-  }
+
   if (
     req.nextUrl.pathname.startsWith("/change-password") &&
     isAuthenticated &&

@@ -73,6 +73,7 @@ const useChangePassword = () => {
             onClick={() => handleRouteChange()}
             tt="capitalize"
             bg="#3377FF"
+            aria-label="continue"
             size="md"
           >
             continue
@@ -104,8 +105,7 @@ const useChangePassword = () => {
       setLoading(false);
       notifications.show({
         color: "red",
-        title: "Failed",
-        message: err.message,
+        message: "Something went wrong, please try again",
         styles: errorStyles,
         autoClose: 7000,
       });

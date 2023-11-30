@@ -11,19 +11,21 @@ export default async function CompleteRegistration() {
   const headersList = headers();
   const domain = headersList.get("host");
   const subdomain = getSubdomain(domain);
-  if (!subdomain && session) {
+  const defaultSubdomain = ["www", "heasyresource"];
+  const hasSubdomain = !defaultSubdomain.includes(subdomain);
+  if (!hasSubdomain && session) {
     const getCompany = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/${session?.user.company.id}`,
       {
         headers: {
           Authorization: `Bearer ${session?.user.token}`,
-          "x-subdomain-name": subdomain,
         },
       }
     );
-
     const getCompanyData = await getCompany.json();
-    companyInfo = getCompanyData.results;
+    if (getCompanyData.statusCode === 200) {
+      companyInfo = getCompanyData?.results;
+    }
   }
   return (
     <div style={{ backgroundColor: "#F8F9FA", padding: "1rem 0" }}>

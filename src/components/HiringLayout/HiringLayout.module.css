@@ -93,3 +93,9 @@
     justify-content: space-between !important;
   }
 }
+.mx {
+  margin: 0 40px;
+  @media (max-width: 768px) {
+    margin: 0 30px;
+  }
+}

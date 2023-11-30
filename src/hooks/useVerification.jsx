@@ -70,6 +70,7 @@ const useVerification = () => {
             tt="capitalize"
             bg="#3377FF"
             size="md"
+            aria-label="continue"
           >
             {routeLoading ? (
               <Loader size="md" color="white" type="dots" />
@@ -167,7 +168,7 @@ const useVerification = () => {
       setLoading(false);
       notifications.show({
         color: "red",
-        title: "Error",
+        title: "Failed",
         message: err.message,
         styles: errorStyles,
         autoClose: 7000,

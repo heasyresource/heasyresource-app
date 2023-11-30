@@ -30,6 +30,7 @@ const LeaveNav = ({ tabTitle }) => {
           data-active={"/dashboard/leave" === pathname || undefined}
           className={classes.btnLink}
           variant="filled"
+          aria-label="leave-list"
         >
           Leave List
         </Button>
@@ -50,6 +51,7 @@ const LeaveNav = ({ tabTitle }) => {
                 "/dashboard/leave/holidays" === pathname ||
                 undefined
               }
+              aria-label="configuration"
             >
               Configuration
               <Space w="5px" />

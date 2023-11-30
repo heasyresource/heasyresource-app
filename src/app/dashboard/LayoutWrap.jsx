@@ -46,6 +46,7 @@ const LayoutWrap = ({ children, companyInfo, companyRep }) => {
           </Group>
 
           <Profile
+            image={companyRep && companyRep.logoUrl}
             position={companyRep && companyRep.employmentInfo.position}
             name={
               companyRep && `${companyRep.firstName} ${companyRep.lastName}`
@@ -57,6 +58,7 @@ const LayoutWrap = ({ children, companyInfo, companyRep }) => {
         <Header
           companyName={companyInfo && companyInfo.name}
           logo={companyInfo && companyInfo.logoUrl}
+          image={companyRep && companyRep.logoUrl}
         />
       </AppShell.Header>
 

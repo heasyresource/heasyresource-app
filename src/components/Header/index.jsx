@@ -65,7 +65,7 @@ const data = [
     subLink: true,
   },
 ];
-const Header = ({ companyName, logo }) => {
+const Header = ({ companyName, logo, image }) => {
   const pathname = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -101,7 +101,7 @@ const Header = ({ companyName, logo }) => {
             <IconAlignLeft style={{ color: "#3377FF" }} />
           </ActionIcon>
           <Group justify="flex-end">
-            <EmployeeProfile />
+            <EmployeeProfile logo={image} />
           </Group>
         </Flex>
       </header>

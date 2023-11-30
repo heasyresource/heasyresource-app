@@ -69,6 +69,7 @@ const SettingsTable = ({
               onClick={() => {
                 modals.closeAll();
               }}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -81,6 +82,7 @@ const SettingsTable = ({
                 handleDelete(data.id);
                 modals.closeAll();
               }}
+              aria-label="delete"
             >
               delete
             </Button>

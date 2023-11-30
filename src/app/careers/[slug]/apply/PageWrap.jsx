@@ -19,7 +19,12 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { IconArrowUp, IconBriefcase2, IconMapPin } from "@tabler/icons-react";
+import {
+  IconArrowUp,
+  IconBriefcase2,
+  IconMapPin,
+  IconArrowLeft,
+} from "@tabler/icons-react";
 import useJobApply from "@/hooks/useJobApply";
 import classes from "../../../../components/JobListingsLayout/JobListings.module.css";
 import Loading from "@/components/Loading";
@@ -41,6 +46,23 @@ const PageWrap = () => {
         <Loading />
       ) : (
         <Container size={{ base: "95%", sm: "80%" }} py={66}>
+          <Flex justify={"flex-start"} align={"center"} mb="md">
+            <Button
+              variant="transparent"
+              onClick={() => router.back()}
+              style={{
+                textDecoration: "none",
+                display: "inline-flex",
+                fontWeight: 500,
+                color: "#3377FF",
+                alignItems: "center",
+              }}
+              aria-label="back"
+            >
+              <IconArrowLeft />
+              Back
+            </Button>
+          </Flex>
           <Card
             bg={"#ffff"}
             shadow="sm"
@@ -217,6 +239,7 @@ const PageWrap = () => {
                     }}
                     {...form.getInputProps("stateId")}
                     disabled={loading}
+                    searchable
                   />
                 </GridCol>
                 <GridCol span={{ lg: 12, md: 6, sm: 12 }}>
@@ -258,10 +281,12 @@ const PageWrap = () => {
                             textTransform: "capitalize",
                             backgroundColor: "#fff",
                           }}
+                          aria-label="browse-file"
                         >
                           browse file
                         </Button>
                       }
+                      leftSectionPointerEvents="none"
                       rightSection={
                         <ActionIcon
                           disabled
@@ -278,7 +303,6 @@ const PageWrap = () => {
                         style={{
                           fontSize: "14px",
                           color: "#565656",
-                          textTransform: "capitalize",
                         }}
                       >
                         File must not be larger than 2mb
@@ -297,18 +321,6 @@ const PageWrap = () => {
               </Grid>
               <Group justify="flex-end" my={40}>
                 <Button
-                  variant="outline"
-                  size="md"
-                  color="#3377FF"
-                  style={{ borderColor: "#3377FF" }}
-                  tt="capitalize"
-                  px="50px"
-                  onClick={() => router.back()}
-                  disabled={loading}
-                >
-                  back
-                </Button>
-                <Button
                   variant="contained"
                   size="md"
                   color="#3377FF"
@@ -319,6 +331,7 @@ const PageWrap = () => {
                     backgroundColor: "#3377FF",
                   }}
                   disabled={loading}
+                  aria-label="submi"
                 >
                   {loading ? (
                     <Loader color="white" type="dots" size={"md"} />

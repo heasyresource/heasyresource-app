@@ -191,6 +191,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 leftSectionWidth={140}
                 accept=".pdf, .doc, .docx"
                 {...form?.getInputProps("resumeUrl")}
+                leftSectionPointerEvents="none"
                 leftSection={
                   <Button
                     disabled
@@ -198,6 +199,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                       textTransform: "capitalize",
                       backgroundColor: "#fff",
                     }}
+                    aria-label="browse-file"
                   >
                     browse file
                   </Button>
@@ -232,6 +234,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 style={{
                   backgroundColor: "#3377FF",
                 }}
+                aria-label="download-resume"
               >
                 Download resume
               </Button>
@@ -254,6 +257,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
               className={classes.btn}
               onClick={() => router.back()}
               disabled={loading}
+              aria-label="back"
             >
               back
             </Button>
@@ -270,6 +274,7 @@ const CandidateProfile = ({ loading, form, handleEdit, states, countries }) => {
                 backgroundColor: "#3377FF",
               }}
               disabled={loading || !isEdit}
+              aria-label="submit"
             >
               {loading ? (
                 <Loader color="white" type="dots" size="md" />

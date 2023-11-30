@@ -29,7 +29,6 @@ const EmployeeWrap = () => {
     getEmployees,
   } = useSearch();
   const handleReset = () => {
-    getEmployees();
     form.setValues({
       employeeName: "",
       departmentId: null,
@@ -58,7 +57,6 @@ const EmployeeWrap = () => {
               <TextInput
                 size="md"
                 label="Employee Name"
-                placeholder="Name"
                 style={{ width: "100%" }}
                 {...form.getInputProps("employeeName")}
                 classNames={{
@@ -72,7 +70,6 @@ const EmployeeWrap = () => {
               <TextInput
                 size="md"
                 label="Employee ID"
-                placeholder="ID"
                 style={{ width: "100%" }}
                 {...form.getInputProps("employeeId")}
                 classNames={{
@@ -86,10 +83,14 @@ const EmployeeWrap = () => {
               <Select
                 size="md"
                 label="Employee Status"
-                placeholder="Working"
-                style={{ width: "100%" }}
                 {...form.getInputProps("status")}
-                data={["Terminated", "Employed"]}
+                data={[
+                  "Resigned",
+                  "Employed",
+                  "Terminated",
+                  "Suspended",
+                  "Retired",
+                ]}
                 classNames={{
                   label: classes.label,
                   error: classes.error,
@@ -101,7 +102,6 @@ const EmployeeWrap = () => {
               <Select
                 size="md"
                 label="Employee Department"
-                placeholder="Software Development"
                 style={{ width: "100%" }}
                 disabled={loading}
                 {...form.getInputProps("departmentId")}
@@ -120,7 +120,7 @@ const EmployeeWrap = () => {
               size="md"
               variant="outline"
               color="#3377FF"
-              px={"40px"}
+              px={"30px"}
               onClick={() => handleReset()}
             >
               Reset
@@ -130,7 +130,7 @@ const EmployeeWrap = () => {
               size="md"
               variant="filled"
               color="#3377FF"
-              px={"40px"}
+              px={"30px"}
               onClick={() => getEmployees()}
             >
               search

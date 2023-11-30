@@ -2,10 +2,12 @@
 import {
   Box,
   Button,
+  Divider,
   Grid,
   GridCol,
   Group,
   Loader,
+  MultiSelect,
   Select,
   Stack,
   Text,
@@ -16,7 +18,17 @@ import classes from "../../employee.module.css";
 import useCompensation from "@/hooks/useCompensation";
 
 const CompensationForm = () => {
-  const { form, handleSubmit, loading, router } = useCompensation();
+  const {
+    form,
+    handleSubmit,
+    loading,
+    router,
+    earnings,
+    deductions,
+    componentForm,
+    handleComponentSubmit,
+    componentLoading,
+  } = useCompensation();
   return (
     <Box>
       <Text tt={"capitalize"} style={{ fontSize: "22px", fontWeight: 700 }}>
@@ -30,10 +42,9 @@ const CompensationForm = () => {
           <Box>
             <Text
               c="#4D4D4D"
-              tt="capitalize"
               style={{ fontWeight: 500, fontSize: "18px", textAlign: "start" }}
             >
-              add basic salary component
+              Add basic salary
             </Text>
 
             <Grid style={{ marginTop: "20px" }} gutter="xl">
@@ -79,25 +90,11 @@ const CompensationForm = () => {
 
           <Group justify="flex-end" align="center" mt={"auto"}>
             <Button
-              variant="outline"
-              size="md"
-              color="#3377FF"
-              style={{ borderColor: "#3377FF" }}
-              tt="capitalize"
-              px="30px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              onClick={() => router.back()}
-              disabled={loading}
-            >
-              cancel
-            </Button>
-            <Button
               variant="contained"
               size="md"
               color="#3377FF"
               tt="capitalize"
               px="30px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
               type="submit"
               style={{
                 backgroundColor: "#3377FF",
@@ -113,6 +110,84 @@ const CompensationForm = () => {
           </Group>
         </Stack>
       </form>
+      <Divider my={"lg"} />
+      <Box>
+        <Text
+          c="#4D4D4D"
+          style={{ fontWeight: 500, fontSize: "18px", textAlign: "start" }}
+        >
+          Add components
+        </Text>
+        <form
+          onSubmit={componentForm.onSubmit((values) =>
+            handleComponentSubmit(values)
+          )}
+          style={{ marginTop: "2rem" }}
+        >
+          <Stack gap={"1rem"}>
+            <Grid gutter={"lg"}>
+              <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+                <MultiSelect
+                  size="md"
+                  withAsterisk
+                  label="Earnings"
+                  placeholder="Select components"
+                  data={earnings}
+                  {...componentForm.getInputProps("earns")}
+                  disabled={componentLoading}
+                  style={{ textAlign: "start", width: "100%" }}
+                  classNames={{ label: classes.label, error: classes.error }}
+                />
+              </GridCol>
+              <GridCol span={{ lg: 6, md: 6, sm: 12 }}>
+                <MultiSelect
+                  size="md"
+                  withAsterisk
+                  label="Deductions"
+                  placeholder="Select components"
+                  data={deductions}
+                  {...componentForm.getInputProps("deduct")}
+                  disabled={componentLoading}
+                  style={{ textAlign: "start", width: "100%" }}
+                  classNames={{ label: classes.label, error: classes.error }}
+                />
+              </GridCol>
+            </Grid>
+            <Group justify="flex-end" align="center" mt={"1.5rem"}>
+              <Button
+                variant="outline"
+                size="md"
+                color="#3377FF"
+                style={{ borderColor: "#3377FF" }}
+                tt="capitalize"
+                px="30px"
+                onClick={() => router.back()}
+                disabled={componentLoading}
+              >
+                back
+              </Button>
+              <Button
+                variant="contained"
+                size="md"
+                color="#3377FF"
+                tt="capitalize"
+                px="30px"
+                type="submit"
+                style={{
+                  backgroundColor: "#3377FF",
+                }}
+                disabled={componentLoading}
+              >
+                {componentLoading ? (
+                  <Loader type="dots" color="white" size={"md"} />
+                ) : (
+                  "save"
+                )}
+              </Button>
+            </Group>
+          </Stack>
+        </form>
+      </Box>
     </Box>
   );
 };

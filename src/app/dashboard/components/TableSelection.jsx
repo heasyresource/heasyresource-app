@@ -77,11 +77,31 @@ export function TableSelection({
               noWrap: true,
             },
             {
+              accessor: "id",
+              title: "Employee ID",
+              noWrap: true,
+              render: (employees) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {employees.employmentInfo.employeeId}
+                </Text>
+              ),
+            },
+            {
               accessor: "department",
               noWrap: true,
               render: ({ employmentInfo }) => (
                 <Text tt="capitalize" style={{ fontSize: "15px" }}>
                   {employmentInfo.department.name}
+                </Text>
+              ),
+            },
+            {
+              accessor: "position",
+              title: "Position",
+              noWrap: true,
+              render: (employees) => (
+                <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                  {employees.employmentInfo.position}
                 </Text>
               ),
             },

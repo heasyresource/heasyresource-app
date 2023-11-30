@@ -4,6 +4,7 @@ import { addHttps } from "@/utils/publicFunctions";
 import { DataTable } from "mantine-datatable";
 import { Avatar, Badge, Flex, Text, rem } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
+import Image from "next/image";
 
 const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
   return (
@@ -32,10 +33,12 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
               width: "80px",
               render: ({ logoUrl }) => (
                 <Flex justify="center" align="center">
-                  <Avatar
-                    size={26}
+                  <Image
+                    width={26}
+                    height={26}
                     src={logoUrl || "/assets/images/cmpLogo.png"}
-                    radius={26}
+                    style={{ borderRadius: "50px" }}
+                    alt="company-logo"
                   />
                 </Flex>
               ),
@@ -45,6 +48,11 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
               title: "Company Name",
               textTransform: "capitalize",
               noWrap: true,
+              render: ({ name }) => (
+                <Text style={{ fontSize: "15px", textTransform: "capitalize" }}>
+                  {name}
+                </Text>
+              ),
             },
             {
               accessor: "companySize",
@@ -97,11 +105,11 @@ const CompanyTable = ({ companies, paginate, pagination, gettingData }) => {
             },
             {
               accessor: "address",
-
+              width: "200px",
               textTransform: "capitalize",
               noWrap: true,
               render: ({ address }) => (
-                <Text style={{ fontSize: "15px" }}>
+                <Text style={{ fontSize: "15px" }} truncate="end">
                   {address !== null ? address : "N/A"}
                 </Text>
               ),

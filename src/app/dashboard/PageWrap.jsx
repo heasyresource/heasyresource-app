@@ -64,6 +64,10 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
   const options = {
     maintainAspectRatio: false,
     plugins: {
+      emptyPie: {
+        color: "rgba(255, 128, 0, 0.5)",
+        width: 2,
+      },
       legend: {
         display: true,
         position: "right",
@@ -181,7 +185,32 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                       textAlign: "center",
                     }}
                   >
-                    <Pie data={data} options={options} />
+                    {analytics?.fullTimeEmployeeCount === 0 &&
+                    analytics?.partTimeEmployeeCount === 0 &&
+                    analytics?.contractEmployeeCount === 0 &&
+                    analytics?.freelanceEmployeeCount === 0 &&
+                    analytics?.intershipEmployeeCount === 0 &&
+                    analytics?.temporaryEmploymentCount === 0 ? (
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          flexDirection: "column",
+                          height: "100%",
+                          gap: "13px",
+                        }}
+                      >
+                        <Image
+                          src={"/assets/svgs/chart.svg"}
+                          alt="empty"
+                          style={{ width: "100px" }}
+                        />
+                        <Text>No data available</Text>
+                      </Box>
+                    ) : (
+                      <Pie data={data} options={options} />
+                    )}
                   </Paper>
                 </GridCol>
                 <GridCol span={{ lg: 4, md: 4, sm: 12 }}>
@@ -191,101 +220,6 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                 </GridCol>
               </Grid>
             </Box>
-            {employees && employees.length !== 0 && (
-              <Box mt="lg">
-                <Group justify={"space-between"} align="center">
-                  <Text style={{ fontSize: "18px", fontWeight: 500 }}>
-                    Employees
-                  </Text>
-                  <Link href={"/dashboard/employee"}>
-                    <Button size="sm" variant="subtle" color="#3377FF">
-                      View all
-                    </Button>
-                  </Link>
-                </Group>
-                <DataTable
-                  style={{ background: "none" }}
-                  minHeight={"auto"}
-                  withRowBorders={false}
-                  records={employees && employees}
-                  columns={[
-                    {
-                      accessor: "index",
-                      title: "S/N",
-                      textAlign: "center",
-                      render: (record) => employees.indexOf(record) + 1,
-                    },
-                    {
-                      accessor: "avatar",
-                      title: "",
-
-                      width: "80px",
-                      render: ({ logoUrl }) => (
-                        <Flex justify="center" align="center">
-                          <Avatar
-                            size={26}
-                            src={logoUrl || "/assets/images/avata2.png"}
-                            radius={26}
-                          />
-                        </Flex>
-                      ),
-                    },
-                    {
-                      accessor: "firstName",
-                      noWrap: true,
-                      render: ({ firstName }) => (
-                        <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                          {firstName}
-                        </Text>
-                      ),
-                    },
-                    {
-                      accessor: "lastName",
-                      noWrap: true,
-                      render: ({ lastName }) => (
-                        <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                          {lastName}
-                        </Text>
-                      ),
-                    },
-
-                    {
-                      accessor: "department",
-                      noWrap: true,
-                      render: ({ employmentInfo }) => (
-                        <Text tt="capitalize" style={{ fontSize: "15px" }}>
-                          {employmentInfo.department.name}
-                        </Text>
-                      ),
-                    },
-                    {
-                      accessor: "moreDetails",
-
-                      render: (employees) => (
-                        <Link
-                          href={`/dashboard/employee/${employees.id}/personal-detail`}
-                        >
-                          <Badge
-                            radius="xs"
-                            variant="light"
-                            color="#3377FF"
-                            size="lg"
-                            style={{
-                              color: "#3377FF",
-
-                              textTransform: "capitalize",
-                              cursor: "pointer",
-                            }}
-                          >
-                            more details
-                          </Badge>
-                        </Link>
-                      ),
-                    },
-                  ]}
-                />
-              </Box>
-            )}
           </Box>
         </GridCol>
 
@@ -303,22 +237,27 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                 Pending Requests
               </Text>
               <Link href={"/dashboard/leave"}>
-                <Button size="sm" variant="subtle" color="#3377FF">
+                <Button
+                  aria-label="view-all"
+                  size="sm"
+                  variant="subtle"
+                  color="#3377FF"
+                >
                   View all
                 </Button>
               </Link>
             </Group>
             {leaves && leaves.length !== 0 ? (
               <DataTable
-                height={"100%"}
+                height={400}
                 style={{ background: "none" }}
-                withRowBorders={false}
+                withRowBorders
                 records={leaves && leaves}
                 columns={[
                   {
                     accessor: "user",
                     title: "Employee Name",
-                    textAlign: "center",
+                    width: "110px",
                     textTransform: "capitalize",
                     noWrap: true,
                     render: ({ user }) => (
@@ -330,11 +269,16 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
 
                   {
                     accessor: "leaveType",
-                    textAlign: "center",
+
                     textTransform: "capitalize",
                     noWrap: true,
+                    width: "120px",
                     render: ({ leaveType }) => (
-                      <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                      <Text
+                        tt="capitalize"
+                        style={{ fontSize: "15px" }}
+                        truncate="end"
+                      >
                         {leaveType.name}
                       </Text>
                     ),
@@ -345,6 +289,7 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                     textAlign: "center",
                     textTransform: "capitalize",
                     noWrap: true,
+                    width: "80px",
                     render: ({ status }) => (
                       <>
                         {status === "Approved" && (
@@ -370,6 +315,7 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                   height: "100%",
                   marginTop: "100px",
                   flexDirection: "column",
+                  gap: "13px",
                 }}
               >
                 <Image
@@ -383,6 +329,123 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
           </Box>
         </GridCol>
       </Grid>
+      {employees && employees.length !== 0 && (
+        <Box mt="lg">
+          <Group justify={"space-between"} align="center">
+            <Text style={{ fontSize: "18px", fontWeight: 500 }}>Employees</Text>
+            <Link href={"/dashboard/employee"}>
+              <Button
+                aria-label="view-all"
+                size="sm"
+                variant="subtle"
+                color="#3377FF"
+              >
+                View all
+              </Button>
+            </Link>
+          </Group>
+          <DataTable
+            style={{ background: "none" }}
+            minHeight={"auto"}
+            withRowBorders={false}
+            records={employees && employees}
+            columns={[
+              {
+                accessor: "index",
+                title: "S/N",
+                textAlign: "center",
+                render: (record) => employees.indexOf(record) + 1,
+              },
+              {
+                accessor: "avatar",
+                title: "",
+
+                width: "80px",
+                render: ({ logoUrl }) => (
+                  <Flex justify="center" align="center">
+                    <Avatar
+                      size={26}
+                      src={logoUrl || "/assets/images/avata2.png"}
+                      radius={26}
+                    />
+                  </Flex>
+                ),
+              },
+              {
+                accessor: "firstName",
+                noWrap: true,
+                render: ({ firstName }) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {firstName}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "lastName",
+                noWrap: true,
+                render: ({ lastName }) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {lastName}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "id",
+                title: "Employee ID",
+                noWrap: true,
+                render: (employees) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {employees.employmentInfo.employeeId}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "department",
+                noWrap: true,
+                render: (employees) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {employees.employmentInfo.department.name}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "position",
+                title: "Position",
+                noWrap: true,
+                render: (employees) => (
+                  <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                    {employees.employmentInfo.position}
+                  </Text>
+                ),
+              },
+              {
+                accessor: "moreDetails",
+
+                render: (employees) => (
+                  <Link
+                    href={`/dashboard/employee/${employees.id}/personal-detail`}
+                  >
+                    <Badge
+                      radius="xs"
+                      variant="light"
+                      color="#3377FF"
+                      size="lg"
+                      style={{
+                        color: "#3377FF",
+
+                        textTransform: "capitalize",
+                        cursor: "pointer",
+                      }}
+                    >
+                      more details
+                    </Badge>
+                  </Link>
+                ),
+              },
+            ]}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

@@ -98,6 +98,7 @@ export default function HolidayTypeTable({
                 modals.closeAll();
                 setItemID("");
               }}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -110,6 +111,7 @@ export default function HolidayTypeTable({
                 handleDelete();
                 modals.closeAll();
               }}
+              aria-label="delete"
             >
               delete
             </Button>
@@ -332,26 +334,20 @@ export default function HolidayTypeTable({
                 disabled={loading}
               />
             </Box>
-            <Group
-              justify="flex-end"
-              className={classes.btnWrap}
-              align="center"
-              mt={"auto"}
-            >
+            <Group justify="flex-end" align="center" mt={"auto"}>
               <Button
                 variant="outline"
                 size="md"
                 color="#3377FF"
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
+                px="30px"
                 onClick={() => {
                   closeEdit();
                   form?.reset();
                 }}
                 disabled={loading}
+                aria-label="cancel"
               >
                 cancel
               </Button>
@@ -360,14 +356,13 @@ export default function HolidayTypeTable({
                 size="md"
                 color="#3377FF"
                 tt="capitalize"
-                px="50px"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
+                px="30px"
                 type="submit"
                 style={{
                   backgroundColor: "#3377FF",
                 }}
                 disabled={loading}
+                aria-label="add"
               >
                 {loading ? (
                   <Loader color="white" type="dots" size="md" />

@@ -142,8 +142,7 @@ const AddEduModal = ({
             color="#3377FF"
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
+            px="30px"
             onClick={() => {
               closeEdu();
               educationForm?.reset();
@@ -158,7 +157,6 @@ const AddEduModal = ({
             color="#3377FF"
             tt="capitalize"
             px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
             type="submit"
             style={{
               backgroundColor: "#3377FF",

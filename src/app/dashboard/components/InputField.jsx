@@ -47,7 +47,6 @@ const InputField = ({
           <Select
             size="md"
             label="Employee Status"
-            placeholder="Working"
             style={{ width: "100%" }}
             {...form.getInputProps("status")}
             data={[

@@ -14,7 +14,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ProviderWrap from "./context/client-provider";
 
-
 export const metadata = {
   title: {
     template: "%s | HeasyResource",

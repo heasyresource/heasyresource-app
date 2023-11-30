@@ -1,5 +1,5 @@
-import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button, TextInput } from '@mantine/core';
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, Button, TextInput } from "@mantine/core";
 
 export default function EditModal() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -16,7 +16,9 @@ export default function EditModal() {
         />
       </Modal>
 
-      <Button onClick={open}>Open modal</Button>
+      <Button onClick={open} aria-label="open-modal">
+        Open modal
+      </Button>
     </>
   );
 }

@@ -14,8 +14,10 @@ const useCompensation = () => {
   const subdomain = getSubdomain();
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
-  const [isChanged, setIsChanged] = useState(null);
+  const [componentLoading, setComponentLoading] = useState(false);
   const router = useRouter();
+  const [earnings, setEarnings] = useState(null);
+  const [deductions, setDeductions] = useState(null);
   const form = useForm({
     initialValues: {
       grossSalary: "",
@@ -28,6 +30,17 @@ const useCompensation = () => {
       currency: (v) => (!v.length ? " Currency is required " : null),
     },
   });
+  const componentForm = useForm({
+    initialValues: {
+      earns: [],
+      deduct: [],
+    },
+    validate: {
+      earns: (val) => (val.length !== 0 ? null : "Field is required"),
+      deduct: (val) => (val.length !== 0 ? null : "Field is required"),
+    },
+  });
+
   const headerSettings = {
     headers: {
       Authorization: `Bearer ${session?.user.token}`,
@@ -64,7 +77,7 @@ const useCompensation = () => {
       }
 
       notifications.show({
-        color: "white",
+        color: "red",
         message: "Something went wrong, please try again.",
         styles: errorStyles,
         autoClose: 7000,
@@ -77,6 +90,35 @@ const useCompensation = () => {
       }
     }
   };
+  const handleComponentSubmit = async (data) => {
+    setComponentLoading(true);
+
+    try {
+      await apiClient.post(
+        `/components/user/${id}`,
+        {
+          componentIds: [...data.earns, ...data.deduct],
+        },
+        headerSettings
+      );
+      notifications.show({
+        color: "white",
+        title: "Success",
+        message: "Components added successfully. ",
+        styles: successStyles,
+        autoClose: 7000,
+      });
+      setComponentLoading(false);
+    } catch (err) {
+      setComponentLoading(false);
+      notifications.show({
+        color: "red",
+        message: "Something went wrong, please try again.",
+        styles: errorStyles,
+        autoClose: 7000,
+      });
+    }
+  };
   const getEmployee = async () => {
     try {
       const response = await apiClient.get(
@@ -86,7 +128,21 @@ const useCompensation = () => {
         headerSettings
       );
       const results = response.results.salary;
+      const components = response.results.components;
+      const earn = components.filter(
+        (item) => item.component && item.component.type === "Earnings"
+      );
+      const deduct = components.filter(
+        (item) => item.component && item.component.type === "Deductions"
+      );
+      const modifiedEarns = earn.map((item) => item.component.id);
+      const modifiedDeduct = deduct.map((item) => item.component.id);
+      componentForm.setValues({
+        earns: modifiedEarns,
+        deduct: modifiedDeduct,
+      });
 
+      console.log({ modifiedDeduct, modifiedEarns });
       form.setValues({
         grossSalary: convertToDecimalFormat(results.grossSalary),
         frequency: results.frequency,
@@ -110,16 +166,43 @@ const useCompensation = () => {
   };
 
   const convertToDecimalFormat = (inputString) => {
-    if (!isNaN(inputString)) {
-      if (inputString.includes(".")) {
-        return inputString;
-      }
+    const parsedNumber = parseFloat(inputString);
 
-      return inputString + ".00";
+    if (!isNaN(parsedNumber)) {
+      const decimalString = parsedNumber.toFixed(2);
+      return decimalString.toString();
     }
   };
+  const getEarnings = async () => {
+    try {
+      const response = await apiClient.get(
+        `/components?paginate=false`,
+        headerSettings
+      );
+      const earn = response.results.filter((i) => i.type === "Earnings");
+      const modifiedEarns = earn.map((item) => ({
+        value: item.id,
+        label: item.name,
+      }));
+      const deduct = response.results.filter((i) => i.type === "Deductions");
+      const modifiedDeduct = deduct.map((item) => ({
+        value: item.id,
+        label: item.name,
+      }));
+      setEarnings(modifiedEarns);
+      setDeductions(modifiedDeduct);
+    } catch (err) {
+      if (
+        err.message === "Authorization is required to access this resource."
+      ) {
+        handleSignOut();
+      }
+    }
+  };
+
   useEffect(() => {
     getEmployee();
+    getEarnings();
     //eslint-disable-next-line
   }, []);
 
@@ -128,6 +211,11 @@ const useCompensation = () => {
     router,
     loading,
     handleSubmit,
+    earnings,
+    deductions,
+    componentForm,
+    handleComponentSubmit,
+    componentLoading,
   };
 };
 

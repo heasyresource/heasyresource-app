@@ -4,6 +4,7 @@ import classes from "../employee.module.css";
 
 import React from "react";
 import { IconUserPlus, IconUsers } from "@tabler/icons-react";
+import Link from "next/link";
 
 const AddEmployee = () => {
   return (
@@ -34,60 +35,67 @@ const AddEmployee = () => {
           gap: "40px",
         }}
       >
-        <Box
-          component="a"
+        <Link
           href="/dashboard/employee/add-employee/individual"
-          className={classes.cardType}
-          style={{
-            border: "1px solid #3377FF",
-            borderRadius: "20px",
-            padding: "40px 30px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "15px",
-            cursor: "pointer",
-            transition: ".3s ease-in-out",
-            color: "initial",
-            textDecoration: "none",
-          }}
+          style={{ textDecoration: "none" }}
         >
-          <IconUserPlus
-            style={{ width: "70px", height: "70px", color: "#3377FF" }}
-          />
-          <Text tt="capitalize" style={{ fontWeight: 700, fontSize: "23px" }}>
-            add individual employee
-          </Text>
-        </Box>
-        <Box
-          className={classes.cardType}
-          component="a"
+          <Box
+            className={classes.cardType}
+            style={{
+              border: "1px solid #3377FF",
+              borderRadius: "20px",
+              padding: "40px 30px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              gap: "15px",
+              cursor: "pointer",
+              transition: ".3s ease-in-out",
+              color: "initial",
+              textDecoration: "none",
+            }}
+          >
+            <IconUserPlus
+              style={{ width: "70px", height: "70px", color: "#3377FF" }}
+            />
+            <Text tt="capitalize" style={{ fontWeight: 700, fontSize: "23px" }}>
+              add individual employee
+            </Text>
+          </Box>
+        </Link>
+
+        <Link
           href="/dashboard/employee/add-employee/bulk"
-          style={{
-            border: "1px solid #3377FF",
-            borderRadius: "20px",
-            padding: "40px 30px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "15px",
-            cursor: "pointer",
-            transition: ".3s ease-in-out",
-            color: "initial",
-            textDecoration: "none",
-          }}
+          style={{ textDecoration: "none" }}
         >
-          <IconUsers
-            style={{ width: "70px", height: "70px", color: "#3377FF" }}
-          />
-          <Text tt="capitalize" style={{ fontWeight: 700, fontSize: "23px" }}>
-            import employees in bulk
-          </Text>
-        </Box>
+          <Box
+            className={classes.cardType}
+            style={{
+              border: "1px solid #3377FF",
+              borderRadius: "20px",
+              padding: "40px 30px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              gap: "15px",
+              cursor: "pointer",
+              transition: ".3s ease-in-out",
+              color: "initial",
+              textDecoration: "none",
+            }}
+          >
+            <IconUsers
+              style={{ width: "70px", height: "70px", color: "#3377FF" }}
+            />
+            <Text tt="capitalize" style={{ fontWeight: 700, fontSize: "23px" }}>
+              import employees in bulk
+            </Text>
+          </Box>
+        </Link>
       </Box>
     </Card>
   );

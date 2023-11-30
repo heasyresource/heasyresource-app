@@ -186,6 +186,7 @@ const CompanyWrap = () => {
                             w={{ lg: "auto", md: "auto", sm: "auto" }}
                             className={classes.btn}
                             onClick={openAccept}
+                            aria-label="approve"
                           >
                             Approve
                           </Button>
@@ -198,6 +199,7 @@ const CompanyWrap = () => {
                             w={{ lg: "auto", md: "auto", sm: "auto" }}
                             className={classes.btn}
                             onClick={openReject}
+                            aria-label="reject"
                           >
                             Reject
                           </Button>
@@ -216,6 +218,7 @@ const CompanyWrap = () => {
                             w={{ lg: "auto", md: "auto", sm: "auto" }}
                             className={classes.btn}
                             onClick={openSuspend}
+                            aria-label="suspend"
                           >
                             Suspend
                           </Button>
@@ -235,6 +238,7 @@ const CompanyWrap = () => {
                             w={{ lg: "auto", md: "auto", sm: "auto" }}
                             className={classes.btn}
                             onClick={openAccept}
+                            aria-label="unsuspend"
                           >
                             unsuspend
                           </Button>
@@ -254,6 +258,7 @@ const CompanyWrap = () => {
                             w={{ lg: "auto", md: "auto", sm: "auto" }}
                             className={classes.btn}
                             onClick={openAccept}
+                            aria-label="approve"
                           >
                             Approve
                           </Button>
@@ -451,6 +456,7 @@ const CompanyWrap = () => {
                         style={{ borderColor: "#3377FF" }}
                         tt="capitalize"
                         onClick={() => back()}
+                        aria-label="back"
                       >
                         back
                       </Button>
@@ -461,6 +467,7 @@ const CompanyWrap = () => {
                         bg="#3377ff"
                         type="submit"
                         disabled={!isEdit}
+                        aria-label="save"
                       >
                         Save
                       </Button>

@@ -36,7 +36,6 @@ const LayoutWrap = ({ children, employeeInfo }) => {
   return (
     <>
       <Group my={"auto"} align="center" justify="flex-start" mt="lg">
-        {/* <AddEmployeeImg logo={logo} /> */}
         <SettingImg
           uploading={uploading}
           logo={employeeInfo && employeeInfo.logoUrl}
@@ -52,7 +51,7 @@ const LayoutWrap = ({ children, employeeInfo }) => {
           </Badge>
           <Space h={10} />
 
-          <Group wrap="nowrap" gap={10} mt={5}>
+          <Group gap={"3px"} mt={5}>
             <Text fw={700} fz="sm" c={"#686868"}>
               Email:
             </Text>

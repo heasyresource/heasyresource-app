@@ -180,6 +180,7 @@ const ApplicantForm = () => {
                 leftSectionWidth={140}
                 accept=".pdf, .doc, .docx"
                 {...form.getInputProps("resumeUrl")}
+                leftSectionPointerEvents="none"
                 leftSection={
                   <Button
                     disabled

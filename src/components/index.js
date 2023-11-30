@@ -4,7 +4,6 @@ export { default as EmployeeLayout } from "./EmployeeLayout";
 export { default as Layout } from "./Layout";
 export { default as EmployeeNav } from "./EmployeeLayout/EmployeeNav";
 export { default as LeaveNav } from "./LeaveLayout/LeaveNav";
-export { default as SearchFields } from "./LeaveLayout/SearchFields";
 export { default as LeaveTable } from "./LeaveLayout/LeaveTable";
 export { default as AssignLeaveForm } from "./LeaveLayout/AssignLeaveForm";
 export { default as AddLeaveType } from "./LeaveLayout/AddLeaveType";

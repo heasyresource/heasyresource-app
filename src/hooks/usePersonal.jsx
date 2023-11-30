@@ -46,7 +46,7 @@ const usePersonal = () => {
         !value.length ? "Marital Status is required" : null,
       dateOfBirth: (value) =>
         value?.length === 0 ? "Date of Birth is required" : null,
-      gender: (value) => (!value.length ? "Gender is required" : null),
+      gender: (value) => (!value?.length ? "Gender is required" : null),
     },
   });
   const headerSettings = {

@@ -62,7 +62,7 @@ const Licence = ({
             c="#4D4D4D"
             style={{
               fontWeight: 700,
-              fontSize: "23px",
+              fontSize: "19px",
               textAlign: "start",
             }}
           >
@@ -142,7 +142,7 @@ const Licence = ({
                         style={{
                           fontSize: "14px",
                         }}
-                      >{`CredentialID: ${item.credentialId}`}</Text>
+                      >{`Credential ID: ${item.credentialId}`}</Text>
                     )}
                     {item.credentialUrl !== null && (
                       <Button

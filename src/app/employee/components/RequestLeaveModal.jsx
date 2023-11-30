@@ -106,7 +106,7 @@ const RequestLeaveModal = ({
               <GridCol span={12}>
                 <Textarea
                   size="md"
-                  {...form?.getInputProps("comment")}
+                  {...form?.getInputProps("comments")}
                   label="Comment"
                   classNames={{
                     label: classes.label,

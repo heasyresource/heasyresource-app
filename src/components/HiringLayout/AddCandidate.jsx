@@ -151,6 +151,7 @@ const AddCandidate = () => {
                 variant="filled"
                 size="md"
                 leftSectionWidth={140}
+                leftSectionPointerEvents="none"
                 leftSection={
                   <Button
                     disabled

@@ -51,6 +51,7 @@ const AddLeaveType = ({
           variant="filled"
           tt={"capitalize"}
           style={{ backgroundColor: "#e7f7ff", color: "#000000" }}
+          aria-label="add"
         >
           add +
         </Button>
@@ -164,26 +165,20 @@ const AddLeaveType = ({
                 {...form?.getInputProps("comments")}
                 disabled={loading}
               />
-              <Group
-                justify="flex-end"
-                className={classes.btnWrap}
-                align="center"
-                mt={"auto"}
-              >
+              <Group justify="flex-end" align="center" mt={"auto"}>
                 <Button
                   variant="outline"
                   size="md"
                   color="#3377FF"
                   style={{ borderColor: "#3377FF" }}
                   tt="capitalize"
-                  px="50px"
-                  w={{ lg: "auto", md: "auto", sm: "auto" }}
-                  className={classes.btn}
+                  px="30px"
                   onClick={() => {
                     closeAdd();
                     form?.reset();
                   }}
                   disabled={loading}
+                  aria-label="cancel"
                 >
                   cancel
                 </Button>
@@ -192,14 +187,13 @@ const AddLeaveType = ({
                   size="md"
                   color="#3377FF"
                   tt="capitalize"
-                  px="50px"
-                  w={{ lg: "auto", md: "auto", sm: "auto" }}
-                  className={classes.btn}
+                  px="30px"
                   type="submit"
                   style={{
                     backgroundColor: "#3377FF",
                   }}
                   disabled={loading}
+                  aria-label="add"
                 >
                   {loading ? (
                     <Loader color="white" type="dots" size="md" />

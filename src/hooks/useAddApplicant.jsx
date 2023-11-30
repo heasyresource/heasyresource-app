@@ -78,7 +78,6 @@ const useAddApplicant = () => {
     initialValues: {
       search: "",
       status: "",
-      vacancyId: "",
     },
   });
   const reasonForm = useForm({
@@ -315,9 +314,7 @@ const useAddApplicant = () => {
     if (!!filterForm.values.status?.length) {
       qParams.status = filterForm.values.status;
     }
-    if (!!filterForm.values?.vacancyId) {
-      qParams.vacancyId = filterForm.values.vacancyId;
-    }
+
     try {
       const response = await apiClient.get(`/applicants`, {
         params: qParams,
@@ -409,7 +406,16 @@ const useAddApplicant = () => {
     getApplicants();
     //eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    if (
+      filterForm.values.status === null &&
+      filterForm.values.search.length === 0
+    ) {
+      getApplicants();
+    }
 
+    //eslint-disable-next-line
+  }, [filterForm.values]);
   return {
     form,
     loading,

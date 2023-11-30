@@ -26,6 +26,7 @@ import DepartmentTable from "./DepartmentTable";
 import { useCompleteReg, useSignOut } from "@/hooks";
 import styles from "./completeRegistration.module.css";
 import {
+  IconBan,
   IconInfoCircle,
   IconLogout,
   IconProgressCheck,
@@ -65,6 +66,7 @@ const CompleteForm = ({ companyInfo }) => {
           color="#FF0000"
           rightSection={<IconLogout />}
           onClick={open}
+          aria-label="sign-out"
         >
           Sign out
         </Button>
@@ -94,6 +96,13 @@ const CompleteForm = ({ companyInfo }) => {
               >
                 {`https://${companyInfo.subdomain}.heasyresource.com`}
               </Link>
+            </Alert>
+          )}
+        {companyInfo &&
+          companyInfo.isCompletedRegistration === 1 &&
+          companyInfo.status === "Rejected" && (
+            <Alert variant="light" color="red" icon={<IconBan />}>
+              your company is rejected
             </Alert>
           )}
         <form
@@ -241,7 +250,7 @@ const CompleteForm = ({ companyInfo }) => {
                       form.values.subdomain.length !== 0
                         ? form.values.subdomain
                         : "subdomain"
-                    }.heasyresource`}
+                    }.heasyresource.com`}
                   </Highlight>
                 </GridCol>
 
@@ -319,7 +328,7 @@ const CompleteForm = ({ companyInfo }) => {
                         mt={"10px"}
                         maxDropdownHeight={150}
                         className={styles.multiSelect}
-                        placeholder="Pick value"
+                        placeholder="Select options to customize your employee ID"
                         // value={selectedOptions}
                         data={allOptions}
                         // onChange={handleMultiSelectChange}
@@ -381,6 +390,7 @@ const CompleteForm = ({ companyInfo }) => {
               className={styles.control}
               type="submit"
               disabled={uploading || isSubmitted}
+              aria-label="sumit"
             >
               {uploading ? (
                 <Loader color="white" type="dots" size="md" />
@@ -427,6 +437,7 @@ const CompleteForm = ({ companyInfo }) => {
               color="#A3A3A3"
               style={{ borderColor: "#A3A3A3" }}
               tt="capitalize"
+              aria-label="cancel"
               onClick={close}
             >
               cancel
@@ -440,6 +451,7 @@ const CompleteForm = ({ companyInfo }) => {
                 handleSignOut();
                 close();
               }}
+              aria-label="sign-out"
             >
               sign out
             </Button>
