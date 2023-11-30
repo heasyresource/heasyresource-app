@@ -99,6 +99,7 @@ const HiringTable = ({
               onClick={() => {
                 modals.closeAll();
               }}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -111,6 +112,7 @@ const HiringTable = ({
                 handleDelete(data?.id);
                 modals.closeAll();
               }}
+              aria-label="delete"
             >
               delete
             </Button>
@@ -162,9 +164,8 @@ const HiringTable = ({
             color="#A3A3A3"
             style={{ borderColor: "#A3A3A3" }}
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
+            px="30px"
+            aria-label="cancel"
           >
             cancel
           </Button>
@@ -173,13 +174,12 @@ const HiringTable = ({
             size="md"
             color="#FF0000"
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
+            px="30px"
             type="submit"
             style={{
               backgroundColor: "#FF0000 ",
             }}
+            aria-label="delete"
           >
             Delete
           </Button>
@@ -342,6 +342,7 @@ const HiringTable = ({
                 leftSectionWidth={140}
                 accept=".pdf, .doc, .docx"
                 {...form?.getInputProps("resumeUrl")}
+                leftSectionPointerEvents="none"
                 leftSection={
                   <Button
                     disabled
@@ -349,6 +350,7 @@ const HiringTable = ({
                       textTransform: "capitalize",
                       backgroundColor: "#fff",
                     }}
+                    aria-label="browse-file"
                   >
                     browse file
                   </Button>
@@ -370,21 +372,15 @@ const HiringTable = ({
               />
             </GridCol>
           </Grid>
-          <Group
-            justify="flex-end"
-            className={classes.btnWrap}
-            align="center"
-            mt={"2rem"}
-          >
+          <Group justify="flex-end" align="center" mt={"2rem"}>
             <Button
               variant="outline"
+              aria-label="cancel"
               size="md"
               color="#3377FF"
               style={{ borderColor: "#3377FF" }}
               tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
+              px="30px"
               onClick={() => {
                 closeEdit();
                 form?.reset();
@@ -394,13 +390,12 @@ const HiringTable = ({
               cancel
             </Button>
             <Button
+              aria-label="update"
               variant="contained"
               size="md"
               color="#3377FF"
               tt="capitalize"
-              px="50px"
-              w={{ lg: "auto", md: "auto", sm: "auto" }}
-              className={classes.btn}
+              px="30px"
               type="submit"
               style={{
                 backgroundColor: "#3377FF",
@@ -436,7 +431,7 @@ const HiringTable = ({
             },
             {
               accessor: "vacancy",
-              textAlign: "center",
+
               title: "Job Title",
 
               noWrap: true,
@@ -449,7 +444,7 @@ const HiringTable = ({
             {
               accessor: "",
               title: "Applicant",
-              textAlign: "center",
+
               textTransform: "capitalize",
               noWrap: true,
               render: ({ firstName, lastName }) => (
@@ -460,14 +455,12 @@ const HiringTable = ({
             },
             {
               accessor: "email",
-              textAlign: "center",
 
               noWrap: true,
             },
 
             {
               accessor: "status",
-              textAlign: "center",
 
               noWrap: true,
               render: ({ status }) => (

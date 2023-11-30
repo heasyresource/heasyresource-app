@@ -306,11 +306,15 @@ const useAdmin = () => {
   }, [searchParams.get("page")]);
 
   useEffect(() => {
-    getCompanies();
-    getSingleCompany();
     getMetadata();
     //eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    if (slug) {
+      getSingleCompany();
+    }
+    //eslint-disable-next-line
+  }, [slug]);
 
   return {
     companies,

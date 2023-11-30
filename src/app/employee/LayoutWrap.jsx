@@ -44,22 +44,7 @@ const LayoutWrap = ({ employeeInfo, children }) => {
               {employeeInfo && employeeInfo.company.name}
             </Text>
           </Group>
-          {/* <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconBell color="black" />
-          </ActionIcon>
-          <ActionIcon
-            color="rgba(126, 166, 244, 0.22)"
-            variant="filled"
-            size={"lg"}
-            radius={"lg"}
-          >
-            <IconMessageDots color="black" />
-          </ActionIcon> */}
+
           <EmployeeProfile
             logo={employeeInfo && employeeInfo.logoUrl}
             position={employeeInfo && employeeInfo.employmentInfo.position}

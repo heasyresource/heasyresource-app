@@ -44,7 +44,7 @@ const SingleEmployeeUpload = ({ logo, uploading, handleSubmit }) => {
             variant="outline"
             style={{ borderRadius: "50%" }}
             color="blue"
-            src={imgUrl || logo || "/assets/images/cmpLogo.png"}
+            src={imgUrl || logo || "/assets/images/avata2.png"}
             opacity={uploading ? ".5" : "1"}
           />
           <ActionIcon
@@ -167,7 +167,7 @@ const SingleEmployeeUpload = ({ logo, uploading, handleSubmit }) => {
                     )}
                     {errors.maxFileSize && (
                       <Text size="12px" c={"#FF0000"}>
-                        * Please select a file with a maximum size of 100kb
+                        * Please select a file with a maximum size of 200kb
                       </Text>
                     )}
                   </Box>

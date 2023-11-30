@@ -109,6 +109,7 @@ export default function ChangePasswordForm() {
             bg="#3377FF"
             mt="1rem"
             disabled={loading}
+            aria-label="change-password"
           >
             {loading ? <Loader type="dots" color="white" /> : "Change Password"}
           </Button>

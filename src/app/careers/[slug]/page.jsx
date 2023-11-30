@@ -18,13 +18,16 @@ import {
 import classes from "../../../components/JobListingsLayout/JobListings.module.css";
 
 import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { apiClient } from "@/lib/interceptor/apiClient";
 import { getSubdomain } from "@/utils/publicFunctions";
 import Loading from "@/components/Loading";
 
+import { IconArrowLeft } from "@tabler/icons-react";
+
 export default function JobDetails() {
+  const router = useRouter();
   const subdomain = getSubdomain();
   const [jobData, setJobData] = useState([]);
   const { slug } = useParams();
@@ -84,14 +87,31 @@ export default function JobDetails() {
                   alt="Company Logo"
                 />
                 <Text fw={700} fz={30}>
-                  Available Jobs
+                  Available Job
                 </Text>
                 <Text ta={{ base: "center", sm: "left" }} c={"#5A5A5A"} fz={20}>
-                  Discover opportunities. Apply now!
+                  Your next career move starts here.
                 </Text>
               </Flex>
             </Center>
             <Container size={{ base: "95%", sm: "80%" }} py={66}>
+              <Flex justify={"flex-end"} align={"center"} mb="md">
+                <Button
+                  variant="transparent"
+                  onClick={() => router.back()}
+                  style={{
+                    textDecoration: "none",
+                    display: "inline-flex",
+                    fontWeight: 500,
+                    color: "#3377FF",
+                    alignItems: "center",
+                  }}
+                  aria-label="back"
+                >
+                  <IconArrowLeft />
+                  Back
+                </Button>
+              </Flex>
               <Stack gap={"xl"}>
                 <Card
                   bg={"#ffff"}
@@ -174,9 +194,11 @@ export default function JobDetails() {
                     size="xl"
                     className={classes.control}
                     mt={40}
+                    aria-label="apply-for-job"
                   >
                     Apply for this Job
                   </Button>
+
                   <Space h={20} />
                 </Card>
               </Stack>

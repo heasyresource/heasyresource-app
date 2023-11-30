@@ -235,9 +235,7 @@ const DepartmentsTable = ({
                   color="#3377FF"
                   style={{ borderColor: "#3377FF" }}
                   tt="capitalize"
-                  px="50px"
-                  w={{ lg: "auto", md: "auto", sm: "auto" }}
-                  className={classes.btn}
+                  px="30px"
                   onClick={() => {
                     form.setValues({ name: "", code: "" });
                     closeEdit();
@@ -252,8 +250,7 @@ const DepartmentsTable = ({
                   size="md"
                   color="#3377FF"
                   tt="capitalize"
-                  px="50px"
-                  w={{ lg: "auto", md: "auto", sm: "auto" }}
+                  px="30px"
                   className={classes.btn}
                   type="submit"
                   style={{

@@ -1,5 +1,5 @@
 "use client";
-import { LeaveNav, LeaveTable, SearchFields } from "@/components";
+import { LeaveNav, LeaveTable } from "@/components";
 import { useAddLeaveType } from "@/hooks";
 import {
   Box,

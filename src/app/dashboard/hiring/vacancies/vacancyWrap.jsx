@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import VacancySearchFields from "@/components/HiringLayout/VacancySearchFields";
 import VacancyTable from "@/components/HiringLayout/VacancyTable";
 import HiringNav from "@/components/HiringNav";
 import {
@@ -49,7 +48,6 @@ const VacancyWrap = () => {
       workMode: null,
       employmentTypeId: null,
     });
-    getVacancy();
   };
 
   return (

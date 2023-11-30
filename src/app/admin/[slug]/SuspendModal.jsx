@@ -54,6 +54,7 @@ const SuspendModal = ({ loading, handleSuspend, opened, close }) => {
             tt="capitalize"
             onClick={close}
             disabled={loading}
+            aria-label="cancel"
           >
             cancel
           </Button>
@@ -66,6 +67,7 @@ const SuspendModal = ({ loading, handleSuspend, opened, close }) => {
               handleSuspend();
             }}
             disabled={loading}
+            aria-label="suspend"
           >
             {loading ? (
               <Loader type="dots" size={"md"} color="white" />

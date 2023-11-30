@@ -28,8 +28,8 @@ import Link from "next/link";
 
 const UserButton = forwardRef(
   ({ image, name, position, icon, ...others }, ref) => (
-    <UnstyledButton ref={ref} {...others}>
-      <Group gap={"10px"} style={{ flexWrap: "nowrap" }}>
+    <UnstyledButton ref={ref} {...others} aria-label="profile">
+      <Group gap={"2px"} style={{ flexWrap: "nowrap" }}>
         <div
           style={{
             border: "2px #3377FF solid",
@@ -72,7 +72,7 @@ const UserButton = forwardRef(
   )
 );
 
-export default function Profile({ position, name }) {
+export default function Profile({ position, name, image }) {
   const { data: session } = useSession();
   const { handleSignOut } = useSignOut();
   const [opened, { open, close }] = useDisclosure(false);
@@ -81,24 +81,31 @@ export default function Profile({ position, name }) {
       <Menu position="bottom-end" offset={10} withArrow>
         <Menu.Target>
           <UserButton
-            image={"/assets/images/avata2.png"}
-            name={
-              session && `${session.user.firstName} ${session.user.lastName}`
-            }
+            image={image || "/assets/images/avata2.png"}
+            name={name && name}
             position={position && position}
           />
         </Menu.Target>
         <Menu.Dropdown w={150}>
           {session?.user.role.name === "CompanyAdmin" && (
-            <Menu.Item
-              leftSection={
-                <IconUser
-                  style={{ width: rem(14), height: rem(14), color: "#3377FF" }}
-                />
-              }
+            <Link
+              href="/dashboard/settings/profile"
+              style={{ width: "100%", textDecoration: "none" }}
             >
-              Profile
-            </Menu.Item>
+              <Menu.Item
+                leftSection={
+                  <IconUser
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                      color: "#3377FF",
+                    }}
+                  />
+                }
+              >
+                Profile
+              </Menu.Item>
+            </Link>
           )}
           {session?.user.role.name === "CompanyAdmin" && (
             <Link
@@ -171,6 +178,7 @@ export default function Profile({ position, name }) {
               style={{ borderColor: "#A3A3A3" }}
               tt="capitalize"
               onClick={close}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -183,6 +191,7 @@ export default function Profile({ position, name }) {
                 handleSignOut();
                 close();
               }}
+              aria-label="sign-out"
             >
               sign out
             </Button>

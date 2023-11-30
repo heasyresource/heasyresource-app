@@ -124,18 +124,14 @@ const AddComImg = ({
                 </Button>
 
                 {imageList.map((image, index) => (
-                  <Box key={index}>
+                  <Stack gap={"20px"} key={index}>
                     <Flex justify={"center"} mt={"lg"} align={"center"}>
-                      <Box w={"200px"} h={"200px"}>
+                      <Box w={"200px"} h="100%">
                         <Image src={image.dataURL} alt="profile" />
                       </Box>
                     </Flex>
 
-                    <Flex
-                      justify={"space-between"}
-                      align={"center"}
-                      mt={"15px"}
-                    >
+                    <Flex justify={"space-between"} align={"center"}>
                       <Button
                         onClick={() => {
                           onImageRemove(index);
@@ -160,7 +156,7 @@ const AddComImg = ({
                         Save
                       </Button>
                     </Flex>
-                  </Box>
+                  </Stack>
                 ))}
 
                 {errors && (

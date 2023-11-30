@@ -8,12 +8,7 @@ const CompensationInputField = () => {
   const { loading, form, handleSubmit } = useSearch();
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-      <Grid
-        gutter="xl"
-        px={{base: 0, sm: 40}}
-        justify="space-between"
-        className={classes.formWrap}
-      >
+      <Grid gutter="lg" justify="space-between" className={classes.formWrap}>
         <GridCol span={{ lg: 3, md: 6, sm: 12 }} mt={0}>
           <TextInput
             size="md"
@@ -33,7 +28,6 @@ const CompensationInputField = () => {
           <TextInput
             size="md"
             label="Employee Salary"
-            placeholder="$10,000"
             style={{ width: "100%" }}
             {...form.getInputProps("employeeId")}
             classNames={{

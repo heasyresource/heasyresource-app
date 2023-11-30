@@ -54,12 +54,14 @@ const ApproveModal = ({ loading, handleApproved, opened, close }) => {
             tt="capitalize"
             onClick={close}
             disabled={loading}
+            aria-label="cancel"
           >
             cancel
           </Button>
           <Button
             variant="contained"
             size="md"
+            aria-label="approve"
             style={{ backgroundColor: "#3377FF" }}
             tt="capitalize"
             onClick={() => {

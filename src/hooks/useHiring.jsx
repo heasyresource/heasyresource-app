@@ -281,6 +281,18 @@ const useHiring = () => {
     getVacancy();
     //eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    if (
+      !filterForm.values.search.length &&
+      filterForm.values.workMode === null &&
+      filterForm.values.jobCategoryId === null &&
+      filterForm.values.employmentTypeId === null
+    ) {
+      getVacancy();
+    }
+    //eslint-disable-next-line
+  }, [filterForm.values]);
+
   return {
     vacancies,
     loading,

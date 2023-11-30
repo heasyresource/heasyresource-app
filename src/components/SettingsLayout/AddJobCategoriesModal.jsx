@@ -63,22 +63,16 @@ const AddJobCategoriesModal = ({
                 />
               </GridCol>
             </Grid>
-            <Group
-              justify="flex-end"
-              className={classes.btnWrap}
-              align="center"
-              mt={"auto"}
-            >
+            <Group justify="flex-end" align="center" mt={"auto"}>
               <Button
                 variant="outline"
                 size="md"
                 color="#3377FF"
                 style={{ borderColor: "#3377FF" }}
                 tt="capitalize"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
                 disabled={loading}
                 onClick={onClose}
+                aria-label="cancel"
               >
                 cancel
               </Button>
@@ -87,13 +81,12 @@ const AddJobCategoriesModal = ({
                 size="md"
                 color="#3377FF"
                 tt="capitalize"
-                w={{ lg: "auto", md: "auto", sm: "auto" }}
-                className={classes.btn}
                 type="submit"
                 style={{
                   backgroundColor: "#3377FF",
                 }}
                 disabled={loading}
+                aria-label="add"
               >
                 {loading ? (
                   <Loader color="white" type="dots" size="md" />

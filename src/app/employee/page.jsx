@@ -26,8 +26,9 @@ const Dashboard = async () => {
       }
     );
     const getEmployeeData = await getEmployee.json();
-    employeeInfo = getEmployeeData.results;
-
+    if (getEmployeeData.statusCode === 200) {
+      employeeInfo = getEmployeeData.results;
+    }
     const getLeaves = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/employee/leaves/me?paginate=false`,
       {
@@ -38,7 +39,9 @@ const Dashboard = async () => {
       }
     );
     const getLeavesData = await getLeaves.json();
-    leavesInfo = getLeavesData.results.data;
+    if (getLeavesData.statusCode === 200) {
+      leavesInfo = getLeavesData.results.data;
+    }
   }
 
   return (

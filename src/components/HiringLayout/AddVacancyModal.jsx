@@ -261,9 +261,7 @@ const AddVacancyModal = ({
             color="#3377FF"
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
+            px="30px"
             onClick={() => {
               onClose();
               vacancyForm?.reset();
@@ -278,9 +276,7 @@ const AddVacancyModal = ({
             size="md"
             color="#3377FF"
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
+            px="30px"
             type="submit"
             style={{
               backgroundColor: "#3377FF",

@@ -64,6 +64,10 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
   const options = {
     maintainAspectRatio: false,
     plugins: {
+      emptyPie: {
+        color: "rgba(255, 128, 0, 0.5)",
+        width: 2,
+      },
       legend: {
         display: true,
         position: "right",
@@ -181,7 +185,32 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                       textAlign: "center",
                     }}
                   >
-                    <Pie data={data} options={options} />
+                    {analytics?.fullTimeEmployeeCount === 0 &&
+                    analytics?.partTimeEmployeeCount === 0 &&
+                    analytics?.contractEmployeeCount === 0 &&
+                    analytics?.freelanceEmployeeCount === 0 &&
+                    analytics?.intershipEmployeeCount === 0 &&
+                    analytics?.temporaryEmploymentCount === 0 ? (
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          flexDirection: "column",
+                          height: "100%",
+                          gap: "13px",
+                        }}
+                      >
+                        <Image
+                          src={"/assets/svgs/chart.svg"}
+                          alt="empty"
+                          style={{ width: "100px" }}
+                        />
+                        <Text>No data available</Text>
+                      </Box>
+                    ) : (
+                      <Pie data={data} options={options} />
+                    )}
                   </Paper>
                 </GridCol>
                 <GridCol span={{ lg: 4, md: 4, sm: 12 }}>
@@ -198,7 +227,12 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                     Employees
                   </Text>
                   <Link href={"/dashboard/employee"}>
-                    <Button size="sm" variant="subtle" color="#3377FF">
+                    <Button
+                      aria-label="view-all"
+                      size="sm"
+                      variant="subtle"
+                      color="#3377FF"
+                    >
                       View all
                     </Button>
                   </Link>
@@ -303,7 +337,12 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                 Pending Requests
               </Text>
               <Link href={"/dashboard/leave"}>
-                <Button size="sm" variant="subtle" color="#3377FF">
+                <Button
+                  aria-label="view-all"
+                  size="sm"
+                  variant="subtle"
+                  color="#3377FF"
+                >
                   View all
                 </Button>
               </Link>
@@ -318,7 +357,7 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                   {
                     accessor: "user",
                     title: "Employee Name",
-                    textAlign: "center",
+
                     textTransform: "capitalize",
                     noWrap: true,
                     render: ({ user }) => (
@@ -330,11 +369,16 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
 
                   {
                     accessor: "leaveType",
-                    textAlign: "center",
+
                     textTransform: "capitalize",
                     noWrap: true,
+                    width: "120px",
                     render: ({ leaveType }) => (
-                      <Text tt="capitalize" style={{ fontSize: "15px" }}>
+                      <Text
+                        tt="capitalize"
+                        style={{ fontSize: "15px" }}
+                        truncate="end"
+                      >
                         {leaveType.name}
                       </Text>
                     ),
@@ -342,7 +386,7 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
 
                   {
                     accessor: "status",
-                    textAlign: "center",
+
                     textTransform: "capitalize",
                     noWrap: true,
                     render: ({ status }) => (
@@ -370,6 +414,7 @@ const PageWrap = ({ currentDate, session, leaves, employees, analytics }) => {
                   height: "100%",
                   marginTop: "100px",
                   flexDirection: "column",
+                  gap: "13px",
                 }}
               >
                 <Image

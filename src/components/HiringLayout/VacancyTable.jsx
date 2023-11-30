@@ -118,6 +118,7 @@ const VacancyTable = ({
               onClick={() => {
                 modals.closeAll();
               }}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -130,6 +131,7 @@ const VacancyTable = ({
                 handleDeleteVacancy(data?.id);
                 modals.closeAll();
               }}
+              aria-label="delete"
             >
               delete
             </Button>
@@ -173,6 +175,7 @@ const VacancyTable = ({
           color: "#000000",
           marginTop: "1.5rem",
         }}
+        aria-label="add"
       >
         add +
       </Button>

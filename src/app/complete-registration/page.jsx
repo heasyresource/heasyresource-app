@@ -18,13 +18,14 @@ export default async function CompleteRegistration() {
       `${process.env.NEXT_PUBLIC_BACKEND_API}/companies/${session?.user.company.id}`,
       {
         headers: {
-          Authorization: `Bearer ${session?.user.token}`
+          Authorization: `Bearer ${session?.user.token}`,
         },
       }
     );
-
     const getCompanyData = await getCompany.json();
-    companyInfo = getCompanyData?.results;
+    if (getCompanyData.statusCode === 200) {
+      companyInfo = getCompanyData?.results;
+    }
   }
   return (
     <div style={{ backgroundColor: "#F8F9FA", padding: "1rem 0" }}>

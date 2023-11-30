@@ -205,8 +205,6 @@ const LeaveTable = ({
                       >
                         Employee Details
                       </MenuItem>
-
-                      <MenuItem fz="xs">Leave Details</MenuItem>
                     </MenuDropdown>
                   </Menu>
                 </Flex>
@@ -281,6 +279,7 @@ const LeaveTable = ({
                 rejectForm?.reset();
                 setItemID("");
               }}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -290,6 +289,7 @@ const LeaveTable = ({
               style={{ backgroundColor: "#FF0000" }}
               tt="capitalize"
               type="submit"
+              aria-label="reject"
             >
               reject
             </Button>
@@ -339,6 +339,7 @@ const LeaveTable = ({
                 closeApp();
                 setItemID("");
               }}
+              aria-label="cancel"
             >
               cancel
             </Button>
@@ -351,6 +352,7 @@ const LeaveTable = ({
                 handleApprove();
                 closeApp();
               }}
+              aria-label="approve"
             >
               approve
             </Button>

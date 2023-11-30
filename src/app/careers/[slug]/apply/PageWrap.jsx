@@ -217,6 +217,7 @@ const PageWrap = () => {
                     }}
                     {...form.getInputProps("stateId")}
                     disabled={loading}
+                    searchable
                   />
                 </GridCol>
                 <GridCol span={{ lg: 12, md: 6, sm: 12 }}>
@@ -258,10 +259,12 @@ const PageWrap = () => {
                             textTransform: "capitalize",
                             backgroundColor: "#fff",
                           }}
+                          aria-label="browse-file"
                         >
                           browse file
                         </Button>
                       }
+                      leftSectionPointerEvents="none"
                       rightSection={
                         <ActionIcon
                           disabled
@@ -305,6 +308,7 @@ const PageWrap = () => {
                   px="50px"
                   onClick={() => router.back()}
                   disabled={loading}
+                  aria-label="back"
                 >
                   back
                 </Button>
@@ -319,6 +323,7 @@ const PageWrap = () => {
                     backgroundColor: "#3377FF",
                   }}
                   disabled={loading}
+                  aria-label="submi"
                 >
                   {loading ? (
                     <Loader color="white" type="dots" size={"md"} />

@@ -76,7 +76,7 @@ export default function HomePage() {
           <a href="/">
             <Image
               src={"/assets/svgs/HRlogo.svg"}
-              style={{ width: "12rem" }}
+              style={{ width: "8rem" }}
               alt="heasyresource-logo"
             />
           </a>
@@ -84,7 +84,13 @@ export default function HomePage() {
             {items}
           </Group>
 
-          <Burger opened={opened} onClick={open} hiddenFrom="xs" size="sm" />
+          <Burger
+            aria-label="open-menuu"
+            opened={opened}
+            onClick={open}
+            hiddenFrom="xs"
+            size="sm"
+          />
         </Container>
       </header>
       <main>
@@ -142,53 +148,73 @@ export default function HomePage() {
             <div className="trust_brand">
               <Image
                 src="/assets/images/log_1.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_2.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_4.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_9.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_6.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_3.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_8.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_5.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_10.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
               <Image
                 src="/assets/images/log_7.png"
-                alt=""
+                alt="trust-brand"
                 className="trust_brand_img"
+                width="auto"
+                height="auto"
               />
             </div>
           </Box>
@@ -208,7 +234,9 @@ export default function HomePage() {
           >
             <Image
               src="/assets/images/progress.png"
-              alt=""
+              alt="progress-image"
+              width={"auto"}
+              height={"auto"}
               className="progress_img"
             />
             <h2 className="progress_title">
@@ -382,7 +410,9 @@ export default function HomePage() {
             </div>
             <Image
               src="/assets/images/payroll_image.png"
-              alt=""
+              alt="payroll-image"
+              width={"auto"}
+              height={"auto"}
               className="payroll_img"
             />
           </Container>

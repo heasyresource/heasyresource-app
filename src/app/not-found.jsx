@@ -1,9 +1,8 @@
 import { headers } from "next/headers";
 import { getSubdomain } from "@/utils/publicFunctions";
 import styles from "./not-found.module.css";
-import Image from "next/image";
-import NextImage from "next/image";
-import { Button } from "@mantine/core";
+import { Button, Image } from "@mantine/core";
+import Link from "next/link";
 
 export default async function NotFound() {
   const headersList = headers();
@@ -27,12 +26,10 @@ export default async function NotFound() {
     }
   }
 
-
   return (
     <div className={styles.container}>
       <div>
         <Image
-          component={NextImage}
           my={30}
           className={styles.image}
           src={"/assets/images/404.png"}
@@ -51,16 +48,17 @@ export default async function NotFound() {
           }}
           href={link}
         >
-          <Button
-            variant="contained"
-            size="sm"
-            style={{ backgroundColor: "#3377FF" }}
-            component="a"
-            href={link}
-            tt="capitalize"
-          >
-            return home
-          </Button>
+          <Link href={link}>
+            <Button
+              variant="contained"
+              size="sm"
+              style={{ backgroundColor: "#3377FF" }}
+              tt="capitalize"
+              aria-label="return home"
+            >
+              return home
+            </Button>
+          </Link>
         </a>
       </div>
     </div>

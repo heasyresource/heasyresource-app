@@ -10,7 +10,6 @@ const Admin = async () => {
   const session = await getServerSession(authOptions);
   const headersList = headers();
   const domain = headersList.get("host");
-  const subdomain = getSubdomain(domain);
   if (session) {
     const getAnalytics = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API}/analytics/`,
@@ -21,8 +20,9 @@ const Admin = async () => {
       }
     );
     const getAnalyticsData = await getAnalytics.json();
-    analytics = getAnalyticsData.results;
-    console.log({ getAnalyticsData });
+    if (getAnalyticsData.statusCode === 200) {
+      analytics = getAnalyticsData.results;
+    }
   }
   return <PageWrap analytics={analytics && analytics} />;
 };

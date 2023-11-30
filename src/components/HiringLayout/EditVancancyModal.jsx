@@ -92,6 +92,7 @@ const EditVancancyModal = ({
               allowDeselect={false}
               {...vacancyForm?.getInputProps("jobCategoryId")}
               disabled={loading}
+              searchable
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -109,6 +110,7 @@ const EditVancancyModal = ({
               allowDeselect={false}
               {...vacancyForm?.getInputProps("employmentTypeId")}
               disabled={loading}
+              searchable
             />
           </GridCol>
           <GridCol span={{ lg: 4, md: 6, sm: 12 }}>
@@ -268,6 +270,7 @@ const EditVancancyModal = ({
               editor?.commands.setContent("");
             }}
             disabled={loading}
+            aria-label="cancel"
           >
             cancel
           </Button>
@@ -284,6 +287,7 @@ const EditVancancyModal = ({
               backgroundColor: "#3377FF",
             }}
             disabled={loading}
+            aria-label="update"
           >
             {loading ? (
               <Loader color="white" type="dots" size="md" />

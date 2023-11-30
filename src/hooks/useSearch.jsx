@@ -102,6 +102,19 @@ const useSearch = () => {
     //eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    if (
+      form.values.departmentId === null &&
+      form.values.status === null &&
+      !form.values.employeeName.length &&
+      !form.values.employeeId.length
+    ) {
+      getEmployees();
+    }
+
+    //eslint-disable-next-line
+  }, [form.values]);
+
   return {
     form,
     loading,

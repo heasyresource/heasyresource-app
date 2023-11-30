@@ -8,13 +8,13 @@ import {
   Group,
   Badge,
   UnstyledButton,
+  Image,
 } from "@mantine/core";
 import classes from "../../components/JobListingsLayout/JobListings.module.css";
 
 import { IconBriefcase2, IconMapPin } from "@tabler/icons-react";
 
 import { getSubdomain } from "@/utils/publicFunctions";
-import Image from "next/image";
 
 import { headers } from "next/headers";
 
@@ -76,6 +76,7 @@ export default async function JobListings() {
                     className={classes.job}
                     component="a"
                     href={`/careers/${jobData.slug}`}
+                    aria-label="job-data"
                   >
                     <Card bg={"#ffff"} shadow="sm" padding="lg" radius="md">
                       <Group justify="space-between" py={10}>

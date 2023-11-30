@@ -118,21 +118,14 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
             </Radio.Group>
           </Grid.Col>
         </Grid>
-        <Group
-          justify="flex-end"
-          className={classes.btnWrap}
-          align="center"
-          mt={"auto"}
-        >
+        <Group justify="flex-end" align="center" mt={"auto"}>
           <Button
             variant="outline"
             size="md"
             color="#3377FF"
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
+            px="30px"
             onClick={() => form?.reset()}
           >
             cancel
@@ -142,9 +135,7 @@ const EmployeeIndividual = ({ form, handleSubmit, fields, loading }) => {
             size="md"
             color="#3377FF"
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
-            className={classes.btn}
+            px="30px"
             type="submit"
             style={{
               backgroundColor: "#3377FF",

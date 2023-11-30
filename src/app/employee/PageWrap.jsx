@@ -18,7 +18,6 @@ import AddEmployeeImg from "./components/AddEmployeeImg";
 import classes from "./dashboard.module.css";
 import Link from "next/link";
 import PaymentTable from "./components/PaymentTable";
-import { convertStringDate } from "@/utils/publicFunctions";
 
 const PageWrap = ({ employeeInfo, leavesInfo }) => {
   const currentDate = new Date();
@@ -49,6 +48,23 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
     return Math.round(daysDifference);
   };
   const newestApprovedLeave = getNewestApprovedLeave(leavesInfo);
+  const formatDateString = (inputDateString) => {
+    const inputDate = new Date(inputDateString);
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    const formattedDate = inputDate.toLocaleDateString("en-US", options);
+    return formattedDate;
+  };
+  const formatCurrency = (amount) => {
+    return parseInt(amount)?.toLocaleString("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    });
+  };
 
   return (
     <Box style={{ height: "50%", borderRadius: "15px" }}>
@@ -110,6 +126,16 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                             {employeeInfo && employeeInfo.email}
                           </Text>
                         </Group>
+                        {employeeInfo && employeeInfo.phoneNumber !== null && (
+                          <Group wrap="nowrap" gap={10} mt={5}>
+                            <Text fw={700} fz="sm" c={"#686868"}>
+                              Phone Number:
+                            </Text>
+                            <Text fz="sm" c="dimmed">
+                              {employeeInfo && employeeInfo.phoneNumber}
+                            </Text>
+                          </Group>
+                        )}
                       </div>
                     </Group>
                   </Paper>
@@ -126,12 +152,11 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                         <Text c={"#808080"} tt={"capitalize"}>
                           current salary
                         </Text>
-                        <Link className={classes.detailsLink} href={"#"}>
-                          more details
-                        </Link>
                       </Group>
-                      <Text c={"#3377FF"} fz={32} fw={700}>
-                        # 458,890
+                      <Text c={"#3377FF"} fz={26} fw={700}>
+                        {employeeInfo && employeeInfo.salary !== null
+                          ? formatCurrency(employeeInfo.salary.grossSalary)
+                          : "₦0"}
                       </Text>
                       <Divider my="lg" />
                       <Text c={"#808080"} fz={"12px"} fw={400}>
@@ -139,7 +164,7 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                       </Text>
                       <Space h={10} />
                       <Text c={"#2D2D2D"} fz={"15px"}>
-                        {convertStringDate(newestApprovedLeave?.startDate)}
+                        N/A
                       </Text>
                     </Card>
                   </Paper>
@@ -149,23 +174,32 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                     <Text c={"#808080"}>Next Leave</Text>
                     <Space h={20} />
                     <Text c={"#6A6A6A"} fz={17} fw={700}>
-                      Thursday, 22nd of December, 2023
+                      {newestApprovedLeave?.startDate !== undefined
+                        ? formatDateString(newestApprovedLeave?.startDate)
+                        : "N/A"}
                     </Text>
                     <Divider my={"xl"} size={"sm"} />
                     <Text c={"#808080"}>Leave Days Available</Text>
                     <Space h={20} />
                     <Text c={"#2D2D2D"} fz={15} fw={700}>
-                      {`${getDaysDifference(
-                        newestApprovedLeave?.startDate,
-                        newestApprovedLeave?.endDate
-                      )} ${
+                      {isNaN(
                         getDaysDifference(
                           newestApprovedLeave?.startDate,
                           newestApprovedLeave?.endDate
-                        ) > 1
-                          ? "days"
-                          : "day"
-                      }`}
+                        )
+                      )
+                        ? "N/A"
+                        : `${getDaysDifference(
+                            newestApprovedLeave?.startDate,
+                            newestApprovedLeave?.endDate
+                          )} ${
+                            getDaysDifference(
+                              newestApprovedLeave?.startDate,
+                              newestApprovedLeave?.endDate
+                            ) > 1
+                              ? "days"
+                              : "day"
+                          }`}
                     </Text>
                   </Paper>
                 </GridCol>
@@ -174,7 +208,7 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                     <DatePicker defaultValue={currentDate} />
                   </Paper>
                 </GridCol>
-                <GridCol span={{ base: 12, xs: 12 }}>
+                {/* <GridCol span={{ base: 12, xs: 12 }}>
                   <Group mb="10px" justify="space-between">
                     <Text>Payment History</Text>
 
@@ -188,7 +222,7 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                     </Link>
                   </Group>
                   <PaymentTable />
-                </GridCol>
+                </GridCol> */}
               </Grid>
             </Box>
           </Box>

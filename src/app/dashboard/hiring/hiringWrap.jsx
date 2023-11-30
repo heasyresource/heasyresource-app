@@ -1,6 +1,5 @@
 "use client";
 import HiringTable from "@/components/HiringLayout/HiringTable";
-import SearchFields from "@/components/HiringLayout/SearchFields";
 import HiringNav from "@/components/HiringNav";
 import useAddApplicant from "@/hooks/useAddApplicant";
 import classes from "../dashboard.module.css";
@@ -42,7 +41,6 @@ const HiringWrap = () => {
       search: "",
       status: null,
     });
-    getApplicants();
   };
   return (
     <>
@@ -97,9 +95,7 @@ const HiringWrap = () => {
               variant="outline"
               color="#3377FF"
               px={"40px"}
-              onClick={() => {
-                handleReset();
-              }}
+              onClick={() => handleReset()}
             >
               reset
             </Button>

@@ -35,7 +35,7 @@ const useProfileNav = () => {
   const handleComplete = async () => {
     try {
       await apiClient.put(
-        `/employees/${id}/set-profile-picture`,
+        `/employees/${id || session.user.id}/set-profile-picture`,
         {
           url: response?.data.secure_url,
         },
@@ -53,7 +53,7 @@ const useProfileNav = () => {
       setUploading(false);
       notifications.show({
         color: "red",
-        message: "Something went wrong. Pleaseddddd try again!",
+        message: "Something went wrong. Please try again!",
         styles: errorStyles,
         autoClose: 7000,
       });

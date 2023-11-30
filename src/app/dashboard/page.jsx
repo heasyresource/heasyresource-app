@@ -29,7 +29,7 @@ const Dashboard = async () => {
       }
     );
     const getLeavesData = await getLeaves.json();
-    console.log({getLeavesData});
+
     if (getLeavesData.statusCode === 200) {
       leaves = getLeavesData.results.data;
     }

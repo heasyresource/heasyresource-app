@@ -59,7 +59,7 @@ const useEmploymentInfo = () => {
         resumptionDate: convertDateFormat(data.resumptionDate),
       };
       const response = await apiClient.put(
-        `/employees/${id}/employment-infos`,
+        `/employees/${id || session.user.id}/employment-infos`,
         modifiedValues,
         headerSettings
       );

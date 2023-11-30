@@ -150,7 +150,6 @@ const EmployeeSlip = () => {
             size="md"
             variant="outline"
             color="#3377FF"
-            className={classes.control}
             px={"40px"}
             type="submit"
           >
@@ -160,7 +159,6 @@ const EmployeeSlip = () => {
             style={{ fontSize: "16px", textTransform: "capitalize" }}
             size="md"
             variant="filled"
-            className={classes.control}
             color="#3377FF"
             px={"40px"}
             type="submit"

@@ -127,8 +127,7 @@ const AddLicenceModal = ({
             color="#3377FF"
             style={{ borderColor: "#3377FF" }}
             tt="capitalize"
-            px="50px"
-            w={{ lg: "auto", md: "auto", sm: "auto" }}
+            px="30px"
             onClick={() => {
               closeLcs();
               licenseForm?.reset();
@@ -142,7 +141,7 @@ const AddLicenceModal = ({
             size="md"
             color="#3377FF"
             tt="capitalize"
-            px="50px"
+            px="30px"
             w={{ lg: "auto", md: "auto", sm: "auto" }}
             type="submit"
             style={{

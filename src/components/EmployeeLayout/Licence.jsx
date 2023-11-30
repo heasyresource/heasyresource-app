@@ -62,7 +62,7 @@ const Licence = ({
             c="#4D4D4D"
             style={{
               fontWeight: 700,
-              fontSize: "23px",
+              fontSize: "19px",
               textAlign: "start",
             }}
           >

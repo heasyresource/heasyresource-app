@@ -7,36 +7,35 @@ import CompensationNav from "@/components/CompensationLayout/CompensationNav";
 import DeductionsTable from "@/components/CompensationLayout/DeductionsTable";
 import AddDeductionsModal from "@/components/CompensationLayout/AddDeductionsModal";
 import EditDeductionsModal from "@/components/CompensationLayout/EditDeductionsModal";
+import usePayroll from "@/hooks/usePayroll";
 
 const Deductions = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  // Open and Close function for Add Earning Modal
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Open and Close function for Add Earning Modal
-  const openEditModal = () => {
-    setIsEditModalOpen(true);
-  };
-
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-  };
+  const {
+    form,
+    openDeduct,
+    closeDeduct,
+    openedDeduct,
+    loading,
+    handleSubmit,
+    deductions,
+    gettingData,
+    setComponentId,
+    handleDelete,
+    handleEdit,
+    openedDeductEdit,
+    openDeductEdit,
+    closeDeductEdit,
+  } = usePayroll();
 
   return (
     <>
-      <EditDeductionsModal
-        isEditOpen={isEditModalOpen}
-        isEditClose={closeEditModal}
+      <AddDeductionsModal
+        isOpen={openedDeduct}
+        onClose={closeDeduct}
+        form={form}
+        loading={loading}
+        handleSubmit={handleSubmit}
       />
-      <AddDeductionsModal isOpen={isModalOpen} onClose={closeModal} />
       <Card
         style={{
           backgroundColor: "#ffff",
@@ -48,14 +47,14 @@ const Deductions = () => {
         <CardSection py="25px" style={{ borderBottom: "1px solid #DDDDDD" }}>
           <CompensationNav tabTitle={"Compensation"} />
         </CardSection>
-        <Group gap={30} px={40} py={45}>
+        <Group gap={30} mx="lg" py={20}>
           <Text fz={24} fw={700}>
             Deductions
           </Text>
           <Button
             variant="filled"
             color="rgba(126, 166, 244, 0.19)"
-            onClick={openModal}
+            onClick={openDeduct}
             classNames={{
               label: classes.buttonText,
             }}
@@ -64,29 +63,18 @@ const Deductions = () => {
           </Button>
         </Group>
       </Card>
-      <DeductionsTable openEditModal={openEditModal} />
-      <Group justify="flex-end" my={"3rem"}>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          variant="outline"
-          color="#3377FF"
-          px={"40px"}
-          type="submit"
-        >
-          cancel
-        </Button>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          variant="filled"
-          color="#3377FF"
-          px={"40px"}
-          type="submit"
-        >
-          save
-        </Button>
-      </Group>
+      <DeductionsTable
+        deductions={deductions}
+        openDeductEdit={openDeductEdit}
+        openedDeductEdit={openedDeductEdit}
+        closeDeductEdit={closeDeductEdit}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        gettingData={gettingData}
+        form={form}
+        loading={loading}
+        setComponentId={setComponentId}
+      />
     </>
   );
 };

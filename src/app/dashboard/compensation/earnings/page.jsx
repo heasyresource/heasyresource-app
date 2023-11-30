@@ -1,42 +1,39 @@
 "use client";
-
 import { Button, Card, CardSection, Group, Text } from "@mantine/core";
 import classes from "../../../../components/CompensationLayout/Compensation.module.css";
 import React, { useState } from "react";
 import CompensationNav from "@/components/CompensationLayout/CompensationNav";
 import EarningsTable from "@/components/CompensationLayout/EarningsTable";
 import AddEarningsModal from "@/components/CompensationLayout/AddEarningsModal";
-import EditEarningsModal from "@/components/CompensationLayout/EditEarningsModal";
+import usePayroll from "@/hooks/usePayroll";
 
 const AddEarnings = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  // Open and Close function for Add Earning Modal
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Open and Close function for Add Earning Modal
-  const openEditModal = () => {
-    setIsEditModalOpen(true);
-  };
-
-  const closeEditModal = () => {
-    setIsEditModalOpen(false);
-  };
+  const {
+    handleSubmit,
+    openAddEarn,
+    closeAddEarn,
+    openedAddEarn,
+    form,
+    loading,
+    earnings,
+    gettingData,
+    openedEditEarn,
+    openEditEarn,
+    closeEditEarn,
+    handleEdit,
+    setComponentId,
+    handleDelete,
+  } = usePayroll();
 
   return (
     <>
-      <EditEarningsModal
-        isEditOpen={isEditModalOpen}
-        isEditClose={closeEditModal}
+      <AddEarningsModal
+        isOpen={openedAddEarn}
+        onClose={closeAddEarn}
+        form={form}
+        handleSubmit={handleSubmit}
+        loading={loading}
       />
-      <AddEarningsModal isOpen={isModalOpen} onClose={closeModal} />
       <Card
         style={{
           backgroundColor: "#ffff",
@@ -55,7 +52,7 @@ const AddEarnings = () => {
           <Button
             variant="filled"
             color="rgba(126, 166, 244, 0.19)"
-            onClick={openModal}
+            onClick={openAddEarn}
             classNames={{
               label: classes.buttonText,
             }}
@@ -64,29 +61,18 @@ const AddEarnings = () => {
           </Button>
         </Group>
       </Card>
-      <EarningsTable openEditModal={openEditModal} />
-      <Group justify="flex-end" my={"3rem"}>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          variant="outline"
-          color="#3377FF"
-          px={"40px"}
-          type="submit"
-        >
-          cancel
-        </Button>
-        <Button
-          style={{ fontSize: "16px", textTransform: "capitalize" }}
-          size="md"
-          variant="filled"
-          color="#3377FF"
-          px={"40px"}
-          type="submit"
-        >
-          save
-        </Button>
-      </Group>
+      <EarningsTable
+        openEditEarn={openEditEarn}
+        closeEditEarn={closeEditEarn}
+        handleEdit={handleEdit}
+        openedEditEarn={openedEditEarn}
+        setComponentId={setComponentId}
+        earnings={earnings}
+        gettingEarnings={gettingData}
+        form={form}
+        loading={loading}
+        handleDelete={handleDelete}
+      />
     </>
   );
 };

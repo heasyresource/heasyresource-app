@@ -16,7 +16,7 @@ import { IconChevronDown } from "@tabler/icons-react";
 const CompensationNav = ({ tabTitle }) => {
   const pathname = usePathname();
   return (
-    <Group justify="space-between" mx="40px">
+    <Group justify="space-between" className={classes.mx}>
       <Text fz="24px" fw="700" tt={"capitalize"}>
         {tabTitle}
       </Text>
@@ -35,18 +35,7 @@ const CompensationNav = ({ tabTitle }) => {
         >
           Employee Salary
         </Button>
-        <Button
-          component="a"
-          href="/dashboard/compensation/add-payroll"
-          w="125px"
-          variant="filled"
-          className={classes.btnLink}
-          data-active={
-            "/dashboard/compensation/add-payroll" === pathname || undefined
-          }
-        >
-          Add Payroll
-        </Button>
+
         <Menu position="bottom-end" width={150}>
           <MenuTarget>
             <Button
@@ -61,7 +50,9 @@ const CompensationNav = ({ tabTitle }) => {
               className={classes.btnLink}
               rightSection={<IconChevronDown size="1.3rem" color="#3377FF" />}
               data-active={
-                "/dashboard/compensation/earnings" === pathname || undefined
+                "/dashboard/compensation/earnings" === pathname ||
+                "/dashboard/compensation/deductions" === pathname ||
+                undefined
               }
             >
               Salary Component
