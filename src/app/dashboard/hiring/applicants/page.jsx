@@ -1,8 +1,8 @@
 import React from "react";
-import HiringWrap from "./pageWrap";
+import PageWrap from "./pageWrap";
 
-const Hiring = () => {
-  return <HiringWrap />;
+const page = () => {
+  return <PageWrap />;
 };
 
-export default Hiring;
+export default page;
