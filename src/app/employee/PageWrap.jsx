@@ -153,11 +153,16 @@ const PageWrap = ({ employeeInfo, leavesInfo }) => {
                           current salary
                         </Text>
                       </Group>
-                      <Text c={"#3377FF"} fz={26} fw={700}>
-                        {employeeInfo && employeeInfo.salary !== null
-                          ? formatCurrency(employeeInfo.salary.grossSalary)
-                          : "₦0"}
-                      </Text>
+                      {employeeInfo && employeeInfo.salary !== null ? (
+                        <Text c={"#3377FF"} fz={26} fw={700}>
+                          {formatCurrency(employeeInfo.salary.grossSalary)}
+                        </Text>
+                      ) : (
+                        <Text c={"#2D2D2D"} fz={"15px"}>
+                          N/A
+                        </Text>
+                      )}
+
                       <Divider my="lg" />
                       <Text c={"#808080"} fz={"12px"} fw={400}>
                         Next Payment Date:
