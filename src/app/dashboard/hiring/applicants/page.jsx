@@ -1,5 +1,5 @@
 import React from "react";
-import PageWrap from "./pageWrap";
+import PageWrap from "./PageWrap";
 
 const page = () => {
   return <PageWrap />;
