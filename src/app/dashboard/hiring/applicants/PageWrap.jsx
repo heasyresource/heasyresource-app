@@ -16,7 +16,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 
-const HiringWrap = () => {
+const PageWrap = () => {
   const {
     applicants,
     applicantsPagination,
@@ -134,4 +134,4 @@ const HiringWrap = () => {
   );
 };
 
-export default HiringWrap;
+export default PageWrap;
